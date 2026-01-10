@@ -1,0 +1,214 @@
+* {
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+.root {
+    --uma-color: #fff;
+    --fondo: #fff;
+    --texto: #000;
+}
+
+html {
+    overflow-x: hidden;
+    opacity: 0;
+    transition: opacity 1.3s ease-in;
+    background-color: black;
+}
+
+body.modo-oscuro {
+    --fondo: #000;
+    --texto: #fff;
+}
+
+body {
+    background-color: var(--fondo);
+    color: var(--texto);
+    transition: background-color .3s ease, color .3s ease;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.margin-auto {
+    margin: auto;
+}
+
+.section-1 {
+    background: url(../media/img/bg.webp) center / cover;
+    box-shadow: 0 0px 50px 6px var(--uma-color) inset;
+    transition: box-shadow 2s ease;
+    min-height: 100vh;
+}
+
+.flex-container--section-1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin: auto;
+    padding: 20px 0;
+}
+
+.flex-container--section-1 .dibujar {
+    margin-top: 30px;
+    padding: 20px;
+    box-shadow: 2px 2px 30px 0px #0006;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: start;
+    overflow-y: hidden;
+    transition: opacity .7s ease;
+    min-height: 20vh;
+}
+
+.flex-container--section-1 .dibujar .presentacion-inicial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.flex-container--section-1 .dibujar .presentacion-inicial p {
+    width: 60%;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+.flex-container--section-1 div p {
+    font-size: 1.2rem;
+    line-height: 2;
+}
+
+.flex-container--section-1 .dibujar .img-uma {
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    filter: blur(5px);
+    object-fit: contain;
+    object-position: bottom;
+}
+
+.flex-container--section-1 .dibujar .img-uma-visible {
+    opacity: 1;
+    filter: contrast(110%);
+    transform: translateY(5px);
+}
+
+.animacion-aparicion {
+    animation: aparicion 1s ease-in-out;
+}
+
+@keyframes aparicion {
+    from {
+        transform: translateY(15px);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.animacion-desaparicion {
+    animation: desaparicion .4s ease forwards;
+}
+@keyframes desaparicion {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(10px);
+    }
+
+}
+.buscador-container {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.buscador {
+    padding: 20px;
+    border-radius: 8px;
+    color: #a5a;
+    font-weight: bolder;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: 1.3rem;
+}
+
+.button {
+    border-radius: 8px;
+    padding: 20px;
+    border: none;
+    border-bottom: 1px solid black
+}
+
+.context-menu {
+    position: absolute;
+    display: flex;
+    width: fit-content;
+    padding: 2px;
+    background-color: #7775;
+    color: #000;
+    flex-direction: column;
+    cursor: pointer;
+    border-radius: 20px;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+}
+
+.context-menu-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(10px);
+    pointer-events: all;
+}
+
+.context-menu-animacion {
+    transition: opacity .4s ease, transform 2s ease, visibility .4s ease;
+}
+
+.context-menu .opcion {
+    font-size: 1.3rem;
+    font-weight: bolder;
+    border-radius: 10px;
+    padding: 5px;
+    transition: background-color .5s ease;
+}
+
+.context-menu .opcion:hover {
+    background-color: white;
+}
+
+.container-flotante {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 3000;
+}
+
+.button-dark-mode {
+    border-radius: 20px;
+    padding: 10px;
+    background: white;
+}
+
+.p-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.mini-imagen {
+    width: 25px;
+    object-fit: contain;
+}
