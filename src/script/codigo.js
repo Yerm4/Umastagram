@@ -114,9 +114,9 @@ async function buscarUma(menu = null) {
         let finalImage = `${ruta_img}${choosedImage}?=ver${version}`;
         img.src = `${finalImage}`;
         await new Promise (resolve => img.onload = resolve) 
-            
+        
         document.documentElement.style.setProperty(`--uma-color`, datos.color);
-            
+        await new Promise(resolve => setTimeout(resolve, 300));
         dibujar.innerHTML = 
         `
             <div class="uma-info" id="uma-info">
