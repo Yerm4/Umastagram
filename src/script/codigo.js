@@ -105,18 +105,15 @@ async function buscarUma(menu = null) {
     let datos = establo[nombre];
 
     if (datos) {
-        
-        let version = Date.now();
 
         const img = new Image();
         let choosedImage = Math.floor(Math.random() * datos.imagen.length);
         choosedImage = datos.imagen[choosedImage]
-        let finalImage = `${ruta_img}${choosedImage}?=ver${version}`;
+        let finalImage = `${ruta_img}${choosedImage}`;
         img.src = `${finalImage}`;
         await new Promise (resolve => img.onload = resolve) 
         
         document.documentElement.style.setProperty(`--uma-color`, datos.color);
-        await new Promise(resolve => setTimeout(resolve, 300));
         dibujar.innerHTML = 
         `
             <div class="uma-info" id="uma-info">
@@ -131,19 +128,21 @@ async function buscarUma(menu = null) {
                 <p><strong>Compañera:</strong> ${datos.compañera}</p>
             </div>
             <div>
-                <img src="${img.src}?${version}" class="img-uma" id="imagen-uma" alt="Imagen de una Uma">
+                <img src="${img.src}" class="img-uma" id="imagen-uma" alt="Imagen de una Uma">
             </div>
         `;
+        
         
         let infoBox = document.getElementById("uma-info");
         alto = infoBox.offsetHeight;
 
+        
         await new Promise((resolve) => {
-            setTimeout(resolve, 100)
+            setTimeout(resolve, 400)
         });
 
         dibujar.style.opacity = "1";
-
+        
         setTimeout( () => {
         let img = document.getElementById("imagen-uma")
         img.classList.add("img-uma-visible");
