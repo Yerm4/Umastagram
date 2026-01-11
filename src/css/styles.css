@@ -3,7 +3,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
 }
 .root {
     --uma-color: #fff;
@@ -12,6 +11,7 @@
 }
 
 html {
+    scroll-behavior: smooth;
     overflow-x: hidden;
     opacity: 0.2;
     transition: opacity 1s ease-in;
@@ -218,7 +218,7 @@ body {
 
 .section-2 .umas-disponibles a {
     text-decoration: none;
-    color: #ffffff99
+    color: #ffffff99;
 }
 
 /* MEDIA QUERIES */ 

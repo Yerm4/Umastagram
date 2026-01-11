@@ -207,7 +207,7 @@ function agregarUma() {
 
         let holder = document.createElement("p")
         let nombre = document.createElement("a")
-        nombre.setAttribute("href", "#dibujar")  
+        nombre.setAttribute("href", "#section-1")  
         nombre.setAttribute(`data-uma`, llave);      
         nombre.textContent = `${datos.nombre}`;
 
