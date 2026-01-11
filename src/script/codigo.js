@@ -199,10 +199,19 @@ function precargado() {
 
 agregarUma();
 function agregarUma() {
-    let dibujar = document.getElementById("dibujar");
+    
     let nombres = Object.keys(establo);
+    
+    nombres.sort((a, b) => {
+        let nombreA = establo[a].nombre.toLowerCase();
+        let nombreB = establo[b].nombre.toLowerCase();
+        
+        // Comparamos los nombres reales, no las llaves
+        return nombreA.localeCompare(nombreB);
+    });
+
     let umasDisponibles = document.getElementById("umas-disponibles")
-    nombres.forEach(llave => {
+        nombres.forEach(llave => {
         let datos = establo[llave];
 
         let holder = document.createElement("p")
