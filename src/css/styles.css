@@ -13,8 +13,8 @@
 
 html {
     overflow-x: hidden;
-    opacity: 0;
-    transition: opacity 1.3s ease-in;
+    opacity: 0.2;
+    transition: opacity 1s ease-in;
     background-color: black;
 }
 
@@ -42,6 +42,7 @@ body {
     box-shadow: 0 0px 50px 6px var(--uma-color) inset;
     transition: box-shadow 2s ease;
     min-height: 100vh;
+    margin: auto;
 }
 
 .flex-container--section-1 {
@@ -55,7 +56,6 @@ body {
 
 .flex-container--section-1 .dibujar {
     margin-top: 30px;
-    padding: 20px;
     box-shadow: 2px 2px 30px 0px #0006;
     border-radius: 20px;
     display: flex;
@@ -63,25 +63,13 @@ body {
     align-items: start;
     overflow-y: hidden;
     transition: opacity .7s ease;
-    min-height: 20vh;
+    min-height: 380px;
+    max-height: fit-content;
+    width: fit-content;
 }
 
-.flex-container--section-1 .dibujar .presentacion-inicial {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-}
-
-.flex-container--section-1 .dibujar .presentacion-inicial p {
-    width: 60%;
-    font-size: 2rem;
-    font-weight: bolder;
-}
-
-.flex-container--section-1 div p {
-    font-size: 1.2rem;
+.flex-container--section-1 .dibujar p {
+    font-size: 1.2em;
     line-height: 2;
 }
 
@@ -127,8 +115,6 @@ body {
 
 }
 .buscador-container {
-    position: relative;
-    z-index: 10;
     display: flex;
     justify-content: center;
     gap: 10px;
@@ -211,4 +197,65 @@ body {
 .mini-imagen {
     width: 25px;
     object-fit: contain;
+}
+
+
+/* MEDIA QUERIES */ 
+
+/* DESKTOP */
+
+@media screen and (min-width: 600px) {
+    
+    .flex-container--section-1 .dibujar {
+        padding: 25px;
+    }
+
+    .flex-container--section-1 .dibujar .img-uma {
+        height: 326px;
+    }
+    
+}
+
+/* MOBILE */
+
+@media screen and (max-width: 599px) {
+    .flex-container--section-1 .dibujar {
+        font-size: 11px;
+        padding: 12px;
+        min-height: 250px;
+    }
+    
+    .flex-container--section-1 .dibujar .img-uma {
+        height: 240px;
+    }
+
+    .buscador {
+        padding: 12px;
+        font-size: 1.2rem;
+    }
+    
+    .button {
+        padding: 12px;
+    }
+}
+/* > 450 PX */
+
+@media screen and (max-width: 450px) {
+    .flex-container--section-1 .dibujar {
+        font-size: 9px;
+        padding: 15px;
+    }
+    
+    .flex-container--section-1 .dibujar .img-uma {
+        height: 180px;
+    }
+
+    .buscador {
+        padding: 8px;
+        font-size: 1.1rem;
+    }
+    
+    .button {
+        padding: 8px;
+    }
 }

@@ -83,6 +83,7 @@ async function buscarUma(menu = null) {
     const ruta_img = "src/media/img/";
 
     let dibujar = document.getElementById("dibujar");
+    void dibujar.offsetWidth;
     dibujar.style.opacity = "0";
     dibujar.classList.add("animacion-desaparicion")
     await new Promise((resolve) => {
@@ -124,7 +125,7 @@ async function buscarUma(menu = null) {
                 <p><strong>Compañera:</strong> ${datos.compañera}</p>
             </div>
             <div>
-                <img src="${img.src}?${version}" alt="Imagen de una Uma" class="img-uma" id="imagen-uma">
+                <img src="${img.src}?${version}" class="img-uma" id="imagen-uma" alt="Imagen de una Uma">
             </div>
         `;
         
@@ -132,7 +133,7 @@ async function buscarUma(menu = null) {
         alto = infoBox.offsetHeight;
         dibujar.style.height = `${alto + 140}px`;
         let imgAltura = document.getElementById("imagen-uma");
-        imgAltura.style.height = `${alto + 90}px`
+        console.log(alto)
 
         await new Promise((resolve) => {
             setTimeout(resolve, 100)

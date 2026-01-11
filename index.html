@@ -14,28 +14,23 @@
 <body>
     <div class="root-container">
         <section class="section-1" id="section-1">
-            <div class="margin-auto">
-                <div class="flex-container--section-1">
-                    <div id="dibujar" class="dibujar animacion-aparicion">
-                        <div class="presentacion-inicial">
-                            
-                        </div>
-                    </div>
+            <div class="flex-container--section-1">
+                <div id="dibujar" class="dibujar animacion-aparicion">
+                    
                 </div>
-                
-                <div class="container-flotante">
-                    <button type="submit" onclick="modoOscuro()" class="button-dark-mode">Modo <br> oscuro</button>
-                </div>
-                
-                <div class="buscador-container">
-                    <form onsubmit="buscarUmaForm(event)">
-                        <input type="text" list="sugerencias-umas" id="nombreUma" placeholder="Nombre de la Uma..." class="buscador" autofocus autocomplete="off">
-                        <button onclick="buscarUma()" class="button">Consultar Registro</button>
-                        <datalist id="sugerencias-umas">
-                        </datalist>
-                    </form>
-                </div>
-
+            </div>
+            
+            <div class="container-flotante">
+                <button type="submit" onclick="modoOscuro()" class="button-dark-mode">Modo <br> oscuro</button>
+            </div>
+            
+            <div class="buscador-container">
+                <form onsubmit="buscarUmaForm(event)">
+                    <input type="text" list="sugerencias-umas" id="nombreUma" placeholder="Nombre de la Uma..." class="buscador" autofocus autocomplete="off">
+                    <button onclick="buscarUma()" class="button">Consultar Registro</button>
+                    <datalist id="sugerencias-umas">
+                    </datalist>
+                </form>
             </div>
 
             <div id="context-menu" class="context-menu context-menu-animacion">
@@ -43,11 +38,12 @@
             </div>
 
         </section>
-            <img src="src/media/img/Mayano_Top_Gun_Alt(1).webp" style="width: 30vw" alt="">
+            
         <section>
 
         </section>
     </div>
+    
 </body>
 </html>
 
