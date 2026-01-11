@@ -1,6 +1,8 @@
 let alto;
 let ancho;
 
+const queryMobile = window.matchMedia("(max-width: 600px)").matches;
+
 // Menu contextual personalizado
 document.addEventListener("contextmenu", async function(event) {
     return;
@@ -148,14 +150,15 @@ async function buscarUma(menu = null) {
         img.classList.add("img-uma-visible");
         }, 200);
         
-
         document.documentElement.scrollTop = 0;
         buscador.value = "";
 
-        
         dibujar.classList.remove("animacion-desaparicion")
         buscador.blur();
-        buscador.focus();
+        
+        if (!queryMobile) {
+            buscador.focus();
+        }
     } else {
         dibujar.style.opacity = "1";
         dibujar.innerHTML = `<p>Esa corredora no está en el establo actual.</p>`;
