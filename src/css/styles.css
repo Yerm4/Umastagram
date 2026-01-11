@@ -44,6 +44,7 @@ body {
     margin: auto;
     display: grid;
     place-content: center;
+    position: relative;
 }
 
 .flex-container--section-1 {
@@ -177,7 +178,7 @@ body {
 }
 
 .container-flotante {
-    position: fixed;
+    position: absolute;
     right: 20px;
     bottom: 20px;
     z-index: 3000;
@@ -208,18 +209,34 @@ body {
 
 .section-2 h2 {
     font-size: 2rem;
+    padding: 10px
+}
+
+.section-2 .umas-disponibles {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .section-2 .umas-disponibles p {
-    padding: 8px;
     font-size: 1.1rem;
     text-decoration: none;
 }
 
 .section-2 .umas-disponibles a {
     text-decoration: none;
+    padding: 5px;
+    border-radius: 10px;
     color: #ffffff99;
+    transition: background-color .6s ease;
 }
+
+.section-2 .umas-disponibles a:hover {
+    background-color: #ffffff55;
+}
+
 
 /* MEDIA QUERIES */ 
 

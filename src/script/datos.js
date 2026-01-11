@@ -88,7 +88,7 @@ const establo = {
             rival: "Duramente, Satono Diamond",
             compañera: "Satono Diamond",
             imagen: ["Kitasan_Black.webp", "Kitasan_Black_Alt(1).webp"],
-            color: "#C1100744"
+            color: "#91100744"
     },
     "suzuka": {
         nombre: "Silence Suzuka",
@@ -101,7 +101,7 @@ const establo = {
             rival: "N/A",
             compañera: "Special Week",
             imagen: ["Silence_Suzuka.webp", "Silence_Suzuka_Alt(1).webp"],
-            color: "#FF890444"
+            color: "#28B46344"
     },
     "gold": {
         nombre: "Gold Ship",
@@ -114,7 +114,7 @@ const establo = {
             rival: "Gentildonna, Orfevre",
             compañera: "Stay Gold",
             imagen: ["Gold_Ship.webp", "Gold_Ship_Alt(1).webp"],
-            color: "#ffffff44"
+            color: "#91100744"
     },
     "scarlet": {
         nombre: "Daiwa Scarlet",
@@ -141,7 +141,33 @@ const establo = {
             compañera: "Vodka",
             imagen: ["Vodka.webp", "Vodka_Alt(1).webp"],
             color: "#00002244"
-    }
+    },
+    "maruzensky": {
+        nombre: "Maruzensky",
+            nacimiento: "19 de Mayo",
+            altura: 1.64,
+            cabello: "Castaño",
+            estilos: "Front",
+            suelo: "Turf",
+            distancia: "Sprint, Mile, Medium",
+            rival: "N/A",
+            compañera: "Tazuna Hayakawa",
+            imagen: ["Maruzensky.webp", "Maruzensky_Alt(1).webp"],
+            color: "#973C0844"
+    },
+    "stay gold": {
+        nombre: "Stay Gold",
+            nacimiento: "24 de Marzo",
+            altura: 1.42,
+            cabello: "Castaño",
+            estilos: "Late",
+            suelo: "Turf",
+            distancia: "Medium, Long",
+            rival: "N/A",
+            compañera: "Gold Ship",
+            imagen: ["Stay_Gold.webp", "Stay_Gold_Alt(1).webp"],
+            color: "#973C0844"
+    },
 };
 generarNombres()
 async function generarNombres() {
