@@ -3,6 +3,7 @@ let ancho;
 
 // Menu contextual personalizado
 document.addEventListener("contextmenu", async function(event) {
+    return;
     const contextMenu = document.getElementById("context-menu");
     event.preventDefault();
 
@@ -34,6 +35,7 @@ document.addEventListener("contextmenu", async function(event) {
 //Añadir opciones a menu contextual
 agregarOpciones();
 function agregarOpciones() {
+    return
     let menuContextual = document.getElementById("context-menu");
     menuContextual.innerHTML = ` `;
     let nombres = Object.keys(establo);
@@ -178,6 +180,7 @@ function modoOscuro() {
 //Sugerencias de buscador
 sugerencias()
 function sugerencias() {
+    return;
     const lista = document.getElementById("sugerencias-umas");
     const nombres = Object.keys(establo);
 

@@ -22,7 +22,7 @@ const establo = {
             distancia: "Medium, Long",
             rival: "Seiun Sky",
             compañera: "Silence Suzuka",
-            imagen: ["Special_Week.webp", "Special_Week_Alt(1).webp"],
+            imagen: ["Special_Week.webp", "Special_Week_Alt(1).webp", "Special_Week_Alt(2).webp"],
             color: "#A020F044"
     },
     "teio": {
@@ -89,7 +89,64 @@ const establo = {
             compañera: "Satono Diamond",
             imagen: ["Kitasan_Black.webp", "Kitasan_Black_Alt(1).webp"],
             color: "#C1100744"
+    },
+    "suzuka": {
+        nombre: "Silence Suzuka",
+            nacimiento: "1 de Mayo",
+            altura: 1.61,
+            cabello: "Castaño claro",
+            estilos: "Front",
+            suelo: "Turf",
+            distancia: "Mile, Medium",
+            rival: "N/A",
+            compañera: "Special Week",
+            imagen: ["Silence_Suzuka.webp", "Silence_Suzuka_Alt(1).webp"],
+            color: "#FF890444"
+    },
+    "gold": {
+        nombre: "Gold Ship",
+            nacimiento: "6 de Marzo",
+            altura: 1.70,
+            cabello: "Blanco",
+            estilos: "End",
+            suelo: "Turf",
+            distancia: "Medium, Long",
+            rival: "Gentildonna, Orfevre",
+            compañera: "Stay Gold",
+            imagen: ["Gold_Ship.webp", "Gold_Ship_Alt(1).webp"],
+            color: "#ffffff44"
+    },
+    "scarlet": {
+        nombre: "Daiwa Scarlet",
+            nacimiento: "13 de Mayo",
+            altura: 1.63,
+            cabello: "Castaño",
+            estilos: "Front, Pace",
+            suelo: "Turf",
+            distancia: "Mile, Medium, Long",
+            rival: "Vodka",
+            compañera: "Vodka",
+            imagen: ["Daiwa_Scarlet.webp", "Daiwa_Scarlet_Alt(1).webp"],
+            color: "#1447E644"
+    },
+    "vodka": {
+        nombre: "Vodka",
+            nacimiento: "4 de Abril",
+            altura: 1.65,
+            cabello: "Castaño oscuro",
+            estilos: "Late",
+            suelo: "Turf",
+            distancia: "Mile, Medium",
+            rival: "Vodka",
+            compañera: "Vodka",
+            imagen: ["Vodka.webp", "Vodka_Alt(1).webp"],
+            color: "#00002244"
     }
 };
 
-establo["matikanetannhauser"] = establo["mambo"];
+Object.keys(establo).forEach(alias => {
+    
+    const nombreCompleto = establo[alias].nombre.toLowerCase();
+    establo[nombreCompleto] = establo[alias];
+});
+
