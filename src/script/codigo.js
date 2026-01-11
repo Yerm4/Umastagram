@@ -154,17 +154,14 @@ async function buscarUma(menu = null) {
         buscador.value = "";
 
         dibujar.classList.remove("animacion-desaparicion")
-        buscador.blur();
-        
-        if (!queryMobile) {
-            buscador.focus();
-        }
     } else {
         dibujar.style.opacity = "1";
         dibujar.innerHTML = `<p>Esa corredora no está en el establo actual.</p>`;
         dibujar.classList.remove("animacion-aparicion");
             void dibujar.offsetWidth;
             dibujar.classList.add("animacion-aparicion");
+    }
+    if (!queryMobile) {
         buscador.focus();
     }
 }
