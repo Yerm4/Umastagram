@@ -209,14 +209,14 @@ body {
 
 .section-2 h2 {
     font-size: 2rem;
-    padding: 10px
+    padding: 20px
 }
 
 .section-2 .umas-disponibles {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     place-items: center;
-    gap: 5px;
+    gap: 15px;
 }
 
 .section-2 .umas-disponibles p {
@@ -228,7 +228,8 @@ body {
     text-decoration: none;
     padding: 5px;
     border-radius: 10px;
-    color: #ffffff99;
+    color: #ffffff;
+    font-weight: bolder;
     transition: background-color .6s ease, transform .6s ease;
     display: inline-block;
 }
