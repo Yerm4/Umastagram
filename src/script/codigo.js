@@ -202,3 +202,19 @@ function precargado() {
     void html.offsetWidth;
     html.style.opacity = "1";
 }
+
+
+
+agregarUma();
+function agregarUma() {
+    let nombres = Object.keys(establo);
+    let umasDisponibles = document.getElementById("umas-disponibles")
+    nombres.forEach(llave => {
+        let datos = establo[llave];
+
+        let nombre = document.createElement("p")        
+        nombre.textContent = `${datos.nombre}`;
+
+        umasDisponibles.appendChild(nombre)
+    });
+}
