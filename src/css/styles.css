@@ -213,6 +213,12 @@ body {
 .section-2 .umas-disponibles p {
     padding: 8px;
     font-size: 1.1rem;
+    text-decoration: none;
+}
+
+.section-2 .umas-disponibles a {
+    text-decoration: none;
+    color: #ffffff99
 }
 
 /* MEDIA QUERIES */ 
@@ -262,7 +268,7 @@ body {
     }
     
     .flex-container--section-1 .dibujar .img-uma {
-        height: 180px;
+        min-height: 180px;
     }
 
     .buscador {

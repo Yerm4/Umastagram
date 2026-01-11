@@ -143,10 +143,11 @@ const establo = {
             color: "#00002244"
     }
 };
-
-Object.keys(establo).forEach(alias => {
-    
-    const nombreCompleto = establo[alias].nombre.toLowerCase();
-    establo[nombreCompleto] = establo[alias];
-});
-
+generarNombres()
+async function generarNombres() {
+    await new Promise (resolve => setTimeout (resolve, 500))
+    Object.keys(establo).forEach(alias => {
+        const nombreCompleto = establo[alias].nombre.toLowerCase();
+        establo[nombreCompleto] = establo[alias];
+    });    
+}

@@ -1,6 +1,3 @@
-let alto;
-let ancho;
-
 const queryMobile = window.matchMedia("(max-width: 600px)").matches;
 
 // Menu contextual personalizado
@@ -86,6 +83,10 @@ buscarUma("mayano")
 async function buscarUma(menu = null) {
     const ruta_img = "src/media/img/";
 
+    let buscador = document.getElementById("nombreUma")
+    let nombre = menu ? menu.toLowerCase() : buscador.value.toLowerCase();
+    nombre = nombre.trim();
+
     let dibujar = document.getElementById("dibujar");
     void dibujar.offsetWidth;
     dibujar.style.opacity = "0";
@@ -95,12 +96,6 @@ async function buscarUma(menu = null) {
     })
     dibujar.style.background = "var(--fondo)";
     dibujar.innerHTML = ``;
-
-    let buscador = document.getElementById("nombreUma")
-    
-    let nombre = menu ? menu.toLowerCase() : buscador.value.toLowerCase();
-    
-    nombre = nombre.trim();
     
     let datos = establo[nombre];
 
@@ -114,6 +109,8 @@ async function buscarUma(menu = null) {
         await new Promise (resolve => img.onload = resolve) 
         
         document.documentElement.style.setProperty(`--uma-color`, datos.color);
+        void dibujar.offsetWidth;
+        
         dibujar.innerHTML = 
         `
             <div class="uma-info" id="uma-info">
@@ -202,14 +199,28 @@ function precargado() {
 
 agregarUma();
 function agregarUma() {
+    let dibujar = document.getElementById("dibujar");
     let nombres = Object.keys(establo);
     let umasDisponibles = document.getElementById("umas-disponibles")
     nombres.forEach(llave => {
         let datos = establo[llave];
 
-        let nombre = document.createElement("p")        
+        let holder = document.createElement("p")
+        let nombre = document.createElement("a")
+        nombre.setAttribute("href", "#dibujar")  
+        nombre.setAttribute(`data-uma`, llave);      
         nombre.textContent = `${datos.nombre}`;
 
-        umasDisponibles.appendChild(nombre)
+        holder.appendChild(nombre)
+        umasDisponibles.appendChild(holder)
+    });
+
+    umasDisponibles.addEventListener("click", function(event) {
+    
+        const opcionSeleccionada = event.target.getAttribute("data-uma");
+    
+        if (opcionSeleccionada) {
+            buscarUma(opcionSeleccionada);
+        }   
     });
 }
