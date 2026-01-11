@@ -137,9 +137,6 @@ async function buscarUma(menu = null) {
         
         let infoBox = document.getElementById("uma-info");
         alto = infoBox.offsetHeight;
-        dibujar.style.height = `${alto + 140}px`;
-        let imgAltura = document.getElementById("imagen-uma");
-        console.log(alto)
 
         await new Promise((resolve) => {
             setTimeout(resolve, 100)
@@ -152,7 +149,6 @@ async function buscarUma(menu = null) {
         img.classList.add("img-uma-visible");
         }, 200);
         
-        document.documentElement.scrollTop = 0;
         buscador.value = "";
 
         dibujar.classList.remove("animacion-desaparicion")
