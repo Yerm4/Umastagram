@@ -10,7 +10,7 @@ const establo = {
             rival: "Narita Brian",
             compañera: "Tokai Teio",
             imagen: ["Mayano_Top_Gun.webp", "Mayano_Top_Gun_Alt(1).webp", "Mayano_Top_Gun_Alt(2).webp"],
-            color: "#ff8c0066"
+            color: "#ff8c0044"
     },
     "special": {
         nombre: "Special Week",
@@ -23,7 +23,7 @@ const establo = {
             rival: "Seiun Sky",
             compañera: "Silence Suzuka",
             imagen: ["Special_Week.webp", "Special_Week_Alt(1).webp"],
-            color: "#A020F066"
+            color: "#A020F044"
     },
     "teio": {
         nombre: "Tokai Teio",
@@ -36,7 +36,7 @@ const establo = {
             rival: "Mejiro McQueen",
             compañera: "Mayano Top Gun",
             imagen: ["Tokai_Teio.webp", "Tokai_Teio.webp"],
-            color: "#A020F066"
+            color: "#A020F044"
     },
     "mambo": {
         nombre: "Matikanetannhauser",
@@ -49,7 +49,7 @@ const establo = {
             rival: "N/A",
             compañera: "Matikanefukukitaru",
             imagen: ["Matikanetannhauser.webp", "Matikanetannhauser.webp"],
-            color: "#3421B066"
+            color: "#3421B044"
     },
     "rice": {
         nombre: "Rice Shower",
@@ -62,7 +62,7 @@ const establo = {
             rival: "Mihono Bourbon",
             compañera: "Zenno Rob Roy",
             imagen: ["Rice_Shower.webp", "Rice_Shower.webp"],
-            color: "#00002266"
+            color: "#00002244"
     },
     "diamond": {
         nombre: "Satono Diamond",
@@ -75,7 +75,7 @@ const establo = {
             rival: "Kitasan Black",
             compañera: "Kitasan Black",
             imagen: ["Satono_Diamond.webp", "Satono_Diamond_Alt(1).webp"],
-            color: "#31C95066"
+            color: "#31C95044"
     },
     "kitasan": {
         nombre: "Kitasan Black",
@@ -88,7 +88,7 @@ const establo = {
             rival: "Duramente, Satono Diamond",
             compañera: "Satono Diamond",
             imagen: ["Kitasan_Black.webp", "Kitasan_Black_Alt(1).webp"],
-            color: "#C1100766"
+            color: "#C1100744"
     }
 };
 
