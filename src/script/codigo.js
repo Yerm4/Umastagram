@@ -100,6 +100,8 @@ async function buscarUma(menu = null) {
     
     let nombre = menu ? menu.toLowerCase() : buscador.value.toLowerCase();
     
+    nombre = nombre.trim();
+    
     let datos = establo[nombre];
 
     if (datos) {
