@@ -51,11 +51,6 @@ body {
     padding: 3px 0 3px 3px;
 }
 
-.nav-item:hover {
-    border-radius: 20px;
-    background-color: #bbb;
-}
-
 .section-1 {
     background: url(../media/img/bg.webp) center / cover;
     box-shadow: 0 0px 50px 6px var(--uma-color) inset;
@@ -306,6 +301,12 @@ body {
         align-items: center;
         text-decoration: none;
         }
+
+        
+        .nav-item:hover {
+        border-radius: 20px;
+        background-color: #bbb;
+        }
     
         .nav-menu-lateral .nav-item-logo  {
         width: 25px;
@@ -387,6 +388,12 @@ body {
     color: black;
     gap: 3px;
     width: 25%;
+    }
+
+    
+    .nav-item:active {
+    border-radius: 20px;
+    background-color: #bbb;
     }
 
     .nav-menu-lateral .nav-item-logo {
