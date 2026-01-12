@@ -13,38 +13,43 @@
 
 <body>
     <div class="root-container">
-        <section class="section-1" id="section-1">
-            <div class="flex-container--section-1">
-                <div id="dibujar" class="dibujar animacion-aparicion">
+        <header>
+            
+        </header>
+        <main>
+            <section class="section-1" id="section-1">
+                <div class="flex-container--section-1">
+                    <div id="dibujar" class="dibujar animacion-aparicion">
+                        
+                    </div>
+                </div>
+                
+                <div class="buscador-container">
+                    <form onsubmit="buscarUmaForm(event)">
+                        <input type="text" list="sugerencias-umas" id="nombreUma" placeholder="Nombre de la Uma..." class="buscador" autofocus autocomplete="off">
+                        <button onclick="buscarUma()" class="button">Consultar Registro</button>
+                        <datalist id="sugerencias-umas">
+                        </datalist>
+                    </form>
+                </div>
+    
+                <div class="container-flotante">
+                    <button type="submit" onclick="modoOscuro()" class="button-dark-mode">Modo <br> oscuro</button>
+                </div>
+    
+                <div id="context-menu" class="context-menu context-menu-animacion">
                     
                 </div>
-            </div>
-            
-            <div class="buscador-container">
-                <form onsubmit="buscarUmaForm(event)">
-                    <input type="text" list="sugerencias-umas" id="nombreUma" placeholder="Nombre de la Uma..." class="buscador" autofocus autocomplete="off">
-                    <button onclick="buscarUma()" class="button">Consultar Registro</button>
-                    <datalist id="sugerencias-umas">
-                    </datalist>
-                </form>
-            </div>
-
-            <div class="container-flotante">
-                <button type="submit" onclick="modoOscuro()" class="button-dark-mode">Modo <br> oscuro</button>
-            </div>
-
-            <div id="context-menu" class="context-menu context-menu-animacion">
                 
-            </div>
-            
-        </section>
-            
-        <section class="section-2">
-            <div>
-                <h2>Lista de Umas disponibles (Puedes clickearlas)</h2>
-                <div class="umas-disponibles" id="umas-disponibles"></div>
-            </div>
-        </section>
+            </section>
+                
+            <section class="section-2">
+                <div>
+                    <h2>Lista de Umas disponibles (Puedes clickearlas)</h2>
+                    <div class="umas-disponibles" id="umas-disponibles"></div>
+                </div>
+            </section>
+        </main>
     </div>
     
 </body>

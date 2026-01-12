@@ -206,7 +206,6 @@ function agregarUma() {
         let nombreA = establo[a].nombre.toLowerCase();
         let nombreB = establo[b].nombre.toLowerCase();
         
-        // Comparamos los nombres reales, no las llaves
         return nombreA.localeCompare(nombreB);
     });
 
