@@ -124,7 +124,7 @@ async function buscarUma(menu = null) {
                 <p><strong>Rival:</strong> ${datos.rival}</p>
                 <p><strong>Compañera:</strong> ${datos.compañera}</p>
             </div>
-            <div>
+            <div class="container-img-uma">
                 <img src="${img.src}" class="img-uma" id="imagen-uma" alt="Imagen de una Uma">
             </div>
         `;

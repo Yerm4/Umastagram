@@ -94,8 +94,7 @@ body {
 }
 
 .flex-container--section-1 .dibujar h2 {
-    font-size: 2rem;
-    letter-spacing: 3px;
+    font-size: 1.8em;
 }
 
 .flex-container--section-1 .dibujar .img-uma {
@@ -207,6 +206,7 @@ body {
 }
 
 .button-dark-mode {
+    font-size: .8em;
     border-radius: 20px;
     padding: 10px;
     background: white;
@@ -357,7 +357,7 @@ body {
     }
 
     .flex-container--section-1 .dibujar .img-uma {
-        height: 326px;
+        height: 300px;
     }
     
 }
@@ -397,7 +397,10 @@ body {
     width: 25%;
     }
 
-    
+    .nav-menu-lateral .item-hidden {
+        text-align: center;
+    }
+
     .nav-item:active {
     background-color: #bbb;
     }
@@ -440,6 +443,7 @@ body {
         padding: 12px;
     }
 }
+
 /* > 450 PX */
 
 @media screen and (max-width: 450px) {
@@ -449,7 +453,7 @@ body {
     }
     
     .flex-container--section-1 .dibujar .img-uma {
-        min-height: 180px;
+        height: 180px;
     }
 
     .buscador {
@@ -459,5 +463,27 @@ body {
     
     .button {
         padding: 8px;
+    }
+}
+
+/* > 400 PX */
+
+@media screen and (max-width: 400px) {
+    .flex-container--section-1 .dibujar {
+        font-size: 9px;
+        padding: 15px;
+    }
+    
+    .flex-container--section-1 .dibujar .img-uma {
+        height: 170px;
+    }
+
+    .buscador {
+        padding: 6px;
+        font-size: 1rem;
+    }
+    
+    .button {
+        padding: 6px;
     }
 }
