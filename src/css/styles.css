@@ -407,6 +407,12 @@ body {
     .nav-menu-lateral .hero {
     padding: 30px 60px;
     }
+
+    .section-2 {
+    background-color: black;
+    color: white;
+    padding: 20px 20px 100px 20px;
+    }
 }
 
 @media screen and (max-width: 599px) {
