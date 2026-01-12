@@ -26,6 +26,7 @@ body {
     background-color: var(--fondo);
     color: var(--texto);
     transition: background-color .5s ease, color .5s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .text-center {
@@ -49,6 +50,8 @@ body {
 
 .nav-item {
     padding: 3px 0 3px 3px;
+    border-radius: 20px;
+    transition: background-color .3s ease;
 }
 
 .section-1 {
@@ -304,7 +307,6 @@ body {
 
         
         .nav-item:hover {
-        border-radius: 20px;
         background-color: #bbb;
         }
     
@@ -392,7 +394,6 @@ body {
 
     
     .nav-item:active {
-    border-radius: 20px;
     background-color: #bbb;
     }
 
