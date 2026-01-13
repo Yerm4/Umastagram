@@ -92,7 +92,7 @@ async function buscarUma(menu = null) {
     dibujar.style.opacity = "0";
     dibujar.classList.add("animacion-desaparicion")
     await new Promise((resolve) => {
-        setTimeout(resolve, 700)
+        setTimeout(resolve, 600)
     })
     dibujar.style.background = "var(--fondo)";
     dibujar.innerHTML = ``;
@@ -109,7 +109,7 @@ async function buscarUma(menu = null) {
         await new Promise (resolve => img.onload = resolve) 
         
         document.documentElement.style.setProperty(`--uma-color`, datos.color);
-        void dibujar.offsetWidth;
+        
         
         dibujar.innerHTML = 
         `
@@ -128,12 +128,7 @@ async function buscarUma(menu = null) {
                 <img src="${img.src}" class="img-uma" id="imagen-uma" alt="Imagen de una Uma">
             </div>
         `;
-        
-        
-        let infoBox = document.getElementById("uma-info");
-        alto = infoBox.offsetHeight;
 
-        
         await new Promise((resolve) => {
             setTimeout(resolve, 400)
         });
@@ -143,17 +138,45 @@ async function buscarUma(menu = null) {
         setTimeout( () => {
         let img = document.getElementById("imagen-uma")
         img.classList.add("img-uma-visible");
-        }, 200);
+        }, 100);
         
         buscador.value = "";
 
         dibujar.classList.remove("animacion-desaparicion")
     } else {
+    
+        const img = new Image();
+        let choosedImage = `${ruta_img}Tazuna_Hayakawa.webp`;
+        img.src = `${choosedImage}`;
+        await new Promise (resolve => img.onload = resolve) 
+
+
+        await new Promise((resolve) => {
+            setTimeout(resolve, 1000)
+        });
+        
         dibujar.style.opacity = "1";
-        dibujar.innerHTML = `<p>Esa corredora no está en el establo actual.</p>`;
-        dibujar.classList.remove("animacion-aparicion");
-            void dibujar.offsetWidth;
-            dibujar.classList.add("animacion-aparicion");
+        
+        dibujar.classList.remove("animacion-desaparicion")
+        void dibujar.offsetWidth;
+
+        dibujar.innerHTML = `
+            <div class="container-img-uma">
+                <h3>No he podido encontrar a <br> esa corredora, entrenador</h3>    
+                <div class="tazuna-container"> 
+                    <img src="${img.src}" class="img-uma" id="imagen-uma" alt="Imagen de una Uma">
+                </div>
+            </div>
+        `;
+
+        await new Promise((resolve) => {
+            setTimeout(resolve, 400)
+        });
+        
+        setTimeout( () => {
+        let img = document.getElementById("imagen-uma")
+        img.classList.add("img-uma-visible");
+        }, 100);
     }
     if (!queryMobile) {
         buscador.focus();

@@ -86,6 +86,7 @@ body {
     min-height: 380px;
     max-height: fit-content;
     width: fit-content;
+    backdrop-filter: blur(10px);
 }
 
 .flex-container--section-1 .dibujar p {
@@ -94,7 +95,17 @@ body {
 }
 
 .flex-container--section-1 .dibujar h2 {
-    font-size: 1.8em;
+    font-size: 2em;
+}
+
+.flex-container--section-1 .dibujar .tazuna-container {
+    display: grid;
+    place-items: center;
+}
+
+.flex-container--section-1 .dibujar h3 {
+    font-size: 2em;
+    padding-bottom: 10px;
 }
 
 .flex-container--section-1 .dibujar .img-uma {
@@ -142,6 +153,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 10px;
+    padding-bottom: 20px;
 }
 
 .buscador {
@@ -353,7 +365,7 @@ body {
 @media screen and (min-width: 600px) {
     
     .flex-container--section-1 .dibujar {
-        padding: 25px;
+        padding: 18px;
     }
 
     .flex-container--section-1 .dibujar .img-uma {
