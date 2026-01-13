@@ -95,7 +95,6 @@ async function buscarUma(menu = null) {
         setTimeout(resolve, 600)
     })
     dibujar.style.background = "var(--fondo)";
-    dibujar.innerHTML = ``;
     
     let datos = establo[nombre];
 
