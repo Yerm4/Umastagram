@@ -34,7 +34,7 @@ document.addEventListener("contextmenu", async function(event) {
 //Añadir opciones a menu contextual
 agregarOpciones();
 function agregarOpciones() {
-    return
+
     let menuContextual = document.getElementById("context-menu");
     menuContextual.innerHTML = ` `;
     let nombres = Object.keys(establo);
