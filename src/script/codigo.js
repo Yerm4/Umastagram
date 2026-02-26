@@ -2,7 +2,7 @@ const queryMobile = window.matchMedia("(max-width: 600px)").matches;
 
 // Menu contextual personalizado
 document.addEventListener("contextmenu", async function(event) {
-    return;
+    
     const contextMenu = document.getElementById("context-menu");
     event.preventDefault();
 
