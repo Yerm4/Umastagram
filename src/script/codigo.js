@@ -94,7 +94,6 @@ async function buscarUma(menu = null) {
     await new Promise((resolve) => {
         setTimeout(resolve, 600)
     })
-    dibujar.style.background = "var(--fondo)";
     
     let datos = establo[nombre];
 
@@ -124,7 +123,7 @@ async function buscarUma(menu = null) {
                 <p><strong>Compañera:</strong> ${datos.compañera}</p>
             </div>
             <div class="container-img-uma">
-                <img src="${img.src}" class="img-uma" id="imagen-uma" alt="Imagen de una Uma">
+                <img src="${img.src}" class="img-uma" id="img-uma" alt="Imagen de una Uma">
             </div>
         `;
 
@@ -135,7 +134,7 @@ async function buscarUma(menu = null) {
         dibujar.style.opacity = "1";
         
         setTimeout( () => {
-        let img = document.getElementById("imagen-uma")
+        let img = document.getElementById("img-uma")
         img.classList.add("img-uma-visible");
         }, 100);
         

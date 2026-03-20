@@ -29,6 +29,9 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
+main {
+    transition: filter .6s ease
+}
 .text-center {
     text-align: center;
 }

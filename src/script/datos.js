@@ -168,6 +168,19 @@ const establo = {
             imagen: ["Stay_Gold.webp", "Stay_Gold_Alt(1).webp"],
             color: "#973C0844"
     },
+    "haru": {
+        nombre: "Haru Urara",
+            nacimiento: "27 de Febrero",
+            altura: 1.40,
+            cabello: "Rosa",
+            estilos: "Late",
+            suelo: "Dirt",
+            distancia: "Sprint",
+            rival: "N/A",
+            compañera: "King Halo",
+            imagen: ["Haru_Urara.webp", "Haru_Urara_Alt(1).webp"],
+            color: "#FDA5D544   "
+    },
 };
 generarNombres()
 async function generarNombres() {
