@@ -179,8 +179,34 @@ const establo = {
             rival: "N/A",
             compañera: "King Halo",
             imagen: ["Haru_Urara.webp", "Haru_Urara_Alt(1).webp"],
-            color: "#FDA5D544   "
+            color: "#FDA5D544"
     },
+    "oguri": {
+    nombre: "Oguri Cap",
+            nacimiento: "27 de Marzo",
+            altura: 1.67,
+            cabello: "Gris",
+            estilos: "Pace, Late",
+            suelo: "Turf, Dirt",
+            distancia: "Mile, Medium, Long",
+            rival: "Tamamo Cross",
+            compañera: "Belno Light",
+            imagen: ["Oguri_Cap.webp", "Oguri_Cap_Alt(1).webp", "Oguri_Cap_Alt(2).webp"],
+            color: "#777777"
+    },
+    "tamamo": {
+    nombre: "Tamamo Cross",
+            nacimiento: "23 de Mayo",
+            altura: 1.40,
+            cabello: "Gris",
+            estilos: "Pace, Late, End",
+            suelo: "Turf",
+            distancia: "Medium, Long",
+            rival: "Oguri Cap",
+            compañera: "Masami Komiyama",
+            imagen: ["Tamamo_Cross.webp", "Tamamo_Cross_Alt(1).webp", "Tamamo_Cross_Alt(2).webp"],
+            color: "#777777"
+    }
 };
 generarNombres()
 async function generarNombres() {
