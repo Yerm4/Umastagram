@@ -104,6 +104,14 @@ async function buscarUma(menu = null) {
     
     let datos = establo[nombre];
 
+    if (!datos && nombre.length > 0) {
+        let nombreAproximado = Object.keys(establo).find(alias => alias.includes(nombre))
+
+        if (nombreAproximado) {
+            datos = establo[nombreAproximado]
+        }
+    }
+
     if (datos) {
 
         const img = new Image();
