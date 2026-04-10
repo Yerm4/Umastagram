@@ -2,7 +2,8 @@ const queryMobile = window.matchMedia("(max-width: 600px)").matches;
 
 // Menu contextual personalizado
 document.addEventListener("contextmenu", async function(event) {
-    
+    return
+
     const contextMenu = document.getElementById("context-menu");
     event.preventDefault();
 
@@ -35,6 +36,8 @@ document.addEventListener("contextmenu", async function(event) {
 agregarOpciones();
 function agregarOpciones() {
 
+    return
+
     let menuContextual = document.getElementById("context-menu");
     menuContextual.innerHTML = ` `;
     let nombres = Object.keys(establo);
@@ -64,6 +67,8 @@ function agregarOpciones() {
 //Elegir opcion del menu contextual
 document.getElementById("context-menu").addEventListener("click", function(event) {
     
+    return
+
     const opcionSeleccionada = event.target.getAttribute("data-uma");
 
     if (opcionSeleccionada) {
@@ -73,6 +78,8 @@ document.getElementById("context-menu").addEventListener("click", function(event
 
 // Cerrar menu contextual
 document.addEventListener("click", function(event) {
+    return
+
     const contextMenu = document.getElementById("context-menu");
     
     contextMenu.classList.remove("context-menu-visible")
