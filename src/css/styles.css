@@ -23,7 +23,7 @@ body.modo-oscuro {
 }
 
 body.modo-oscuro main {
-    filter: brightness(70%);
+    filter: brightness(85%);
 }
 
 body {
