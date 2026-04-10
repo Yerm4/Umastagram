@@ -190,3 +190,13 @@ async function generarNombres() {
         establo[nombreCompleto] = establo[alias];
     });    
 }
+
+let sql = "INSERT INTO tu_nombre_de_tabla (nombre, nacimiento, altura, cabello, estilo, suelo, distancia, rival, compañera, imagen, color) VALUES \n";
+
+const values = Object.keys(establo).map(key => {
+    const u = establo[key];
+    // Convertimos el array de imágenes a un solo texto separado por comas
+    const imagenesStr = u.imagen.join(',');
+    
+    return `('${u.nombre}', '${u.nacimiento}', ${u.altura}, '${u.cabello}', '${u.estilos}', '${u.suelo}', '${u.distancia}', '${u.rival}', '${u.compañera}', '${imagenesStr}', '${u.color.trim()}')`;
+});

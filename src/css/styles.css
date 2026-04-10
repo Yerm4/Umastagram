@@ -4,7 +4,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-.root {
+:root {
     --uma-color: #fff;
     --fondo: #fff;
     --texto: #000;
@@ -20,6 +20,10 @@ html {
 body.modo-oscuro {
     --fondo: #000;
     --texto: #fff;
+}
+
+body.modo-oscuro main {
+    filter: brightness(70%);
 }
 
 body {
@@ -42,11 +46,11 @@ main {
 
 .nav-menu-lateral {
     position: fixed;
-    background-color: #fff;
+    background-color: var(--fondo);
     padding: 10px;
     display: flex;
     gap: 20px;
-    transition: width .5s ease;
+    transition: width .5s ease, background-color .3s ease;
     overflow: hidden;
     z-index: 1000;
 }

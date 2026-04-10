@@ -202,18 +202,21 @@ function modoOscuro() {
 //Sugerencias de buscador
 sugerencias()
 function sugerencias() {
-    return;
+    
     const lista = document.getElementById("sugerencias-umas");
     const nombres = Object.keys(establo);
 
-    nombres.forEach(nombre => {
+    nombres.sort(() => Math.random() - 0.5)
+    nombres.slice(0, 8).forEach(nombre => {
         const opcion = document.createElement("option");
         opcion.value = nombre;
         let label = `${establo[nombre].nombre}`
         opcion.textContent = label;
+        opcion.classList = "opcion"
         lista.appendChild(opcion);
     })
 }
+
 
 precargado()
 function precargado() {
