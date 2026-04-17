@@ -85,14 +85,26 @@ document.addEventListener("click", function(event) {
     contextMenu.classList.remove("context-menu-visible")
 });
 
+let IRL = false;
+let nombreGuardado;
 //Buscar Uma
 buscarUma("mayano")
 async function buscarUma(menu = null) {
     const ruta_img = "src/media/img/";
 
+    if (IRL == false) {
+        fuente = establo
+    }
+
+    else {
+        fuente = establoReal
+    }
+
     let buscador = document.getElementById("nombreUma")
     let nombre = menu ? menu.toLowerCase() : buscador.value.toLowerCase();
     nombre = nombre.trim();
+
+    nombreGuardado = nombre;
 
     let dibujar = document.getElementById("dibujar");
     void dibujar.offsetWidth;
@@ -102,7 +114,7 @@ async function buscarUma(menu = null) {
         setTimeout(resolve, 600)
     })
     
-    let datos = establo[nombre];
+    let datos = fuente[nombre];
 
     if (!datos && nombre.length > 0) {
         let nombreAproximado = Object.keys(establo).find(alias => alias.includes(nombre))
@@ -113,7 +125,7 @@ async function buscarUma(menu = null) {
     }
 
     if (datos) {
-
+        
         const img = new Image();
         let choosedImage = Math.floor(Math.random() * datos.imagen.length);
         choosedImage = datos.imagen[choosedImage]
@@ -123,8 +135,9 @@ async function buscarUma(menu = null) {
         
         document.documentElement.style.setProperty(`--uma-color`, datos.color);
         
-        
-        dibujar.innerHTML = 
+        // Dibujar Mma
+        if (!IRL) {
+            dibujar.innerHTML = 
         `
             <div class="uma-info" id="uma-info">
                 <h2>${datos.nombre}</h2>
@@ -141,6 +154,29 @@ async function buscarUma(menu = null) {
                 <img src="${img.src}" class="img-uma" id="img-uma" alt="Imagen de una Uma">
             </div>
         `;
+        }
+        // Dibujar caballo
+        else {
+            dibujar.innerHTML = 
+        `
+            <div class="uma-info" id="uma-info">
+                <h2>${datos.nombre}</h2>
+                <br>
+                <p><strong>Nacimiento:</strong> ${datos.nacimiento}</p>
+                <p><strong>Sexo:</strong> ${datos.sexo}</p>
+                <p><strong>Fallecimiento:</strong> ${datos.fallecimiento}</p>
+                <p><strong>Cabello:</strong> ${datos.cabello}</p>
+                <p><strong>Carreras:</strong> ${datos.carreras}</p>
+                <p><strong>Victorias:</strong> ${datos.victorias}</p>
+                <p><strong>Padre:</strong> ${datos.padre}</p>
+                <p><strong>Madre:</strong> ${datos.madre}</p>
+                <p><strong>Cabello:</strong> ${datos.cabello}</p>
+            </div>
+            <div class="container-img-uma">
+                <img src="${img.src}" class="img-uma img-caballo" id="img-uma" alt="Imagen de una Uma">
+            </div>
+        `;
+        }
 
         await new Promise((resolve) => {
             setTimeout(resolve, 400)
@@ -156,6 +192,7 @@ async function buscarUma(menu = null) {
         buscador.value = "";
 
         dibujar.classList.remove("animacion-desaparicion")
+
     } else {
     
         const img = new Image();
@@ -195,6 +232,14 @@ async function buscarUma(menu = null) {
         buscador.focus();
     }
 }
+
+ //Cambio de contenido 
+let switchButton = document.getElementById("switch-button")
+
+switchButton.addEventListener("click", function(event) {
+IRL = !IRL
+buscarUma(nombreGuardado)
+})
 
 //Busqueda "Enter"
 function buscarUmaForm(event) {
@@ -254,7 +299,8 @@ function agregarUma() {
 
         let holder = document.createElement("p")
         let nombre = document.createElement("a")
-        nombre.setAttribute("href", "#section-1")  
+        nombre.setAttribute("href", "#section-1")
+        nombre.setAttribute("onclick", "scrollSection1(event)")  
         nombre.setAttribute(`data-uma`, llave);      
         nombre.textContent = `${datos.nombre}`;
 
@@ -270,4 +316,10 @@ function agregarUma() {
             buscarUma(opcionSeleccionada);
         }   
     });
+}
+
+function scrollSection1 (event) {
+    event.preventDefault()
+    let seccion1 = document.getElementById("section-1")
+    seccion1.scrollIntoView()
 }

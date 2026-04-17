@@ -208,6 +208,21 @@ const establo = {
             color: "#777777"
     }
 };
+
+const establoReal = {
+    "mayano": {
+        nombre: "Mayano Top Gun",
+        nacimiento: "24 de marzo - 1992",
+        fallecimiento: "3 de noviembre - 2019",
+        sexo: "Macho",
+        cabello: "Castaño",
+        padre: "Brian's Time",
+        madre: "Alp Me Please",
+        carreras: 21,
+        victorias: 8,
+        imagen: ["IRL_Mayano_Top_Gun.webp"]
+    }
+}
 generarNombres()
 async function generarNombres() {
     await new Promise (resolve => setTimeout (resolve, 500))
