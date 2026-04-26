@@ -92,11 +92,19 @@ buscarUma("mayano")
 async function buscarUma(menu = null) {
     const ruta_img = "src/media/img/";
 
-    if (IRL == false) {
+    let dibujar = document.getElementById("dibujar");
+    void dibujar.offsetWidth;
+    dibujar.style.opacity = "0";
+    dibujar.classList.add("animacion-desaparicion")
+    await new Promise((resolve) => {
+        setTimeout(resolve, 600)
+    })
+
+    if (!IRL) {
         fuente = establo
     }
 
-    else {
+    if (IRL) {
         fuente = establoReal
     }
 
@@ -105,14 +113,6 @@ async function buscarUma(menu = null) {
     nombre = nombre.trim();
 
     nombreGuardado = nombre;
-
-    let dibujar = document.getElementById("dibujar");
-    void dibujar.offsetWidth;
-    dibujar.style.opacity = "0";
-    dibujar.classList.add("animacion-desaparicion")
-    await new Promise((resolve) => {
-        setTimeout(resolve, 600)
-    })
     
     let datos = fuente[nombre];
 
@@ -156,7 +156,7 @@ async function buscarUma(menu = null) {
         `;
         }
         // Dibujar caballo
-        else {
+        if (IRL) {
             dibujar.innerHTML = 
         `
             <div class="uma-info" id="uma-info">
@@ -170,7 +170,6 @@ async function buscarUma(menu = null) {
                 <p><strong>Victorias:</strong> ${datos.victorias}</p>
                 <p><strong>Padre:</strong> ${datos.padre}</p>
                 <p><strong>Madre:</strong> ${datos.madre}</p>
-                <p><strong>Cabello:</strong> ${datos.cabello}</p>
             </div>
             <div class="container-img-uma">
                 <img src="${img.src}" class="img-uma img-caballo" id="img-uma" alt="Imagen de una Uma">
@@ -297,15 +296,20 @@ function agregarUma() {
         nombres.forEach(llave => {
         let datos = establo[llave];
 
-        let holder = document.createElement("p")
+        let container = document.createElement("div")
         let nombre = document.createElement("a")
-        nombre.setAttribute("href", "#section-1")
+       // let imagen = document.createElement("img")
+
+        container.setAttribute("class", "umas-disponibles-container")
+        nombre.setAttribute("href", "#")
         nombre.setAttribute("onclick", "scrollSection1(event)")  
         nombre.setAttribute(`data-uma`, llave);      
         nombre.textContent = `${datos.nombre}`;
+        //imagen.setAttribute("src", `src/media/img/${datos.imagen[0]}`)
 
-        holder.appendChild(nombre)
-        umasDisponibles.appendChild(holder)
+        container.appendChild(nombre)
+        //container.appendChild(imagen)
+        umasDisponibles.appendChild(container)
     });
 
     umasDisponibles.addEventListener("click", function(event) {

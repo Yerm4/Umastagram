@@ -206,7 +206,33 @@ const establo = {
             compañera: "Masami Komiyama",
             imagen: ["Tamamo_Cross.webp", "Tamamo_Cross_Alt(1).webp", "Tamamo_Cross_Alt(2).webp"],
             color: "#777777"
-    }
+    }, 
+    "rudolf": {
+    nombre: "Symboli Rudolf",
+            nacimiento: "13 de marzo",
+            altura: 1.65,
+            cabello: "Castaño con negro",
+            estilos: "Front, Pace, Late",
+            suelo: "Turf",
+            distancia: "Medium, Long",
+            rival: "Oguri Cap",
+            compañera: "Air Groove",
+            imagen: ["Symboli_Rudolf.webp", "Symboli_Rudolf_Alt(1).webp", "Symboli_Rudolf_Alt(2).webp"],
+            color: "#633a34"
+    },
+    "taiki": {
+    nombre: "Taiki Shuttle",
+            nacimiento: "23 de marzo",
+            altura: 1.72,
+            cabello: "Castaño claro",
+            estilos: "Front, Pace",
+            suelo: "Turf, Dirt",
+            distancia: "Sprint, Mile",
+            rival: "Special Week",
+            compañera: "Mejiro Dober",
+            imagen: ["Taiki_Shuttle.webp", "Taiki_Shuttle_Alt(1).webp", "Taiki_Shuttle_Alt(2).webp"],
+            color: "#633a34"
+    },
 };
 
 const establoReal = {
@@ -221,8 +247,81 @@ const establoReal = {
         carreras: 21,
         victorias: 8,
         imagen: ["IRL_Mayano_Top_Gun.webp"]
-    }
+    },
+    "special": {
+        nombre: "Special Week",
+        nacimiento: "2 de Mayo",
+        fallecimiento: "27 de abril - 2019",
+        sexo: "Macho",
+        cabello: "Castaño oscuro",
+        padre: "Sunday Silence",
+        madre: "Campaign Girl",
+        carreras: 17,
+        victorias: 10,
+        imagen: ["IRL_Special_Week.webp"]
+    },
+    "teio": {
+        nombre: "Tokai Teio",
+        nacimiento: "20 de abril - 1988",
+        fallecimiento: "30 de agosto - 2013",
+        sexo: "Macho",
+        cabello: "Castaño oscuro",
+        padre: "Symboli Rudolf",
+        madre: "Nice Dancer",
+        carreras: 12,
+        victorias: 9,
+        imagen: ["IRL_Tokai_Teio.webp"]
+    },
+    "mambo": {
+        nombre: "Matikanetannhauser",
+        nacimiento: "7 de mayo - 1989",
+        fallecimiento: "7 de diciembre - 2013",
+        sexo: "Macho",
+        cabello: "Castaño",
+        padre: "Northern Taste",
+        madre: "Cripsi",
+        carreras: 32,
+        victorias: 8,
+        imagen: ["IRL_Matikanetannhauser.webp"]
+    },
+    "rudolf": {
+        nombre: "Symboli Rudolf",
+        nacimiento: "13 de marzo - 1981",
+        fallecimiento: "4 de octubre - 2011",
+        sexo: "Macho",
+        cabello: "Castaño",
+        padre: "Partholon",
+        madre: "Sweet Luna",
+        carreras: 16,
+        victorias: 13,
+        imagen: ["IRL_Symboli_Rudolf.webp"]
+    },
+    "kitasan": {
+        nombre: "Kitasan Black",
+        nacimiento: "10 de marzo - 2012",
+        fallecimiento: "Con vida",
+        sexo: "Macho",
+        cabello: "Castaño",
+        padre: "Black Tide",
+        madre: "Sugar Heart",
+        carreras: 20,
+        victorias: 12,
+        imagen: ["IRL_Kitasan_Black.webp"]
+    },
+    "taiki": {
+        nombre: "Taiki Shuttle",
+        nacimiento: "23 de marzo - 1994",
+        fallecimiento: "17 de agosto - 2022",
+        sexo: "Macho",
+        cabello: "Castaño rubio",
+        padre: "Devil´s Bag",
+        madre: "Welsh Muffin",
+        carreras: 13,
+        victorias: 11,
+        imagen: ["IRL_Taiki_Shuttle.webp"]
+    },
 }
+
 generarNombres()
 async function generarNombres() {
     await new Promise (resolve => setTimeout (resolve, 500))
@@ -232,7 +331,7 @@ async function generarNombres() {
     });    
 }
 
-let sql = "INSERT INTO tu_nombre_de_tabla (nombre, nacimiento, altura, cabello, estilo, suelo, distancia, rival, compañera, imagen, color) VALUES \n";
+/* let sql = "INSERT INTO tu_nombre_de_tabla (nombre, nacimiento, altura, cabello, estilo, suelo, distancia, rival, compañera, imagen, color) VALUES \n";
 
 const values = Object.keys(establo).map(key => {
     const u = establo[key];
@@ -241,3 +340,4 @@ const values = Object.keys(establo).map(key => {
     
     return `('${u.nombre}', '${u.nacimiento}', ${u.altura}, '${u.cabello}', '${u.estilos}', '${u.suelo}', '${u.distancia}', '${u.rival}', '${u.compañera}', '${imagenesStr}', '${u.color.trim()}')`;
 });
+*/

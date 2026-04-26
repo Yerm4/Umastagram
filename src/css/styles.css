@@ -509,6 +509,18 @@ main {
 
 /* > 400 PX */
 
+
+.umas-disponibles-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+.umas-disponibles-container img {
+    width: 20%
+}
+
 @media screen and (max-width: 400px) {
     .flex-container--section-1 .dibujar {
         font-size: 9px;
