@@ -91,9 +91,13 @@ let nombreGuardado;
 buscarUma("mayano")
 async function buscarUma(menu = null) {
     const ruta_img = "src/media/img/";
+    let IRLButton = document.getElementById("switch-button")
 
     let dibujar = document.getElementById("dibujar");
     void dibujar.offsetWidth;
+    void IRLButton.offsetWidth;
+    IRLButton.style.opacity = "0"
+    IRLButton.classList.add("animacion-desaparicion")
     dibujar.style.opacity = "0";
     dibujar.classList.add("animacion-desaparicion")
     await new Promise((resolve) => {
@@ -135,48 +139,97 @@ async function buscarUma(menu = null) {
         
         document.documentElement.style.setProperty(`--uma-color`, datos.color);
         
+        function crearDato(texto, valor) {
+            let p = document.createElement("p")
+            let s = document.createElement("strong")
+
+            s.textContent = texto + ": "
+            p.append(s, valor)
+            return p;
+        }
+
         // Dibujar Uma
         if (!IRL) {
             dibujar.classList.remove("dibujar-column")
-            dibujar.innerHTML = 
-        `
-            <div class="uma-info" id="uma-info">
-                <h2>${datos.nombre}</h2>
-                <br>
-                <p><strong>Altura:</strong> ${datos.altura.toFixed(2)}</p>
-                <p><strong>Cabello:</strong> ${datos.cabello}</p>
-                <p><strong>Estilos:</strong> ${datos.estilos}</p>
-                <p><strong>Suelo:</strong> ${datos.suelo}</p>
-                <p><strong>Distancia:</strong> ${datos.distancia}</p>
-                <p><strong>Rival:</strong> ${datos.rival}</p>
-                <p><strong>Compañera:</strong> ${datos.compañera}</p>
-            </div>
-            <div class="container-img-uma">
-                <img src="${img.src}" class="img-uma" id="img-uma" alt="Imagen de una Uma">
-            </div>
-        `;
+            IRLButton.textContent = "Caballo - IRL"
+
+            dibujar.textContent = ""
+            
+            let infoContainer = document.createElement("div")
+            infoContainer.classList.add("uma-info")
+            infoContainer.id = "uma-info"
+
+            let imgContainer = document.createElement("div")
+            imgContainer.classList.add("container-img-uma")
+            
+            let h2 = document.createElement("h2")
+            h2.textContent = datos.nombre
+
+            let imagen = document.createElement("img")
+            imagen.src = img.src
+            imagen.classList.add("img-uma")
+            imagen.id = "img-uma"
+            imagen.alt = "Imagen de un caballo"
+
+            infoContainer.append(
+                h2,
+                document.createElement("br"),
+                crearDato("Altura", datos.altura),
+                crearDato("Cabello", datos.cabello),
+                crearDato("Estilos", datos.estilos),
+                crearDato("Suelo", datos.suelo),
+                crearDato("Distancia", datos.distancia),
+                crearDato("Rival", datos.rival),
+                crearDato("Compañera", datos.compañera)
+            )
+
+            imgContainer.append(
+                imagen
+            )
+            
+            dibujar.append(infoContainer, imgContainer)
         }
+
         // Dibujar caballo
         if (IRL) {
             dibujar.classList.add("dibujar-column")
-            dibujar.innerHTML = 
-        `
-            <div class="uma-info" id="uma-info">
-                <h2>${datos.nombre}</h2>
-                <br>
-                <p><strong>Nacimiento:</strong> ${datos.nacimiento}</p>
-                <p><strong>Sexo:</strong> ${datos.sexo}</p>
-                <p><strong>Fallecimiento:</strong> ${datos.fallecimiento}</p>
-                <p><strong>Cabello:</strong> ${datos.cabello}</p>
-                <p><strong>Carreras:</strong> ${datos.carreras}</p>
-                <p><strong>Victorias:</strong> ${datos.victorias}</p>
-                <p><strong>Padre:</strong> ${datos.padre}</p>
-                <p><strong>Madre:</strong> ${datos.madre}</p>
-            </div>
-            <div class="container-img-uma">
-                <img src="${img.src}" class="img-uma img-caballo" id="img-uma" alt="Imagen de una Uma">
-            </div>
-        `;
+            IRLButton.textContent = "Uma Musume"
+            dibujar.textContent = ""
+            
+            let infoContainer = document.createElement("div")
+            infoContainer.classList.add("uma-info")
+            infoContainer.id = "uma-info"
+
+            let imgContainer = document.createElement("div")
+            imgContainer.classList.add("container-img-uma")
+            
+            let h2 = document.createElement("h2")
+            h2.textContent = datos.nombre
+
+            let imagen = document.createElement("img")
+            imagen.src = img.src
+            imagen.classList.add("img-uma")
+            imagen.classList.add("img-caballo")
+            imagen.id = "img-uma"
+            imagen.alt = "Imagen de un caballo"
+
+            infoContainer.append(
+                h2,
+                document.createElement("br"),
+                crearDato("Nacimiento", datos.nacimiento),
+                crearDato("Sexo", datos.sexo),
+                crearDato("Fallecimiento", datos.fallecimiento),
+                crearDato("Cabello", datos.cabello),
+                crearDato("Carreras", datos.carreras),
+                crearDato("Victorias", datos.victorias),
+                crearDato("Padre", datos.padre),
+                crearDato("Madre", datos.madre)
+            )
+            imgContainer.append(
+                imagen
+            )
+            
+            dibujar.append(infoContainer, imgContainer)
         }
 
         await new Promise((resolve) => {
@@ -184,6 +237,7 @@ async function buscarUma(menu = null) {
         });
 
         dibujar.style.opacity = "1";
+        IRLButton.style.opacity = "1"
         
         setTimeout( () => {
         let img = document.getElementById("img-uma")
@@ -193,6 +247,7 @@ async function buscarUma(menu = null) {
         buscador.value = "";
 
         dibujar.classList.remove("animacion-desaparicion")
+        IRLButton.classList.remove("animacion-desaparicion")
 
     } else {
     
@@ -234,13 +289,28 @@ async function buscarUma(menu = null) {
     }
 }
 
+let sonido = new Audio("src/media/audio/mambo.mp3")
+sonido.volume = 0.2
  //Cambio de contenido 
 let switchButton = document.getElementById("switch-button")
 
 switchButton.addEventListener("click", function(event) {
 IRL = !IRL
 buscarUma(nombreGuardado)
+sonido.play()
 })
+
+// Mambo 
+let mambo = document.querySelectorAll(".mambo-spinning")
+
+mambo.forEach(mambo => {
+    mambo.addEventListener("click", function(event) {
+        buscarUma("mambo")
+        sonido.play()
+    })    
+});
+
+
 
 //Busqueda "Enter"
 function buscarUmaForm(event) {
