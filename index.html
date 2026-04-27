@@ -58,8 +58,8 @@
                         <div id="dibujar" class="dibujar animacion-aparicion">
                         
                         </div>
-                        <div class="switch-container">
-                            <button class="switch-button" id="switch-button" >
+                        <div class="IRL-button-container">
+                            <button class="IRL-button" id="switch-button" >
                                 Cambio
                             </button>
                         </div>
@@ -69,14 +69,14 @@
                 <div class="buscador-container">
                     <form onsubmit="buscarUmaForm(event)">
                         <input type="text" list="sugerencias-umas" id="nombreUma" placeholder="Nombre de la Uma..." class="buscador" autofocus autocomplete="off">
-                        <button onclick="buscarUma()" class="button">Consultar Registro</button>
+                        <button onclick="buscarUma()" class="buscador-button">Consultar Registro</button>
                         <datalist id="sugerencias-umas">
                         </datalist>
                     </form>
                 </div>
     
                 <div class="container-modo-oscuro">
-                    <button type="submit" onclick="modoOscuro()" class="button-dark-mode">Modo <br> oscuro</button>
+                    <button type="submit" onclick="modoOscuro()" class="button-modo-oscuro">Modo <br> oscuro</button>
                 </div>
     
                 <div id="context-menu" class="context-menu context-menu-animacion">
@@ -87,7 +87,7 @@
                 
             <section class="section-2">
                 <div>
-                    <h2>Lista de Umas disponibles (Puedes clickearlas)</h2>
+                    <h2>Lista de Umas disponibles (Puedes <strong>clickearlas</strong>) </h2>
                     <div class="umas-disponibles" id="umas-disponibles">
                         
                     </div>

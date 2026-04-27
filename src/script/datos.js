@@ -320,6 +320,30 @@ const establoReal = {
         victorias: 11,
         imagen: ["IRL_Taiki_Shuttle.webp"]
     },
+    "scarlet": {
+        nombre: "Daiwa Scarlet",
+        nacimiento: "13 de mayo - 2004",
+        fallecimiento: "Con vida",
+        sexo: "Hembra",
+        cabello: "Castaño",
+        padre: "Agnes Tachyon",
+        madre: "Scarlet Bouquet",
+        carreras: 12,
+        victorias: 8,
+        imagen: ["IRL_Daiwa_Scarlet.webp"]
+    },
+    "gold": {
+        nombre: "Gold Ship",
+        nacimiento: "6 de marzo - 2009",
+        fallecimiento: "Con vida",
+        sexo: "Macho",
+        cabello: "Blanco grisáceo",
+        padre: "Stay Gold",
+        madre: "Point Flag",
+        carreras: 28,
+        victorias: 13,
+        imagen: ["IRL_Gold_Ship.webp"]
+    },
 }
 
 generarNombres()

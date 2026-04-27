@@ -135,8 +135,9 @@ async function buscarUma(menu = null) {
         
         document.documentElement.style.setProperty(`--uma-color`, datos.color);
         
-        // Dibujar Mma
+        // Dibujar Uma
         if (!IRL) {
+            dibujar.classList.remove("dibujar-column")
             dibujar.innerHTML = 
         `
             <div class="uma-info" id="uma-info">
@@ -157,6 +158,7 @@ async function buscarUma(menu = null) {
         }
         // Dibujar caballo
         if (IRL) {
+            dibujar.classList.add("dibujar-column")
             dibujar.innerHTML = 
         `
             <div class="uma-info" id="uma-info">
@@ -269,7 +271,6 @@ function sugerencias() {
     })
 }
 
-
 precargado()
 function precargado() {
     let html = document.documentElement;
@@ -277,8 +278,6 @@ function precargado() {
     void html.offsetWidth;
     html.style.opacity = "1";
 }
-
-
 
 agregarUma();
 function agregarUma() {
