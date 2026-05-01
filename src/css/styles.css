@@ -22,8 +22,8 @@ body.modo-oscuro {
     --texto: #fff;
 }
 
-body.modo-oscuro main {
-    filter: brightness(85%);
+body.modo-oscuro .root-container {
+    filter: brightness(66%);
 }
 
 body {
@@ -70,6 +70,14 @@ main {
     margin: 20px 0;
 }
 
+@keyframes shake-animation {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-2px, -2px); }
+    50% { transform: translate(2px, 2px); }
+    75% { transform: translate(-2px, -2px); }
+    100% { transform: translate(0, 0); }
+}
+
 .dibujar {
     margin-top: 30px;
     box-shadow: 2px 2px 30px 0px #0006;
@@ -89,10 +97,12 @@ main {
     font-size: 1.2em;
     line-height: 2;
     font-weight: 500;
+    color: #000
 }
 
 .dibujar h2 {
     font-size: 2em;
+    color: #000
 }
 
 .dibujar .tazuna-container {
@@ -124,15 +134,10 @@ main {
     transform: translateY(5px);
 }
 
-.IRL-button-container {
+.IRL-button {
     position: absolute;
     width: fit-content;
-    right: 0;
     bottom: 0;
-    padding: 5px
-}
-
-.IRL-button {
     right: 0;
     border-radius: 20px;
     opacity: 0;
@@ -152,7 +157,7 @@ main {
 }
 
 .animacion-aparicion {
-    animation: aparicion 1s ease-in-out;
+    animation: aparicion 1s ease-in-out, shake-animation 2.5s infinite
 }
 
 @keyframes aparicion {
@@ -254,16 +259,17 @@ main {
 */
 
 .container-modo-oscuro {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
+    position: relative;
+    width: 30px;
+    height: 60px
 }
 
-.button-modo-oscuro {
-    font-size: .8em;
-    border-radius: 20px;
-    padding: 10px;
-    background: white;
+.boton-modo-oscuro {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    inset: 0;
+    margin: auto;
 }
 
 .section-2 {
@@ -351,7 +357,7 @@ footer p {
         }
     
         .nav-menu-lateral:hover {
-        width: 200px;
+        width: 210px;
         }
     
         .nav-menu-lateral .nav-logo {
@@ -413,7 +419,7 @@ footer p {
         }
     
         body:has(.nav-menu-lateral:hover) main {
-        filter: brightness(70%);
+        filter: brightness(80%);
         }
     
         .section-1, .section-2, footer {
@@ -429,6 +435,16 @@ footer p {
         }
 }
 
+@media screen and (max-width: 950px) {
+    .dibujar-column {
+    flex-direction: column;
+    }
+
+    .dibujar.dibujar-column {
+        padding-bottom: 40px;
+    }
+}
+
 /* MOBILE */
 
 @media screen and (max-width: 599px) {
@@ -441,14 +457,32 @@ footer p {
     padding: 5px;
     }
 
-    .nav-menu-lateral .nav-logo {
+    .nav-logo {
+        padding-left: 10px
+    }
+
+    .nav-menu-lateral .nav-logo .item-hidden {
     display: none;
+    }
+
+    .container-modo-oscuro {
+        position: relative;
+        width: 60px;
+        height: 55px
+    }
+    
+    .boton-modo-oscuro {
+        position: absolute;
+        width: 45px;
+        height: 40px;
+        inset: 0;
+        margin: auto;
     }
 
     .nav-menu-lateral .nav-container-items {
     display: flex;
-    justify-content: space-evenly;
-    width: 100%;
+    justify-content: space-around;
+    width: 80%;
     }
 
     .nav-menu-lateral .nav-item {
@@ -486,39 +520,34 @@ footer p {
     }
 
     .dibujar {
-        font-size: 9.5px;
-        padding: 15px;
-        min-height: 250px;
-    }
-    
-    .dibujar-column {
-        flex-direction: column;
+    font-size: 9.5px;
+    padding: 15px;
+    min-height: 250px;
     }
 
     .dibujar.dibujar-column p {
-        font-size: 1.4em;
+    font-size: 1.4em;
     }
 
     .dibujar.dibujar-column .img-caballo {
-        padding: 5px;
+    padding: 5px;
     }
 
-
     .dibujar .img-uma {
-        height: 240px;
+    height: 240px;
     }
 
     .buscador {
-        padding: 12px;
-        font-size: 1.2rem;
+    padding: 12px;
+    font-size: 1.2rem;
     }
     
     .buscador-button {
-        padding: 12px;
+    padding: 12px;
     }
 
     footer {
-        padding-bottom: 100px;
+    padding-bottom: 100px;
     }
 }
 

@@ -100,6 +100,7 @@ async function buscarUma(menu = null) {
     IRLButton.classList.add("animacion-desaparicion")
     dibujar.style.opacity = "0";
     dibujar.classList.add("animacion-desaparicion")
+    dibujar.classList.add("shake-animacion")
     await new Promise((resolve) => {
         setTimeout(resolve, 600)
     })
@@ -263,7 +264,7 @@ async function buscarUma(menu = null) {
         
         dibujar.style.opacity = "1";
         
-        dibujar.classList.remove("animacion-desaparicion")
+        dibujar.classList.remove("animacion-des cion")
         void dibujar.offsetWidth;
 
         dibujar.innerHTML = `
@@ -320,9 +321,25 @@ function buscarUmaForm(event) {
 }
 
 //Modo Oscuro
-function modoOscuro() {
-    document.body.classList.toggle("modo-oscuro");
-}
+let botonOscuro = document.getElementById("modo-oscuro")
+
+botonOscuro.addEventListener("click", () => {
+    document.body.classList.add("modo-oscuro")
+    botonOscuro.style.visibility = "hidden" 
+
+    botonClaro.style.visibility = "visible"
+})
+
+let botonClaro = document.getElementById("modo-claro")
+
+botonClaro.addEventListener("click", () => {
+    document.body.classList.remove("modo-oscuro")
+    botonClaro.style.visibility = "hidden"
+
+    botonOscuro.style.visibility = "visible"
+})
+
+//Animacion modo oscuro/claro
 
 //Sugerencias de buscador
 sugerencias()
@@ -394,6 +411,6 @@ function agregarUma() {
 
 function scrollSection1 (event) {
     event.preventDefault()
-    let seccion1 = document.getElementById("section-1")
-    seccion1.scrollIntoView()
+    let dibujar = document.getElementById("dibujar")
+    dibujar.scrollIntoView()
 }
