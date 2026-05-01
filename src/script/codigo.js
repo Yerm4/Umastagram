@@ -121,10 +121,10 @@ async function buscarUma(menu = null) {
     let datos = fuente[nombre];
 
     if (!datos && nombre.length > 0) {
-        let nombreAproximado = Object.keys(establo).find(alias => alias.includes(nombre))
+        let nombreAproximado = Object.keys(fuente).find(alias => alias.includes(nombre))
 
         if (nombreAproximado) {
-            datos = establo[nombreAproximado]
+            datos = fuente[nombreAproximado]
         }
     }
 
@@ -306,6 +306,7 @@ let mambo = document.querySelectorAll(".mambo-spinning")
 mambo.forEach(mambo => {
     mambo.addEventListener("click", function(event) {
         buscarUma("mambo")
+        sonido.currentTime = 0
         sonido.play()
     })    
 });
