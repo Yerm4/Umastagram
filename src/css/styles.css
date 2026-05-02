@@ -22,8 +22,22 @@ body.modo-oscuro {
     --texto: #fff;
 }
 
-body.modo-oscuro .root-container {
-    filter: brightness(66%);
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.34);
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .5s; 
+}
+
+body.modo-oscuro::after {
+    opacity: 1
 }
 
 body {
@@ -31,10 +45,6 @@ body {
     color: var(--texto);
     transition: background-color .5s ease, color .5s ease;
     -webkit-tap-highlight-color: transparent;
-}
-
-main {
-    transition: filter .6s ease
 }
 
 .nav-menu-lateral {
@@ -421,10 +431,6 @@ footer p {
         visibility: visible;
         }
     
-        body:has(.nav-menu-lateral:hover) main {
-        filter: brightness(80%);
-        }
-    
         .section-1, .section-2, footer {
         margin-left: 50px;
         }
@@ -469,13 +475,11 @@ footer p {
     }
 
     .container-modo-oscuro {
-        position: relative;
         width: 60px;
         height: 55px
     }
     
     .boton-modo-oscuro {
-        position: absolute;
         width: 45px;
         height: 40px;
         inset: 0;
