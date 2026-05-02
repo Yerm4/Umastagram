@@ -470,7 +470,7 @@ setTimeout(() => {
             establoReal[nombreCompleto] = establoReal[alias];
         });    
 }
-}, 500);
+}, 1000);
 
 /* let sql = "INSERT INTO tu_nombre_de_tabla (nombre, nacimiento, altura, cabello, estilo, suelo, distancia, rival, compañera, imagen, color) VALUES \n";
 
