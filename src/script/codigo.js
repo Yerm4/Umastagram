@@ -1,101 +1,17 @@
 const queryMobile = window.matchMedia("(max-width: 600px)").matches;
 
-// Menu contextual personalizado
-document.addEventListener("contextmenu", async function(event) {
-    return
-
-    const contextMenu = document.getElementById("context-menu");
-    event.preventDefault();
-
-    contextMenu.classList.remove("context-menu-visible");
-    contextMenu.classList.remove("context-menu-animacion")
-
-    let menuAncho = contextMenu.offsetWidth;
-    let menuAlto = contextMenu.offsetHeight;
-
-    let y = event.clientY;
-    let x = event.clientX;
-
-    if (x + menuAncho > window.innerWidth) {
-        x = x - menuAncho;
-    }
-
-    if (y + menuAlto > window.innerHeight) {
-        y = y - menuAlto;
-    }
-
-    contextMenu.style.top = y + "px";
-    contextMenu.style.left = x + "px";
-    
-    void contextMenu.offsetWidth;
-    contextMenu.classList.add("context-menu-animacion");
-    contextMenu.classList.add("context-menu-visible");
-});
-
-//Añadir opciones a menu contextual
-agregarOpciones();
-function agregarOpciones() {
-
-    return
-
-    let menuContextual = document.getElementById("context-menu");
-    menuContextual.innerHTML = ` `;
-    let nombres = Object.keys(establo);
-
-    nombres.forEach(llave => {
-        let datos = establo[llave];
-
-        let opcion = document.createElement("p")
-        let nombre = document.createElement("span")
-        opcion.classList.add("p-container")
-        nombre.setAttribute(`data-uma`, llave);
-        nombre.textContent = `${datos.nombre}`;
-        nombre.classList.add("opcion");
-        nombre.style.borderRight = `4px solid ${datos.color}`
-        
-        let imagen = document.createElement("img")
-        imagen.src = `src/media/img/mini/${datos.imagen[0]}`
-        imagen.classList.add("mini-imagen");
-
-        opcion.appendChild(nombre);
-        opcion.appendChild(imagen);
-
-        menuContextual.appendChild(opcion)
-    });
-}
-
-//Elegir opcion del menu contextual
-document.getElementById("context-menu").addEventListener("click", function(event) {
-    
-    return
-
-    const opcionSeleccionada = event.target.getAttribute("data-uma");
-
-    if (opcionSeleccionada) {
-        buscarUma(opcionSeleccionada);
-    }
-});
-
-// Cerrar menu contextual
-document.addEventListener("click", function(event) {
-    return
-
-    const contextMenu = document.getElementById("context-menu");
-    
-    contextMenu.classList.remove("context-menu-visible")
-});
+//Buscar Uma
 
 let IRL = false;
-let nombreGuardado;
-//Buscar Uma
+let nombreGuardado = "";
 buscarUma("mayano")
 async function buscarUma(menu = null) {
     const ruta_img = "src/media/img/";
     let IRLButton = document.getElementById("switch-button")
-
+    let caballoSvg = document.getElementById("caballo-svg")
+    let umaSvg = document.getElementById("uma-svg")
     let dibujar = document.getElementById("dibujar");
-    void dibujar.offsetWidth;
-    void IRLButton.offsetWidth;
+    
     IRLButton.style.opacity = "0"
     IRLButton.classList.add("animacion-desaparicion")
     dibujar.style.opacity = "0";
@@ -127,6 +43,10 @@ async function buscarUma(menu = null) {
         if (nombreAproximado) {
             datos = fuente[nombreAproximado]
         }
+
+        if (!nombreAproximado) {
+            
+        }
     }
 
     if (datos) {
@@ -152,7 +72,8 @@ async function buscarUma(menu = null) {
         // Dibujar Uma
         if (!IRL) {
             dibujar.classList.remove("dibujar-column")
-            IRLButton.textContent = "Caballo - IRL"
+            caballoSvg.style.opacity = "1"
+            umaSvg.style.opacity = "0"
 
             dibujar.textContent = ""
             
@@ -194,7 +115,10 @@ async function buscarUma(menu = null) {
         // Dibujar caballo
         if (IRL) {
             dibujar.classList.add("dibujar-column")
-            IRLButton.textContent = "Uma Musume"
+            
+            umaSvg.style.opacity = "1"
+            caballoSvg.style.opacity = "0"
+
             dibujar.textContent = ""
             
             let infoContainer = document.createElement("div")
@@ -250,7 +174,9 @@ async function buscarUma(menu = null) {
         dibujar.classList.remove("animacion-desaparicion")
         IRLButton.classList.remove("animacion-desaparicion")
 
-    } else {
+    } 
+    
+    else {
     
         const img = new Image();
         let choosedImage = `${ruta_img}Tazuna_Hayakawa.webp`;
@@ -264,7 +190,7 @@ async function buscarUma(menu = null) {
         
         dibujar.style.opacity = "1";
         
-        dibujar.classList.remove("animacion-des cion")
+        dibujar.classList.remove("animacion-desaparicion")
         void dibujar.offsetWidth;
 
         dibujar.innerHTML = `
@@ -285,23 +211,31 @@ async function buscarUma(menu = null) {
         img.classList.add("img-uma-visible");
         }, 100);
     }
+
     if (!queryMobile) {
         buscador.focus();
     }
 }
 
-let sonido = new Audio("src/media/audio/mambo.mp3")
-sonido.volume = 0.2
- //Cambio de contenido 
+ //Cambio de IRL
+
 let switchButton = document.getElementById("switch-button")
 
 switchButton.addEventListener("click", function(event) {
+switchButton.style.pointerEvents = "none"
+setTimeout(() => {
+    switchButton.style.pointerEvents = "auto"
+}, 500);
 IRL = !IRL
 buscarUma(nombreGuardado)
 sonido.play()
 })
 
 // Mambo 
+
+let sonido = new Audio("src/media/audio/mambo.mp3")
+sonido.volume = 0.2
+
 let mambo = document.querySelectorAll(".mambo-spinning")
 
 mambo.forEach(mambo => {
@@ -315,12 +249,14 @@ mambo.forEach(mambo => {
 
 
 //Busqueda "Enter"
+
 function buscarUmaForm(event) {
     event.preventDefault();
     buscarUma();
 }
 
 //Modo Oscuro
+
 let botonOscuro = document.getElementById("modo-oscuro")
 
 botonOscuro.addEventListener("click", () => {
@@ -339,25 +275,7 @@ botonClaro.addEventListener("click", () => {
     botonOscuro.style.visibility = "visible"
 })
 
-//Animacion modo oscuro/claro
-
 //Sugerencias de buscador
-sugerencias()
-function sugerencias() {
-    
-    const lista = document.getElementById("sugerencias-umas");
-    const nombres = Object.keys(establo);
-
-    nombres.sort(() => Math.random() - 0.5)
-    nombres.slice(0, 8).forEach(nombre => {
-        const opcion = document.createElement("option");
-        opcion.value = nombre;
-        let label = `${establo[nombre].nombre}`
-        opcion.textContent = label;
-        opcion.classList = "opcion"
-        lista.appendChild(opcion);
-    })
-}
 
 precargado()
 function precargado() {
@@ -366,6 +284,8 @@ function precargado() {
     void html.offsetWidth;
     html.style.opacity = "1";
 }
+
+//Agregar umas a lista de disponibles
 
 agregarUma();
 function agregarUma() {

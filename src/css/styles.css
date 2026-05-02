@@ -40,6 +40,24 @@ body.modo-oscuro::after {
     opacity: 1
 }
 
+main::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.14);
+    z-index: 9;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .5s; 
+}
+
+body:not(.modo-oscuro):has(.nav-menu-lateral:hover) main::after {
+    opacity: 1;
+}
+
 body {
     background-color: var(--fondo);
     color: var(--texto);
@@ -78,6 +96,8 @@ body {
 .relative-container {
     position: relative;
     margin: 20px 0;
+    display: grid;
+    place-items: center;
 }
 
 @keyframes shake-animation {
@@ -149,28 +169,45 @@ body {
 
 .IRL-button {
     position: absolute;
-    width: fit-content;
+    width: 55px;
+    height: 55px;
     bottom: 0;
     right: 0;
     border-radius: 20px;
     opacity: 0;
     padding: 10px;
-    background-color: #fffa;
-    border: 1px black solid;
+    border: #fff solid 1px;
     transition: background-color .3s ease, transform .3s ease, opacity .7s ease;
 }
 
 .IRL-button:hover {
-    background-color: #ccca;
+    background-color: #9998;
 }
 
 .IRL-button:active {
-    background-color: #999a;
-    transform: scale(0.95);
+    background-color: #999c;
+    transform: scale(1.95);
+}
+
+.uma-svg {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 50px;
+    height: 50px;
+    opacity: 0;
+}
+
+.caballo-svg {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 40px;
+    height: 40px;
 }
 
 .animacion-aparicion {
-    animation: aparicion 1s ease-in-out, shake-animation 2.5s infinite
+    animation: aparicion 1s ease-in-out, shake-animation 7s infinite
 }
 
 @keyframes aparicion {
@@ -450,7 +487,11 @@ footer p {
     }
 
     .dibujar.dibujar-column {
-        padding-bottom: 40px;
+    padding-bottom: 60px;
+    }
+
+    .dibujar.dibujar-column ~ .IRL-button {
+    right: 10px;
     }
 }
 
@@ -467,7 +508,7 @@ footer p {
     }
 
     .nav-logo {
-        padding-left: 10px
+    padding-left: 10px
     }
 
     .nav-menu-lateral .nav-logo .item-hidden {
@@ -475,15 +516,15 @@ footer p {
     }
 
     .container-modo-oscuro {
-        width: 60px;
-        height: 55px
+    width: 60px;
+    height: 55px
     }
     
     .boton-modo-oscuro {
-        width: 45px;
-        height: 40px;
-        inset: 0;
-        margin: auto;
+    width: 45px;
+    height: 40px;
+    inset: 0;
+    margin: auto;
     }
 
     .nav-menu-lateral .nav-container-items {
@@ -504,7 +545,7 @@ footer p {
     }
 
     .nav-menu-lateral .item-hidden {
-        text-align: center;
+    text-align: center;
     }
 
     .nav-item:active {
@@ -530,6 +571,7 @@ footer p {
     font-size: 9.5px;
     padding: 15px;
     min-height: 250px;
+    min-width: 325px;
     }
 
     .dibujar.dibujar-column p {
@@ -542,6 +584,30 @@ footer p {
 
     .dibujar .img-uma {
     height: 240px;
+    }
+
+    .dibujar:not(.dibujar-column) ~ .IRL-button {
+    width: 45px;
+    height: 45px;
+    bottom: 5px;
+    right: 5px;
+    }
+    
+    .uma-svg {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 50px;
+    height: 50px;
+    opacity: 0;
+    }
+    
+    .caballo-svg {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 30px;
+    height: 30px;
     }
 
     .buscador {

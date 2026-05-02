@@ -240,7 +240,7 @@ const establoReal = {
         nombre: "Satono Diamond",
         nacimiento: "30 de enero - 2013",
         fallecimiento: "Con vida",
-        sexo: "Machi",
+        sexo: "Macho",
         cabello: "Castaño",
         padre: "Deep Impact",
         madre: "Malpensa",
