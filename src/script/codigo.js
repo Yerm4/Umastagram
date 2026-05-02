@@ -11,7 +11,8 @@ async function buscarUma(menu = null) {
     let caballoSvg = document.getElementById("caballo-svg")
     let umaSvg = document.getElementById("uma-svg")
     let dibujar = document.getElementById("dibujar");
-    
+    scrollSection1(event)
+
     IRLButton.style.opacity = "0"
     IRLButton.classList.add("animacion-desaparicion")
     dibujar.style.opacity = "0";
@@ -330,7 +331,7 @@ function agregarUma() {
 }
 
 function scrollSection1 (event) {
-    event.preventDefault()
-    let dibujar = document.getElementById("dibujar")
-    dibujar.scrollIntoView()
+    window.scrollTo({
+        top: 0
+    })
 }
