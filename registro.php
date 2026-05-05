@@ -20,11 +20,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $_SESSION["id_usuario"] = $pdo->lastInsertId();
             $_SESSION["nombre_usuario"] = $nombreUsuario;
-            header("Location: muro.php");
+            header("Location: perfil.php");
         }
     
         catch (PDOException $e) {
-            $error = "Error. Quizá ese nombre ya fue tomado?";
+            $error = "Error. Una cuenta con ese nombre ya existe";
         }
     }
 
@@ -37,7 +37,7 @@ include "header.php";
 ?>
         <main class="register">
             <section class="section-1">
-                <div class="register-card">
+                <div id="card" class="card register-card">
                 <h1>Crea tu cuenta</h1>
                 <form class="register-form" action="" method="POST">
                     <label> Nombre <br>

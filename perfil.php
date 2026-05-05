@@ -1,23 +1,28 @@
 <?php
 session_start();
+
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
 require "conexion.php";
 
-if (isset($_SESSION["nombre"])) {
+if (isset($_SESSION["nombre_usuario"])) {
     $nombreUsuario = $_SESSION["nombre_usuario"];
 }
 else {
     header("Location: login.php");
 }
-
+$titulo = "Perfil";
 include "header.php"; 
 ?>
     <main class="muro">
             <section class="section-1">
-                <div class="login-card">
+                <div id="card" class="card login-card">
                 <h1>Hola, <?= e($nombreUsuario) ?>! <br> Bienvenido.</h1>
                 <form class="login-form" action="" method="POST">
-                    <p class="aviso">Espero sea de tu agrado mi sitio <br> Pronto mas funciones!</p>
-                    <button type="submit" name="" value="">Reclamar uma</button>
+                    <p class="aviso">Espero sea de tu agrado mi sitio<br> Pronto mas funciones!</p>
+                    
                 </form>
                 </div>
             </section>

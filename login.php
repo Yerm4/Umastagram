@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($usuarioEncontrado && password_verify($password, $usuarioEncontrado["password"])) {
         $_SESSION["id_usuario"] = $usuarioEncontrado["id"];
         $_SESSION["nombre_usuario"] = $usuarioEncontrado["nombre"];
-        header("Location: muro.php");
+        header("Location: perfil.php");
         exit();
     } else {
         $error = "Error. El usuario o contraseña son incorrectos";
@@ -25,7 +25,7 @@ include "header.php";
 ?>
     <main class="login">
         <section class="section-1">
-            <div class="login-card">
+            <div id="card" class="card login-card">
             <h1>Inicia Sesión</h1>
             <form class="login-form" action="" method="POST">
                 <label> Nombre <br>

@@ -23,3 +23,10 @@ botonClaro.addEventListener("click", () => {
 
     botonOscuro.style.visibility = "visible"
 })
+
+let card = document.getElementById("card")
+if (card) {
+setTimeout(() => {
+    card.style.opacity = "1"
+}, 500);
+}
