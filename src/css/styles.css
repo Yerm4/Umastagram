@@ -13,8 +13,6 @@
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
-    opacity: 0.2;
-    transition: opacity 1.5s ease;
 }
 
 body.modo-oscuro {
@@ -61,7 +59,8 @@ body:not(.modo-oscuro):has(.nav-menu-lateral:hover) main::after {
 body {
     background-color: var(--fondo);
     color: var(--texto);
-    transition: background-color .5s ease, color .5s ease;
+    opacity: 0.2;
+    transition: background-color .5s ease, color .5s ease, opacity 1.5s ease;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -77,10 +76,12 @@ body {
 }
 
 .nav-item {
-    padding: 3px 0 3px 3px;
+    padding: 3px 0 3px 5px;
     border-radius: 20px;
     transition: background-color .3s ease;
 }
+
+/* INDEX - BUSCADOR */
 
 .section-1 {
     position: relative;
@@ -390,7 +391,62 @@ footer p {
     font-weight: bolder;
 }
 
+/* LOGIN */
 
+.register-card ,.login-card {
+    max-width: 450px;
+    padding: 30px 50px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 2px 2px 30px 0px #0006;
+    animation: shake-animation 8s infinite;
+    color: black;
+}
+
+.register-form, .login-form {
+    display: grid;
+    place-items: center;
+    gap: 2px;
+    padding: 10px;
+}
+
+.register h1, .login h1, .muro h1 {
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.register-form input, .login-form input {
+    padding: 5px;
+    border-radius: 10px;
+    margin: 5px 0 5px 0
+}
+
+.register-form button, .login-form button {
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #eee;
+    transition: background-color .5s ease;
+}
+
+.register-form button:hover, .login-form button:hover{
+    transform: scale(1.03);
+    background-color: #999;
+}
+
+.register-form input, .register-form button, 
+.login-form input, .login-form button
+{
+    border: none;
+    border-width: 0 3px 3px 0;
+    border-color: #000;
+    border-style: solid;
+}
+
+.aviso {
+    padding: 5px;
+    font-size: 1.3rem;
+}
 /********* MEDIA QUERIES ********/ 
 
 /********* DESKTOP **********/
@@ -448,7 +504,7 @@ footer p {
         height: 35px;
         opacity: 1;
         fill: none;
-        stroke: currentColor;
+        stroke: #663399;
         }
         
         .nav-menu-lateral .item-hidden {
@@ -468,7 +524,7 @@ footer p {
         visibility: visible;
         }
     
-        .section-1, .section-2, footer {
+        main, footer {
         margin-left: 50px;
         }
 

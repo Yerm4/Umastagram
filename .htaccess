@@ -2,7 +2,7 @@ RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-<Files "conexion.php">
-    Order Allow,Deny
+<FilesMatch "^(conexion\.php|conexion-infi\.php)$">
+    Order allow,deny
     Deny from all
-</Files>
+</FilesMatch>

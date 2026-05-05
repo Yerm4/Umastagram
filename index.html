@@ -3,17 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:url" content="https://umamusume.infinityfreeapp.com">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="buscador-umas.vercel.app">
     <meta property="og:title" content="Uma Musume!">
-    <meta property="og:image" content="https://buscador-umas.vercel.app/src/media/img/card.webp">
     <meta property="og:description" content="Conoce un poco mas a tus umas favoritas!">
+    <meta property="og:image" content="https://umamusume.infinityfreeapp.com/src/media/img/card.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="628">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="umamusume.infinityfreeapp.com">
+    <meta property="twitter:url" content="https://umamusume.infinityfreeapp.com">
+    <meta name="twitter:title" content="Uma Musume!">
+    <meta name="twitter:description" content="Conoce un poco mas a tus umas favoritas!">
+    <meta name="twitter:image" content="https://umamusume.infinityfreeapp.com/src/media/img/card.jpg">
     <meta name="author" content="Yerm4">
     <title>Uma Musume</title>
     <link rel="stylesheet" href="src/css/styles.css">
     <link rel="icon" href="src/media/img/mini/favicon.ico" type="image/x-icon">
     <script src="src/script/datos.js" defer></script>
     <script src="src/script/codigo.js" defer></script>
+    <script src="src/script/diseño.js" defer></script>
     <link rel="preload" href="src/media/img/bg.webp" as="image">
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
@@ -24,7 +33,7 @@
     </script>
 </head>
 
-<body>
+<body class="index">
     <div class="root-container">
         <header>
             <nav>
@@ -41,6 +50,17 @@
                         <h2 class="item-hidden ">Uma Musume</h2>
                     </div>
                     <div class="nav-container-items">
+
+                        <a href="registro.php" class="nav-item">
+                            <svg class="nav-item-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17,21V19a4,4,0,0,0-4-4H5a4,4,0,0,0-4,4v2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                <circle cx="9" cy="7" r="4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                <line x1="17" y1="11" x2="23" y2="11" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                <line x1="20" y1="8" x2="20" y2="14" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                            </svg>
+                            <p class="item-hidden">Registrate</p>
+                        </a>
+
                         <a href="login.php" target="" class="nav-item">
                             <svg class="nav-item-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10.56,18.35,9,17.05a1,1,0,0,1-.11-1.41L10.34,14H3V10h7.34L8.93,8.36A1,1,0,0,1,9,7l1.52-1.3A1,1,0,0,1,12,5.76l4.79,5.59a1,1,0,0,1,0,1.3L12,18.24A1,1,0,0,1,10.56,18.35ZM17,4h3a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H17"
@@ -49,7 +69,7 @@
                             <p class="item-hidden">Inicia sesion</p>
                         </a>
                         
-                        <a href="#" class="nav-item">
+                        <a href="index.html" class="nav-item">
                             <svg class="nav-item-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15 16C15 15.2044 14.6839 14.4413 14.1213 13.8787C13.5587 13.3161 12.7957 13 12 13C11.2044 13 10.4413 13.3161 9.87868 13.8787C9.31607 14.4413 9 15.2043 9 16V20H4L4 10L8 6.5M12 3L20 10L20 20H15" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -134,8 +154,8 @@
             <p>Este es un proyecto sin fines de lucro creado por un fan. Todos los derechos de los personajes e imágenes pertenecen a Cygames. No tengo afiliación oficial con el juego.</p>
             <p>This is a non-profit fanmade project. All characters and images are property of Cygames. I have no official afilitaion with the game nor their developers.  </p>
         </footer>
-            <video src="src/media/img/mambo-spinning.webm" class="mambo-spinning" id="mambo " autoplay loop muted playsinline title="mambo"></video>
-            <video src="src/media/img/mambo-spinning.webm" class="mambo-spinning mambo-spinning2" id="mambo " autoplay loop muted playsinline title="mambo"></video>
+        <video src="src/media/img/mambo-spinning.webm" class="mambo-spinning" id="mambo " autoplay loop muted playsinline title="mambo"></video>
+        <video src="src/media/img/mambo-spinning.webm" class="mambo-spinning mambo-spinning2" id="mambo " autoplay loop muted playsinline title="mambo"></video>
     </div>
 </body>
 </html>
