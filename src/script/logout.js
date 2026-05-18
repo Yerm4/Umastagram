@@ -1,3 +1,3 @@
 setTimeout(() => {
-    window.location.replace("https://umamusume.infinityfreeapp.com");
+    window.location.replace("home");
 }, 3500);

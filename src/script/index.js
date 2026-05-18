@@ -1,4 +1,4 @@
-const queryMobile = window.matchMedia("(max-width: 600px)").matches;
+const queryMobile = window.matchMedia("(pointer: fine)").matches;
 
 //Buscar Uma
 
@@ -33,7 +33,9 @@ async function buscarUma(menu = null) {
     let buscador = document.getElementById("nombreUma")
     let nombre = menu ? menu.toLowerCase() : buscador.value.toLowerCase();
     nombre = nombre.trim();
-
+    if (queryMobile) {
+        buscador.focus()
+    }
     nombreGuardado = nombre;
     
     let datos = fuente[nombre];
@@ -212,10 +214,6 @@ async function buscarUma(menu = null) {
         img.classList.add("img-uma-visible");
         }, 100);
     }
-
-    if (!queryMobile) {
-        buscador.focus();
-    }
 }
 
  //Cambio de IRL
@@ -305,3 +303,19 @@ function scrollSection1 (event) {
         top: 0
     })
 }
+
+let loginButton = document.getElementById("loginButton")
+let loginModal = document.getElementById("loginModal")
+    loginButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        loginModal.showModal();
+    })
+
+
+let registroButton = document.getElementById("registroButton")
+let registroModal = document.getElementById("registroModal")
+    registroButton.addEventListener("click", function(event) {
+    event.preventDefault()
+    
+    registroModal.showModal()
+    })

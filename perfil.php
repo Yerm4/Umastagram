@@ -7,6 +7,10 @@ header("Pragma: no-cache");
 
 require "conexion.php";
 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $contenido = $_POST["contenido"];
+}
+
 if (isset($_SESSION["nombre_usuario"])) {
     $nombreUsuario = $_SESSION["nombre_usuario"];
 }
@@ -18,7 +22,7 @@ include "header.php";
 ?>
     <main class="muro">
             <section class="section-1">
-                <div id="card" class="card login-card">
+                <div id="card" class="card perfil-card">
                 <h1>Hola, <?= e($nombreUsuario) ?>! <br> Bienvenido.</h1>
                 <form class="login-form" action="" method="POST">
                     <p class="aviso">Espero sea de tu agrado mi sitio<br> Pronto mas funciones!</p>

@@ -1,4 +1,43 @@
 const establo = {
+    "tachyon": {
+        nombre: "Agnes Tachyon",
+        nacimiento: "13 de abril",
+        altura: 1.59,
+        cabello: "Castaño",
+        estilos: "Pace, Late",
+        suelo: "Turf",
+        distancia: "Medium, Long",
+        rival: "Jungle Pocket",
+        compañera: "Agnes Digital",
+        imagen: ["Agnes_Tachyon.webp", "Agnes_Tachyon_Alt(1).webp", "Agnes_Tachyon_Alt(2).webp"],
+        color: "#31C95044"
+    },
+    "cafe": {
+        nombre: "Manhattan Cafe",
+        nacimiento: "5 de marzo",
+        altura: 1.55,
+        cabello: "Negro",
+        estilos: "Late",
+        suelo: "Turf",
+        distancia: "Long",
+        rival: "Agnes Tachyon",
+        compañera: "Yukino Bijin",
+        imagen: ["Manhattan_Cafe.webp", "Manhattan_Cafe_Alt(1).webp", "Manhattan_Cafe_Alt(2).webp"],
+        color: "#0a0a0a"
+    },
+    "almond": {
+        nombre: "Almond Eye",
+        nacimiento: "10 de marzo",
+        altura: 1.63,
+        cabello: "Castaño claro",
+        estilos: "Late, End",
+        suelo: "Turf",
+        distancia: "Mile, Medium, Long",
+        rival: "Lucky Lilac",
+        compañera: "Blast Onepiece",
+        imagen: ["Almond_Eye.webp", "Almond_Eye_Alt(1).webp", "Almond_Eye_Alt(2).webp"],
+        color: "#31C95044"
+    },
     "diamond": {
         nombre: "Satono Diamond",
         nacimiento: "30 de Enero",
@@ -9,7 +48,7 @@ const establo = {
         distancia: "Medium, Long",
         rival: "Kitasan Black",
         compañera: "Kitasan Black",
-        imagen: ["Satono_Diamond.webp", "Satono_Diamond_Alt(1).webp"],
+        imagen: ["Satono_Diamond.webp", "Satono_Diamond_Alt(1).webp", "Satono_Diamond_Alt(2).webp"],
         color: "#31C95044"
     },
     "gold": {
@@ -22,7 +61,7 @@ const establo = {
         distancia: "Medium, Long",
         rival: "Gentildonna, Orfevre",
         compañera: "Stay Gold",
-        imagen: ["Gold_Ship.webp", "Gold_Ship_Alt(1).webp"],
+        imagen: ["Gold_Ship.webp", "Gold_Ship_Alt(1).webp", "Gold_Ship_Alt(2).webp"],
         color: "#91100744"
     },
     "haru": {
@@ -35,7 +74,7 @@ const establo = {
         distancia: "Sprint",
         rival: "N/A",
         compañera: "King Halo",
-        imagen: ["Haru_Urara.webp", "Haru_Urara_Alt(1).webp"],
+        imagen: ["Haru_Urara.webp", "Haru_Urara_Alt(1).webp", "Haru_Urara_Alt(2).webp"],
         color: "#FDA5D544"
     },
     "kitasan": {
@@ -48,7 +87,7 @@ const establo = {
         distancia: "Medium, Long",
         rival: "Duramente, Satono Diamond",
         compañera: "Satono Diamond",
-        imagen: ["Kitasan_Black.webp", "Kitasan_Black_Alt(1).webp"],
+        imagen: ["Kitasan_Black.webp", "Kitasan_Black_Alt(1).webp", "Kitasan_Black_Alt(2).webp"],
         color: "#91100744"
     },
     "mambo": {
@@ -74,7 +113,7 @@ const establo = {
         distancia: "Sprint, Mile, Medium",
         rival: "N/A",
         compañera: "Tazuna Hayakawa",
-        imagen: ["Maruzensky.webp", "Maruzensky_Alt(1).webp"],
+        imagen: ["Maruzensky.webp", "Maruzensky_Alt(1).webp", "Maruzensky_Alt(2).webp"],
         color: "#973C0844"
     },
     "mayano": {
@@ -87,7 +126,7 @@ const establo = {
         distancia: "Medium, Long",
         rival: "Narita Brian",
         compañera: "Tokai Teio",
-        imagen: ["Mayano_Top_Gun.webp", "Mayano_Top_Gun_Alt(1).webp", "Mayano_Top_Gun_Alt(2).webp"],
+        imagen: ["Mayano_Top_Gun.webp", "Mayano_Top_Gun_Alt(1).webp", "Mayano_Top_Gun_Alt(2).webp", "Mayano_Top_Gun_Alt(3).webp"],
         color: "#ff8c0044"
     },
     "oguri": {
@@ -113,7 +152,7 @@ const establo = {
         distancia: "Medium, Long",
         rival: "Mihono Bourbon",
         compañera: "Zenno Rob Roy",
-        imagen: ["Rice_Shower.webp", "Rice_Shower.webp"],
+        imagen: ["Rice_Shower.webp", "Rice_Shower_Alt(1).webp", "Rice_Shower_Alt(2).webp"],
         color: "#00002244"
     },
     "rudolf": {
@@ -139,7 +178,7 @@ const establo = {
         distancia: "Mile, Medium, Long",
         rival: "Vodka",
         compañera: "Vodka",
-        imagen: ["Daiwa_Scarlet.webp", "Daiwa_Scarlet_Alt(1).webp"],
+        imagen: ["Daiwa_Scarlet.webp", "Daiwa_Scarlet_Alt(1).webp", "Daiwa_Scarlet_Alt(2).webp"],
         color: "#1447E644"
     },
     "special": {
@@ -152,7 +191,7 @@ const establo = {
         distancia: "Medium, Long",
         rival: "Seiun Sky",
         compañera: "Silence Suzuka",
-        imagen: ["Special_Week.webp", "Special_Week_Alt(1).webp", "Special_Week_Alt(2).webp"],
+        imagen: ["Special_Week.webp", "Special_Week_Alt(1).webp", "Special_Week_Alt(2).webp", "Special_Week_Alt(3).webp", "Special_Week_Alt(4).webp"],
         color: "#A020F044"
     },
     "stay gold": {
@@ -217,7 +256,7 @@ const establo = {
         distancia: "Medium, Long",
         rival: "Mejiro McQueen",
         compañera: "Mayano Top Gun",
-        imagen: ["Tokai_Teio.webp", "Tokai_Teio.webp"],
+        imagen: ["Tokai_Teio.webp", "Tokai_Teio_Alt(1).webp", "Tokai_Teio_Alt(2).webp"],
         color: "#A020F044"
     },
     "vodka": {
@@ -230,12 +269,48 @@ const establo = {
         distancia: "Mile, Medium",
         rival: "Vodka",
         compañera: "Vodka",
-        imagen: ["Vodka.webp", "Vodka_Alt(1).webp"],
+        imagen: ["Vodka.webp", "Vodka_Alt(1).webp", "Vodka_Alt(2).webp"],
         color: "#00002244"
     }
 };
 
 const establoReal = {
+    "tachyon": {
+        nombre: "Agnes Tachyon",
+        nacimiento: "13 de abril - 1998",
+        fallecimiento: "22 de junio - 2009",
+        sexo: "Macho",
+        cabello: "Castaño",
+        padre: "Sunday Silence",
+        madre: "Agnes Flora",
+        carreras: 4,
+        victorias: 4,
+        imagen: ["IRL_Agnes_Tachyon.webp"]
+    },
+    "cafe": {
+        nombre: "Manhattan Cafe",
+        nacimiento: "5 de marzo - 1998",
+        fallecimiento: "13 de agosto - 2015",
+        sexo: "Macho",
+        cabello: "Castaño oscuro",
+        padre: "Sunday Silence",
+        madre: "Subtle Change",
+        carreras: 12,
+        victorias: 6,
+        imagen: ["IRL_Manhattan_Cafe.webp"]
+    },
+    "almond": {
+        nombre: "Almond Eye",
+        nacimiento: "10 de marzo - 2015",
+        fallecimiento: "Con vida",
+        sexo: "Hembra",
+        cabello: "Castaño",
+        padre: "Lord Kanaloa",
+        madre: "Fusaichi Pandora",
+        carreras: 15,
+        victorias: 11,
+        imagen: ["IRL_Almond_Eye.webp"]
+    },
     "diamond": {
         nombre: "Satono Diamond",
         nacimiento: "30 de enero - 2013",

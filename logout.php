@@ -5,7 +5,7 @@ if (isset($_SESSION["nombre_usuario"])) {
 }
 
 else {
-    header("Location: index.php");
+    header("Location: home");
 }
 
 include "header.php"; 
