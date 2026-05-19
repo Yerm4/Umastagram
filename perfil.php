@@ -15,7 +15,7 @@ if (isset($_SESSION["nombre_usuario"])) {
     $nombreUsuario = $_SESSION["nombre_usuario"];
 }
 else {
-    header("Location: login.php");
+    header("Location: home");
 }
 $titulo = "Perfil";
 include "header.php"; 

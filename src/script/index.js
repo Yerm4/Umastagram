@@ -33,6 +33,7 @@ async function buscarUma(menu = null) {
     let buscador = document.getElementById("nombreUma")
     let nombre = menu ? menu.toLowerCase() : buscador.value.toLowerCase();
     nombre = nombre.trim();
+    
     if (queryMobile) {
         buscador.focus()
     }
@@ -46,10 +47,10 @@ async function buscarUma(menu = null) {
         if (nombreAproximado) {
             datos = fuente[nombreAproximado]
         }
+    }
 
-        if (!nombreAproximado) {
-            
-        }
+    if (!datos && nombre.length == 0) {
+        datos = fuente["oguri"]
     }
 
     if (datos) {
@@ -309,7 +310,7 @@ let loginModal = document.getElementById("loginModal")
     loginButton.addEventListener("click", function(event) {
         event.preventDefault();
         loginModal.showModal();
-    })
+})
 
 
 let registroButton = document.getElementById("registroButton")
@@ -318,4 +319,36 @@ let registroModal = document.getElementById("registroModal")
     event.preventDefault()
     
     registroModal.showModal()
-    })
+})
+
+let closeModalRegistro = document.getElementById("closeModalRegistro")
+closeModalRegistro.addEventListener("click", function(event) {
+    registroModal.close()
+})
+
+let closeModalLogin = document.getElementById("closeModalLogin")
+closeModalLogin.addEventListener("click", function(event) {
+    loginModal.close()
+})
+
+let switchToRegistro = document.getElementById("switchToRegistro")
+switchToRegistro.addEventListener("click", function(event) {
+    event.preventDefault()
+    loginModal.classList.add("modal-fade")
+    setTimeout(() => {
+        loginModal.classList.remove("modal-fade")
+        loginModal.close()
+        registroModal.showModal();
+    }, 1500);
+})
+
+let switchToLogin = document.getElementById("switchToLogin")
+switchToLogin.addEventListener("click", function(event) {
+    event.preventDefault()
+    registroModal.classList.add("modal-fade")
+    setTimeout(() => {
+        registroModal.classList.remove("modal-fade")
+        registroModal.close()
+        loginModal.showModal();
+    }, 1500);
+})
