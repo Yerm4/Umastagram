@@ -100,7 +100,7 @@ async function buscarUma(menu = null) {
             infoContainer.append(
                 h2,
                 document.createElement("br"),
-                crearDato("Altura", datos.altura),
+                crearDato("Altura", datos.altura.toFixed(2)),
                 crearDato("Cabello", datos.cabello),
                 crearDato("Estilos", datos.estilos),
                 crearDato("Suelo", datos.suelo),
@@ -305,34 +305,38 @@ function scrollSection1 (event) {
     })
 }
 
-let loginButton = document.getElementById("loginButton")
-let loginModal = document.getElementById("loginModal")
+let login = document.getElementById("main").dataset.login
+login == "true" ? login = true : login = false
+if (!login) {
+    console.log("logueado")
+    let loginButton = document.getElementById("loginButton")
+    let loginModal = document.getElementById("loginModal")
     loginButton.addEventListener("click", function(event) {
         event.preventDefault();
         loginModal.showModal();
+        loginModal.focus();
 })
 
-
-let registroButton = document.getElementById("registroButton")
-let registroModal = document.getElementById("registroModal")
+    let registroButton = document.getElementById("registroButton")
+    let registroModal = document.getElementById("registroModal")
     registroButton.addEventListener("click", function(event) {
     event.preventDefault()
-    
     registroModal.showModal()
+    registroModal.focus()
 })
 
-let closeModalRegistro = document.getElementById("closeModalRegistro")
-closeModalRegistro.addEventListener("click", function(event) {
+    let closeModalRegistro = document.getElementById("closeModalRegistro")
+    closeModalRegistro.addEventListener("click", function(event) {
     registroModal.close()
 })
 
-let closeModalLogin = document.getElementById("closeModalLogin")
-closeModalLogin.addEventListener("click", function(event) {
+    let closeModalLogin = document.getElementById("closeModalLogin")
+    closeModalLogin.addEventListener("click", function(event) {
     loginModal.close()
 })
 
-let switchToRegistro = document.getElementById("switchToRegistro")
-switchToRegistro.addEventListener("click", function(event) {
+    let switchToRegistro = document.getElementById("switchToRegistro")
+    switchToRegistro.addEventListener("click", function(event) {
     event.preventDefault()
     loginModal.classList.add("modal-fade")
     setTimeout(() => {
@@ -342,8 +346,8 @@ switchToRegistro.addEventListener("click", function(event) {
     }, 1500);
 })
 
-let switchToLogin = document.getElementById("switchToLogin")
-switchToLogin.addEventListener("click", function(event) {
+    let switchToLogin = document.getElementById("switchToLogin")
+    switchToLogin.addEventListener("click", function(event) {
     event.preventDefault()
     registroModal.classList.add("modal-fade")
     setTimeout(() => {
@@ -352,3 +356,8 @@ switchToLogin.addEventListener("click", function(event) {
         loginModal.showModal();
     }, 1500);
 })
+}
+
+else {
+    console.log("no logueado")
+}

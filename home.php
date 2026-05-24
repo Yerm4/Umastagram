@@ -2,6 +2,7 @@
 
 require_once "conexion.php";
 session_start();
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $formulario = $_POST["form"] ?? "";
@@ -19,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if ($usuarioEncontrado && password_verify($password, $usuarioEncontrado["password"])) {
                 $_SESSION["id_usuario"] = $usuarioEncontrado["id"];
                 $_SESSION["nombre_usuario"] = $usuarioEncontrado["nombre"];
+                $_SESSION["uma_fav"] = $usuarioEncontrado["uma_fav"];
                 header("Location: perfil");
                 exit();
             } else {
@@ -29,31 +31,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         case "registro":
             $nombreUsuario = trim($_POST["usuario"]);
             $password = trim($_POST["password"]);
-        
-            if (strlen($password) >= 8) {
+            $umaFav = trim($_POST["umaFav"]);
+            $umas_disponibles = ["Mayano Top Gun", "Narita Brian"];
+            $umaFavIsOk = false;
+
+            if (strlen($password) >= 8 && in_array($umaFav, $umas_disponibles)) {
                 $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-        
+                echo "ola";
                 try {
-                    $sql = "INSERT INTO usuarios (nombre, password) VALUES (:nombre, :password)";
+                    $sql = "INSERT INTO usuarios (nombre, password, uma_fav) VALUES (:nombre, :password, :umafav)";
                     $stmt = $pdo->prepare($sql);
             
                     $stmt->execute([
                         "nombre" => $nombreUsuario,
-                        "password" => $passwordHash
+                        "password" => $passwordHash,
+                        "umafav" => $umaFav
                     ]);
         
                     $_SESSION["id_usuario"] = $pdo->lastInsertId();
                     $_SESSION["nombre_usuario"] = $nombreUsuario;
+                    $_SESSION["uma_fav"] = $umaFav;
                     header("Location: perfil");
+                    echo "ola";
                 }
             
                 catch (PDOException $e) {
                     $error = "Error. Una cuenta con ese nombre ya existe";
+                    echo "ola";
                 }
             }
         
             else {
-                $aviso = "La contraseña debe teber 8 o mas caracteres";
+                $aviso = "Hubo un error. Vuelvelo a intentar.";
+                echo "ola";
             }
         break;
         
@@ -62,11 +72,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         break;
     }
 }
+if (isset($_SESSION["uma_fav"])) {
+    $umaFav = $_SESSION["uma_fav"];
+
+    if ($umaFav == "gwen") {
+        $gwen = true;
+    }
+}
 
 $titulo = "Uma Musume";
 include "header.php";
 ?>
-        <main>
+        <main id="main" data-login='<?php echo isset($_SESSION["nombre_usuario"]) ? "true" : "false" ?>'>
             <section class="section-1" id="section-1">
                     <div class="relative-container">
                         <div id="dibujar" class="dibujar animacion-aparicion">
@@ -157,6 +174,12 @@ include "header.php";
                     <label> Contraseña <br>
                         <input type="password" name="password" minlength="8" autocomplete="off" required>
                     </label>
+                    <label>Uma Favorita <br>
+                    <select class="register-select" name="umaFav" id="selectUmaFav">
+                        <option value="Mayano Top Gun">Mayano Top Gun</option>
+                        <option value="Narita Brian">Narita Brian</option>
+                    </select>
+                    </label>
                     <input type="hidden" name="form" value="registro">
                     <button type="submit">Registrar</button>
                 </form>
@@ -190,7 +213,7 @@ include "header.php";
                         <input type="password" name="password" autocomplete="off" required>
                     </label>
                     <input type="hidden" name="form" value="login">
-                    <button type="submit">Registrar</button>
+                    <button type="submit">Loguear</button>
                 </form>
                 <p class="aviso"><?= isset($aviso) ? e($aviso) : ""; ?> <br> <?= isset($error) ? e($error) : ""?></p>
             </div>
@@ -214,5 +237,11 @@ include "header.php";
         <video src="src/media/img/mambo-spinning.webm" class="mambo-spinning" id="mambo " autoplay loop muted playsinline title="mambo"></video>
         <video src="src/media/img/mambo-spinning.webm" class="mambo-spinning mambo-spinning2" id="mambo " autoplay loop muted playsinline title="mambo"></video>
     </div>
+    <?php if (isset($gwen)): ?>
+        <img src="gwen.jpeg" alt="">
+    <?php endif ?>
 </body>
 </html>
+<?php if (!$_SESSION["nombre_usuario"]) {
+    echo "olaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+}

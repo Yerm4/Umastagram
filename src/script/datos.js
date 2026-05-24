@@ -12,19 +12,6 @@ const establo = {
         imagen: ["Agnes_Tachyon.webp", "Agnes_Tachyon_Alt(1).webp", "Agnes_Tachyon_Alt(2).webp"],
         color: "#31C95044"
     },
-    "cafe": {
-        nombre: "Manhattan Cafe",
-        nacimiento: "5 de marzo",
-        altura: 1.55,
-        cabello: "Negro",
-        estilos: "Late",
-        suelo: "Turf",
-        distancia: "Long",
-        rival: "Agnes Tachyon",
-        compañera: "Yukino Bijin",
-        imagen: ["Manhattan_Cafe.webp", "Manhattan_Cafe_Alt(1).webp", "Manhattan_Cafe_Alt(2).webp"],
-        color: "#0a0a0a"
-    },
     "almond": {
         nombre: "Almond Eye",
         nacimiento: "10 de marzo",
@@ -38,17 +25,30 @@ const establo = {
         imagen: ["Almond_Eye.webp", "Almond_Eye_Alt(1).webp", "Almond_Eye_Alt(2).webp"],
         color: "#31C95044"
     },
-    "diamond": {
-        nombre: "Satono Diamond",
-        nacimiento: "30 de Enero",
-        altura: 1.58,
-        cabello: "Castaño claro",
-        estilos: "Late",
+    "scarlet": {
+        nombre: "Daiwa Scarlet",
+        nacimiento: "13 de Mayo",
+        altura: 1.63,
+        cabello: "Castaño",
+        estilos: "Front, Pace",
         suelo: "Turf",
-        distancia: "Medium, Long",
-        rival: "Kitasan Black",
-        compañera: "Kitasan Black",
-        imagen: ["Satono_Diamond.webp", "Satono_Diamond_Alt(1).webp", "Satono_Diamond_Alt(2).webp"],
+        distancia: "Mile, Medium, Long",
+        rival: "Vodka",
+        compañera: "Vodka",
+        imagen: ["Daiwa_Scarlet.webp", "Daiwa_Scarlet_Alt(1).webp", "Daiwa_Scarlet_Alt(2).webp"],
+        color: "#1447E644"
+    },
+    "condor": {
+        nombre: "El Condor Pasa",
+        nacimiento: "17 de marzo",
+        altura: 1.63,
+        cabello: "Castaño",
+        estilos: "Pace, Late",
+        suelo: "Turf, Dirt",
+        distancia: "Mile, Medium, Long",
+        rival: "Special Week",
+        compañera: "Grass Wonder",
+        imagen: ["El_Condor_Pasa.webp", "El_Condor_Pasa_Alt(1).webp", "El_Condor_Pasa_Alt(2).webp", "El_Condor_Pasa_Alt(3).webp"],
         color: "#31C95044"
     },
     "gold": {
@@ -90,18 +90,18 @@ const establo = {
         imagen: ["Kitasan_Black.webp", "Kitasan_Black_Alt(1).webp", "Kitasan_Black_Alt(2).webp"],
         color: "#91100744"
     },
-    "mambo": {
-        nombre: "Matikanetannhauser",
-        nacimiento: "7 de Mayo",
+    "cafe": {
+        nombre: "Manhattan Cafe",
+        nacimiento: "5 de marzo",
         altura: 1.55,
-        cabello: "Castaño",
-        estilos: "Pace, Late",
+        cabello: "Negro",
+        estilos: "Late",
         suelo: "Turf",
-        distancia: "Medium, Long",
-        rival: "N/A",
-        compañera: "Matikanefukukitaru",
-        imagen: ["Matikanetannhauser.webp", "Matikanetannhauser.webp"],
-        color: "#3421B044"
+        distancia: "Long",
+        rival: "Agnes Tachyon",
+        compañera: "Yukino Bijin",
+        imagen: ["Manhattan_Cafe.webp", "Manhattan_Cafe_Alt(1).webp", "Manhattan_Cafe_Alt(2).webp"],
+        color: "#0a0a0a"
     },
     "maruzensky": {
         nombre: "Maruzensky",
@@ -116,6 +116,19 @@ const establo = {
         imagen: ["Maruzensky.webp", "Maruzensky_Alt(1).webp", "Maruzensky_Alt(2).webp"],
         color: "#973C0844"
     },
+    "mambo": {
+        nombre: "Matikanetannhauser",
+        nacimiento: "7 de Mayo",
+        altura: 1.55,
+        cabello: "Castaño",
+        estilos: "Pace, Late",
+        suelo: "Turf",
+        distancia: "Medium, Long",
+        rival: "N/A",
+        compañera: "Matikanefukukitaru",
+        imagen: ["Matikanetannhauser.webp", "Matikanetannhauser.webp"],
+        color: "#3421B044"
+    },
     "mayano": {
         nombre: "Mayano Top Gun",
         nacimiento: "24 de Marzo",
@@ -128,6 +141,19 @@ const establo = {
         compañera: "Tokai Teio",
         imagen: ["Mayano_Top_Gun.webp", "Mayano_Top_Gun_Alt(1).webp", "Mayano_Top_Gun_Alt(2).webp", "Mayano_Top_Gun_Alt(3).webp"],
         color: "#ff8c0044"
+    },
+    "narita brian": {
+        nombre: "Narita Brian",
+        nacimiento: "3 de mayo",
+        altura: 1.60,
+        cabello: "Negro",
+        estilos: "Pace, Late",
+        suelo: "Turf",
+        distancia: "Mile, Medium, Long",
+        rival: "Mayano Top Gun",
+        compañera: "Tanino Gimlet",
+        imagen: ["Narita_Brian.webp","Narita_Brian_Alt(1).webp","Narita_Brian_Alt(2).webp"],
+        color: "#31C95044"
     },
     "oguri": {
         nombre: "Oguri Cap",
@@ -155,31 +181,31 @@ const establo = {
         imagen: ["Rice_Shower.webp", "Rice_Shower_Alt(1).webp", "Rice_Shower_Alt(2).webp"],
         color: "#00002244"
     },
-    "rudolf": {
-        nombre: "Symboli Rudolf",
-        nacimiento: "13 de marzo",
-        altura: 1.65,
-        cabello: "Castaño con negro",
-        estilos: "Front, Pace, Late",
+    "diamond": {
+        nombre: "Satono Diamond",
+        nacimiento: "30 de Enero",
+        altura: 1.58,
+        cabello: "Castaño claro",
+        estilos: "Late",
         suelo: "Turf",
         distancia: "Medium, Long",
-        rival: "Oguri Cap",
-        compañera: "Air Groove",
-        imagen: ["Symboli_Rudolf.webp", "Symboli_Rudolf_Alt(1).webp", "Symboli_Rudolf_Alt(2).webp"],
-        color: "#633a34"
+        rival: "Kitasan Black",
+        compañera: "Kitasan Black",
+        imagen: ["Satono_Diamond.webp", "Satono_Diamond_Alt(1).webp", "Satono_Diamond_Alt(2).webp"],
+        color: "#31C95044"
     },
-    "scarlet": {
-        nombre: "Daiwa Scarlet",
-        nacimiento: "13 de Mayo",
-        altura: 1.63,
-        cabello: "Castaño",
-        estilos: "Front, Pace",
+    "suzuka": {
+        nombre: "Silence Suzuka",
+        nacimiento: "1 de Mayo",
+        altura: 1.61,
+        cabello: "Castaño claro",
+        estilos: "Front",
         suelo: "Turf",
-        distancia: "Mile, Medium, Long",
-        rival: "Vodka",
-        compañera: "Vodka",
-        imagen: ["Daiwa_Scarlet.webp", "Daiwa_Scarlet_Alt(1).webp", "Daiwa_Scarlet_Alt(2).webp"],
-        color: "#1447E644"
+        distancia: "Mile, Medium",
+        rival: "N/A",
+        compañera: "Special Week",
+        imagen: ["Silence_Suzuka.webp", "Silence_Suzuka_Alt(1).webp"],
+        color: "#28B46344"
     },
     "special": {
         nombre: "Special Week",
@@ -207,18 +233,18 @@ const establo = {
         imagen: ["Stay_Gold.webp", "Stay_Gold_Alt(1).webp"],
         color: "#973C0844"
     },
-    "suzuka": {
-        nombre: "Silence Suzuka",
-        nacimiento: "1 de Mayo",
-        altura: 1.61,
-        cabello: "Castaño claro",
-        estilos: "Front",
+    "rudolf": {
+        nombre: "Symboli Rudolf",
+        nacimiento: "13 de marzo",
+        altura: 1.65,
+        cabello: "Castaño con negro",
+        estilos: "Front, Pace, Late",
         suelo: "Turf",
-        distancia: "Mile, Medium",
-        rival: "N/A",
-        compañera: "Special Week",
-        imagen: ["Silence_Suzuka.webp", "Silence_Suzuka_Alt(1).webp"],
-        color: "#28B46344"
+        distancia: "Medium, Long",
+        rival: "Oguri Cap",
+        compañera: "Air Groove",
+        imagen: ["Symboli_Rudolf.webp", "Symboli_Rudolf_Alt(1).webp", "Symboli_Rudolf_Alt(2).webp"],
+        color: "#633a34"
     },
     "taiki": {
         nombre: "Taiki Shuttle",
@@ -287,18 +313,6 @@ const establoReal = {
         victorias: 4,
         imagen: ["IRL_Agnes_Tachyon.webp"]
     },
-    "cafe": {
-        nombre: "Manhattan Cafe",
-        nacimiento: "5 de marzo - 1998",
-        fallecimiento: "13 de agosto - 2015",
-        sexo: "Macho",
-        cabello: "Castaño oscuro",
-        padre: "Sunday Silence",
-        madre: "Subtle Change",
-        carreras: 12,
-        victorias: 6,
-        imagen: ["IRL_Manhattan_Cafe.webp"]
-    },
     "almond": {
         nombre: "Almond Eye",
         nacimiento: "10 de marzo - 2015",
@@ -311,17 +325,29 @@ const establoReal = {
         victorias: 11,
         imagen: ["IRL_Almond_Eye.webp"]
     },
-    "diamond": {
-        nombre: "Satono Diamond",
-        nacimiento: "30 de enero - 2013",
+    "scarlet": {
+        nombre: "Daiwa Scarlet",
+        nacimiento: "13 de mayo - 2004",
         fallecimiento: "Con vida",
-        sexo: "Macho",
+        sexo: "Hembra",
         cabello: "Castaño",
-        padre: "Deep Impact",
-        madre: "Malpensa",
-        carreras: 18,
+        padre: "Agnes Tachyon",
+        madre: "Scarlet Bouquet",
+        carreras: 12,
         victorias: 8,
-        imagen: ["IRL_Satono_Diamond.webp"]
+        imagen: ["IRL_Daiwa_Scarlet.webp"]
+    },
+    "condor": {
+        nombre: "El Condor Pasa",
+        nacimiento: "17 de marzo - 1995",
+        fallecimiento: "16 de julio - 2002",
+        sexo: "Macho",
+        cabello: "Castaño oscuro",
+        padre: "Kingmambo",
+        madre: "Saddler's Wells",
+        carreras: 11,
+        victorias: 8,
+        imagen: ["IRL_El_Condor_Pasa.webp"]
     },
     "gold": {
         nombre: "Gold Ship",
@@ -359,17 +385,17 @@ const establoReal = {
         victorias: 12,
         imagen: ["IRL_Kitasan_Black.webp"]
     },
-    "mambo": {
-        nombre: "Matikanetannhauser",
-        nacimiento: "7 de mayo - 1989",
-        fallecimiento: "7 de diciembre - 2013",
+    "cafe": {
+        nombre: "Manhattan Cafe",
+        nacimiento: "5 de marzo - 1998",
+        fallecimiento: "13 de agosto - 2015",
         sexo: "Macho",
-        cabello: "Castaño",
-        padre: "Northern Taste",
-        madre: "Cripsi",
-        carreras: 32,
-        victorias: 8,
-        imagen: ["IRL_Matikanetannhauser.webp"]
+        cabello: "Castaño oscuro",
+        padre: "Sunday Silence",
+        madre: "Subtle Change",
+        carreras: 12,
+        victorias: 6,
+        imagen: ["IRL_Manhattan_Cafe.webp"]
     },
     "maruzensky": {
         nombre: "Maruzensky",
@@ -383,6 +409,18 @@ const establoReal = {
         victorias: 8,
         imagen: ["IRL_Maruzensky.webp"]
     },
+    "mambo": {
+        nombre: "Matikanetannhauser",
+        nacimiento: "7 de mayo - 1989",
+        fallecimiento: "7 de diciembre - 2013",
+        sexo: "Macho",
+        cabello: "Castaño",
+        padre: "Northern Taste",
+        madre: "Cripsi",
+        carreras: 32,
+        victorias: 8,
+        imagen: ["IRL_Matikanetannhauser.webp"]
+    },
     "mayano": {
         nombre: "Mayano Top Gun",
         nacimiento: "24 de marzo - 1992",
@@ -394,6 +432,18 @@ const establoReal = {
         carreras: 21,
         victorias: 8,
         imagen: ["IRL_Mayano_Top_Gun.webp"]
+    },
+    "narita brian": {
+        nombre: "Narita Brian",
+        nacimiento: "3 de mayo - 1991",
+        fallecimiento: "27 de septiembre - 1998",
+        sexo: "Macho",
+        cabello: "Castaño oscuro",
+        padre: "Brian´s Time",
+        madre: "Pacificus",
+        carreras: 21,
+        victorias: 12,
+        imagen: ["IRL_Narita_Brian.webp"]
     },
     "oguri": {
         nombre: "Oguri Cap",
@@ -419,29 +469,29 @@ const establoReal = {
         victorias: 6,
         imagen: ["IRL_Rice_Shower.webp"]
     },
-    "rudolf": {
-        nombre: "Symboli Rudolf",
-        nacimiento: "13 de marzo - 1981",
-        fallecimiento: "4 de octubre - 2011",
+    "diamond": {
+        nombre: "Satono Diamond",
+        nacimiento: "30 de enero - 2013",
+        fallecimiento: "Con vida",
         sexo: "Macho",
         cabello: "Castaño",
-        padre: "Partholon",
-        madre: "Sweet Luna",
-        carreras: 16,
-        victorias: 13,
-        imagen: ["IRL_Symboli_Rudolf.webp"]
-    },
-    "scarlet": {
-        nombre: "Daiwa Scarlet",
-        nacimiento: "13 de mayo - 2004",
-        fallecimiento: "Con vida",
-        sexo: "Hembra",
-        cabello: "Castaño",
-        padre: "Agnes Tachyon",
-        madre: "Scarlet Bouquet",
-        carreras: 12,
+        padre: "Deep Impact",
+        madre: "Malpensa",
+        carreras: 18,
         victorias: 8,
-        imagen: ["IRL_Daiwa_Scarlet.webp"]
+        imagen: ["IRL_Satono_Diamond.webp"]
+    },
+    "suzuka": {
+        nombre: "Silence Suzuka",
+        nacimiento: "1 de mayo - 1994",
+        fallecimiento: "1 de noviembre - 1998",
+        sexo: "Macho",
+        cabello: "Castaño",
+        padre: "Sunday Silence",
+        madre: "Wakia",
+        carreras: 16,
+        victorias: 9,
+        imagen: ["IRL_Silence_Suzuka.webp"]
     },
     "special": {
         nombre: "Special Week",
@@ -467,17 +517,17 @@ const establoReal = {
         victorias: 7,
         imagen: ["IRL_Stay_Gold.webp"]
     },
-    "suzuka": {
-        nombre: "Silence Suzuka",
-        nacimiento: "1 de mayo - 1994",
-        fallecimiento: "1 de noviembre - 1998",
+    "rudolf": {
+        nombre: "Symboli Rudolf",
+        nacimiento: "13 de marzo - 1981",
+        fallecimiento: "4 de octubre - 2011",
         sexo: "Macho",
         cabello: "Castaño",
-        padre: "Sunday Silence",
-        madre: "Wakia",
+        padre: "Partholon",
+        madre: "Sweet Luna",
         carreras: 16,
-        victorias: 9,
-        imagen: ["IRL_Silence_Suzuka.webp"]
+        victorias: 13,
+        imagen: ["IRL_Symboli_Rudolf.webp"]
     },
     "taiki": {
         nombre: "Taiki Shuttle",
@@ -528,6 +578,24 @@ const establoReal = {
         imagen: ["IRL_Vodka.webp"]
     },
 };
+
+setTimeout(() => {
+    generarNombres()
+    async function generarNombres() {
+        Object.keys(establo).forEach(alias => {
+            const nombreCompleto = establo[alias].nombre.toLowerCase();
+            establo[nombreCompleto] = establo[alias];
+        });  
+    }
+
+    generarNombresIRL()
+    async function generarNombresIRL() {
+        Object.keys(establoReal).forEach(alias => {
+            const nombreCompleto = establoReal[alias].nombre.toLowerCase();
+            establoReal[nombreCompleto] = establoReal[alias];
+        });    
+    }
+}, 1000);
 
 setTimeout(() => {
     generarNombres()

@@ -7,25 +7,20 @@ header("Pragma: no-cache");
 
 require "conexion.php";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $contenido = $_POST["contenido"];
-}
+isset($_SESSION["nombre_usuario"]) ? $ok = "ok" : header("Location: home");
+    
 
-if (isset($_SESSION["nombre_usuario"])) {
-    $nombreUsuario = $_SESSION["nombre_usuario"];
-}
-else {
-    header("Location: home");
-}
 $titulo = "Perfil";
 include "header.php"; 
 ?>
     <main class="muro">
             <section class="section-1">
                 <div id="card" class="card perfil-card">
-                <h1>Hola, <?= e($nombreUsuario) ?>! <br> Bienvenido.</h1>
+                <h1>Hola, <?= e($nombreUsuario) ?>! <br> Bienvenid@.</h1>
                 <form class="login-form" action="" method="POST">
-                    <p class="aviso">Espero sea de tu agrado mi sitio<br> Pronto mas funciones!</p>
+                    <p class="aviso">Espero sea de tu agrado mi sitio </p> 
+                    <p class="aviso"> Tu uma favorita es <strong><?= e($umaFav) ?></strong>? <br> Pronto podras utilizarla de foto de perfil! </p> 
+                    <p class="aviso">Nuevas funciones en camino...</p>
                     
                 </form>
                 </div>

@@ -1,3 +1,3 @@
 setTimeout(() => {
     window.location.replace("home");
-}, 3500);
+}, 1000);

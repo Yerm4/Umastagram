@@ -3,6 +3,13 @@ function e($texto) {
     if ($texto === null) return "";
     return htmlspecialchars($texto, ENT_QUOTES, 'UTF-8');
 }
+
+if (isset($_SESSION["nombre_usuario"])) {
+    $nombreUsuario = $_SESSION["nombre_usuario"];
+    $umaFav = $_SESSION["uma_fav"];
+    $umaFavGuion = str_replace(" ", "_", $umaFav);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +32,7 @@ function e($texto) {
     <meta name="twitter:description" content="Conoce un poco mas a tus umas favoritas!">
     <meta name="twitter:image" content="https://umamusume.infinityfreeapp.com/src/media/img/card.jpg">
     <meta name="author" content="Yerm4">
-    <title><?php echo isset($titulo) ? $titulo : "Uma Musume";?></title>
+    <title><?= isset($titulo) ? $titulo : "Uma Musume";?></title>
     <link rel="stylesheet" href="src/css/styles.css">
     <link rel="icon" href="src/media/img/mini/favicon.ico" type="image/x-icon">
     <link rel="preload" href="src/media/img/bg.webp" as="image">
@@ -37,18 +44,12 @@ function e($texto) {
         <header>
             <nav>
                 <div class="nav-menu-lateral">
-                    <div class="nav-logo">
-                        <div class="container-modo-oscuro">
-                            <svg class="boton-modo-oscuro logo-claro" id="modo-claro" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <svg class="boton-modo-oscuro" id="modo-oscuro" fill="#000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve">
-                                <path d="M504.929,323.637c-6.955-6.953-17.436-8.995-26.489-5.16c-26.922,11.403-55.471,17.185-84.859,17.185c-58.032,0-112.586-22.597-153.618-63.63c-62.92-62.918-81.149-156.525-46.442-238.474c3.835-9.057,1.793-19.534-5.162-26.487c-6.953-6.955-17.434-8.992-26.487-5.157c-31.495,13.343-59.788,32.433-84.093,56.74C27.616,108.815-0.006,175.506,0,246.443c0.006,70.927,27.63,137.61,77.785,187.767C127.948,484.374,194.643,512,265.58,512c70.926,0,137.61-27.622,187.767-77.779c24.308-24.308,43.397-52.6,56.74-84.093C513.923,341.071,511.883,330.593,504.929,323.637z"/>
-                            </svg>
+                        <div class="nav-logo">
+                        <div class="div-pfp">
+                            <img class="pfp" src="src/media/img/pfp/<?= isset($umaFav) ? e($umaFavGuion) : "invitado"?>_Pfp.webp" alt="Foto de perfil">
                         </div>
                         <h2 class="item-hidden ">Uma Musume</h2>
                     </div>
-
                     <div class="nav-container-items">
 
                         <a href="home" class="nav-item">
@@ -58,8 +59,7 @@ function e($texto) {
                             <p class="item-hidden">Home</p>
                         </a>
 
-                        <?php
-                        if (!isset($_SESSION["nombre_usuario"])): ?>
+                        <?php if (!isset($_SESSION["nombre_usuario"])): ?>
                         <a id="registroButton" href="#" class="nav-item">
                         <svg class="nav-item-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M17,21V19a4,4,0,0,0-4-4H5a4,4,0,0,0-4,4v2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
@@ -76,14 +76,10 @@ function e($texto) {
                                 stroke-linecap= "round" stroke-linejoin="round" stroke-width= "1.5"/>
                             </svg>
                             <p class="item-hidden">Login</p>
-                        </a>
-
+                        </a> 
                         <?php endif; ?>
 
-                        
-
-                        <?php
-                        if (isset($_SESSION["nombre_usuario"])): ?>
+                        <?php if (isset($_SESSION["nombre_usuario"])): ?>
                         <a href="perfil" class="nav-item">
                             <svg class="nav-item-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="800" height="800" fill="#000000">
                                 <path d="M10,12 C13.785,12 16.958,14.214 17.784,18 L2.216,18 C3.042,14.214 6.215,12 10,12 M6,6 C6,3.794 7.794,2 10,2 C12.206,2 14,3.794 14,6 C14,8.206 12.206,10 10,10 C7.794,10 6,8.206 6,6 M13.758,10.673 C15.124,9.574 16,7.89 16,6 C16,2.686 13.314,0 10,0 C6.686,0 4,2.686 4,6 C4,7.89 4.876,9.574 6.242,10.673 C2.583,12.048 0,15.445 0,19 L20,19 C20,15.445 17.417,12.048 13.758,10.673"/>
@@ -99,7 +95,14 @@ function e($texto) {
                         <p class="item-hidden">Logout</p>
                         </a>
                         <?php endif; ?>
-
+                        <div class="container-modo-oscuro">
+                            <svg class="boton-modo-oscuro logo-claro" id="modo-claro" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg class="boton-modo-oscuro" id="modo-oscuro" fill="#000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve">
+                                <path d="M504.929,323.637c-6.955-6.953-17.436-8.995-26.489-5.16c-26.922,11.403-55.471,17.185-84.859,17.185c-58.032,0-112.586-22.597-153.618-63.63c-62.92-62.918-81.149-156.525-46.442-238.474c3.835-9.057,1.793-19.534-5.162-26.487c-6.953-6.955-17.434-8.992-26.487-5.157c-31.495,13.343-59.788,32.433-84.093,56.74C27.616,108.815-0.006,175.506,0,246.443c0.006,70.927,27.63,137.61,77.785,187.767C127.948,484.374,194.643,512,265.58,512c70.926,0,137.61-27.622,187.767-77.779c24.308-24.308,43.397-52.6,56.74-84.093C513.923,341.071,511.883,330.593,504.929,323.637z"/>
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </nav>

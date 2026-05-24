@@ -52,10 +52,6 @@ main::after {
     transition: opacity .5s; 
 }
 
-body:not(.modo-oscuro):has(.nav-menu-lateral:hover) main::after {
-    opacity: 1;
-}
-
 body {
     background-color: var(--fondo);
     color: var(--texto);
@@ -325,6 +321,7 @@ a {
     height: 30px;
     inset: 0;
     margin: auto;
+    transform: rotate(270deg)
 }
 
 .logo-claro {
@@ -458,6 +455,13 @@ footer p {
     border-style: solid;
 }
 
+.register-select {
+    padding: 5px;
+    margin: 5px;
+    border-radius: 20px;
+    text-align: center;
+}
+
 .aviso {
     padding: 5px;
     font-size: 1.3rem;
@@ -539,6 +543,10 @@ dialog::backdrop {
 /* Menu lateral Desktop*/ 
 
 @media screen and (min-width: 600px) {
+    body:not(.modo-oscuro):has(.nav-menu-lateral:hover) main::after {
+        opacity: 1;
+    }
+    
     .nav-menu-lateral {
         top: 0;
         bottom: 0;
@@ -559,6 +567,21 @@ dialog::backdrop {
         align-items: center;
         padding-bottom: 20px;
         border-bottom: 2px solid #7777;
+        }
+
+        .div-pfp {
+            position: relative;
+            left: -5px;
+            width: 40px;
+            height: 40px;
+            border-radius: 100%;
+            overflow: hidden;
+            border: solid 1px
+        }
+        
+        .pfp {
+            width: 100%;
+            transform: scale(1.1);
         }
         
         .nav-menu-lateral .nav-logo h2 {
@@ -651,6 +674,24 @@ dialog::backdrop {
 
     .nav-menu-lateral .nav-logo .item-hidden {
     display: none;
+    }
+    
+    .nav-logo {
+    display: grid;
+    place-items: center;
+    }
+
+    .div-pfp {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    overflow: hidden;
+    border: solid 1px
+    }
+    
+    .pfp {
+    width: 100%;
+    transform: scale(1.1);
     }
 
     .container-modo-oscuro {
