@@ -2,6 +2,8 @@
 namespace App\Models;
 
 use PDO;
+use PDOException;
+
 class Usuario {
     private $pdo;
 
@@ -9,20 +11,39 @@ class Usuario {
         $this->pdo = $conexionBD;
     }
 
+    public function registro ($nombreUsuario, $password, $umaFav) {
+        
+        try {
+            $sql = "INSERT INTO usuarios (nombre, password, uma_fav) VALUES (:nombre, :password, :umaFav)";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
+            "nombre" => $nombreUsuario,
+            "password" => $password,
+            "umaFav" => $umaFav
+        ]);
+
+        return $this->pdo->lastInsertId();
+        }
+
+        catch (PDOException $e) {
+            echo $e;
+            return false;
+        }
+    }
+
     public function login($nombreUsuario, $password) {
-        $sql = "SELECT * FROM usuarios WHERE nombre = :nombre";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([
+        try {
+            $sql = "SELECT * FROM usuarios WHERE nombre = :nombre";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
             "nombre" => $nombreUsuario
         ]);
-        $usuarioEncontrado = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($usuarioEncontrado && password_verify($password, $usuarioEncontrado["password"])) {
-            $_SESSION["id_usuario"] = $usuarioEncontrado["id"];
-            $_SESSION["nombre_usuario"] = $usuarioEncontrado["nombre"];
-            $_SESSION["uma_fav"] = $usuarioEncontrado["uma_fav"];
-            header("Location: perfil");
+        
+        return $usuarioEncontrado = $stmt->fetch(PDO::FETCH_ASSOC);
         }
         
+        catch (PDOException $e) {
+            return false;
+        }
     }
 }

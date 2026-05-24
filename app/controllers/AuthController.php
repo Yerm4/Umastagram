@@ -13,30 +13,29 @@ class AuthController {
     }
 
     public function registrarUsuario() {
-        $nombreUsuario = isset($_POST["nombre"]) ? trim($_POST["nombre"]) : "";
+        $nombreUsuario = isset($_POST["usuario"]) ? trim($_POST["usuario"]) : "";
         $password = isset($_POST["password"]) ? trim($_POST["password"]) : "";
         $umaFav = isset($_POST["uma_fav"]) ? trim($_POST["uma_fav"]) : "";
         $umasDisponibles = ["Mayano Top Gun", "Narita Brian"];
 
-        if (strlen($password) >= 8 && in_array($umaFav, $umasDisponibles)) {
-            $sql = "INSERT INTO usuarios (nombre, password, uma_fav) values (:nombre, :password, :umaFav)";
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([
-                "nombre" => $nombreUsuario,
-                "password" => $password,
-                "umaFav" => $umaFav
-            ]);
+        if (!empty($nombreUsuario) && !empty($password) && strlen($password) >= 8 && in_array($umaFav, $umasDisponibles)) {
+                $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+                $usuarioModel = new Usuario($this->pdo);
+                $resultado = $usuarioModel->registro($nombreUsuario, $passwordHash, $umaFav);
+                if ($resultado) {
+                    $_SESSION["id_usuario"] = $resultado;
+                    $_SESSION["nombre_usuario"] = $nombreUsuario;
+                    $_SESSION["uma_fav"] = $umaFav;
+                    header("Location: perfil");
+                }
+                else {
+                    echo "error pana mio";
+                }
+        }
+        else {
+            $_SESSION["error_registro"] = "Error. Quizá un usuario con ese nombre ya existe";
         }
     }
-
-
-
-
-
-
-
-
-
 
     public function iniciarSesion() {
         $nombreUsuario = isset($_POST["usuario"]) ? trim($_POST["usuario"]) : "";
@@ -44,8 +43,16 @@ class AuthController {
 
         if (!empty($nombreUsuario) && !empty($password)) {
             $usuarioModel = new Usuario($this->pdo);
-            if ($usuarioModel->login($nombreUsuario, $password)) {
-                echo"olaaaaaaaaaaaaaaa";
+            $usuarioEncontrado = $usuarioModel->login($nombreUsuario, $password);
+            if ($usuarioEncontrado && password_verify($password, $usuarioEncontrado["password"])) {
+                $_SESSION["id_usuario"] = $usuarioEncontrado["id"];
+                $_SESSION["nombre_usuario"] = $usuarioEncontrado["nombre"];
+                $_SESSION["uma_fav"] = $usuarioEncontrado["uma_fav"];
+                header("Location: perfil");
+            }
+
+            else {
+                $_SESSION["error_login"] = "Usuario o contraseña incorrecta";
             }
         }
     }

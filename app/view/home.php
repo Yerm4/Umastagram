@@ -10,7 +10,6 @@
 
             if (strlen($password) >= 8 && in_array($umaFav, $umas_disponibles)) {
                 $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-                echo "ola";
                 try {
                     $sql = "INSERT INTO usuarios (nombre, password, uma_fav) VALUES (:nombre, :password, :umafav)";
                     $stmt = $pdo->prepare($sql);
@@ -150,7 +149,7 @@ include "header.php";
                     <input type="hidden" name="form" value="registro">
                     <button type="submit">Registrar</button>
                 </form>
-                <p class="aviso"><?= isset($aviso) ? e($aviso) : ""; ?> <br> <?= isset($error) ? e($error) : ""?></p>
+                <p class="aviso"><?= isset($_SESSION["error_registro"]) ? e($_SESSION["error_registro"]) : ""; ?> <br> <?= isset($error) ? e($error) : ""?></p>
             </div>
             <a id="switchToLogin" class="a-switch-modal" href="#">
             <svg class="svg-modal-switch" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37.72 75.8">
@@ -182,7 +181,7 @@ include "header.php";
                     <input type="hidden" name="form" value="login">
                     <button type="submit">Loguear</button>
                 </form>
-                <p class="aviso"><?= isset($aviso) ? e($aviso) : ""; ?> <br> <?= isset($error) ? e($error) : ""?></p>
+                <p class="aviso"><?= isset($_SESSION["error_login"]) ? e($_SESSION["error_login"]) : ""; ?> <br> <?= isset($error) ? e($error) : ""?></p>
             </div>
             <a href="#" class="a-switch-modal" id="switchToRegistro">
             <svg class="svg-modal-switch" viewBox="0 0 75.803 75.803" xmlns="http://www.w3.org/2000/svg">
