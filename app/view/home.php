@@ -1,32 +1,5 @@
 <?php
-
-require_once "conexion.php";
-session_start();
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-    $formulario = $_POST["form"] ?? "";
-
-    switch ($formulario) {
-        case "login": 
-            $nombreUsuario = $_POST["usuario"];
-            $password = $_POST["password"];
-
-            $sql = "SELECT * FROM usuarios WHERE nombre = :nombre";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute(["nombre" => $nombreUsuario]);
-            $usuarioEncontrado = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if ($usuarioEncontrado && password_verify($password, $usuarioEncontrado["password"])) {
-                $_SESSION["id_usuario"] = $usuarioEncontrado["id"];
-                $_SESSION["nombre_usuario"] = $usuarioEncontrado["nombre"];
-                $_SESSION["uma_fav"] = $usuarioEncontrado["uma_fav"];
-                header("Location: perfil");
-                exit();
-            } else {
-                $error = "Error. El usuario o contraseña son incorrectos";
-            }
-        break;
+    /*switch ($formulario) {
 
         case "registro":
             $nombreUsuario = trim($_POST["usuario"]);
@@ -72,13 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         break;
     }
 }
-if (isset($_SESSION["uma_fav"])) {
-    $umaFav = $_SESSION["uma_fav"];
-
-    if ($umaFav == "gwen") {
-        $gwen = true;
-    }
-}
+*/
 
 $titulo = "Uma Musume";
 include "header.php";
@@ -175,7 +142,7 @@ include "header.php";
                         <input type="password" name="password" minlength="8" autocomplete="off" required>
                     </label>
                     <label>Uma Favorita <br>
-                    <select class="register-select" name="umaFav" id="selectUmaFav">
+                    <select class="register-select" name="uma_fav" id="selectUmaFav">
                         <option value="Mayano Top Gun">Mayano Top Gun</option>
                         <option value="Narita Brian">Narita Brian</option>
                     </select>
@@ -237,11 +204,5 @@ include "header.php";
         <video src="src/media/img/mambo-spinning.webm" class="mambo-spinning" id="mambo " autoplay loop muted playsinline title="mambo"></video>
         <video src="src/media/img/mambo-spinning.webm" class="mambo-spinning mambo-spinning2" id="mambo " autoplay loop muted playsinline title="mambo"></video>
     </div>
-    <?php if (isset($gwen)): ?>
-        <img src="gwen.jpeg" alt="">
-    <?php endif ?>
 </body>
 </html>
-<?php if (!$_SESSION["nombre_usuario"]) {
-    echo "olaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-}

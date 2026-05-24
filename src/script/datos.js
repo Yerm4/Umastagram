@@ -615,13 +615,22 @@ setTimeout(() => {
 }
 }, 1000);
 
-/* let sql = "INSERT INTO tu_nombre_de_tabla (nombre, nacimiento, altura, cabello, estilo, suelo, distancia, rival, compañera, imagen, color) VALUES \n";
-
-const values = Object.keys(establo).map(key => {
-    const u = establo[key];
-    // Convertimos el array de imágenes a un solo texto separado por comas
-    const imagenesStr = u.imagen.join(',');
-    
-    return `('${u.nombre}', '${u.nacimiento}', ${u.altura}, '${u.cabello}', '${u.estilos}', '${u.suelo}', '${u.distancia}', '${u.rival}', '${u.compañera}', '${imagenesStr}', '${u.color.trim()}')`;
-});
+/* 
+mi-proyecto/ (Carpeta Raíz)
+├── app/                  <-- Aquí vive tu lógica POO (Es el "src" de tu profe)
+│   ├── config/           <-- conexion.php y configuraciones
+│   ├── controllers/      <-- Los controladores (LoginController.php, etc.)
+│   ├── models/           <-- Tus clases de la BD (Usuario.php, Uma.php)
+│   └── views/            <-- Tus archivos PHP visuales (home.php, etc.)
+├── assets/               <-- Tus archivos estáticos públicos
+│   ├── css/              <-- Tus estilos personalizados
+│   ├── js/               <-- Tus scripts de JavaScript limpios
+│   └── imagenes/         <-- Las fotos de tus Umas
+├── vendor/               <-- Creado por Composer (¡No tocar!)
+├── .htaccess             <-- El enrutador amigable
+├── index.php             <-- El Front Controller principal de la raíz
+├── server.php            <-- El servidor de WebSockets (Ratchet)
+├── chat.php              <-- Lógica del chat (opcional por ahora)
+├── composer.json         <-- Tu configuración de Composer
+└── composer.lock         <-- Bloqueo de versiones de Composer
 */
