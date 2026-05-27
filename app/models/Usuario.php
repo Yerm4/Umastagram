@@ -1,5 +1,5 @@
 <?php
-namespace App\Models;
+namespace app\models;
 
 use PDO;
 use PDOException;
@@ -26,7 +26,6 @@ class Usuario {
         }
 
         catch (PDOException $e) {
-            echo $e;
             return false;
         }
     }

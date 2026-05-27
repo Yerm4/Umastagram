@@ -1,4 +1,5 @@
 <?php 
+
 session_start();
 
 require_once __DIR__."/vendor/autoload.php";
@@ -9,12 +10,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $formulario = $_POST["form"] ?? "";
     switch ($formulario) {
         case "login":
-            $auth = new \App\Controllers\AuthController($pdo);
+            $auth = new \app\controllers\AuthController($pdo);
             $auth->iniciarSesion();
         break;
 
         case "registro":
-            $auth = new \App\Controllers\AuthController($pdo);
+            $auth = new \app\controllers\AuthController($pdo);
             $auth->registrarUsuario();
         break;
 

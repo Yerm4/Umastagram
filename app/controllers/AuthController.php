@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace app\controllers;
 
-use App\Models\Usuario;
+use app\models\Usuario;
 
 class AuthController {
     
@@ -29,11 +29,11 @@ class AuthController {
                     header("Location: perfil");
                 }
                 else {
-                    echo "error pana mio";
+                    $_SESSION["error_registro"] = "Error. Quizá un usuario con ese nombre ya existe";
                 }
         }
         else {
-            $_SESSION["error_registro"] = "Error. Quizá un usuario con ese nombre ya existe";
+            $_SESSION["error_registro"] = "Error. Quizá intentaste enviar un campo vacío";
         }
     }
 
