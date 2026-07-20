@@ -63,7 +63,7 @@ include "header.php";
                 
             <section class="section-2">
                 <div>
-                    <h2>Lista de Umas disponibles (Puedes <strong>clickearlas</strong>) </h2>
+                    <h2>Lista de Umas disponibles <strong>(clickealas!</strong>) </h2>
                     <div class="umas-disponibles" id="umas-disponibles">
                         
                     </div>
