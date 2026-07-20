@@ -8,8 +8,8 @@ class AuthController {
     
     private $pdo;
 
-    public function __construct($conexionBD) {
-        $this->pdo = $conexionBD;
+    public function __construct($conexion) {
+        $this->pdo = $conexion;
     }
 
     public function registrarUsuario() {
@@ -18,7 +18,8 @@ class AuthController {
         $umaFav = isset($_POST["uma_fav"]) ? trim($_POST["uma_fav"]) : "";
         $umasDisponibles = ["Mayano Top Gun", "Narita Brian"];
 
-        if (!empty($nombreUsuario) && !empty($password) && strlen($password) >= 8 && in_array($umaFav, $umasDisponibles)) {
+        if (!empty($nombreUsuario) && !empty($password) && strlen($password) >= 8 
+        && in_array($umaFav, $umasDisponibles)) {
                 $passwordHash = password_hash($password, PASSWORD_BCRYPT);
                 $usuarioModel = new Usuario($this->pdo);
                 $resultado = $usuarioModel->registro($nombreUsuario, $passwordHash, $umaFav);

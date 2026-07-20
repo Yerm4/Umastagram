@@ -7,8 +7,8 @@ use PDOException;
 class Usuario {
     private $pdo;
 
-    public function __construct($conexionBD) {
-        $this->pdo = $conexionBD;
+    public function __construct($conexion) {
+        $this->pdo = $conexion;
     }
 
     public function registro ($nombreUsuario, $password, $umaFav) {

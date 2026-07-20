@@ -2,20 +2,28 @@
 
 session_start();
 
+header("Cache-Control: no-cache, must-revalidate");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
+use app\controllers\AuthController;
+use app\config\Conexion;
+
 require_once __DIR__."/vendor/autoload.php";
-require_once __DIR__."/app/config/conexion.php";
+
+$pdo = Conexion::conectar();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $formulario = $_POST["form"] ?? "";
     switch ($formulario) {
         case "login":
-            $auth = new \app\controllers\AuthController($pdo);
+            $auth = new AuthController($pdo);
             $auth->iniciarSesion();
         break;
 
         case "registro":
-            $auth = new \app\controllers\AuthController($pdo);
+            $auth = new AuthController($pdo);
             $auth->registrarUsuario();
         break;
 
@@ -39,7 +47,9 @@ switch($paginaActual) {
         break;
 
     case "logout";
-        include __DIR__."/app/view/logout.php";
+        session_unset();
+        session_destroy();
+        header("Location: home");
         break;
 
     default: 

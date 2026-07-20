@@ -1,9 +1,4 @@
 <?php
-
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-
 isset($_SESSION["id_usuario"]) ? $ok = "ok" : header("Location: home");
 
 $titulo = "Perfil";
@@ -23,7 +18,7 @@ include "header.php";
             </section>
         </main>
         
-        <video src="src/media/img/mambo-spinning.webm" class="mambo-spinning" id="mambo " autoplay loop muted playsinline title="mambo"></video>
-            <video src="src/media/img/mambo-spinning.webm" class="mambo-spinning mambo-spinning2" id="mambo " autoplay loop muted playsinline title="mambo"></video>
+        <video src="src/media/img/mambo-spinning.webm" class="mambo-spinning" id="mambo" autoplay loop muted playsinline title="mambo"></video>
+        <video src="src/media/img/mambo-spinning.webm" class="mambo-spinning mambo-spinning2" id="mambo" autoplay loop muted playsinline title="mambo"></video>
 </body>
 </html>

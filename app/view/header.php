@@ -15,7 +15,6 @@ if (isset($_SESSION["nombre_usuario"])) {
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <script src="src/script/diseño.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:url" content="https://umamusume.infinityfreeapp.com">
@@ -36,7 +35,8 @@ if (isset($_SESSION["nombre_usuario"])) {
     <link rel="stylesheet" href="src/css/styles.css">
     <link rel="icon" href="src/media/img/mini/favicon.ico" type="image/x-icon">
     <link rel="preload" href="src/media/img/bg.webp" as="image">
-    <link rel="prefetch" href="src/media/img/modal_bg.webp">
+    <link rel="prefetch" href="src/media/img/modal_bg_2.webp">
+    <script src="src/script/diseño.js" defer></script>
 </head>
 
 <body>
@@ -48,7 +48,7 @@ if (isset($_SESSION["nombre_usuario"])) {
                         <div class="div-pfp">
                             <img class="pfp" src="src/media/img/pfp/<?= isset($umaFav) ? e($umaFavGuion) : "invitado"?>_Pfp.webp" alt="Foto de perfil">
                         </div>
-                        <h2 class="item-hidden ">Uma Musume</h2>
+                        <h1 class="item-hidden">Umamusume</h2>
                     </div>
                     <div class="nav-container-items">
 

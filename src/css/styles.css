@@ -417,7 +417,7 @@ footer p {
     padding: 10px;
 }
 
-.card h1 {
+.card h2 {
     font-size: 2.5rem;
     text-align: center;
 }
@@ -474,7 +474,7 @@ dialog {
     border-radius: 20px;
     box-shadow: 5px 5px 40px 5px #000a;
     margin: auto;
-    background: #fff6 url(../media/img/modal_bg.webp) left / cover;
+    background: #fff url(../media/img/modal_bg_2.webp) center / contain no-repeat;
     animation: modalAparecer 1.5s ease forwards;
 }
 
@@ -798,7 +798,7 @@ dialog::backdrop {
     padding: 12px;
     }
 
-    .card h1 {
+    .card h2 {
         font-size: 2rem;
     }
 
