@@ -16,8 +16,21 @@ include "header.php";
                 </form>
                 </div>
             </section>
+            <section class="section-1">
+                <div id="card" class="card perfil-card">
+                
+                <form class="login-form" action="" method="POST">
+                    <fieldset>
+                    <legend>Publicaciones</legend>
+                    <input type="hidden" name="form" value="publicar">
+                    <input type="text" placeholder="Contenido" name="contenido_publicacion">
+                    <button type="submit">Enviar</button>
+                    </fieldset>
+
+                </form>
+                </div>
+            </section>
         </main>
-        
         <video src="src/media/img/mambo-spinning.webm" class="mambo-spinning" id="mambo" autoplay loop muted playsinline title="mambo"></video>
         <video src="src/media/img/mambo-spinning.webm" class="mambo-spinning mambo-spinning2" id="mambo" autoplay loop muted playsinline title="mambo"></video>
 </body>

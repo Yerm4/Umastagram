@@ -18,13 +18,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $formulario = $_POST["form"] ?? "";
     switch ($formulario) {
         case "login":
-            $auth = new AuthController($pdo);
-            $auth->iniciarSesion();
+            $controller = new AuthController($pdo);
+            $controller->iniciarSesion();
         break;
 
         case "registro":
-            $auth = new AuthController($pdo);
-            $auth->registrarUsuario();
+            $controller = new AuthController($pdo);
+            $controller->registrarUsuario();
+        break;
+
+        case "publicar":
+            $controller = new AuthController($pdo);
+            $controller->publicar();
         break;
 
         default:

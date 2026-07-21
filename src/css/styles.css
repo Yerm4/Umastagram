@@ -479,7 +479,7 @@ dialog {
     border-radius: 20px;
     box-shadow: 5px 5px 40px 5px #000a;
     margin: auto;
-    background: #fff url(../media/img/modal_bg_2.webp) center / contain no-repeat;
+    background: linear-gradient(#fff9, #fff9), url(../media/img/modal_bg_2.webp) center / contain no-repeat;
     animation: modalAparecer 1.5s ease forwards;
 }
 
@@ -638,7 +638,7 @@ dialog::backdrop {
         }
 
         .nav-menu-lateral .item-hidden--title {
-            font-size: 2rem;
+        font-size: 2rem;
         }
     
         main, footer {
@@ -646,11 +646,11 @@ dialog::backdrop {
         }
 
         .dibujar {
-            padding: 18px;
+        padding: 18px;
         }
     
         .dibujar .img-uma {
-            height: 300px;
+        height: 300px;
         }
 }
 
