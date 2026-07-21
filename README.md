@@ -1,4 +1,4 @@
-Umastagram 🥕
+<h1 style="text-align: center; "> Umastagram 🥕 </h1>
 
 La red social de Uma Musume
 
