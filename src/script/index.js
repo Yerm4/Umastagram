@@ -284,38 +284,53 @@ function scrollSection1(event) {
 
 // Login
 const rawLogin = document.getElementById("main").dataset.login;
-const isLogin = rawLogin === "true";
-
+const isLogin = rawLogin === "true" ? true : false;
+const modales = document.querySelectorAll("dialog[name=modal]")
+const modalesButton = document.querySelectorAll("[name=buttonModal]")
 if (!isLogin) {
     console.log("no logueado");
     
-    const loginButton = document.getElementById("loginButton");
+    modales.forEach(modal => {
+        modal.addEventListener("click", (event) => {
+            if (event.clientX === 0 && event.clientY === 0) {
+                return; 
+            }
+            const modalPosicion = modal.getBoundingClientRect()
+            const clickAfuera = (
+                event.clientX < modalPosicion.left ||
+                event.clientX > modalPosicion.right ||
+                event.clientY < modalPosicion.top ||
+                event.clientY > modalPosicion.bottom 
+            )
+            if (clickAfuera) {
+                modal.style.opacity = 0
+                setTimeout(() => {
+                modal.close()
+                }, 150);
+            }
+        })
+    })
+
+    modalesButton.forEach(button => {
+        button.addEventListener("click", (e) => {
+            e.preventDefault()
+            const buttonId = button.dataset.modal
+            const modal = document.getElementById(buttonId)
+            modal.showModal()
+        })
+    })
+
     const loginModal = document.getElementById("loginModal");
-    
-    loginButton.addEventListener("click", function(event) {
-        event.preventDefault();
-        loginModal.showModal();
-        loginModal.focus();
-    });
-
-    const registroButton = document.getElementById("registroButton");
     const registroModal = document.getElementById("registroModal");
-    
-    registroButton.addEventListener("click", function(event) {
-        event.preventDefault();
-        registroModal.showModal();
-        registroModal.focus();
-    });
 
-    const closeModalRegistro = document.getElementById("closeModalRegistro");
-    closeModalRegistro.addEventListener("click", function(event) {
-        registroModal.close();
-    });
-
-    const closeModalLogin = document.getElementById("closeModalLogin");
-    closeModalLogin.addEventListener("click", function(event) {
-        loginModal.close();
-    });
+    const modalButtonClose = document.querySelectorAll(".svg-dialog-close")
+    modalButtonClose.forEach(button => {
+        button.addEventListener("click", (e) => {
+            const buttonId = button.dataset.modal
+            const modal = document.getElementById(buttonId)
+            modal.close()
+        })
+    })
 
     const switchToRegistro = document.getElementById("switchToRegistro");
     switchToRegistro.addEventListener("click", function(event) {

@@ -64,6 +64,11 @@ a {
     text-decoration: none;
 }
 
+h1.item-hidden {
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
 .nav-menu-lateral {
     position: fixed;
     background-color: var(--fondo);
@@ -630,6 +635,10 @@ dialog::backdrop {
         opacity: 1;
         pointer-events: all;
         visibility: visible;
+        }
+
+        .nav-menu-lateral .item-hidden--title {
+            font-size: 2rem;
         }
     
         main, footer {

@@ -7,7 +7,7 @@ include "header.php";
     <main class="muro">
             <section class="section-1">
                 <div id="card" class="card perfil-card">
-                <h1>Hola, <?= e($nombreUsuario) ?>! <br> Bienvenid@.</h1>
+                <h2>Hola, <?= e($nombreUsuario) ?>! <br> Bienvenid@.</h2>
                 <form class="login-form" action="" method="POST">
                     <p class="aviso">Espero sea de tu agrado mi sitio </p> 
                     <p class="aviso"> Tu uma favorita es <strong><?= e($umaFav) ?></strong>? <br> Pronto podras utilizarla de foto de perfil! </p> 

@@ -48,7 +48,7 @@ if (isset($_SESSION["nombre_usuario"])) {
                         <div class="div-pfp">
                             <img class="pfp" src="src/media/img/pfp/<?= isset($umaFav) ? e($umaFavGuion) : "invitado"?>_Pfp.webp" alt="Foto de perfil">
                         </div>
-                        <h1 class="item-hidden">Umamusume</h2>
+                        <h1 class="item-hidden item-hidden--title"><?= isset($nombreUsuario) ? e($nombreUsuario) : "Umamusume" ?> </h1>
                     </div>
                     <div class="nav-container-items">
 
@@ -60,17 +60,17 @@ if (isset($_SESSION["nombre_usuario"])) {
                         </a>
 
                         <?php if (!isset($_SESSION["nombre_usuario"])): ?>
-                        <a id="registroButton" href="#" class="nav-item">
-                        <svg class="nav-item-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17,21V19a4,4,0,0,0-4-4H5a4,4,0,0,0-4,4v2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                            <circle cx="9" cy="7" r="4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                            <line x1="17" y1="11" x2="23" y2="11" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                            <line x1="20" y1="8" x2="20" y2="14" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                        </svg>
+                        <a name="buttonModal" data-modal="registroModal" href="#" class="nav-item">
+                            <svg class="nav-item-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17,21V19a4,4,0,0,0-4-4H5a4,4,0,0,0-4,4v2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                <circle cx="9" cy="7" r="4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                <line x1="17" y1="11" x2="23" y2="11" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                <line x1="20" y1="8" x2="20" y2="14" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                            </svg>
                             <p class="item-hidden">Registrate</p>
                         </a>
 
-                        <a id="loginButton" href="#" class="nav-item">
+                        <a name="buttonModal" data-modal="loginModal" href="#" class="nav-item">
                             <svg class="nav-item-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10.56,18.35,9,17.05a1,1,0,0,1-.11-1.41L10.34,14H3V10h7.34L8.93,8.36A1,1,0,0,1,9,7l1.52-1.3A1,1,0,0,1,12,5.76l4.79,5.59a1,1,0,0,1,0,1.3L12,18.24A1,1,0,0,1,10.56,18.35ZM17,4h3a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H17"
                                 stroke-linecap= "round" stroke-linejoin="round" stroke-width= "1.5"/>
