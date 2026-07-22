@@ -128,7 +128,7 @@ h1.item-hidden {
     min-height: 380px;
     max-height: fit-content;
     width: fit-content;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(3px);
     opacity: 0;
 }
 
@@ -157,7 +157,7 @@ h1.item-hidden {
 .dibujar .img-uma {
     opacity: 0;
     transition: opacity 0.5s ease, transform 0.5s ease;
-    filter: blur(5px);
+    filter: blur(3px);
     object-fit: contain;
     object-position: bottom;
 }
@@ -412,7 +412,7 @@ footer p {
 }
 
 .perfil-card {
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(3px);
 }
 
 .register-form, .login-form {
@@ -434,7 +434,7 @@ footer p {
 
 .register-form input, .login-form input {
     padding: 5px;
-    border-radius: 10px;
+    border-radius: 10px 10px 10px 0px;
     margin: 5px 0 5px 0
 }
 
@@ -455,7 +455,7 @@ footer p {
 .login-form input, .login-form button
 {
     border: none;
-    border-width: 0 3px 3px 0;
+    border-width: 0 1px 1px 0;
     border-color: #000;
     border-style: solid;
 }

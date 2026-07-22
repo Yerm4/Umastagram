@@ -1,8 +1,13 @@
 <?php
+
+use app\controllers\Controller;
+
 isset($_SESSION["id_usuario"]) ? $ok = "ok" : header("Location: home");
 
 $titulo = "Perfil";
 include "header.php"; 
+$controller = new Controller($pdo);
+$resultado = $controller->consultarPublicaciones();
 ?>
     <main class="muro">
             <section class="section-1">
@@ -30,7 +35,17 @@ include "header.php";
                 </form>
                 </div>
             </section>
+            <section class="section-1">
+                <div id="card" class="card perfil-card">               
+                    <?php 
+                    foreach ($resultado["data"] as $nose) {
+                        echo $nose["contenido"]."<br>";
+                    }
+            ?>
+                </div>
+            </section>
         </main>
+
         <video src="src/media/img/mambo-spinning.webm" class="mambo-spinning" id="mambo" autoplay loop muted playsinline title="mambo"></video>
         <video src="src/media/img/mambo-spinning.webm" class="mambo-spinning mambo-spinning2" id="mambo" autoplay loop muted playsinline title="mambo"></video>
 </body>

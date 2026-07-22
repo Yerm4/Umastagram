@@ -1,8 +1,4 @@
 <?php
-function e($texto) {
-    if ($texto === null) return "";
-    return htmlspecialchars($texto, ENT_QUOTES, 'UTF-8');
-}
 
 if (isset($_SESSION["nombre_usuario"])) {
     $nombreUsuario = $_SESSION["nombre_usuario"];

@@ -14,12 +14,12 @@ class Usuario {
     public function registro ($nombreUsuario, $password, $umaFav) {
         
         try {
-            $sqlCheck = "SELECT nombre FROM usuarios WHERE nombre = :nombre";
+            $sqlCheck = "SELECT COUNT(*) FROM usuarios WHERE nombre = :nombre";
             $stmtCheck = $this->pdo->prepare($sqlCheck);
             $stmtCheck->execute([
                 "nombre" => $nombreUsuario
             ]);
-            $existe = $stmtCheck->fetchColumn();
+            $existe = (int)$stmtCheck->fetchColumn();
 
             if ($existe === 0) {
                 $sql = "INSERT INTO usuarios (nombre, password, uma_fav) VALUES (:nombre, :password, :umaFav)";
@@ -41,7 +41,6 @@ class Usuario {
                     "data" => "Ya existe un usuario registrado con ese nombre"
                 ];
             }
-        
         }
 
         catch (PDOException $e) {
@@ -52,16 +51,16 @@ class Usuario {
         }
     }
 
-    public function login($nombreUsuario, $password) {
+    public function login($nombreUsuario) {
         try {
             $sqlCheck = "SELECT COUNT(*) FROM usuarios WHERE nombre = :nombre";
             $stmtCheck = $this->pdo->prepare($sqlCheck);
             $stmtCheck->execute([
-            "nombre" => $nombreUsuario
+                "nombre" => $nombreUsuario
             ]);
             $existe = $stmtCheck->fetchColumn();
             if ($existe > 0) {
-                $sql = "SELECT COUNT(*) FROM usuarios WHERE nombre = :nombre";
+                $sql = "SELECT * FROM usuarios WHERE nombre = :nombre";
                 $stmt = $this->pdo->prepare($sql);
                 $stmt->execute([
                 "nombre" => $nombreUsuario
@@ -109,5 +108,15 @@ class Usuario {
                 "data" => $e
             ];
         }
+    }
+
+    public function consultarPublicaciones() {
+        $sql = "SELECT * FROM publicaciones";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return [
+            "status" => "ok",
+            "data" => $stmt->fetchAll(PDO::FETCH_ASSOC)  
+        ];
     }
 }

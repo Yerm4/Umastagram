@@ -10,7 +10,7 @@
     <h2>Crea tu cuenta</h2>
     <form class="register-form" action="" method="POST">
         <label> Nombre <br>
-            <input type="text" name="usuario" required autocomplete="off">
+            <input type="text" name="nombre" required autocomplete="off">
         </label>
         <label> Contraseña <br>
             <input type="password" name="password" minlength="8" autocomplete="off" required>
@@ -24,7 +24,7 @@
         <input type="hidden" name="form" value="registro">
         <button type="submit">Registrar</button>
     </form>
-    <p class="aviso"><?= isset($_SESSION["error_registro"]) ? e($_SESSION["error_registro"]) : ""; ?> <br> <?= isset($error) ? e($error) : ""?></p>
+    <p class="aviso"><?= isset($_SESSION["error_registro"]) ? e($_SESSION["error_registro"]) : ""; unset($_SESSION["error_registro"]) ?></p>
 </div>
 <a id="switchToLogin" class="a-switch-modal" href="#">
 <svg class="svg-modal-switch" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37.72 75.8">
