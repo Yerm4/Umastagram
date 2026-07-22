@@ -3,7 +3,6 @@
 if (isset($_SESSION["nombre_usuario"])) {
     $nombreUsuario = $_SESSION["nombre_usuario"];
     $umaFav = $_SESSION["uma_fav"];
-    $umaFavGuion = str_replace(" ", "_", $umaFav);
 }
 
 ?>
@@ -42,7 +41,7 @@ if (isset($_SESSION["nombre_usuario"])) {
                 <div class="nav-menu-lateral">
                         <div class="nav-logo">
                         <div class="div-pfp">
-                            <img class="pfp" src="src/media/img/pfp/<?= isset($umaFav) ? e($umaFavGuion) : "invitado"?>_Pfp.webp" alt="Foto de perfil">
+                            <img class="pfp" src="src/media/img/pfp/<?= isset($umaFav) ? e(umaGuion($umaFav)) : "invitado"?>_Pfp.webp" alt="Foto de perfil">
                         </div>
                         <h1 class="item-hidden item-hidden--title"><?= isset($nombreUsuario) ? e($nombreUsuario) : "Umamusume" ?> </h1>
                     </div>

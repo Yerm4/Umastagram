@@ -111,7 +111,11 @@ class Usuario {
     }
 
     public function consultarPublicaciones() {
-        $sql = "SELECT * FROM publicaciones";
+        $sql = "SELECT p.*,
+                u.nombre AS nombre_usuario,
+                u.uma_fav
+                FROM publicaciones p
+                INNER JOIN usuarios u ON p.id_usuario = u.id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         return [

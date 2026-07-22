@@ -104,7 +104,7 @@ class Controller {
             $estado = $model->publicar($id_usuario, $contenido);
 
             if ($estado["status"] === "ok") {
-                die("Publicacion hecha");
+                reload();
             }
 
             else {

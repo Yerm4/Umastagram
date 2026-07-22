@@ -63,7 +63,9 @@ switch($paginaActual) {
 }
 
 function e($texto) {
-    if ($texto === null) return "";
+    if ($texto === null) {
+        return "";
+    }
     return htmlspecialchars($texto, ENT_QUOTES, 'UTF-8');
 }
 
@@ -71,4 +73,11 @@ function reload() {
     $url = $_SERVER["REQUEST_URI"];
     header("Location: ".$url);
     die();
+}
+
+function umaGuion($texto) {
+    if ($texto === null) {
+        return "";
+    }
+    return str_replace(" ", "_", $texto);
 }
