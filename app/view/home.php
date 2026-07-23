@@ -18,7 +18,7 @@ $resultado = $controller->consultarPublicaciones();
                     <p class="umastagram__p">*añadir descripción interesante* <br> Te gustaria publicar algo? Solo debes <span class="umastagram__p--blue" name="buttonModal" data-modal="registroModal">registrarte!</span></p>
                     <?php endif ?>
                     <?php if (isset($_SESSION["user_id"])): ?> 
-                    <form class="form post-form" action="" method="POST">
+                    <form id="postForm" class="form post-form" action="" method="POST">
                         <fieldset class="fieldset fieldset-post">
                             <legend>Crea una publicacion</legend>
                             <input type="hidden" name="form" value="publicar">
@@ -28,6 +28,7 @@ $resultado = $controller->consultarPublicaciones();
                             </div>
                             <button type="submit">Enviar</button>
                         </fieldset> 
+                        <p class="form-warning" id="postError">olis</p>
                     </form>
                     <?php endif ?>
                     
@@ -37,18 +38,18 @@ $resultado = $controller->consultarPublicaciones();
                             <div class="post__title">
                                 <img class="post__title-img"  width="30px" height="30px" src="src/media/img/pfp/<?= e(umaGuion($data["fav_uma"]))?>_Pfp.webp" alt="">
                                 <h2 class="post__title-name capitalize"> 
-                                    <?= $data["username"] ?> 
-                                    <p class="post__title-fecha"><?= $data["date"]?></p>
+                                    <?= e($data["username"]) ?> 
+                                    <p class="post__title-fecha"><?= e($data["date"])?></p>
                                 </h2>
                                 
                             </div>
                             <div class="post__content">
-                                <p class="post__content-title"><?= $data["title"]?></p>
-                                <p class="post__content-description">> <?= $data["content"]?></p>
+                                <p class="post__content-title"><?= e($data["title"])?></p>
+                                <p class="post__content-description">> <?= e($data["content"])?></p>
                                 <img class="post__content-img" src="src/media/img/modal_bg_2.webp" alt="">
                             </div>
                             <div class="post__interaction">
-                                <button name="button-like" data-post-id="<?= $data["id"] ?>" class="post__button-like">
+                                <button name="button-like" data-post-id="<?= e($data["id"]) ?>" class="post__button-like">
                                     <svg class="post__interaction-like" viewBox="0 0 1024 1024" class="icon"  version="1.1" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M254.593 740.233c-17.109 99.238-25.094 149.359 3.422 177.943 55.689 55.892 196.388-6.993 219.007-17.109 138.933-62.132 326.846-230.038 277.181-383.263-27.969-86.359-128.895-160.332-229.148-154.469-78.706 4.563-131.519 56.839-157.571 82.596-74.953 74.121-90.021 161.586-112.891 294.303z" fill="#EF863F" />
                                         <path d="M261.436 928.465c2.761 9.969 50.633 4.711 67.619 2.841 206.563-22.676 350.925-165.248 393.53-242.403 0.901-1.631 2.282-4.095 3.924-7.312 12.068-23.258 45.113-89.189 27.787-163.81-7.597-32.715-12.080-52.038-23.954-54.752-41.189-9.422-63.010 205.73-223.57 337.523-111.067 91.207-249.999 110.861-245.334 127.914z" fill="#CF7436" />
@@ -63,7 +64,7 @@ $resultado = $controller->consultarPublicaciones();
                                         <path d="M579.27 648.717l34.756 33.25z" fill="#EF863F" />
                                         <path d="M614.027 704.78c-0.023 0-0.053 0-0.082 0-6.090 0-11.62-2.394-15.701-6.293l-34.736-33.242c-4.47-4.176-7.257-10.105-7.257-16.687 0-12.599 10.214-22.813 22.813-22.813 6.226 0 11.87 2.495 15.986 6.538l34.718 33.202c4.342 4.161 7.041 10.006 7.041 16.483 0 12.599-10.214 22.813-22.813 22.813-0.001 0-0.002 0-0.004 0z" fill="#000000" />
                                     </svg>   
-                                    <p>0</p>
+                                    <p name="likes" data-post-id="<?= e($data["id"]) ?>"><?= e($data["likes"])?></p>
                                 </button>
                             </div>
                         </div>

@@ -1,3 +1,8 @@
+::selection {
+    color: white;
+    background-color: #0003;
+}
+
 * {
     font-family: monospace;
     margin: 0;
@@ -434,11 +439,6 @@ footer p {
     margin: 5px;
     border-radius: 20px;
     text-align: center;
-}
-
-.aviso {
-    padding: 5px;
-    font-size: 1.3rem;
 }
 
 dialog {
@@ -983,7 +983,7 @@ a:-webkit-any-link:focus-visible {
 }
 
 @keyframes falling-carrots {
-    0% { transform: translate(100px, -5vh);}
+    0% { transform: translate(100px, -10vh);}
     100% { transform: translate(100px, 110vh);}
 }
 
@@ -1036,6 +1036,21 @@ a:-webkit-any-link:focus-visible {
     height: 40px; 
     position: fixed; 
     top: 0; 
-    animation: falling-carrots 20s infinite;
-    z-index: 2
+    animation: falling-carrots 10s ease-in infinite;
+    z-index: 2;
+}
+
+.carrot-falling:hover {
+    animation-play-state: paused;
+}
+
+.form-warning {
+    padding: 5px;
+    font-size: 1.3rem;
+    transition: opacity .5s ease; 
+    opacity: 0
+}
+
+.opacity1 {
+    opacity: 1;
 }

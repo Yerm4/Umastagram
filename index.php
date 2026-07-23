@@ -45,13 +45,11 @@ $ruta = isset($_GET["ruta"]) ? trim ($_GET["ruta"], "/") : "home";
 $partesRuta = explode("/", $ruta);
 $paginaActual = $partesRuta[0];
 
-switch($paginaActual) {
-    case "logout":
-        session_unset();
-        session_destroy();
-        header("Location: home");
-        break;
-
+if ($paginaActual === "logout") {
+    session_unset();
+    session_destroy();
+    header("Location: home");
+    exit();
 }
 
 $paginaMostrar = __DIR__."/app/view/$paginaActual.php";

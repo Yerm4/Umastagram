@@ -24,7 +24,7 @@
     <title><?= isset($titulo) ? $titulo : "Uma Musume";?></title>
     <link rel="stylesheet" href="src/css/styles.css">
     <link rel="icon" href="src/media/img/mini/favicon.ico" type="image/x-icon">
-    <link rel="preload" href="src/media/img/bg.webp" as="image">
+    <!-- <link rel="preload" href="src/media/img/bg.webp" as="image"> -->
     <link rel="prefetch" href="src/media/img/modal_bg_2.webp">
     <script src="src/script/diseño.js" defer></script>
 </head>

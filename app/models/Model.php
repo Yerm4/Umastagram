@@ -1,6 +1,7 @@
 <?php
 namespace app\models;
 
+use DateTime;
 use PDO;
 use PDOException;
 
@@ -9,6 +10,15 @@ class Model {
 
     public function __construct($connection) {
         $this->pdo = $connection;
+    }
+
+    private function jsonResponse($status, $message = "", $data = null, $redirect = null) {
+            return    [
+            "status" => $status,
+            "message" => $message,
+            "data" => $data,
+            "redirect" => $redirect
+            ];
     }
 
     public function login($username) {
@@ -25,25 +35,18 @@ class Model {
                 $stmt->execute([
                 "username" => $username
                 ]);
-                return [
-                    "status" => "ok",
-                    "data" => $stmt->fetch(PDO::FETCH_ASSOC)
-                ];
+
+                return $this->jsonResponse("ok", "", $stmt->fetch(PDO::FETCH_ASSOC));
+                
             }
 
             else {
-                return [
-                    "status" => "error",
-                    "data" => "No existe un usuario con ese nombre"
-                ];
+                return $this->jsonResponse("error", "No existe un usuario con ese nombre");
             }
         }
         
         catch (PDOException $e) {
-            return  [
-                "status" => "error",
-                "data" => $e
-            ];
+            return $this->jsonResponse("error", "Error en la consulta");
         }
     }
 
@@ -65,44 +68,40 @@ class Model {
                 "password" => $password,
                 "favUma" => $favUma
                 ]);
-                return [
-                    "status" => "ok",
-                    "data" => $this->pdo->lastInsertId()
-                ];
+
+                return $this->jsonResponse("ok", "", $this->pdo->lastInsertId());
             }
 
             else {
-                return [
-                    "status" => "error",
-                    "data" => "Ya existe un usuario registrado con ese nombre"
-                ];
+                return $this->jsonResponse("error", "Ya existe un usuario registrado con ese nombre");
             }
         }
 
         catch (PDOException $e) {
-            return  [
-                "status" => "error",
-                "data" => $e
-            ];
+            return $this->jsonResponse("error", "Error en la consulta");
         }
     }
 
     public function publicar($user_id, $title, $content) {
         try {
-            $sql = "INSERT INTO posts (user_id, title, content) VALUES (:user_id, :title, :content)";
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([
+            $stmtCheck = $this->pdo->prepare("SELECT COUNT(*) FROM posts WHERE user_id = :user_id AND date >= NOW() - INTERVAL 5 MINUTE");
+            $stmtCheck->execute([
+                "user_id" => $user_id
+            ]);
+            $date = $stmtCheck->fetchColumn();
+
+            if (!$date > 0) {
+                $stmt = $this->pdo->prepare("INSERT INTO posts (user_id, title, content) VALUES (:user_id, :title, :content)");
+                $stmt->execute([
                 "user_id" => $user_id,
                 "title" => $title,
                 "content" => $content
-            ]);
-
-            return [
-                "status" => "ok",
-                "data" => $this->pdo->lastInsertId()
-            ];
+                ]);
+                return $this->jsonResponse("ok", "", $this->pdo->lastInsertId());
+            } else {
+                return $this->jsonResponse("error", "Publicaste hace menos de 5 minutos");
+            }
         }
-
         catch (PDOException $e) {
             return [
                 "status" => "error",
@@ -135,19 +134,42 @@ class Model {
         }
     }
 
-    public function actualizarLikes ($postId, $userId) {
-        $sql = "INSERT INTO post_likes (user_id, id_publicacion) VALUES (:user_id, :id_publicacion)";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([
-            "user_id" => $userId,
-            "id_publicacion" => $postId
-        ]);
+    public function actualizarLikes ($userId, $postId) {
+        try {
+            $this->pdo->beginTransaction();
 
-        return $sql = "SELECT COUNT(*) post_likes (user_id, id_publicacion) VALUES (:user_id, :id_publicacion)";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([
-            "user_id" => $userId,
-            "id_publicacion" => $postId
-        ]);
+            $stmt = $this->pdo->prepare("INSERT INTO posts_likes (user_id, post_id) VALUES (:user_id, :post_id)");
+            $stmt->execute([
+                "user_id" => $userId,
+                "post_id" => $postId
+            ]);
+            $stmt2 = $this->pdo->prepare("UPDATE posts SET likes = likes + 1 WHERE id = :post_id");
+            $stmt2->execute([
+                "post_id" => $postId
+            ]);
+            
+            $stmt3 = $this->pdo->prepare("SELECT likes FROM posts WHERE id = :post_id");
+            $stmt3->execute([
+                "post_id" => $postId
+            ]);
+            $likes = $stmt3->fetch();
+
+            $this->pdo->commit();
+            return [
+                "status" => "ok",
+                "message" => "Like enviado correctamente",
+                "data" => $likes["likes"]
+            ];
+
+            
+        }
+
+        catch (PDOException $e) {
+            $this->pdo->rollBack();
+            return [ 
+                "status" => "error",
+                "message" => $e
+            ];
+        }
     }
 }

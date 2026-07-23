@@ -24,7 +24,7 @@
         <input type="hidden" name="form" value="registro">
         <button type="submit">Registrar</button>
     </form>
-    <p id="signUpError" class="aviso"><?= isset($_SESSION["register_error"]) ? e($_SESSION["register_error"]) : ""; unset($_SESSION["register_error"]) ?></p>
+    <p  id="signUpError" class="form-warning"><?= isset($_SESSION["register_error"]) ? e($_SESSION["register_error"]) : ""; unset($_SESSION["register_error"]) ?></p>
 </div>
 <a id="switchToLogin" class="a-switch-modal" href="#">
 <svg class="svg-modal-switch" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37.72 75.8">

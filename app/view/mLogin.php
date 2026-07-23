@@ -18,7 +18,7 @@
         <input type="hidden" name="form" value="login">
         <button type="submit">Loguear</button>
     </form>
-    <p id="loginError" class="aviso"><?php echo isset($_SESSION["login_error"]) ? e($_SESSION["login_error"]) : ""; unset($_SESSION["login_error"]) ?></p>
+    <p id="loginError" class="form-warning"><?php echo isset($_SESSION["login_error"]) ? e($_SESSION["login_error"]) : ""; unset($_SESSION["login_error"]) ?></p>
 </div>
 <a href="#" class="a-switch-modal" id="switchToRegistro">
 <svg class="svg-modal-switch" viewBox="0 0 75.803 75.803" xmlns="http://www.w3.org/2000/svg">

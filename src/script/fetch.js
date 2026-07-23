@@ -4,6 +4,7 @@ if (buttonLike) {
     buttonLike.forEach(button => {
         button.addEventListener("click", (e) => {
             const postId = button.dataset.postId
+            const like = document.querySelector(`[name="likes"][data-post-id="${postId}"]`)
             fetch('index.php', {
                 method: 'POST',
                 headers: { 
@@ -14,10 +15,21 @@ if (buttonLike) {
                     data: postId
                 })
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error en el servidor")
+                }
+                return response.json()
+            })
+            
             .then(data => {
-                
-                console.log(data);
+                if (data.status === "ok") {
+                    console.log("like dado, esta publicacion tiene: "+data.data+" Likes")
+                    like.innerHTML = data.data
+                } else {
+                    console.log("like no dado")
+                }
+            
             })
             .catch(error => console.error('Error:', error));
         })
@@ -26,10 +38,11 @@ if (buttonLike) {
 
 const loginForm = document.getElementById("loginForm") 
 const loginError = document.getElementById("loginError")
-if (loginForm) {
+
+if (loginForm && loginError) {
     loginForm.addEventListener("submit", (e) => {
         e.preventDefault()
-        const formData = new FormData (loginForm)
+        const formData = new FormData(loginForm)
         const datos = Object.fromEntries(formData.entries())
     
         fetch("index.php", {
@@ -49,7 +62,11 @@ if (loginForm) {
             if (data.status === "ok") {
                 window.location.href = data.redirect;
             } else {
-                loginError.innerHTML = data.message
+                loginError.classList.remove("opacity1")
+                setTimeout(() => {
+                    loginError.innerHTML = data.message
+                    loginError.classList.add("opacity1")
+                }, 500);
             }
         })
         .catch(error => {
@@ -61,7 +78,7 @@ if (loginForm) {
 const signUpForm = document.getElementById("signUpForm") 
 const signUpError = document.getElementById("signUpError")
 
-if (signUpForm) {
+if (signUpForm && signUpError) {
     signUpForm.addEventListener("submit", (e) => {
         e.preventDefault()
 
@@ -90,6 +107,46 @@ if (signUpForm) {
         })
         .catch(error => {
             console.error("Hubo un problema con la petición fetch:", error);
+        })
+    })
+}
+
+const postForm = document.getElementById("postForm")
+const postError = document.getElementById("postError")
+
+if (postForm && postError) {
+    postForm.addEventListener("submit", (e) => {
+        e.preventDefault()
+        const formData = new FormData(postForm)
+        const datos = Object.fromEntries(formData.entries())
+
+        fetch("index.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(datos)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error en el servidor")
+            }
+            return response.json()
+        })
+        .then(data => {
+            console.log(data.status)
+            if (data.status === "ok") {
+
+            } else {
+                postError.classList.remove("opacity1")
+                setTimeout(() => {
+                    postError.textContent = data.message
+                    postError.classList.add("opacity1")
+                }, 500);
+            }
+        })
+        .catch(error => {
+            console.error(error)
         })
     })
 }
