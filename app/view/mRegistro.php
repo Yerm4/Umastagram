@@ -6,17 +6,17 @@
     l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719
     c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"/>
 </svg>
-<div id="card" class="card register-card">
+<div id="card" class="card">
     <h2>Crea tu cuenta</h2>
-    <form class="register-form" action="" method="POST">
+    <form id="signUpForm" class="form register-form" action="" method="POST">
         <label> Nombre <br>
-            <input type="text" name="nombre" required autocomplete="off">
+            <input type="text" minlength="3" name="username" required autocomplete="off">
         </label>
         <label> Contraseña <br>
             <input type="password" name="password" minlength="8" autocomplete="off" required>
         </label>
         <label>Uma Favorita <br>
-        <select class="register-select" name="uma_fav" id="selectUmaFav">
+        <select class="register-select" name="fav_uma" id="selectUmaFav">
             <option value="Mayano Top Gun">Mayano Top Gun</option>
             <option value="Narita Brian">Narita Brian</option>
         </select>
@@ -24,7 +24,7 @@
         <input type="hidden" name="form" value="registro">
         <button type="submit">Registrar</button>
     </form>
-    <p class="aviso"><?= isset($_SESSION["error_registro"]) ? e($_SESSION["error_registro"]) : ""; unset($_SESSION["error_registro"]) ?></p>
+    <p id="signUpError" class="aviso"><?= isset($_SESSION["register_error"]) ? e($_SESSION["register_error"]) : ""; unset($_SESSION["register_error"]) ?></p>
 </div>
 <a id="switchToLogin" class="a-switch-modal" href="#">
 <svg class="svg-modal-switch" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37.72 75.8">

@@ -6,20 +6,22 @@ function precargado() {
     body.style.opacity = "1";
 }
 
-let botonOscuro = document.getElementById("modo-oscuro")
+const botonOscuro = document.getElementById("modo-oscuro")
+    if (botonOscuro) {
+        botonOscuro.addEventListener("click", () => {
+        document.body.classList.add("modo-oscuro")
+        botonOscuro.style.visibility = "hidden" 
+    
+        botonClaro.style.visibility = "visible"    
+    })
+}
 
-botonOscuro.addEventListener("click", () => {
-    document.body.classList.add("modo-oscuro")
-    botonOscuro.style.visibility = "hidden" 
-
-    botonClaro.style.visibility = "visible"
-})
-
-let botonClaro = document.getElementById("modo-claro")
-
-botonClaro.addEventListener("click", () => {
-    document.body.classList.remove("modo-oscuro")
-    botonClaro.style.visibility = "hidden"
-
-    botonOscuro.style.visibility = "visible"
-})
+const botonClaro = document.getElementById("modo-claro")
+    if (botonClaro) {
+        botonClaro.addEventListener("click", () => {
+            document.body.classList.remove("modo-oscuro")
+            botonClaro.style.visibility = "hidden"
+        
+            botonOscuro.style.visibility = "visible"
+    })
+}

@@ -15,25 +15,34 @@ $pdo = Conexion::conectar();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $formulario = $_POST["form"] ?? "";
+    $JSON = json_decode(file_get_contents("php://input"), true);
+    $formulario = $_POST["form"] ?? $JSON["form"] ?? "";
+    
     switch ($formulario) {
+        
         case "login":
             $controller = new Controller($pdo);
-            $controller->iniciarSesion();
+            $controller->login();
+            exit();
         break;
 
         case "registro":
             $controller = new Controller($pdo);
-            $controller->registrarUsuario();
+            $controller->signUp();
+            exit();
         break;
 
         case "publicar":
+            
             $controller = new Controller($pdo);
             $controller->publicar();
+            exit();
         break;
 
-        default:
-        header("Location: home");
+        case "actualizar_likes":
+            $controller = new Controller($pdo);
+            $controller->publicar();
+            exit();
         break;
     }
 }
@@ -49,6 +58,10 @@ switch($paginaActual) {
 
     case "perfil": 
         include __DIR__."/app/view/perfil.php";
+        break;
+
+    case "establo":
+        include __DIR__."/app/view/establo.php";
         break;
 
     case "logout";

@@ -1,10 +1,5 @@
 <?php
 
-if (isset($_SESSION["nombre_usuario"])) {
-    $nombreUsuario = $_SESSION["nombre_usuario"];
-    $umaFav = $_SESSION["uma_fav"];
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -41,20 +36,29 @@ if (isset($_SESSION["nombre_usuario"])) {
                 <div class="nav-menu-lateral">
                         <div class="nav-logo">
                         <div class="div-pfp">
-                            <img class="pfp" src="src/media/img/pfp/<?= isset($umaFav) ? e(umaGuion($umaFav)) : "invitado"?>_Pfp.webp" alt="Foto de perfil">
+                            <img class="pfp" src="src/media/img/pfp/<?= isset($_SESSION["fav_uma"]) ? e(umaGuion($_SESSION["fav_uma"])) : "invitado"?>_Pfp.webp" alt="Foto de perfil">
                         </div>
-                        <h1 class="item-hidden item-hidden--title"><?= isset($nombreUsuario) ? e($nombreUsuario) : "Umamusume" ?> </h1>
+                        <h1 class="item-hidden capitalize item-hidden--title"><?= isset($_SESSION["username"]) ? e($_SESSION["username"]) : "Umamusume" ?> </h1>
                     </div>
                     <div class="nav-container-items">
 
-                        <a href="home" class="nav-item">
-                            <svg class="nav-item-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M15 16C15 15.2044 14.6839 14.4413 14.1213 13.8787C13.5587 13.3161 12.7957 13 12 13C11.2044 13 10.4413 13.3161 9.87868 13.8787C9.31607 14.4413 9 15.2043 9 16V20H4L4 10L8 6.5M12 3L20 10L20 20H15" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <a href="home" class="nav-item"> 
+                            <svg class="nav-item-logo" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="#663399" d="M160 224a32 32 0 00-32 32v512a32 32 0 0032 32h704a32 32 0 0032-32V256a32 32 0 00-32-32H160zm0-64h704a96 96 0 0196 96v512a96 96 0 01-96 96H160a96 96 0 01-96-96V256a96 96 0 0196-96z"/>
+                                <path fill="#663399" d="M704 320a64 64 0 110 128 64 64 0 010-128zM288 448h256q32 0 32 32t-32 32H288q-32 0-32-32t32-32zM288 576h256q32 0 32 32t-32 32H288q-32 0-32-32t32-32z"/>
                             </svg>
                             <p class="item-hidden">Home</p>
                         </a>
 
-                        <?php if (!isset($_SESSION["nombre_usuario"])): ?>
+                        <a href="establo" class="nav-item">
+                            <svg class="nav-item-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 16C15 15.2044 14.6839 14.4413 14.1213 13.8787C13.5587 13.3161 12.7957 13 12 13C11.2044 13 10.4413 13.3161 9.87868 13.8787C9.31607 14.4413 9 15.2043 9 16V20H4L4 10L8 6.5M12 3L20 10L20 20H15" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <p class="item-hidden">Establo</p>
+                        </a>
+
+                        <?php if (!isset($_SESSION["user_id"])): ?>
                         <a name="buttonModal" data-modal="registroModal" href="#" class="nav-item">
                             <svg class="nav-item-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M17,21V19a4,4,0,0,0-4-4H5a4,4,0,0,0-4,4v2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
@@ -74,14 +78,14 @@ if (isset($_SESSION["nombre_usuario"])) {
                         </a> 
                         <?php endif; ?>
 
-                        <?php if (isset($_SESSION["nombre_usuario"])): ?>
+                        <?php if (isset($_SESSION["user_id"])): ?>
                         <a href="perfil" class="nav-item">
-                            <svg class="nav-item-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="800" height="800" fill="#000000">
+                            <svg class="nav-item-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#000000">
                                 <path d="M10,12 C13.785,12 16.958,14.214 17.784,18 L2.216,18 C3.042,14.214 6.215,12 10,12 M6,6 C6,3.794 7.794,2 10,2 C12.206,2 14,3.794 14,6 C14,8.206 12.206,10 10,10 C7.794,10 6,8.206 6,6 M13.758,10.673 C15.124,9.574 16,7.89 16,6 C16,2.686 13.314,0 10,0 C6.686,0 4,2.686 4,6 C4,7.89 4.876,9.574 6.242,10.673 C2.583,12.048 0,15.445 0,19 L20,19 C20,15.445 17.417,12.048 13.758,10.673"/>
                             </svg>
                             <p class="item-hidden">Perfil</p>
                         </a>
-                        
+
                         <a href="logout" class="nav-item"> 
                             <svg class="nav-item-logo" viewBox="0 -0.5 25 25" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.04401 9.53165C7.33763 9.23949 7.33881 8.76462 7.04665 8.47099C6.75449 8.17737 6.27962 8.17619 5.98599 8.46835L7.04401 9.53165ZM2.97099 11.4683C2.67737 11.7605 2.67619 12.2354 2.96835 12.529C3.26051 12.8226 3.73538 12.8238 4.02901 12.5317L2.97099 11.4683ZM4.02901 11.4683C3.73538 11.1762 3.26051 11.1774 2.96835 11.471C2.67619 11.7646 2.67737 12.2395 2.97099 12.5317L4.02901 11.4683ZM5.98599 15.5317C6.27962 15.8238 6.75449 15.8226 7.04665 15.529C7.33881 15.2354 7.33763 14.7605 7.04401 14.4683L5.98599 15.5317ZM3.5 11.25C3.08579 11.25 2.75 11.5858 2.75 12C2.75 12.4142 3.08579 12.75 3.5 12.75V11.25ZM17.5 12.75C17.9142 12.75 18.25 12.4142 18.25 12C18.25 11.5858 17.9142 11.25 17.5 11.25V12.75ZM5.98599 8.46835L2.97099 11.4683L4.02901 12.5317L7.04401 9.53165L5.98599 8.46835ZM2.97099 12.5317L5.98599 15.5317L7.04401 14.4683L4.02901 11.4683L2.97099 12.5317ZM3.5 12.75L17.5 12.75V11.25L3.5 11.25V12.75Z"/>

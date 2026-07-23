@@ -31,7 +31,7 @@ body::after {
     z-index: 10;
     pointer-events: none;
     opacity: 0;
-    transition: opacity .5s; 
+    transition: opacity .2s; 
 }
 
 body.modo-oscuro::after {
@@ -70,7 +70,7 @@ h1.item-hidden {
     text-transform: capitalize;
 }
 
-h2 {
+.capitalize {
     text-transform: capitalize;
 }
 
@@ -95,7 +95,7 @@ h2 {
 
 .section-1 {
     position: relative;
-    background: url(../media/img/bg.webp) center / cover;
+    background: url(../media/img/bg.webp) center / cover,#3C9992;;
     box-shadow: 0 0px 50px 6px var(--uma-color) inset;
     transition: box-shadow 2s ease;
     min-height: 100vh;
@@ -344,7 +344,7 @@ h2 {
     padding: 20px;
 }
 
-.section-2 h2 {
+main.home .section-2 h2 {
     font-size: 2rem;
     padding: 20px
 }
@@ -416,7 +416,7 @@ footer p {
     color: black;
 }
 
-.register-form, .login-form {
+.form {
     display: grid;
     place-items: center;
     gap: 2px;
@@ -428,18 +428,18 @@ footer p {
     text-align: center;
 }
 
-.register-form label, .login-form label {
+.form label {
     font-size: 1.2rem;
     font-weight: bolder;
 }
 
-.register-form input, .login-form input {
+.form input {
     padding: 5px;
     border-radius: 10px 10px 10px 0px;
     margin: 5px 0 5px 0
 }
 
-.register-form button, .login-form button {
+.form button {
     margin-top: 5px;
     padding: 10px;
     border-radius: 10px;
@@ -447,13 +447,12 @@ footer p {
     transition: background-color .5s ease;
 }
 
-.register-form button:hover, .login-form button:hover{
+.form button:hover{
     transform: scale(1.03);
     background-color: #999;
 }
 
-.register-form input, .register-form button, 
-.login-form input, .login-form button
+.form input, .form button
 {
     border: none;
     border-width: 0 1px 1px 0;
@@ -545,12 +544,14 @@ dialog::backdrop {
 .card .post {
     border: solid 2px #fdd;
     border-radius: 10px;
-    padding: 5px;
+    padding: 5px 10px;
     margin: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 5px;
+    width: 100%;
 }
 
 .card .post__title {
@@ -568,7 +569,7 @@ dialog::backdrop {
     padding: 1px;
     border: 1px solid #fff;
     border-radius: 30px;
-    flex: 0 1 auto;
+    flex: 0 1 auto
 }
 
 .card .post__title-name {
@@ -578,26 +579,99 @@ dialog::backdrop {
     padding-left: 10px;
 }
 
+.card .post__title-fecha {
+    font-size: 1rem;
+}
+
+.card .post__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.card .post__content-title {
+    font-size: 1.3rem;
+    font-weight: bolder;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word; 
+    width: 100%;            
+    min-width: 0;           
+}
+
+
 .card .post__content-description {
     font-size: 1.1rem;
     padding: 5px;
+    background-color: #0001;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word; 
+    width: 100%;            
+    min-width: 0;  
+}
+
+.card .post__content-img {
+    border: 2px solid rgb(179, 172, 172)
 }
 
 .card .post__interaction {
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     align-items: center;
     width: 100%;
 }
 
 .card .post__interaction-like {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
+}
+
+.post__button-like {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 5px;
+    transition: background-color .2s ease
+}
+
+.post__button-like:active {
+    background: #fff;
 }
 
 main.muro .section-2 {
-    background: #3C9992;
+    background-color: #3C9992;
+}
+
+.fieldset {
+    padding: 5px;
+}
+
+.form .textarea {
+    padding: 5px;
+    border-radius: 10px 10px 10px 0;
+    field-sizing: content; 
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 40px;      
+    max-height: 150px;     
+    overflow-y: hidden;    
+    resize: none;
+    border: none;
+    outline: none;
+    border-top: solid 2px #0002;
+}
+
+.form__input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
 }
 
 /********* MEDIA QUERIES ********/ 

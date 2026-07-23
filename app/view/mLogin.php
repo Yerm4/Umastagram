@@ -8,9 +8,9 @@
 </svg>
 <div id="card" class="card login-card">
     <h2>Inicio de Sesión</h2>
-    <form class="login-form" action="" method="POST">
+    <form class="form login-form" id="loginForm" action="" method="POST">
         <label> Usuario <br>
-            <input type="text" name="nombre" required>
+            <input type="text" name="username" required>
         </label>
         <label> Contraseña <br>
             <input type="password" name="password" autocomplete="off" required>
@@ -18,7 +18,7 @@
         <input type="hidden" name="form" value="login">
         <button type="submit">Loguear</button>
     </form>
-    <p class="aviso"><?php echo isset($_SESSION["error_login"]) ? e($_SESSION["error_login"]) : ""; unset($_SESSION["error_login"]) ?></p>
+    <p id="loginError" class="aviso"><?php echo isset($_SESSION["login_error"]) ? e($_SESSION["login_error"]) : ""; unset($_SESSION["login_error"]) ?></p>
 </div>
 <a href="#" class="a-switch-modal" id="switchToRegistro">
 <svg class="svg-modal-switch" viewBox="0 0 75.803 75.803" xmlns="http://www.w3.org/2000/svg">
