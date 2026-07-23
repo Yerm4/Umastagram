@@ -10,8 +10,10 @@ $resultado = $controller->consultarPublicaciones();
     <main class="muro">
             <section class="section-1 section-2">
                 <div class="card">    
-                <h2> <span style="color: #fdd">Umastagram!</span> <br> Red social de Uma Musume <span style="color: #fdd">n.n</span></h2>
-                    
+                <h2> <span style="color: #faa">Uma</span><span style="color: #f88">stagram 🥕</span> <br> <span style="font-size: 2rem; color: #fff">Red social de Uma Musume</span> <span style="color: #faa6">n.n</span></h2>
+                    <?php if (!isset($_SESSION["user_id"])): ?>
+                    <p style="font-size: 1.2rem; text-align: center">*añadir descripción interesante* <br> Te gustaria publicar algo? Solo debes <span style="color: #33f; cursor: pointer" name="buttonModal" data-modal="registroModal">registrarte!</span></p>
+                    <?php endif ?>
                     <?php if (isset($_SESSION["user_id"])): ?> 
                     <form class="form post-form" action="" method="POST">
                         <fieldset class="fieldset fieldset-post">

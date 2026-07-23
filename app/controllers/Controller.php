@@ -96,7 +96,9 @@ class Controller {
             $_SESSION["user_id"] = $resultado["data"];
             $_SESSION["username"] = $username;
             $_SESSION["fav_uma"] = $favUma;
-            $this->jsonResponse("ok", "¡Registro exitoso!", null, "perfil");        }
+            $this->jsonResponse("ok", "¡Registro exitoso!", null, "home");
+        }
+        
         else {
             $this->jsonResponse("error", $resultado["data"]);        }
     }

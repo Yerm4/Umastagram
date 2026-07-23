@@ -95,7 +95,7 @@ h1.item-hidden {
 
 .section-1 {
     position: relative;
-    background: url(../media/img/bg.webp) center / cover,#3C9992;;
+    background: #3C9992;;
     box-shadow: 0 0px 50px 6px var(--uma-color) inset;
     transition: box-shadow 2s ease;
     min-height: 100vh;
