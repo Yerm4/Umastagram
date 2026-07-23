@@ -7,7 +7,7 @@
     c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"/>
 </svg>
 <div id="card" class="card login-card">
-    <h2>Inicio de Sesión</h2>
+    <h2 class="form__title">Inicio de Sesión</h2>
     <form class="form login-form" id="loginForm" action="" method="POST">
         <label> Usuario <br>
             <input type="text" name="username" required>

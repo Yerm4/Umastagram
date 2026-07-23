@@ -17,34 +17,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $JSON = json_decode(file_get_contents("php://input"), true);
     $formulario = $_POST["form"] ?? $JSON["form"] ?? "";
+
     
-    switch ($formulario) {
+    $acciones = [   //Nombre del formulario -> metodo a llamar en controlador
+        "login"            => "login", 
+        "registro"         => "signUp",
+        "publicar"         => "publicar",
+        "actualizar_likes" => "actualizarLikes"
+    ];
+
+    if (array_key_exists($formulario, $acciones)) {
+        $metodo = $acciones[$formulario];
+        $controller = new Controller($pdo);
         
-        case "login":
-            $controller = new Controller($pdo);
-            $controller->login();
+        if (method_exists($controller, $metodo)) {
+            $controller->$metodo();
             exit();
-        break;
-
-        case "registro":
-            $controller = new Controller($pdo);
-            $controller->signUp();
-            exit();
-        break;
-
-        case "publicar":
-            
-            $controller = new Controller($pdo);
-            $controller->publicar();
-            exit();
-        break;
-
-        case "actualizar_likes":
-            $controller = new Controller($pdo);
-            $controller->publicar();
-            exit();
-        break;
+        }
     }
+
+    header("Content-Type: application/json");
+    echo json_encode(["status" => "error", "message" => "Acción no válida"]);
+    exit();
 }
 
 $ruta = isset($_GET["ruta"]) ? trim ($_GET["ruta"], "/") : "home";
@@ -52,27 +46,19 @@ $partesRuta = explode("/", $ruta);
 $paginaActual = $partesRuta[0];
 
 switch($paginaActual) {
-    case "home":
-        include __DIR__."/app/view/home.php";
-        break;
-
-    case "perfil": 
-        include __DIR__."/app/view/perfil.php";
-        break;
-
-    case "establo":
-        include __DIR__."/app/view/establo.php";
-        break;
-
-    case "logout";
+    case "logout":
         session_unset();
         session_destroy();
         header("Location: home");
         break;
 
-    default: 
-        include __DIR__."/app/view/home.php";
-        break;
+}
+
+$paginaMostrar = __DIR__."/app/view/$paginaActual.php";
+if (file_exists($paginaMostrar)) {
+    include $paginaMostrar;
+}   else {
+    include __DIR__."/app/view/home.php";
 }
 
 function e($texto) {

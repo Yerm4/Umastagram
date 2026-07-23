@@ -55,7 +55,7 @@ main::after {
 body {
     background-color: var(--fondo);
     color: var(--texto);
-    opacity: 0.2;
+    opacity: 0.8;
     transition: background-color .5s ease, color .5s ease, opacity 1.5s ease;
     -webkit-tap-highlight-color: transparent;
 }
@@ -109,16 +109,6 @@ h1.item-hidden {
     margin: 20px 0;
     display: grid;
     place-items: center;
-}
-
-@keyframes shake-animation {
-    0% { transform: translate(0, 0); }
-    20% { transform: translate(2px, 2px); }
-    40% { transform: translate(-2px, -2px); }
-    60% { transform: translate(-2px, 2px); }
-    80% { transform: translate(2, -2px); }
-    100% { transform: translate(0, 0); }
-    
 }
 
 .dibujar {
@@ -218,31 +208,11 @@ h1.item-hidden {
 }
 
 .animacion-aparicion {
-    animation: aparicion 1s ease-in-out, shake-animation 7s infinite
-}
-
-@keyframes aparicion {
-    from {
-        transform: translateY(15px);
-    }
-
-    to {
-        transform: translateY(0);
-    }
+    animation: aparicion 1s ease-in-out
 }
 
 .animacion-desaparicion {
     animation: desaparicion .4s ease forwards;
-}
-@keyframes desaparicion {
-    from {
-        transform: translateY(0);
-    }
-
-    to {
-        transform: translateY(10px);
-    }
-
 }
 
 .buscador-container {
@@ -412,7 +382,6 @@ footer p {
     max-width: 450px;
     padding: 10px;
     border-radius: 20px;
-    animation: shake-animation 8s infinite;
     color: black;
 }
 
@@ -423,7 +392,7 @@ footer p {
     padding: 10px;
 }
 
-.card h2 {
+.form__title {
     font-size: 2.5rem;
     text-align: center;
 }
@@ -517,30 +486,41 @@ dialog::backdrop {
     animation: modalFade 1.5s ease-in-out forwards;
 }
 
-@keyframes modalAparecer {
-    from {
-        opacity: 0;
-        transform: translateY(80px)
-    }
 
-    to {
-        opacity: 1;
-        transform: translateY(0)
-    }
+.profile__title-name {
+    font-size: 2.5rem;
+    text-align: center;
 }
 
-@keyframes modalFade {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    to {
-        opacity: 0;
-        transform: translateY(80px)
-    }
+.umastagram {
+    font-size: 2.5rem;
+    text-align: center;
 }
 
+.umastagram--light-pink {
+    color: #faa
+}
+
+.umastagram--orange-pink {
+    color: #f88
+}
+
+.umastagram__slogan {
+    font-size: 2rem; 
+    color: #fff
+}
+
+.umastagram__face {
+    color: #faa6
+}
+.umastagram__p {
+    font-size: 1.2rem; 
+    text-align: center
+}
+.umastagram__p--blue {
+    color: #33f;
+    cursor: pointer
+}
 .card .post {
     border: solid 2px #fdd;
     border-radius: 10px;
@@ -577,6 +557,7 @@ dialog::backdrop {
     flex: 1 0 auto;
     text-align: left;
     padding-left: 10px;
+    
 }
 
 .card .post__title-fecha {
@@ -601,11 +582,11 @@ dialog::backdrop {
     min-width: 0;           
 }
 
-
 .card .post__content-description {
     font-size: 1.1rem;
     padding: 5px;
-    background-color: #0001;
+    background-color: #0003;
+    border-radius: 5px;
     white-space: normal;
     overflow-wrap: break-word;
     word-break: break-word; 
@@ -999,4 +980,62 @@ a:focus-visible,
 a:-webkit-any-link:focus-visible {
     outline: none !important;
     -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes falling-carrots {
+    0% { transform: translate(100px, -5vh);}
+    100% { transform: translate(100px, 110vh);}
+}
+
+@keyframes modalAparecer {
+    from {
+        opacity: 0;
+        transform: translateY(80px)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+@keyframes modalFade {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(80px)
+    }
+}
+
+@keyframes aparicion {
+    from {
+        transform: translateY(15px);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes desaparicion {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(10px);
+    }
+}
+
+.carrot-falling {
+    width: 40px;
+    height: 40px; 
+    position: fixed; 
+    top: 0; 
+    animation: falling-carrots 20s infinite;
+    z-index: 2
 }

@@ -7,7 +7,7 @@
     c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"/>
 </svg>
 <div id="card" class="card">
-    <h2>Crea tu cuenta</h2>
+    <h2 class="form__title">Crea tu cuenta</h2>
     <form id="signUpForm" class="form register-form" action="" method="POST">
         <label> Nombre <br>
             <input type="text" minlength="3" name="username" required autocomplete="off">

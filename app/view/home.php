@@ -10,9 +10,12 @@ $resultado = $controller->consultarPublicaciones();
     <main class="muro">
             <section class="section-1 section-2">
                 <div class="card">    
-                <h2> <span style="color: #faa">Uma</span><span style="color: #f88">stagram 🥕</span> <br> <span style="font-size: 2rem; color: #fff">Red social de Uma Musume</span> <span style="color: #faa6">n.n</span></h2>
+                <h2 class="umastagram"> 
+                    <span class="umastagram--light-pink">Uma</span><span class="umastagram--orange-pink">stagram 🥕</span>
+                    <br> 
+                    <span class="umastagram__slogan">Red social de Uma Musume</span> <span class="umastagram__face">n.n</span></h2>
                     <?php if (!isset($_SESSION["user_id"])): ?>
-                    <p style="font-size: 1.2rem; text-align: center">*añadir descripción interesante* <br> Te gustaria publicar algo? Solo debes <span style="color: #33f; cursor: pointer" name="buttonModal" data-modal="registroModal">registrarte!</span></p>
+                    <p class="umastagram__p">*añadir descripción interesante* <br> Te gustaria publicar algo? Solo debes <span class="umastagram__p--blue" name="buttonModal" data-modal="registroModal">registrarte!</span></p>
                     <?php endif ?>
                     <?php if (isset($_SESSION["user_id"])): ?> 
                     <form class="form post-form" action="" method="POST">
@@ -27,12 +30,13 @@ $resultado = $controller->consultarPublicaciones();
                         </fieldset> 
                     </form>
                     <?php endif ?>
+                    
                     <?php if ($resultado["status"] === "ok"): ?>
                         <?php foreach ($resultado["data"] as $data) : ?>
                         <div class="post">
                             <div class="post__title">
                                 <img class="post__title-img"  width="30px" height="30px" src="src/media/img/pfp/<?= e(umaGuion($data["fav_uma"]))?>_Pfp.webp" alt="">
-                                <h2 class="post__title-name"> 
+                                <h2 class="post__title-name capitalize"> 
                                     <?= $data["username"] ?> 
                                     <p class="post__title-fecha"><?= $data["date"]?></p>
                                 </h2>
@@ -72,6 +76,7 @@ $resultado = $controller->consultarPublicaciones();
         </main>
         <?php include __DIR__."/footer.php" ?>
         <script src="src/script/fetch.js"></script>
-        <script src="src/script/index.js"></script>
+        <script src="src/script/index.js"></script>  
 </body>
+
 </html>

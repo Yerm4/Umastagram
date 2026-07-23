@@ -14,8 +14,8 @@ $resultado = $controller->consultarPublicaciones();
 ?>
     <main class="muro">
             <section class="section-1">
-                <div class="card">
-                <h2 class="capitalize">Hola, <?= e($_SESSION["username"]) ?>! <br> Bienvenid@.</h2>
+                <div class="card profile__wrapper">
+                <h2 class="capitalize profile__title-name">Hola, <?= e($_SESSION["username"]) ?>! <br> Bienvenid@.</h2>
                 <form class="form login-form" action="" method="POST">
                     <p class="aviso">Espero sea de tu agrado mi sitio </p> 
                     <p class="aviso"> Tu uma favorita es <strong><?= e($_SESSION["fav_uma"]) ?></strong>? <br> Pronto podras utilizarla de foto de perfil! </p> 
