@@ -78,3 +78,12 @@ function umaGuion($texto) {
     }
     return str_replace(" ", "_", $texto);
 }
+
+function fileExists(?string $file, string $ruta = "/src/media/img/post/") : bool {
+    if (empty($file)) {
+        return false;
+    }
+    
+    return file_exists(__DIR__.$ruta.$file.".webp");
+}
+

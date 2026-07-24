@@ -8,10 +8,10 @@ class Conexion {
     
     public static function conectar () {
         
-        $host = "localhost";
-        $db = "uma";
-        $user = "root";
-        $password = "";
+            $host = "localhost";
+            $db = "uma";
+            $user = "root";
+            $password = "";
         
         try {
             $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $password);

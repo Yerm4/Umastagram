@@ -16,7 +16,7 @@
             <input type="password" name="password" minlength="8" autocomplete="off" required>
         </label>
         <label>Uma Favorita <br>
-        <select class="register-select" name="fav_uma" id="selectUmaFav">
+        <select class="select" name="fav_uma" id="selectUmaFav">
             <option value="Mayano Top Gun">Mayano Top Gun</option>
             <option value="Narita Brian">Narita Brian</option>
         </select>
@@ -24,7 +24,7 @@
         <input type="hidden" name="form" value="registro">
         <button type="submit">Registrar</button>
     </form>
-    <p  id="signUpError" class="form-warning"><?= isset($_SESSION["register_error"]) ? e($_SESSION["register_error"]) : ""; unset($_SESSION["register_error"]) ?></p>
+    <p  id="signUpMessage" class="form-warning"><?= isset($_SESSION["register_error"]) ? e($_SESSION["register_error"]) : ""; unset($_SESSION["register_error"]) ?></p>
 </div>
 <a id="switchToLogin" class="a-switch-modal" href="#">
 <svg class="svg-modal-switch" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37.72 75.8">

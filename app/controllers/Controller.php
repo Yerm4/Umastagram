@@ -39,7 +39,7 @@ class Controller {
         }
 
         if (strlen($username) < 3 || strlen($username) > 20) {
-            $this->jsonResponse("error", "Tu nombre no puede ser menor a 3 caracteres o mayor a 20");
+            $this->jsonResponse("error", "Tu nombre no puede ser menor a 3 caracteres");
         }
 
         $usuarioModel = new Model($this->pdo);
@@ -50,7 +50,7 @@ class Controller {
                 $_SESSION["user_id"] = $resultado["data"]["id"];
                 $_SESSION["username"] = $resultado["data"]["username"];
                 $_SESSION["fav_uma"] = $resultado["data"]["fav_uma"];
-                $this->jsonResponse("ok", "¡Inicio de sesión correcto!", null, "home");
+                $this->jsonResponse("ok", "Inicio de sesión exitoso, redirigiendo..", null, "home");
             }
             
             else {
@@ -96,7 +96,7 @@ class Controller {
             $_SESSION["user_id"] = $resultado["data"];
             $_SESSION["username"] = $username;
             $_SESSION["fav_uma"] = $favUma;
-            $this->jsonResponse("ok", "¡Registro exitoso!", null, "home");
+            $this->jsonResponse("ok", "Registro exitoso, redirigiendo..", null, "home");
         } else {
             $this->jsonResponse("error", $resultado["message"]);        
         }
@@ -112,28 +112,28 @@ class Controller {
 
         $title = isset($data["post_title"]) ? $data["post_title"] : "";
         $content = isset($data["post_content"]) ? $data["post_content"] : "";
+        $postImg = isset($data["post_img"]) ? $data["post_img"] : "";
         $userId = $_SESSION["user_id"];
+
+        if (empty($content) || empty($title) || empty($postImg)) {
+            $this->jsonResponse("error", "Parece que el contenido de la publicacion está vacio");
+        }
 
         if (strlen($content) > 250 || strlen($title) > 100) {
             $this->jsonResponse("error", "El mensaje es muy largo (Max 250 caracteres)");
         }
+    
+        $model = new Model($this->pdo);
+        $estado = $model->publicar($userId, $title, $content, $postImg);
 
-        if (strlen($content) > 0 && $userId) {
-            $model = new Model($this->pdo);
-            $estado = $model->publicar($userId, $title, $content);
-
-            if ($estado["status"] === "ok") {
-                $this->jsonResponse("ok", "Publicacion hecha", $estado["data"]);
-            }
-
-            else {
-                $this->jsonResponse("error", "Ya hiciste una publicacion en los ultimos 5 minutos");
-            }
+        if ($estado["status"] === "ok") {
+            $this->jsonResponse("ok", "Publicacion hecha, si no la ves intenta recargar la pagina", $estado["data"]);
         }
 
         else {
-            $this->jsonResponse("error", "Parece que el contenido de la publicacion está vacio");
+            $this->jsonResponse("error", "Ya hiciste una publicacion en los ultimos 5 minutos");
         }
+        
     }
 
     public function consultarPublicaciones () {

@@ -25,10 +25,16 @@ $resultado = $controller->consultarPublicaciones();
                             <div class="form__input-wrapper"> 
                                 <input class="textarea" name="post_title" placeholder="Titulo">
                                 <textarea class="textarea" name="post_content" placeholder="Contenido" cols="30" rows="10"></textarea>
+                                <select name="post_img" class="select">
+                                    <option value="" selected disabled>Elige una imagen!</option>
+                                    <option value="post_1">Mayano</option>
+                                    <option value="post_2">Vivlox</option>
+                                    <option value="post_3">Tosho</option>
+                                </select>
                             </div>
                             <button type="submit">Enviar</button>
                         </fieldset> 
-                        <p class="form-warning" id="postError">olis</p>
+                        <p class="form-warning" id="postMessage">olis</p>
                     </form>
                     <?php endif ?>
                     
@@ -46,7 +52,7 @@ $resultado = $controller->consultarPublicaciones();
                             <div class="post__content">
                                 <p class="post__content-title"><?= e($data["title"])?></p>
                                 <p class="post__content-description">> <?= e($data["content"])?></p>
-                                <img class="post__content-img" src="src/media/img/modal_bg_2.webp" alt="">
+                                <img class="post__content-img" src="src/media/img/post/<?= fileExists($data["post_img"] ?? null) ? e($data["post_img"]) : "post_3" ?>.webp" alt="">
                             </div>
                             <div class="post__interaction">
                                 <button name="button-like" data-post-id="<?= e($data["id"]) ?>" class="post__button-like">

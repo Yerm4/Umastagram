@@ -434,7 +434,7 @@ footer p {
     border-style: solid;
 }
 
-.register-select {
+.select {
     padding: 5px;
     margin: 5px;
     border-radius: 20px;
@@ -595,7 +595,9 @@ dialog::backdrop {
 }
 
 .card .post__content-img {
-    border: 2px solid rgb(179, 172, 172)
+    border: 2px solid rgb(179, 172, 172);
+    max-width: 400px;
+    max-height: 400px;
 }
 
 .card .post__interaction {
@@ -1036,7 +1038,7 @@ a:-webkit-any-link:focus-visible {
     height: 40px; 
     position: fixed; 
     top: 0; 
-    animation: falling-carrots 10s ease-in infinite;
+    animation: falling-carrots 10s ease infinite;
     z-index: 2;
 }
 

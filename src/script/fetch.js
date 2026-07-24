@@ -1,5 +1,13 @@
 const buttonLike = document.querySelectorAll("[name=button-like]")
 
+function msg(msg, data) {
+    msg.classList.remove("opacity1")
+    setTimeout(() => {
+        msg.textContent = data.message
+        msg.classList.add("opacity1")
+    }, 500);
+}
+
 if (buttonLike) {
     buttonLike.forEach(button => {
         button.addEventListener("click", (e) => {
@@ -37,9 +45,9 @@ if (buttonLike) {
 }
 
 const loginForm = document.getElementById("loginForm") 
-const loginError = document.getElementById("loginError")
+const loginMessage = document.getElementById("loginMessage")
 
-if (loginForm && loginError) {
+if (loginForm && loginMessage) {
     loginForm.addEventListener("submit", (e) => {
         e.preventDefault()
         const formData = new FormData(loginForm)
@@ -60,13 +68,12 @@ if (loginForm && loginError) {
         })
         .then(data => {
             if (data.status === "ok") {
-                window.location.href = data.redirect;
-            } else {
-                loginError.classList.remove("opacity1")
+                msg(loginMessage, data)
                 setTimeout(() => {
-                    loginError.innerHTML = data.message
-                    loginError.classList.add("opacity1")
-                }, 500);
+                    window.location.href = data.redirect;
+                }, 2000);
+            } else {
+                msg(loginMessage, data)
             }
         })
         .catch(error => {
@@ -76,9 +83,9 @@ if (loginForm && loginError) {
 }
 
 const signUpForm = document.getElementById("signUpForm") 
-const signUpError = document.getElementById("signUpError")
+const signUpMessage = document.getElementById("signUpMessage")
 
-if (signUpForm && signUpError) {
+if (signUpForm && signUpMessage) {
     signUpForm.addEventListener("submit", (e) => {
         e.preventDefault()
 
@@ -100,9 +107,12 @@ if (signUpForm && signUpError) {
         })
         .then(data => {
             if (data.status === "ok") {
-                window.location.href = data.redirect;
+                msg(signUpMessage, data)
+                setTimeout(() => {
+                    window.location.href = data.redirect;
+                }, 2000);
             } else {
-                signUpError.innerHTML = data.message
+                msg(signUpMessage, data)
             }
         })
         .catch(error => {
@@ -112,9 +122,9 @@ if (signUpForm && signUpError) {
 }
 
 const postForm = document.getElementById("postForm")
-const postError = document.getElementById("postError")
+const postMessage = document.getElementById("postMessage")
 
-if (postForm && postError) {
+if (postForm && postMessage) {
     postForm.addEventListener("submit", (e) => {
         e.preventDefault()
         const formData = new FormData(postForm)
@@ -136,13 +146,9 @@ if (postForm && postError) {
         .then(data => {
             console.log(data.status)
             if (data.status === "ok") {
-
+                msg(postMessage, data)
             } else {
-                postError.classList.remove("opacity1")
-                setTimeout(() => {
-                    postError.textContent = data.message
-                    postError.classList.add("opacity1")
-                }, 500);
+                msg(postMessage, data)
             }
         })
         .catch(error => {

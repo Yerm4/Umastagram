@@ -82,7 +82,7 @@ class Model {
         }
     }
 
-    public function publicar($user_id, $title, $content) {
+    public function publicar($user_id, $title, $content, $postImg) {
         try {
             $stmtCheck = $this->pdo->prepare("SELECT COUNT(*) FROM posts WHERE user_id = :user_id AND date >= NOW() - INTERVAL 5 MINUTE");
             $stmtCheck->execute([
@@ -91,11 +91,12 @@ class Model {
             $date = $stmtCheck->fetchColumn();
 
             if (!$date > 0) {
-                $stmt = $this->pdo->prepare("INSERT INTO posts (user_id, title, content) VALUES (:user_id, :title, :content)");
+                $stmt = $this->pdo->prepare("INSERT INTO posts (user_id, title, content, post_img) VALUES (:user_id, :title, :content, :post_img)");
                 $stmt->execute([
                 "user_id" => $user_id,
                 "title" => $title,
-                "content" => $content
+                "content" => $content,
+                "post_img" => $postImg
                 ]);
                 return $this->jsonResponse("ok", "", $this->pdo->lastInsertId());
             } else {
