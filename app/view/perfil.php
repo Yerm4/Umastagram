@@ -1,16 +1,11 @@
 <?php
 
-use app\controllers\Controller;
-
 if (!$_SESSION["user_id"]) {
     header("Location: home");
     die();
 }
 
 $titulo = "Perfil";
-include "header.php"; 
-$controller = new Controller($pdo);
-$resultado = $controller->consultarPublicaciones();
 ?>
     <main class="muro">
             <section class="section-1">

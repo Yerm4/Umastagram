@@ -1,8 +1,8 @@
 <?php
 
-namespace app\controllers;
+namespace app\controller;
 
-use app\models\Model;
+use app\model\Model;
 
 class Controller {
     
@@ -31,14 +31,17 @@ class Controller {
         $password = isset($data["password"]) ? trim($data["password"]) : "";
         
         if (empty($username) || empty($password)) {
+            code(400);
             $this->jsonResponse("error", "Parece que intentaste enviar un campo vacío");
         }
 
         if (strlen($password) < 8 || strlen($password) > 20) {
+            code(400);
             $this->jsonResponse("error", "La contraseña no puede ser menor a 8 caracteres");
         }
 
         if (strlen($username) < 3 || strlen($username) > 20) {
+            code(400);
             $this->jsonResponse("error", "Tu nombre no puede ser menor a 3 caracteres");
         }
 
@@ -54,16 +57,18 @@ class Controller {
             }
             
             else {
+                code(401);
                 $this->jsonResponse("error", "La contraseña no coincide");
             }
         }
 
         else {
+            code(400);
             $this->jsonResponse("error", $resultado["message"]);
         }
     }
 
-    public function signUp() {
+    public function signup() {
 
         $data = json_decode(file_get_contents("php://input"), true);
 
@@ -73,18 +78,22 @@ class Controller {
         $allowedUmas = ["Mayano Top Gun", "Narita Brian"];
 
         if (empty($username) || empty($password) || empty($favUma)) {
+            code(400);
             $this->jsonResponse("error", "Parece que intentaste enviar un campo vacío");
         }
 
         if (strlen($password) < 8 || strlen($password) > 20) {
+            code(400);
             $this->jsonResponse("error", "La contraseña no puede ser menor a 8 caracteres o mayor a 20");
         }
 
         if (strlen($username) < 3 || strlen($username) > 20) {
+            code(400);
             $this->jsonResponse("error", "Tu nombre no puede ser menor a 3 caracteres o mayor a 20");
         }
 
         if (!in_array($favUma, $allowedUmas)) {
+            code(400);
             $this->jsonResponse("error", "Parece que intentaste cambiar a tu Uma favorita");
         }
 
@@ -98,6 +107,7 @@ class Controller {
             $_SESSION["fav_uma"] = $favUma;
             $this->jsonResponse("ok", "Registro exitoso, redirigiendo..", null, "home");
         } else {
+            code(400);
             $this->jsonResponse("error", $resultado["message"]);        
         }
     }
@@ -105,6 +115,7 @@ class Controller {
     public function publicar() {
         
         if (!$_SESSION["user_id"]) {
+            code(401);
             reload();
         }
 
@@ -116,10 +127,12 @@ class Controller {
         $userId = $_SESSION["user_id"];
 
         if (empty($content) || empty($title) || empty($postImg)) {
+            code(400);
             $this->jsonResponse("error", "Parece que el contenido de la publicacion está vacio");
         }
 
         if (strlen($content) > 250 || strlen($title) > 100) {
+            code(400);
             $this->jsonResponse("error", "El mensaje es muy largo (Max 250 caracteres)");
         }
     
@@ -127,10 +140,11 @@ class Controller {
         $estado = $model->publicar($userId, $title, $content, $postImg);
 
         if ($estado["status"] === "ok") {
-            $this->jsonResponse("ok", "Publicacion hecha, si no la ves intenta recargar la pagina", $estado["data"]);
+            $this->jsonResponse("ok", "Publicacion hecha", $estado["data"]);
         }
 
         else {
+            code(429);
             $this->jsonResponse("error", "Ya hiciste una publicacion en los ultimos 5 minutos");
         }
         
@@ -138,7 +152,7 @@ class Controller {
 
     public function consultarPublicaciones () {
         $model = new Model($this->pdo);
-        return $model->consultarPublicaciones();
+        $this->jsonResponse("ok", "", $model->consultarPublicaciones());
     }
 
     public function actualizarLikes () {
@@ -148,6 +162,7 @@ class Controller {
         $userId = $_SESSION["user_id"];
         
         if (empty($postId) || empty($userId)) {
+            code(409);
             $this->jsonResponse("error", "Parece que intestate darle like a un post no existente?");
         }
 
@@ -155,9 +170,10 @@ class Controller {
         $data = $model->actualizarLikes($userId, $postId);
 
         if ($data["status"] === "ok") {
-            $this->jsonResponse("ok", "enviado", $data["data"]);
+            $this->jsonResponse("ok", "Like dado", $data["data"]);
         } else {
-            $this->jsonResponse("error", "no enviado");
+            code(409);
+            $this->jsonResponse("error", "Like no dado");
         }
     }
 }

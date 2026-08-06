@@ -1,7 +1,6 @@
 <?php
-namespace app\models;
+namespace app\model;
 
-use DateTime;
 use PDO;
 use PDOException;
 
@@ -12,7 +11,7 @@ class Model {
         $this->pdo = $connection;
     }
 
-    private function jsonResponse($status, $message = "", $data = null, $redirect = null) {
+    private function response($status, $message = "", $data = null, $redirect = null) {
             return    [
             "status" => $status,
             "message" => $message,
@@ -36,17 +35,17 @@ class Model {
                 "username" => $username
                 ]);
 
-                return $this->jsonResponse("ok", "", $stmt->fetch(PDO::FETCH_ASSOC));
+                return $this->response("ok", "", $stmt->fetch(PDO::FETCH_ASSOC));
                 
             }
 
             else {
-                return $this->jsonResponse("error", "No existe un usuario con ese nombre");
+                return $this->response("error", "No existe un usuario con ese nombre");
             }
         }
         
         catch (PDOException $e) {
-            return $this->jsonResponse("error", "Error en la consulta");
+            return $this->response("error", "Error en la consulta");
         }
     }
 
@@ -69,16 +68,16 @@ class Model {
                 "favUma" => $favUma
                 ]);
 
-                return $this->jsonResponse("ok", "", $this->pdo->lastInsertId());
+                return $this->response("ok", "", $this->pdo->lastInsertId());
             }
 
             else {
-                return $this->jsonResponse("error", "Ya existe un usuario registrado con ese nombre");
+                return $this->response("error", "Ya existe un usuario registrado con ese nombre");
             }
         }
 
         catch (PDOException $e) {
-            return $this->jsonResponse("error", "Error en la consulta");
+            return $this->response("error", "Error en la consulta");
         }
     }
 
@@ -98,9 +97,21 @@ class Model {
                 "content" => $content,
                 "post_img" => $postImg
                 ]);
-                return $this->jsonResponse("ok", "", $this->pdo->lastInsertId());
+                $newPostId = $this->pdo->lastInsertId();
+
+                if ($newPostId) {
+                    $stmt = $this->pdo->prepare("
+                    SELECT p.*, u.username, u.fav_uma
+                    FROM posts p
+                    INNER JOIN users u ON p.user_id = u.id
+                    WHERE p.id = :id");
+                    $stmt->execute([
+                        "id" => $newPostId
+                    ]);
+                    return $this->response("ok", "", $stmt->fetch(PDO::FETCH_ASSOC));
+                }
             } else {
-                return $this->jsonResponse("error", "Publicaste hace menos de 5 minutos");
+                return $this->response("error", "Publicaste hace menos de 5 minutos");
             }
         }
         catch (PDOException $e) {

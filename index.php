@@ -6,42 +6,66 @@ header("Cache-Control: no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-use app\controllers\Controller;
 use app\config\Conexion;
+use app\controller\Controller;
+use app\model\Model;
+
 
 require_once __DIR__."/vendor/autoload.php";
 
 $pdo = Conexion::conectar();
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+$method = !empty($_SERVER["REQUEST_METHOD"]) ? $_SERVER["REQUEST_METHOD"] : "";
+$ruta = isset($_GET["ruta"]) ? trim ($_GET["ruta"], "/") : "home";
 
-    $JSON = json_decode(file_get_contents("php://input"), true);
-    $formulario = $_POST["form"] ?? $JSON["form"] ?? "";
+$rutasApi = [
+    "POST" => [
+        "api/auth/login"    => "login",
+        "api/users" => "signup",
+        "api/posts"    => "publicar",
+        "api/posts/likes"    => "actualizarLikes",
+    ],
+    "GET" => [
+        "api/posts"    => "obtenerPosts",
+    ],
+    "PUT" => [
 
-    
-    $acciones = [   //Nombre del formulario -> metodo a llamar en controlador
-        "login"            => "login", 
-        "registro"         => "signUp",
-        "publicar"         => "publicar",
-        "actualizar_likes" => "actualizarLikes"
-    ];
+    ],
+    "PATCH" => [
 
-    if (array_key_exists($formulario, $acciones)) {
-        $metodo = $acciones[$formulario];
-        $controller = new Controller($pdo);
+    ],
+    "DELETE" => [
         
-        if (method_exists($controller, $metodo)) {
-            $controller->$metodo();
-            exit();
-        }
-    }
+        ]
+    
+];
 
-    header("Content-Type: application/json");
-    echo json_encode(["status" => "error", "message" => "Acción no válida"]);
-    exit();
+if (isset($rutasApi[$method][$ruta])) {
+    header("Content-Type: application/json; charset=UTF-8");
+    
+    $metodoController = $rutasApi[$method][$ruta];
+    $controller = new Controller($pdo);
+
+    if (method_exists($controller, $metodoController)) {
+        $controller->$metodoController();
+        exit();
+    } else {
+        http_response_code(500);
+        echo json_encode(["status" => "error", "message" => "El método del controlador no existe"]);
+        exit();
+    }
 }
 
-$ruta = isset($_GET["ruta"]) ? trim ($_GET["ruta"], "/") : "home";
+if (str_starts_with($ruta, "api/")) { 
+    header("Content-Type: application/json; 
+    charset=UTF-8"); http_response_code(400); 
+    echo json_encode([ 
+        "status" => "error", 
+        "message" => "La ruta: ".$ruta." no existe" 
+        ]); 
+    exit(); 
+}
+
 $partesRuta = explode("/", $ruta);
 $paginaActual = $partesRuta[0];
 
@@ -52,6 +76,7 @@ if ($paginaActual === "logout") {
     exit();
 }
 
+include_once __DIR__."/app/view/header.php";
 $paginaMostrar = __DIR__."/app/view/$paginaActual.php";
 if (file_exists($paginaMostrar)) {
     include $paginaMostrar;
@@ -63,7 +88,7 @@ function e($texto) {
     if ($texto === null) {
         return "";
     }
-    return htmlspecialchars($texto, ENT_QUOTES, 'UTF-8');
+    return htmlspecialchars($texto, ENT_QUOTES, "UTF-8");
 }
 
 function reload() {
@@ -87,3 +112,9 @@ function fileExists(?string $file, string $ruta = "/src/media/img/post/") : bool
     return file_exists(__DIR__.$ruta.$file.".webp");
 }
 
+function code($num) {
+    if ($num === null) {
+        return "";
+    }
+    return http_response_code($num);
+}

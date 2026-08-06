@@ -15,7 +15,6 @@
         <label> Contraseña <br>
             <input type="password" name="password" autocomplete="off" required>
         </label>
-        <input type="hidden" name="form" value="login">
         <button type="submit">Loguear</button>
     </form>
     <p id="loginMessage" class="form-warning"><?php echo isset($_SESSION["login_error"]) ? e($_SESSION["login_error"]) : ""; unset($_SESSION["login_error"]) ?></p>

@@ -1,6 +1,5 @@
 <?php
 $titulo = "Uma Musume";
-include "header.php";
 ?>
         <main id="main" class="home" data-login='<?php echo isset($_SESSION["user_id"]) ? "true" : "false" ?>'>
             <section class="section-1" id="section-1">

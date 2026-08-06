@@ -10,10 +10,10 @@
     <h2 class="form__title">Crea tu cuenta</h2>
     <form id="signUpForm" class="form register-form" action="" method="POST">
         <label> Nombre <br>
-            <input type="text" minlength="3" name="username" required autocomplete="off">
+            <input type="text" name="username" required autocomplete="off">
         </label>
         <label> Contraseña <br>
-            <input type="password" name="password" minlength="8" autocomplete="off" required>
+            <input type="password" name="password" autocomplete="off" required>
         </label>
         <label>Uma Favorita <br>
         <select class="select" name="fav_uma" id="selectUmaFav">
@@ -21,7 +21,6 @@
             <option value="Narita Brian">Narita Brian</option>
         </select>
         </label>
-        <input type="hidden" name="form" value="registro">
         <button type="submit">Registrar</button>
     </form>
     <p  id="signUpMessage" class="form-warning"><?= isset($_SESSION["register_error"]) ? e($_SESSION["register_error"]) : ""; unset($_SESSION["register_error"]) ?></p>

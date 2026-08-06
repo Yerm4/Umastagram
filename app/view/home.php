@@ -1,11 +1,9 @@
 <?php
 
-use app\controllers\Controller;
-
+use app\model\Model;
+$model = new Model($pdo);
+$resultado = $model->consultarPublicaciones();
 $titulo = "Muro";
-include "header.php"; 
-$controller = new Controller($pdo);
-$resultado = $controller->consultarPublicaciones();
 ?>
     <main class="muro">
             <section class="section-1 section-2">
@@ -21,13 +19,11 @@ $resultado = $controller->consultarPublicaciones();
                     <form id="postForm" class="form post-form" action="" method="POST">
                         <fieldset class="fieldset fieldset-post">
                             <legend>Crea una publicacion</legend>
-                            <input type="hidden" name="form" value="publicar">
                             <div class="form__input-wrapper"> 
                                 <input class="textarea" name="post_title" placeholder="Titulo">
                                 <textarea class="textarea" name="post_content" placeholder="Contenido" cols="30" rows="10"></textarea>
                                 <select name="post_img" class="select">
-                                    <option value="" selected disabled>Elige una imagen!</option>
-                                    <option value="post_1">Mayano</option>
+                                    <option value="post_1" selected">Mayano</option>
                                     <option value="post_2">Vivlox</option>
                                     <option value="post_3">Tosho</option>
                                 </select>
@@ -38,6 +34,7 @@ $resultado = $controller->consultarPublicaciones();
                     </form>
                     <?php endif ?>
                     
+                    <div class="post-wrapper" id="post-wrapper">
                     <?php if ($resultado["status"] === "ok"): ?>
                         <?php foreach ($resultado["data"] as $data) : ?>
                         <div class="post">
@@ -78,6 +75,7 @@ $resultado = $controller->consultarPublicaciones();
                     <?php else: ?>
                     <h2>No hay publicaciones :(</h2>
                     <?php endif ?>
+                    </div>
                 </div>
             </section>
         </main>
