@@ -10,17 +10,16 @@ async function buscarUma(menu = null) {
     if (!IRLButton) {
         return
     }
-    const caballoSvg = document.getElementById("caballo-svg");
-    const umaSvg = document.getElementById("uma-svg");
-    const dibujar = document.getElementById("dibujar");
+    const caballoSvg = document.getElementById("irl-button__horse-icon");
+    const umaSvg = document.getElementById("irl-button__uma-icon");
+    const drawCard = document.getElementById("draw-card");
     
     scrollSection1(event);
 
     IRLButton.style.opacity = "0";
-    IRLButton.classList.add("animacion-desaparicion");
-    dibujar.style.opacity = "0";
-    dibujar.classList.add("animacion-desaparicion");
-    dibujar.classList.add("shake-animacion");
+    IRLButton.classList.add("anim-disappear");
+    drawCard.style.opacity = "0";
+    drawCard.classList.add("anim-disappear");
 
     await new Promise((resolve) => {
         setTimeout(resolve, 600);
@@ -31,12 +30,12 @@ async function buscarUma(menu = null) {
         fuente = establoReal;
     }
 
-    const buscador = document.getElementById("nombreUma");
-    let nombre = menu ? menu.toLowerCase() : buscador.value.toLowerCase();
+    const searchBoxInput = document.getElementById("nombreUma");
+    let nombre = menu ? menu.toLowerCase() : searchBoxInput.value.toLowerCase();
     nombre = nombre.trim();
     
     if (queryMobile) {
-        buscador.focus();
+        searchBoxInput.focus();
     }
     nombreGuardado = nombre;
     
@@ -74,28 +73,29 @@ async function buscarUma(menu = null) {
             return p;
         }
 
-        // Dibujar Uma
+        // drawCard Uma
+
         if (!IRL) {
-            dibujar.classList.remove("dibujar-column");
+            drawCard.classList.remove("draw-card--column");
             caballoSvg.style.opacity = "1";
             umaSvg.style.opacity = "0";
 
-            dibujar.textContent = "";
+            drawCard.textContent = "";
             
             const infoContainer = document.createElement("div");
             infoContainer.classList.add("uma-info");
             infoContainer.id = "uma-info";
 
             const imgContainer = document.createElement("div");
-            imgContainer.classList.add("container-img-uma");
+            imgContainer.classList.add("draw-card__img-container");
             
             const h2 = document.createElement("h2");
             h2.textContent = datos.nombre;
 
             const imagen = document.createElement("img");
             imagen.src = img.src;
-            imagen.classList.add("img-uma");
-            imagen.id = "img-uma";
+            imagen.classList.add("draw-card__uma-img");
+            imagen.id = "draw-card__uma-img";
             imagen.alt = "Imagen de un caballo";
 
             infoContainer.append(
@@ -111,33 +111,33 @@ async function buscarUma(menu = null) {
             );
 
             imgContainer.append(imagen);
-            dibujar.append(infoContainer, imgContainer);
+            drawCard.append(infoContainer, imgContainer);
         }
 
-        // Dibujar caballo
+        // drawCard caballo
         if (IRL) {
-            dibujar.classList.add("dibujar-column");
+            drawCard.classList.add("draw-card--column");
             
             umaSvg.style.opacity = "1";
             caballoSvg.style.opacity = "0";
 
-            dibujar.textContent = "";
+            drawCard.textContent = "";
             
             const infoContainer = document.createElement("div");
             infoContainer.classList.add("uma-info");
             infoContainer.id = "uma-info";
 
             const imgContainer = document.createElement("div");
-            imgContainer.classList.add("container-img-uma");
+            imgContainer.classList.add("draw-card__hose-img-container");
             
             const h2 = document.createElement("h2");
             h2.textContent = datos.nombre;
 
             const imagen = document.createElement("img");
             imagen.src = img.src;
-            imagen.classList.add("img-uma");
-            imagen.classList.add("img-caballo");
-            imagen.id = "img-uma";
+            imagen.classList.add("draw-card__uma-img");
+            imagen.classList.add("draw-card__horse-img");
+            imagen.id = "draw-card__uma-img";
             imagen.alt = "Imagen de un caballo";
 
             infoContainer.append(
@@ -154,25 +154,25 @@ async function buscarUma(menu = null) {
             );
 
             imgContainer.append(imagen);
-            dibujar.append(infoContainer, imgContainer);
+            drawCard.append(infoContainer, imgContainer);
         }
 
         await new Promise((resolve) => {
             setTimeout(resolve, 400);
         });
 
-        dibujar.style.opacity = "1";
+        drawCard.style.opacity = "1";
         IRLButton.style.opacity = "1";
         
         setTimeout(() => {
-            const imgUma = document.getElementById("img-uma");
-            if (imgUma) imgUma.classList.add("img-uma-visible");
+            const imgUma = document.getElementById("draw-card__uma-img");
+            if (imgUma) imgUma.classList.add("draw-card__uma-img--visible");
         }, 100);
         
-        buscador.value = "";
+        searchBoxInput.value = "";
 
-        dibujar.classList.remove("animacion-desaparicion");
-        IRLButton.classList.remove("animacion-desaparicion");
+        drawCard.classList.remove("anim-disappear");
+        IRLButton.classList.remove("anim-disappear");
 
     } else {
         const img = new Image();
@@ -184,15 +184,15 @@ async function buscarUma(menu = null) {
             setTimeout(resolve, 1000);
         });
         
-        dibujar.style.opacity = "1";
-        dibujar.classList.remove("animacion-desaparicion");
-        void dibujar.offsetWidth;
+        drawCard.style.opacity = "1";
+        drawCard.classList.remove("anim-disappear");
+        void drawCard.offsetWidth;
 
-        dibujar.innerHTML = `
-            <div class="container-img-uma">
+        drawCard.innerHTML = `
+            <div class="draw-card__uma-img">
                 <h3>No he podido encontrar a <br> esa corredora, entrenador</h3>    
-                <div class="tazuna-container"> 
-                    <img src="${img.src}" class="img-uma" id="imagen-uma" alt="Imagen de una Uma">
+                <div class="draw-card__tazuna-container"> 
+                    <img src="${img.src}" class="draw-card__uma-img" id="imagen-uma" alt="Imagen de una Uma">
                 </div>
             </div>
         `;
@@ -203,7 +203,7 @@ async function buscarUma(menu = null) {
         
         setTimeout(() => {
             const imgUma = document.getElementById("imagen-uma");
-            if (imgUma) imgUma.classList.add("img-uma-visible");
+            if (imgUma) imgUma.classList.add("draw-card__uma-img--visible");
         }, 100);
     }
 }
@@ -227,7 +227,7 @@ if (switchButton) {
 const sonido = new Audio("src/media/audio/mambo.mp3");
 sonido.volume = 0.2;
 
-const mambo = document.querySelectorAll(".mambo-spinning");
+const mambo = document.querySelectorAll(".mambo-wrapper__video");
 
 mambo.forEach(elementoMambo => {
     elementoMambo.addEventListener("click", function(event) {
@@ -255,14 +255,14 @@ function agregarUma() { // Agregar umas a lista de umas disponibles
         return nombreA.localeCompare(nombreB);
     });
 
-    const umasDisponibles = document.getElementById("umas-disponibles");
+    const umasDisponibles = document.getElementById("available-section__grid");
     
     nombres.forEach(llave => {
         const datos = establo[llave];
         const container = document.createElement("div");
         const nombre = document.createElement("a");
 
-        container.setAttribute("class", "umas-disponibles-container");
+        container.setAttribute("class", "available-section__grid-container");
         nombre.setAttribute("href", "#");
         nombre.setAttribute("onclick", "scrollSection1(event)");  
         nombre.setAttribute("data-uma", llave);      

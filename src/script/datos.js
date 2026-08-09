@@ -568,7 +568,7 @@ const establoReal = {
     "vodka": {
         nombre: "Vodka",
         nacimiento: "4 de abril - 2004",
-        fallecimiento: "1 de abil - 2019",
+        fallecimiento: "1 de abril - 2019",
         sexo: "Hembra",
         cabello: "Castaño",
         padre: "Tanino Gimlet",
@@ -596,41 +596,3 @@ setTimeout(() => {
         });    
     }
 }, 1000);
-
-setTimeout(() => {
-    generarNombres()
-    async function generarNombres() {
-        Object.keys(establo).forEach(alias => {
-            const nombreCompleto = establo[alias].nombre.toLowerCase();
-            establo[nombreCompleto] = establo[alias];
-        });  
-}
-
-    generarNombresIRL()
-    async function generarNombresIRL() {
-        Object.keys(establoReal).forEach(alias => {
-            const nombreCompleto = establoReal[alias].nombre.toLowerCase();
-            establoReal[nombreCompleto] = establoReal[alias];
-        });    
-}
-}, 1000);
-
-/* 
-mi-proyecto/ (Carpeta Raíz)
-├── app/                  <-- Aquí vive tu lógica POO (Es el "src" de tu profe)
-│   ├── config/           <-- conexion.php y configuraciones
-│   ├── controllers/      <-- Los controladores (LoginController.php, etc.)
-│   ├── models/           <-- Tus clases de la BD (Usuario.php, Uma.php)
-│   └── views/            <-- Tus archivos PHP visuales (home.php, etc.)
-├── assets/               <-- Tus archivos estáticos públicos
-│   ├── css/              <-- Tus estilos personalizados
-│   ├── js/               <-- Tus scripts de JavaScript limpios
-│   └── imagenes/         <-- Las fotos de tus Umas
-├── vendor/               <-- Creado por Composer (¡No tocar!)
-├── .htaccess             <-- El enrutador amigable
-├── index.php             <-- El Front Controller principal de la raíz
-├── server.php            <-- El servidor de WebSockets (Ratchet)
-├── chat.php              <-- Lógica del chat (opcional por ahora)
-├── composer.json         <-- Tu configuración de Composer
-└── composer.lock         <-- Bloqueo de versiones de Composer
-*/

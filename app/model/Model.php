@@ -129,7 +129,8 @@ class Model {
                 u.fav_uma
                 FROM posts p
                 INNER JOIN users u ON p.user_id = u.id
-                ORDER BY date DESC";
+                ORDER BY date DESC
+                LIMIT 10";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         return [

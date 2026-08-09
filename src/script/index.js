@@ -40,7 +40,7 @@ modalesButton.forEach(button => {
 const loginModal = document.getElementById("loginModal");
 const registroModal = document.getElementById("registroModal");
 
-const modalButtonClose = document.querySelectorAll(".svg-dialog-close")
+const modalButtonClose = document.querySelectorAll(".modal__close-icon")
 modalButtonClose.forEach(button => {
     button.addEventListener("click", (e) => {
         const buttonId = button.dataset.modal

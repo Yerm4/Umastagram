@@ -113,18 +113,13 @@ class Controller {
     }
 
     public function publicar() {
-        
-        if (!$_SESSION["user_id"]) {
-            code(401);
-            reload();
-        }
 
         $data = json_decode(file_get_contents("php://input"), true);
 
         $title = isset($data["post_title"]) ? $data["post_title"] : "";
         $content = isset($data["post_content"]) ? $data["post_content"] : "";
         $postImg = isset($data["post_img"]) ? $data["post_img"] : "";
-        $userId = $_SESSION["user_id"];
+        $userId = $_SESSION["user_id"] ?? null;
 
         if (empty($content) || empty($title) || empty($postImg)) {
             code(400);
@@ -156,13 +151,14 @@ class Controller {
     }
 
     public function actualizarLikes () {
+        hasLoggedIn();
 
         $data = json_decode(file_get_contents("php://input"), true);
-        $postId = $data["data"];
-        $userId = $_SESSION["user_id"];
+        $postId = $data["data"] ?? null;
+        $userId = $_SESSION["user_id"] ?? null; 
         
         if (empty($postId) || empty($userId)) {
-            code(409);
+            code(401);
             $this->jsonResponse("error", "Parece que intestate darle like a un post no existente?");
         }
 

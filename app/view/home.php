@@ -6,7 +6,7 @@ $resultado = $model->consultarPublicaciones();
 $titulo = "Muro";
 ?>
     <main class="muro">
-            <section class="section-1 section-2">
+            <section class="hero">
                 <div class="card">    
                 <h2 class="umastagram"> 
                     <span class="umastagram--light-pink">Uma</span><span class="umastagram--orange-pink">stagram 🥕</span>
@@ -17,12 +17,12 @@ $titulo = "Muro";
                     <?php endif ?>
                     <?php if (isset($_SESSION["user_id"])): ?> 
                     <form id="postForm" class="form post-form" action="" method="POST">
-                        <fieldset class="fieldset fieldset-post">
+                        <fieldset class="fieldset form__fieldset">
                             <legend>Crea una publicacion</legend>
                             <div class="form__input-wrapper"> 
                                 <input class="textarea" name="post_title" placeholder="Titulo">
-                                <textarea class="textarea" name="post_content" placeholder="Contenido" cols="30" rows="10"></textarea>
-                                <select name="post_img" class="select">
+                                <textarea class="textarea form__textarea" name="post_content" placeholder="Contenido" cols="30" rows="10"></textarea>
+                                <select name="post_img" class="select form__select">
                                     <option value="post_1" selected">Mayano</option>
                                     <option value="post_2">Vivlox</option>
                                     <option value="post_3">Tosho</option>
@@ -30,7 +30,7 @@ $titulo = "Muro";
                             </div>
                             <button type="submit">Enviar</button>
                         </fieldset> 
-                        <p class="form-warning" id="postMessage">olis</p>
+                        <p class="form__warning" id="postMessage">olis</p>
                     </form>
                     <?php endif ?>
                     
@@ -40,9 +40,9 @@ $titulo = "Muro";
                         <div class="post">
                             <div class="post__title">
                                 <img class="post__title-img"  width="30px" height="30px" src="src/media/img/pfp/<?= e(umaGuion($data["fav_uma"]))?>_Pfp.webp" alt="">
-                                <h2 class="post__title-name capitalize"> 
+                                <h2 class="post__title-name u-capitalize"> 
                                     <?= e($data["username"]) ?> 
-                                    <p class="post__title-fecha"><?= e($data["date"])?></p>
+                                    <p class="post__title-date"><?= e($data["date"])?></p>
                                 </h2>
                                 
                             </div>

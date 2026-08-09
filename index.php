@@ -118,3 +118,10 @@ function code($num) {
     }
     return http_response_code($num);
 }
+
+function hasLoggedIn () {
+    if (!isset($_SESSION["user_id"])) {
+        code(401);
+        reload();
+    }
+}
