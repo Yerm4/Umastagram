@@ -1,13 +1,16 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
 
-<FilesMatch "^(conexion\.php|conexion-infi\.php)$">
-    Order allow,deny
-    Deny from all
+    # 1. Evitar bucles: Si la petición ya entró a public/, detenemos las reglas de este archivo
+    RewriteRule ^public/ - [L]
+
+    # 2. Bloquear acceso a carpetas sensibles de forma relativa (devuelve error 403 Forbidden)
+    RewriteRule ^(app|db|vendor) - [F,L]
+
+    # 3. Redirigir todo el tráfico restante hacia el interior de la carpeta public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+<FilesMatch "^(composer\.json|composer\.lock|phinx\.php|readme\.md|\.env)$">
+    Require all denied
 </FilesMatch>
-
-RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?ruta=$1 [L,QSA]

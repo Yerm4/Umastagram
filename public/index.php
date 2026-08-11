@@ -9,10 +9,11 @@ header("Pragma: no-cache");
 use app\config\Conexion;
 use app\controller\Controller;
 use app\model\Model;
+//C:\xampp\htdocs\Uma-establo\public
 
-
-require_once __DIR__."/vendor/autoload.php";
-
+require_once __DIR__."/../vendor/autoload.php";
+$env = Dotenv\Dotenv::createImmutable(__DIR__."/../");
+$env->load();
 $pdo = Conexion::conectar();
 
 $method = !empty($_SERVER["REQUEST_METHOD"]) ? $_SERVER["REQUEST_METHOD"] : "";
@@ -76,12 +77,12 @@ if ($paginaActual === "logout") {
     exit();
 }
 
-include_once __DIR__."/app/view/header.php";
-$paginaMostrar = __DIR__."/app/view/$paginaActual.php";
+include_once __DIR__."/../app/view/header.php";
+$paginaMostrar = __DIR__."/../app/view/$paginaActual.php";
 if (file_exists($paginaMostrar)) {
     include $paginaMostrar;
 }   else {
-    include __DIR__."/app/view/home.php";
+    include __DIR__."/../app/view/home.php";
 }
 
 function e($texto) {
@@ -117,11 +118,4 @@ function code($num) {
         return "";
     }
     return http_response_code($num);
-}
-
-function hasLoggedIn () {
-    if (!isset($_SESSION["user_id"])) {
-        code(401);
-        reload();
-    }
 }

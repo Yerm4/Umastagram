@@ -85,19 +85,19 @@ a:-webkit-any-link:focus-visible {
 --- UTILITIES ---
 ------------*/
 .u-capitalize {
-    text-transform: capitalize;
+    text-transform: capitalize !important;
 }
 
 .u-opacity-1 {
-    opacity: 1;
+    opacity: 1 !important;
 }
 
 .anim-appear {
-    animation: aparicion 1s ease forwards;
+    animation: aparicion 1s ease forwards !important;
 }
 
 .anim-disappear {
-    animation: desaparicion .5s ease forwards;
+    animation: desaparicion .5s ease forwards !important;
 }
 
 /* -----------
@@ -409,10 +409,6 @@ footer p {
 
 .form input, 
 .form button {
-    border: none;
-    border-width: 0 1px 1px 0;
-    border-color: #000;
-    border-style: solid;
 }
 
 .form__fieldset {
@@ -547,8 +543,8 @@ dialog::backdrop {
 }
 
 .card .post {
-    border: solid 2px #fdd;
-    border-radius: 10px;
+    border: solid 2px #fff;
+    border-radius: 5px 20px 50px 5px;
     padding: 5px 10px;
     background-color: oklch(0.7 0.15 188);
     margin: 5px;
@@ -600,7 +596,7 @@ dialog::backdrop {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 98%;
 }
 
 .card .post__content-title {
@@ -626,9 +622,11 @@ dialog::backdrop {
 }
 
 .card .post__content-img {
+    margin-top: 5px;
     border: 2px solid rgb(179, 172, 172);
     max-width: 400px;
     max-height: 400px;
+    border-radius: 5px
 }
 
 .card .post__interaction {
@@ -651,9 +649,12 @@ dialog::backdrop {
     background-color: transparent;
     border-radius: 5px;
     padding: 5px;
-    transition: background-color .2s ease;
+    transition: background-color .5s ease;
 }
 
+.post__button-like:hover {
+    background: #fff8;
+}
 .post__button-like:active {
     background: #fff;
 }
@@ -786,6 +787,7 @@ dialog::backdrop {
         gap: 20px;
         align-items: center;
         text-decoration: none;
+        color: inherit;
     }
 
     .sidebar-nav__item:hover {

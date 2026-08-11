@@ -17,7 +17,7 @@
                 <input type="password" name="password" autocomplete="off" required>
             </label>
             <label>Uma Favorita <br>
-            <select class="select" name="fav_uma" id="selectUmaFav">
+            <select class="select form__select" name="fav_uma" id="selectUmaFav">
                 <option value="Mayano Top Gun">Mayano Top Gun</option>
                 <option value="Narita Brian">Narita Brian</option>
             </select>

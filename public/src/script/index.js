@@ -53,10 +53,10 @@ const switchToRegistro = document.getElementById("switchToRegistro");
     if (switchToRegistro) {
         switchToRegistro.addEventListener("click", function(event) {
         event.preventDefault();
-        loginModal.classList.add("modal-fade");
+        loginModal.classList.add("modal--fade");
         setTimeout(() => {
-            loginModal.classList.remove("modal-fade");
             loginModal.close();
+            loginModal.classList.remove("modal--fade");
             registroModal.showModal();
         }, 1500);
     })
@@ -67,9 +67,9 @@ const switchToLogin = document.getElementById("switchToLogin");
 if (switchToLogin) {
     switchToLogin.addEventListener("click", function(event) {
         event.preventDefault();
-        registroModal.classList.add("modal-fade");
+        registroModal.classList.add("modal--fade");
         setTimeout(() => {
-            registroModal.classList.remove("modal-fade");
+            registroModal.classList.remove("modal--fade");
             registroModal.close();
             loginModal.showModal();
         }, 1500);

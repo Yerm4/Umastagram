@@ -151,13 +151,17 @@ class Controller {
     }
 
     public function actualizarLikes () {
-        hasLoggedIn();
 
         $data = json_decode(file_get_contents("php://input"), true);
         $postId = $data["data"] ?? null;
         $userId = $_SESSION["user_id"] ?? null; 
         
-        if (empty($postId) || empty($userId)) {
+        if (empty($userId)) {
+            code(401);
+            $this->jsonResponse("error", "No estas logueado");
+        }
+
+        if (empty($postId)) {
             code(401);
             $this->jsonResponse("error", "Parece que intestate darle like a un post no existente?");
         }
@@ -169,7 +173,7 @@ class Controller {
             $this->jsonResponse("ok", "Like dado", $data["data"]);
         } else {
             code(409);
-            $this->jsonResponse("error", "Like no dado");
+            $this->jsonResponse("error", "Ya le diste like a está publicacion");
         }
     }
 }

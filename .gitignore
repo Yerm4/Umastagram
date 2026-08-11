@@ -3,3 +3,5 @@ Uma-establo.zip
 vendor/
 db/
 phinx.php
+.env
+.env.infi
