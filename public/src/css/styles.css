@@ -792,6 +792,10 @@ dialog::backdrop {
     animation: falling-carrots-2 8s ease-in-out infinite;
 }
 
+.carrot-falling-3 {
+    animation: falling-carrots-3 9s ease-in-out infinite;
+}
+
 .carrot-falling:hover {
     animation-play-state: paused;
 }
@@ -807,6 +811,11 @@ dialog::backdrop {
 @keyframes falling-carrots-2 {
     0% { transform: translate(80vw, -10vh); }
     100% { transform: translate(80vw, 110vh); }
+}
+
+@keyframes falling-carrots-3 {
+    0% { transform: translate(40vw, -10vh); }
+    100% { transform: translate(40vw, 110vh); }
 }
 
 @keyframes modalAparecer {
