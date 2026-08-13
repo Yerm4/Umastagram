@@ -6,12 +6,14 @@ $resultado = $model->consultarPublicaciones();
 $titulo = "Muro";
 ?>
     <main class="muro">
-            <section class="hero">
+            <section class="hero home">
+                
                 <div class="card">    
-                <h2 class="umastagram"> 
-                    <span class="umastagram--light-pink">Uma</span><span class="umastagram--orange-pink">stagram 🥕</span>
-                    <br> 
-                    <span class="umastagram__slogan">Red social de Uma Musume</span> <span class="umastagram__face">n.n</span></h2>
+                    <h2 class="umastagram"> 
+                        <span class="umastagram--light-pink">Uma</span<span class="umastagram--orange-pink">stagram 🥕</span>
+                        <br> 
+                        <span class="umastagram__slogan">Red social de Uma Musume</span> <span class="umastagram__face">n.n</span>
+                    </h2>
                     <?php if (!isset($_SESSION["user_id"])): ?>
                     <p class="umastagram__p">*añadir descripción interesante* <br> Te gustaria publicar algo? Solo debes <span class="umastagram__p--blue" name="buttonModal" data-modal="registroModal">registrarte!</span></p>
                     <?php endif ?>
@@ -76,6 +78,14 @@ $titulo = "Muro";
                     <h2>No hay publicaciones :(</h2>
                     <?php endif ?>
                     </div>
+                </div>
+                
+                <div class="aside">
+                <h2 class="umastagram"> 
+                        <span class="umastagram--light-pink">Notic</span<span class="umastagram--orange-pink">ias</span>
+                        <br> 
+                        <span class="umastagram__slogan">Red social de Uma Musume</span> <span class="umastagram__face">n.n</span>
+                    </h2>    
                 </div>
             </section>
         </main>

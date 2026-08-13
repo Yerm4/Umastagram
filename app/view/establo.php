@@ -2,7 +2,7 @@
 $titulo = "Uma Musume";
 ?>
         <main id="main" class="home" data-login='<?php echo isset($_SESSION["user_id"]) ? "true" : "false" ?>'>
-            <section class="hero" id="hero">
+            <section class="hero establo" id="hero">
                     <div class="hero__container">
                         <div id="draw-card" class="draw-card anim-appear">
                         
@@ -45,14 +45,14 @@ $titulo = "Uma Musume";
                         </div>
                     </div>
                 
-                <div class="search-box">
-                    <form onsubmit="buscarUmaForm(event)">
-                        <input type="text" list="sugerencias-umas" id="nombreUma" placeholder="Nombre de la Uma..." class="search-box__input" autocomplete="off">
-                        <button onclick="buscarUma()" class="search-box__button">Buscar</button>
-                        <datalist id="sugerencias-umas">
-                        </datalist>
-                    </form>
-                </div>
+                    <div class="search-box">
+                        <form onsubmit="buscarUmaForm(event)">
+                            <input type="text" list="sugerencias-umas" id="nombreUma" placeholder="Nombre de la Uma..." class="search-box__input" autocomplete="off">
+                            <button onclick="buscarUma()" class="search-box__button">Buscar</button>
+                            <datalist id="sugerencias-umas">
+                            </datalist>
+                        </form>
+                    </div>
 
             </section>
                 
@@ -71,8 +71,8 @@ $titulo = "Uma Musume";
             <script src="src/script/index.js" defer></script>
             <script src="src/script/fetch.js" defer></script>
             <script src="src/script/establo.js" defer></script>
-        <video src="src/media/img/mambo-wrapper__video.webm" class="mambo-wrapper__video" autoplay loop muted playsinline title="mambo"></video>
-        <video src="src/media/img/mambo-wrapper__video.webm" class="mambo-wrapper__video mambo-wrapper__video--left" autoplay loop muted playsinline title="mambo"></video>
+        <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video" autoplay loop muted playsinline title="mambo"></video>
+        <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video mambo-wrapper__video--left" autoplay loop muted playsinline title="mambo"></video>
     </div>
 </body>
 </html>

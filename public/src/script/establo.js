@@ -62,7 +62,7 @@ async function buscarUma(menu = null) {
         img.src = `${finalImage}`;
         await new Promise(resolve => img.onload = resolve);
         
-        document.documentElement.style.setProperty(`--uma-color`, datos.color);
+        document.documentElement.style.setProperty(`--c-uma`, datos.color);
         
         function crearDato(texto, valor) {
             const p = document.createElement("p");

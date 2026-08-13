@@ -211,3 +211,20 @@ function crearPost(data) {
 
     return postDiv;
 }
+
+document.addEventListener("DOMContentLoaded", async (e) => {
+
+    const response = await fetch("https://api.umapyoi.net/api/v1/character/info", {
+        method: "GET"
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+        console.error(response.status)
+    }
+
+    if (data) {
+        console.log(data)
+    }
+})

@@ -14,10 +14,11 @@
 }
 
 :root {
-    --uma-color: #fff;
-    --fondo: #fff;
-    --texto: #000;
-    --color-bg: oklch(0.6 0.25 188);
+    --c-uma: oklch(100% 0 0);
+    --theme-bg: oklch(100% 0 0);
+    --c-text: oklch(0 0 0);
+    --c-bg: oklch(0.6 0.25 188);
+    --c-post: oklch(0.7 0.15 188);
 }
 
 html {
@@ -26,19 +27,21 @@ html {
 }
 
 body {
-    background-color: var(--fondo);
-    color: var(--texto);
+    background-color: var(--c-bg);
+    color: var(--c-text);
     opacity: 0.8;
-    transition: background-color .5s ease, color .5s ease, opacity 1.5s ease;
+    transition: background-color .5s ease, color .5s ease, opacity .5s ease;
     -webkit-tap-highlight-color: transparent;
 }
 
 body.modo-oscuro {
-    --fondo: #000;
-    --texto: #fff;
+    --theme-bg: oklch(0 0 0);
+    --c-text: oklch(100% 0 0);
+    --c-bg: oklch(0.3 0.25 188);
+    --c-post: oklch(0.5 0.15 188);
 }
 
-body::after {
+/*body::after {
     content: "";
     position: fixed;
     top: 0;
@@ -46,7 +49,7 @@ body::after {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.30);
-    z-index: 10;
+    z-index: 20;
     pointer-events: none;
     opacity: 0;
     transition: opacity .2s; 
@@ -54,7 +57,7 @@ body::after {
 
 body.modo-oscuro::after {
     opacity: 1;
-}
+}*/
 
 main::after {
     content: "";
@@ -64,7 +67,7 @@ main::after {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.14);
-    z-index: 9;
+    z-index: 19;
     pointer-events: none;
     opacity: 0;
     transition: opacity .5s; 
@@ -105,13 +108,13 @@ a:-webkit-any-link:focus-visible {
 ------------*/
 .sidebar-nav {
     position: fixed;
-    background-color: var(--fondo);
+    background-color: var(--theme-bg);
     padding: 10px;
     display: flex;
     gap: 10px;
     transition: width .5s ease, background-color .3s ease;
     overflow: hidden;
-    z-index: 1000;
+    z-index: 9999;
 }
 
 .sidebar-nav__item {
@@ -124,12 +127,18 @@ a:-webkit-any-link:focus-visible {
     font-size: 2rem;
     font-weight: bolder;
     text-transform: capitalize;
+    transition: color .5s ease
 }
 
 .theme-toggle {
-    position: relative;
-    width: 30px;
-    height: 60px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--theme-bg);
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    z-index: 3
 }
 
 .theme-toggle__button {
@@ -150,13 +159,24 @@ a:-webkit-any-link:focus-visible {
 ------------*/
 .hero {
     position: relative;
-    background: var(--color-bg);
-    box-shadow: 0 0px 50px 6px var(--uma-color) inset;
-    transition: box-shadow 2s ease;
+    background: var(--c-bg);
+    transition: background .5s ease;
     min-height: 100vh;
     margin: auto;
     display: grid;
     place-content: center;
+}
+
+.hero.establo {
+    box-shadow: 0 0 30px 3px var(--c-uma) inset;
+    transition: box-shadow 2s ease;
+}
+
+.hero.home {
+    display: grid;
+    grid-template-columns: minmax(350px, 3fr) minmax(150px, 1fr);
+    justify-items: center;
+    gap: 20px;
 }
 
 .hero__container {
@@ -202,8 +222,8 @@ a:-webkit-any-link:focus-visible {
     min-height: 380px;
     max-height: fit-content;
     width: fit-content;
-    backdrop-filter: blur(3px);
     opacity: 0;
+    
 }
 
 .draw-card:hover {
@@ -234,7 +254,7 @@ a:-webkit-any-link:focus-visible {
 
 .draw-card__uma-img {
     opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity .5s ease, transform .5s ease;
     filter: blur(3px);
     object-fit: contain;
     object-position: bottom;
@@ -365,7 +385,7 @@ footer p {
 --- FORMS & MODALS ---
 ------------*/
 .card {
-    max-width: 450px;
+    max-width: 550px;
     padding: 10px;
     border-radius: 20px;
     color: black;
@@ -376,6 +396,7 @@ footer p {
     place-items: center;
     gap: 2px;
     padding: 10px;
+    border-radius: 20px;
 }
 
 .form__title {
@@ -392,14 +413,17 @@ footer p {
     padding: 5px;
     border-radius: 10px 10px 10px 0px;
     margin: 5px 0 5px 0;
+    border: none;
+    background-color: var(--theme-bg);
 }
 
 .form button {
     margin-top: 5px;
+    width: 100%;
     padding: 10px;
     border-radius: 10px;
     background-color: #eee;
-    transition: background-color .5s ease;
+    border: none
 }
 
 .form button:hover {
@@ -407,12 +431,29 @@ footer p {
     background-color: #999;
 }
 
-.form input, 
+.form input,
+.form textarea,
+.form select,
 .form button {
+    transition: background-color .5s ease, color .5s ease;
+    background-color: var(--theme-bg);
+    color: var(--c-text)
+}
+
+body.modo-oscuro {
+    .form input,
+    .form textarea,
+    .form select,
+    .form button {
+        transition: background-color .5s ease, color .5s ease;
+        background-color: oklch(from var(--theme-bg) l c h / .6);
+        color: var(--c-text)
+    }
 }
 
 .form__fieldset {
     padding: 5px;
+    border-radius: 10px;
 }
 
 .form__input-wrapper {
@@ -539,15 +580,14 @@ dialog::backdrop {
 .post-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
-.card .post {
-    border: solid 2px #fff;
+.post {
+    outline: solid 2px #fff;
     border-radius: 5px 20px 50px 5px;
     padding: 5px 10px;
-    background-color: oklch(0.7 0.15 188);
-    margin: 5px;
+    background-color: var(--c-post);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -555,14 +595,14 @@ dialog::backdrop {
     gap: 5px;
     width: 100%;
     box-shadow: 10px 10px 10px #0006;
-    transition: box-shadow .5s ease;
+    transition: box-shadow .5s ease, background-color .5s ease;
 }
 
-.card .post:hover {
+.post:hover {
     box-shadow: 10px 10px 10px #0009;
 }
 
-.card .post__title {
+.post__title {
     border-bottom: 1px solid #000a; 
     padding: 5px;
     display: flex;
@@ -571,7 +611,7 @@ dialog::backdrop {
     width: 100%;
 }
 
-.card .post__title-img {
+.post__title-img {
     width: 35px;
     height: 35px;
     padding: 1px;
@@ -580,18 +620,18 @@ dialog::backdrop {
     flex: 0 1 auto;
 }
 
-.card .post__title-name {
+.post__title-name {
     font-size: 1.5rem;
     flex: 1 0 auto;
     text-align: left;
     padding-left: 10px;
 }
 
-.card .post__title-date {
+.post__title-date {
     font-size: 1rem;
 }
 
-.card .post__content {
+.post__content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -599,7 +639,7 @@ dialog::backdrop {
     width: 98%;
 }
 
-.card .post__content-title {
+.post__content-title {
     font-size: 1.3rem;
     font-weight: bolder;
     white-space: normal;
@@ -609,7 +649,7 @@ dialog::backdrop {
     min-width: 0;           
 }
 
-.card .post__content-description {
+.post__content-description {
     font-size: 1.1rem;
     padding: 5px;
     background-color: #0003;
@@ -621,22 +661,23 @@ dialog::backdrop {
     min-width: 0;  
 }
 
-.card .post__content-img {
+.post__content-img {
     margin-top: 5px;
     border: 2px solid rgb(179, 172, 172);
+    width: 100%;
     max-width: 400px;
     max-height: 400px;
     border-radius: 5px
 }
 
-.card .post__interaction {
+.post__interaction {
     display: flex;
     justify-content: left;
     align-items: center;
     width: 100%;
 }
 
-.card .post__interaction-like {
+.post__interaction-like {
     width: 30px;
     height: 30px;
 }
@@ -886,8 +927,10 @@ dialog::backdrop {
     }
 
     .theme-toggle {
-        width: 60px;
-        height: 55px;
+        width: 50px;
+        height: 50px;
+        bottom: 80px;
+        right: 20px;
     }
     
     .theme-toggle__button {
@@ -909,13 +952,14 @@ dialog::backdrop {
         justify-content: space-evenly;
         align-items: center;
         text-decoration: none;
-        color: var(--texto);
+        color: var(--c-text);
         gap: 3px;
         width: 25%;
     }
 
     .sidebar-nav .sidebar-nav__text--hidden {
         text-align: center;
+        font-size: clamp(1.1rem, 4vw + 1rem, 1.4rem);
     }
 
     .sidebar-nav__item:active {
@@ -987,8 +1031,20 @@ dialog::backdrop {
         padding: 12px;
     }
 
+    .card {
+        
+    }
+
     .card h2 {
         font-size: 2rem;
+    }
+
+    .aside {
+        display: none;
+    }
+
+    .hero.home {
+        grid-template-columns: minmax(200px, 1fr)
     }
 
     footer {
@@ -1005,6 +1061,10 @@ dialog::backdrop {
     
     .draw-card .draw-card__uma-img {
         height: 180px;
+    }
+
+    .card {
+
     }
 
     .search-box__input {

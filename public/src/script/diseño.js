@@ -1,10 +1,8 @@
-precargado()
-function precargado() {
-    let body = document.body;
-    
-    void body.offsetWidth;
-    body.style.opacity = "1";
-}
+let body = document.body;
+
+void body.offsetWidth;
+body.style.opacity = "1";
+
 
 const botonOscuro = document.getElementById("modo-oscuro")
     if (botonOscuro) {
