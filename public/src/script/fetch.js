@@ -6,10 +6,10 @@ if (buttonLike) {
             const postId = button.dataset.postId
             const like = document.querySelector(`[name="likes"][data-post-id="${postId}"]`)
             try {
-                const response = await fetch('api/posts/likes', {
-                    method: 'POST',
+                const response = await fetch("api/posts/likes", {
+                    method: "POST",
                     headers: { 
-                        'Content-Type': 'application/json' 
+                        "Content-Type": "application/json" 
                     },
                     body: JSON.stringify({
                         data: postId
@@ -138,7 +138,7 @@ if (postForm && postMessage) {
             const data = await response.json().catch(() => null)
             
             if (!response.ok) {
-                const errorMsg = data.message || response.status+": "+response.statusText
+                const errorMsg = data.message || `${response.status}: ${response.statusText}`
                 msg(postMessage, errorMsg)
                 throw new Error(errorMsg)
             }
@@ -162,10 +162,10 @@ if (postForm && postMessage) {
 }
 
 function msg(msg, data) {
-    msg.classList.remove("u-opacity-1")
+    msg.classList.remove("op-1")
     setTimeout(() => {
-        msg.textContent = data.message
-        msg.classList.add("u-opacity-1")
+        msg.textContent = data
+        msg.classList.add("op-1")
     }, 500);
 }
 
@@ -178,7 +178,7 @@ function crearPost(data) {
     postDiv.innerHTML = `
         <div class="post__title">
             <img class="post__title-img" width="30px" height="30px" src="src/media/img/pfp/${favUmaFormatted}_Pfp.webp" alt="">
-            <h2 class="post__title-name u-capitalize"> 
+            <h2 class="post__title-name capitalize"> 
                 ${data.username} 
                 <p class="post__title-date">${data.date}</p>
             </h2>
@@ -186,7 +186,7 @@ function crearPost(data) {
         <div class="post__content">
             <p class="post__content-title">${data.title}</p>
             <p class="post__content-description">> ${data.content}</p>
-            <img class="post__content-img" src="src/media/img/post/${data.post_img || 'post_3'}.webp" alt="">
+            <img class="post__content-img" src="src/media/img/post/${data.post_img || "post_3"}.webp" alt="">
         </div>
         <div class="post__interaction">
             <button name="button-like" data-post-id="${data.id}" class="post__button-like">
@@ -212,7 +212,7 @@ function crearPost(data) {
     return postDiv;
 }
 
-document.addEventListener("DOMContentLoaded", async (e) => {
+/*document.addEventListener("DOMContentLoaded", async (e) => {
 
     const response = await fetch("https://api.umapyoi.net/api/v1/character/info", {
         method: "GET"
@@ -227,4 +227,4 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     if (data) {
         console.log(data)
     }
-})
+})*/

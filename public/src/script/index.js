@@ -80,7 +80,7 @@ const inputNombre = document.querySelectorAll("[name=nombre]")
 inputNombre.forEach(input => {
     input.addEventListener("input", (e) => {
         const target = e.target;
-        target.value = target.value.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]/g, '');
+        target.value = target.value.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]/g, "");
         
         if (target.value.length > 20) {
             target.value = target.value.slice(0, 20);

@@ -25,7 +25,7 @@ class Controller {
 
     public function login() {
 
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents("php://input"), true);
 
         $username = isset($data["username"]) ? trim($data["username"]) : "";
         $password = isset($data["password"]) ? trim($data["password"]) : "";

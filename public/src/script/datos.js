@@ -49,7 +49,7 @@ const establo = {
         rival: "Special Week",
         compañera: "Grass Wonder",
         imagen: ["El_Condor_Pasa.webp", "El_Condor_Pasa_Alt(1).webp", "El_Condor_Pasa_Alt(2).webp", "El_Condor_Pasa_Alt(3).webp"],
-        color: "#31C95044"
+        color: "#91100744"
     },
     "gold": {
         nombre: "Gold Ship",

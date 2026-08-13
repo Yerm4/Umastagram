@@ -10,7 +10,7 @@ $titulo = "Perfil";
     <main class="muro">
             <section class="hero">
                 <div class="card profile__wrapper">
-                <h2 class="u-capitalize profile__title-name">Hola, <?= e($_SESSION["username"]) ?>! <br> Bienvenid@.</h2>
+                <h2 class="capitalize profile__title-name">Hola, <?= e($_SESSION["username"]) ?>! <br> Bienvenid@.</h2>
                 <form class="form login-form" action="" method="POST">
                     <p>Espero sea de tu agrado mi sitio </p> 
                     <p> Tu uma favorita es <strong><?= e($_SESSION["fav_uma"]) ?></strong>? <br> Pronto podras utilizarla de foto de perfil! </p> 
