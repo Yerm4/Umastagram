@@ -75,7 +75,7 @@ class Controller {
         $username = isset($data["username"]) ? trim($data["username"]) : "";
         $password = isset($data["password"]) ? trim($data["password"]) : "";
         $favUma = isset($data["fav_uma"]) ? trim($data["fav_uma"]) : "";
-        $allowedUmas = ["Mayano Top Gun", "Narita Brian"];
+        $allowedUmas = ["Mayano Top Gun", "Narita Brian", "Marvelous Sunday"];
 
         if (empty($username) || empty($password) || empty($favUma)) {
             code(400);

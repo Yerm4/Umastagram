@@ -9,7 +9,7 @@ $titulo = "Perfil";
 ?>
     <main class="muro">
             <section class="hero">
-                <div class="card profile__wrapper">
+                <div class="card card__profile">
                 <h2 class="capitalize profile__title-name">Hola, <?= e($_SESSION["username"]) ?>! <br> Bienvenid@.</h2>
                 <form class="form login-form" action="" method="POST">
                     <p>Espero sea de tu agrado mi sitio </p> 

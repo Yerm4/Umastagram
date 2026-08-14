@@ -1,8 +1,7 @@
-const buttonLike = document.querySelectorAll("[name=button-like]")
+document.addEventListener("click", async (e) => {
+    const button = e.target.closest("[name='button-like']")
 
-if (buttonLike) {
-    buttonLike.forEach(button => {
-        button.addEventListener("click", async (e) => {
+    if (button) {
             const postId = button.dataset.postId
             const like = document.querySelector(`[name="likes"][data-post-id="${postId}"]`)
             try {
@@ -32,9 +31,8 @@ if (buttonLike) {
             catch (error) {
                 console.error(error)
             }
-        })
-    });
-}
+        }
+    })
 
 const loginForm = document.getElementById("loginForm") 
 const loginMessage = document.getElementById("loginMessage")
@@ -57,14 +55,14 @@ if (loginForm && loginMessage) {
             
             if (!response.ok) {
                 const error = data?.message || response.status+": "+response.statusText
-                msg(loginMessage, data)
+                msg(loginMessage, error)
                 throw new Error(error)
             }
             
             if (!data) throw new Error("La respuesta no fue JSON")
             
             if (data.status === "ok") {
-                msg(loginMessage, data)
+                msg(loginMessage, data.message)
                 setTimeout(() => {
                     window.location.href = data.redirect;
                 }, 2000);
@@ -99,14 +97,14 @@ if (signUpForm && signUpMessage) {
 
             if (!response.ok) {
                 const error = data?.message || response.status+": "+response.statusText
-                msg(signUpMessage, data)
+                msg(signUpMessage, error)
                 throw new Error(error)
             }
 
             if (!data) throw new Error("La respuesta no es JSON")
 
             if (data.status === "ok") {
-                msg(signUpMessage, data)
+                msg(signUpMessage, data.message)
                 setTimeout(() => {
                     window.location.href = data.redirect;
                 }, 2000);
@@ -138,9 +136,9 @@ if (postForm && postMessage) {
             const data = await response.json().catch(() => null)
             
             if (!response.ok) {
-                const errorMsg = data.message || `${response.status}: ${response.statusText}`
-                msg(postMessage, errorMsg)
-                throw new Error(errorMsg)
+                const error = data.message || `${response.status}: ${response.statusText}`
+                msg(postMessage, error)
+                throw new Error(error)
             }
 
             if (!data) throw new Error("La respuesta no fue JSON")

@@ -28,9 +28,10 @@ $titulo = "Muro";
                         </span>
                         <br> 
                         <span class="umastagram__slogan">Red social de Uma Musume</span> <span class="umastagram__face">n.n</span>
+                        <p class="umastagram__p">*añadir descripción interesante* </p>
                     </h2>
                     <?php if (!isset($_SESSION["user_id"])): ?>
-                    <p class="umastagram__p">*añadir descripción interesante* <br> Te gustaria publicar algo? Solo debes <span class="umastagram__p--blue" name="buttonModal" data-modal="registroModal">registrarte!</span></p>
+                    <p class="umastagram__p">Te gustaria publicar algo? Solo debes <span class="umastagram__p--blue" name="buttonModal" data-modal="registroModal">registrarte!</span></p>
                     <?php endif ?>
                     <?php if (isset($_SESSION["user_id"])): ?> 
                     <form id="postForm" class="form post-form" action="" method="POST">
