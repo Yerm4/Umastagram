@@ -9,7 +9,6 @@ header("Pragma: no-cache");
 use app\config\Conexion;
 use app\controller\Controller;
 use app\model\Model;
-//C:\xampp\htdocs\Uma-establo\public
 
 require_once __DIR__."/../vendor/autoload.php";
 $env = Dotenv\Dotenv::createImmutable(__DIR__."/../");
@@ -84,6 +83,8 @@ if (file_exists($paginaMostrar)) {
 }   else {
     include __DIR__."/../app/view/home.php";
 }
+
+// Helper functions
 
 function e($texto) {
     if ($texto === null) {

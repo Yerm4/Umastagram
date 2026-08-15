@@ -5,21 +5,19 @@ document.addEventListener("DOMContentLoaded", (e) => {
     body.style.opacity = "1";
 })
 
-const preferredThemeSaved = localStorage.getItem("theme");
-const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
 const themeToggle = document.getElementById("theme-toggle") 
 const botonOscuro = document.getElementById("modo-oscuro")
 const botonClaro = document.getElementById("modo-claro")
 
 if (preferredThemeSaved === "dark" || (!preferredThemeSaved && preferredTheme)) {
-    document.body.classList.add("modo-oscuro")
+    document.documentElement.classList.add("modo-oscuro")
     themeToggle.dataset.theme = "toLight"
     botonOscuro.style.visibility = "hidden" 
     botonClaro.style.visibility = "visible" 
 
     localStorage.setItem("theme", "dark");
 } else {
-    document.body.classList.remove("modo-oscuro")
+    document.documentElement.classList.remove("modo-oscuro")
     themeToggle.dataset.theme = "toDark"
     botonClaro.style.visibility = "hidden"
     botonOscuro.style.visibility = "visible"  
@@ -32,7 +30,7 @@ themeToggle.addEventListener("click", (e) => {
     let theme = themeToggle.dataset.theme
 
     if (theme === "toLight") {
-        document.body.classList.remove("modo-oscuro")
+        document.documentElement.classList.remove("modo-oscuro")
         themeToggle.dataset.theme = "toDark"
         botonClaro.style.visibility = "hidden"
         botonOscuro.style.visibility = "visible" 
@@ -41,7 +39,7 @@ themeToggle.addEventListener("click", (e) => {
     }
 
     if (theme === "toDark") {
-        document.body.classList.add("modo-oscuro")
+        document.documentElement.classList.add("modo-oscuro")
         themeToggle.dataset.theme = "toLight"
         botonOscuro.style.visibility = "hidden" 
         botonClaro.style.visibility = "visible" 

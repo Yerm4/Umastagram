@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,15 +17,21 @@
     <meta name="twitter:description" content="Conoce un poco mas a tus umas favoritas!">
     <meta name="twitter:image" content="https://umamusume.infinityfreeapp.com/src/media/img/card.jpg">
     <meta name="author" content="Yerm4">
-    <title><?= isset($titulo) ? $titulo : "Uma Musume";?></title>
+    <title><?= !empty($titulo) ? $titulo : "Uma Musume";?></title>
     <link rel="stylesheet" href="src/css/styles.css">
     <link rel="icon" href="src/media/img/mini/favicon.ico" type="image/x-icon">
-    <!-- <link rel="preload" href="src/media/img/bg.webp" as="image"> -->
     <link rel="prefetch" href="src/media/img/modal_bg_2.webp">
     <script src="src/script/diseño.js" defer></script>
+    <script>
+        const preferredThemeSaved = localStorage.getItem("theme");
+        const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (preferredThemeSaved === "dark" || (!preferredThemeSaved && preferredTheme)) {
+            document.documentElement.classList.add("modo-oscuro")
+        }
+    </script>
 </head>
 
-<body style="background: #000">
+<body>
     <div class="root-container">
         <header>
             <nav>
@@ -44,9 +46,9 @@
 
                         
                         <a href="home" class="sidebar-nav__item"> 
-                            <svg class="sidebar-nav__item-logo" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-                                <path fill="#663399" d="M160 224a32 32 0 00-32 32v512a32 32 0 0032 32h704a32 32 0 0032-32V256a32 32 0 00-32-32H160zm0-64h704a96 96 0 0196 96v512a96 96 0 01-96 96H160a96 96 0 01-96-96V256a96 96 0 0196-96z"/>
-                                <path fill="#663399" d="M704 320a64 64 0 110 128 64 64 0 010-128zM288 448h256q32 0 32 32t-32 32H288q-32 0-32-32t32-32zM288 576h256q32 0 32 32t-32 32H288q-32 0-32-32t32-32z"/>
+                            <svg class="sidebar-nav__item-logo sidebar-nav__item-logo--fill" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M160 224a32 32 0 00-32 32v512a32 32 0 0032 32h704a32 32 0 0032-32V256a32 32 0 00-32-32H160zm0-64h704a96 96 0 0196 96v512a96 96 0 01-96 96H160a96 96 0 01-96-96V256a96 96 0 0196-96z"/>
+                                <path d="M704 320a64 64 0 110 128 64 64 0 010-128zM288 448h256q32 0 32 32t-32 32H288q-32 0-32-32t32-32zM288 576h256q32 0 32 32t-32 32H288q-32 0-32-32t32-32z"/>
                             </svg>
                             <p class="sidebar-nav__text--hidden">Home</p>
                         </a>
