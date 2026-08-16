@@ -50,6 +50,7 @@ class Controller {
 
         if ($resultado["status"] === "ok") {
             if (password_verify($password, $resultado["data"]["password"])) {
+                session_regenerate_id(true);
                 $_SESSION["user_id"] = $resultado["data"]["id"];
                 $_SESSION["username"] = $resultado["data"]["username"];
                 $_SESSION["fav_uma"] = $resultado["data"]["fav_uma"];
@@ -102,6 +103,7 @@ class Controller {
         $resultado = $usuarioModel->signUp($username, $passwordHash, $favUma);
 
         if ($resultado["status"] === "ok") {
+            session_regenerate_id(true);
             $_SESSION["user_id"] = $resultado["data"];
             $_SESSION["username"] = $username;
             $_SESSION["fav_uma"] = $favUma;
@@ -175,5 +177,19 @@ class Controller {
             code(409);
             $this->jsonResponse("error", "Ya le diste like a está publicacion");
         }
+    }
+
+    public function getUser($username) {
+        $model = new Model($this->pdo);
+        $data = $model->getUser($username);
+        
+        if ($data["status"] === "ok") {
+            $this->jsonResponse("ok", "Perfil enviado", $data);
+        }
+
+        else {
+            $this->jsonResponse("error", "nose", $data);
+        }
+
     }
 }

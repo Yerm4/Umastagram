@@ -76,7 +76,6 @@ if ($paginaActual === "logout") {
     exit();
 }
 
-include_once __DIR__."/../app/view/header.php";
 $paginaMostrar = __DIR__."/../app/view/$paginaActual.php";
 if (file_exists($paginaMostrar)) {
     include $paginaMostrar;

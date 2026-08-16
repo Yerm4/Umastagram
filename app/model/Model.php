@@ -42,9 +42,7 @@ class Model {
             else {
                 return $this->response("error", "No existe un usuario con ese nombre");
             }
-        }
-        
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             return $this->response("error", "Error en la consulta");
         }
     }
@@ -74,9 +72,7 @@ class Model {
             else {
                 return $this->response("error", "Ya existe un usuario registrado con ese nombre");
             }
-        }
-
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             return $this->response("error", "Error en la consulta");
         }
     }
@@ -113,12 +109,8 @@ class Model {
             } else {
                 return $this->response("error", "Publicaste hace menos de 5 minutos");
             }
-        }
-        catch (PDOException $e) {
-            return [
-                "status" => "error",
-                "data" => ""
-            ];
+        } catch (PDOException $e) {
+            return $this->response("error", "");
         }
     }
 
@@ -131,19 +123,11 @@ class Model {
                 INNER JOIN users u ON p.user_id = u.id
                 ORDER BY date DESC
                 LIMIT 10";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
-        return [
-            "status" => "ok",
-            "data" => $stmt->fetchAll(PDO::FETCH_ASSOC)  
-        ];
-        }
-
-        catch (PDOException $e) {
-            return [
-                "status" => "error",
-                "data" => $e
-            ];  
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            return $this->response("ok", "", $stmt->fetchAll(PDO::FETCH_ASSOC)  );
+        } catch (PDOException $e) {
+            return $this->response("error", $e);
         }
     }
 
@@ -168,21 +152,28 @@ class Model {
             $likes = $stmt3->fetch();
 
             $this->pdo->commit();
-            return [
-                "status" => "ok",
-                "message" => "Like enviado correctamente",
-                "data" => $likes["likes"]
-            ];
-
-            
-        }
-
-        catch (PDOException $e) {
+            return $this->response("ok", "Like enviado correctamente", $likes["likes"]);
+        } catch (PDOException $e) {
             $this->pdo->rollBack();
-            return [ 
-                "status" => "error",
-                "message" => $e
-            ];
+            return $this->response("error", $e);
+        }
+    }
+
+    public function getUser($username) {
+        try {
+            $stmt = $this->pdo->prepare("SELECT id, username, fav_uma, signup_date FROM users WHERE username = :username");
+            $stmt->execute([
+                "username" => $username
+            ]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if (!$data) {
+                return $this->response("error", "No se encontro ese usuario");
+            }
+
+            return $this->response("ok", "Perfil enviado", $data);
+        } catch (PDOException $e) {
+            $this->response("error", $e);
         }
     }
 }

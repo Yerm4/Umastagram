@@ -25,7 +25,7 @@
         <svg class="modal__switch-icon" viewBox="0 0 75.803 75.803" xmlns="http://www.w3.org/2000/svg">
             <path d="M36.231,0a1.5,1.5,0,0,1,1.06,2.561L3.735,36.121a2.528,2.528,0,0,0,0,3.564L37.291,73.243a1.5,1.5,0,0,1-2.121,2.121L1.616,41.806a5.527,5.527,0,0,1,0-7.807L35.172,2.561A1.5,1.5,0,0,1,36.231,0Z" fill="#000"/>
         </svg>
-        No tienes una cuenta aún? <br> Registrate!
+        No tienes una cuenta aún? <br> <span class="underline">Registrate!</span>
         </a>
     </div>
 </dialog>

@@ -24,7 +24,7 @@ document.addEventListener("click", async (e) => {
                     throw new Error(error)
                 }
                 if (data.status === "ok") {
-                    console.log("like dado, esta publicacion tiene: "+data.data+" Likes")
+                    console.log("like dado, esta publicacion tiene: "+data.data+" like(s)")
                     like.innerHTML = data.data
                 }
             }
@@ -32,7 +32,11 @@ document.addEventListener("click", async (e) => {
                 console.error(error)
             }
         }
-    })
+})
+
+document.querySelector('[name="post_img"')?.addEventListener("change", (e) => {
+    document.getElementById('form-preview-img').src = 'src/media/img/post/' + e.target.value + '.webp'
+})
 
 const loginForm = document.getElementById("loginForm") 
 const loginMessage = document.getElementById("loginMessage")

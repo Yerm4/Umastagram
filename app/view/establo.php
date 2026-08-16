@@ -1,5 +1,6 @@
 <?php
-$titulo = "Uma Musume";
+$titulo = "Establo";
+include_once __DIR__."/header.php";
 ?>
         <main id="main" class="home" data-login="<?php echo isset($_SESSION["user_id"]) ? "true" : "false" ?>">
             <section class="hero establo" id="hero">
@@ -67,12 +68,11 @@ $titulo = "Uma Musume";
         </main>
 
         <?php include __DIR__."/footer.php" ?>
-        <script src="src/script/datos.js" defer></script>
-            <script src="src/script/index.js" defer></script>
-            <script src="src/script/fetch.js" defer></script>
-            <script src="src/script/establo.js" defer></script>
         <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video" autoplay loop muted playsinline title="mambo"></video>
         <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video mambo-wrapper__video--left" autoplay loop muted playsinline title="mambo"></video>
+        <script src="src/script/datos.js" defer></script>
+        <script src="src/script/index.js" defer></script>
+        <script src="src/script/establo.js" defer></script>
     </div>
 </body>
 </html>

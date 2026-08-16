@@ -18,7 +18,8 @@
     <meta name="twitter:image" content="https://umamusume.infinityfreeapp.com/src/media/img/card.jpg">
     <meta name="author" content="Yerm4">
     <title><?= !empty($titulo) ? $titulo : "Uma Musume";?></title>
-    <link rel="stylesheet" href="src/css/styles.css">
+    <base href="/Uma-establo/">
+    <link rel="stylesheet" href="src/css/styles.css?v=1">
     <link rel="icon" href="src/media/img/mini/favicon.ico" type="image/x-icon">
     <link rel="prefetch" href="src/media/img/modal_bg_2.webp">
     <script src="src/script/diseño.js" defer></script>
@@ -80,7 +81,7 @@
                         <?php endif; ?>
 
                         <?php if (isset($_SESSION["user_id"])): ?>
-                        <a href="perfil" class="sidebar-nav__item">
+                        <a href="perfil/<?= e($_SESSION["username"]) ?>" class="sidebar-nav__item">
                             <svg class="sidebar-nav__item-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#000000">
                                 <path d="M10,12 C13.785,12 16.958,14.214 17.784,18 L2.216,18 C3.042,14.214 6.215,12 10,12 M6,6 C6,3.794 7.794,2 10,2 C12.206,2 14,3.794 14,6 C14,8.206 12.206,10 10,10 C7.794,10 6,8.206 6,6 M13.758,10.673 C15.124,9.574 16,7.89 16,6 C16,2.686 13.314,0 10,0 C6.686,0 4,2.686 4,6 C4,7.89 4.876,9.574 6.242,10.673 C2.583,12.048 0,15.445 0,19 L20,19 C20,15.445 17.417,12.048 13.758,10.673"/>
                             </svg>

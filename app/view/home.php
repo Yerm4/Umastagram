@@ -4,6 +4,9 @@ use app\model\Model;
 $model = new Model($pdo);
 $resultado = $model->consultarPublicaciones();
 $titulo = "Muro";
+
+include_once __DIR__."/header.php";
+
 ?>
     <main class="muro">
             <section class="hero home">
@@ -43,8 +46,8 @@ $titulo = "Muro";
                             </div>
                             <div class="post__content">
                                 <input type="text" class="post__content-title form-post__content-title" name="post_title" placeholder="Escribe un titulo..." required>
-                                <textarea class="post__content-description form-post__content-description" name="post_content" placeholder="> Escribe una descripcion..." rows="3" required></textarea>
-                                <select name="post_img" class="select form__select form-post-mold__select" onchange="document.getElementById('form-preview-img').src = 'src/media/img/post/' + this.value + '.webp'">
+                                <textarea class="post__content-description form-post__content-description" name="post_content" placeholder="> Escribe una descripcion... Asi se verá tu publicación!" rows="3" required></textarea>
+                                <select name="post_img" class="select form__select">
                                     <option value="post_1" selected>Mayano</option>
                                     <option value="post_2">Vivlox</option>
                                     <option value="post_3">Tosho</option>
@@ -74,14 +77,17 @@ $titulo = "Muro";
                                 <button type="submit" class="post__button-like form-post__button-submit"> Publicar</button>
                                 <p class="form__warning" id="postMessage">olis</p>
                             </div>
-                        </form>
+                       </form>
                     <?php endif ?>
+
+                    <p>Publicaciones</p>
+
                     <div class="post-wrapper" id="post-wrapper">
                     <?php if ($resultado["status"] === "ok"): ?>
                         <?php foreach ($resultado["data"] as $data) : ?>
                         <div class="post">
                             <div class="post__title">
-                                <img class="post__title-img" src="src/media/img/pfp/<?= isset($_SESSION["fav_uma"]) && fileExists(umaGuion($_SESSION["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($_SESSION["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
+                                <img class="post__title-img" src="src/media/img/pfp/<?= isset($data["fav_uma"]) && fileExists(umaGuion($data["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($data["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
                                 <h2 class="post__title-name capitalize"> 
                                     <?= e($data["username"]) ?> 
                                     <p class="post__title-date"><?= e($data["date"])?></p>

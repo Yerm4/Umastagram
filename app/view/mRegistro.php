@@ -29,10 +29,10 @@
             <p id="signUpMessage" class="form__warning"></p>
         </div>
         <a id="switchToLogin" class="modal__switch-link" href="#">
-        <svg class="modal__switch-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37.72 75.8">
-            <path d="M1.5 75.8a1.5 1.5 0 0 1-1.06-2.56l33.56-33.56a2.53 2.53 0 0 0 0-3.56L.44 2.56A1.5 1.5 0 0 1 2.56.44l33.56 33.56a5.53 5.53 0 0 1 0 7.8L2.56 75.36A1.5 1.5 0 0 1 1.5 75.8z" fill="#000"/>
-        </svg>
-        Ya tienes una cuenta? <br> Inicia sesión!
+            <svg class="modal__switch-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37.72 75.8">
+                <path d="M1.5 75.8a1.5 1.5 0 0 1-1.06-2.56l33.56-33.56a2.53 2.53 0 0 0 0-3.56L.44 2.56A1.5 1.5 0 0 1 2.56.44l33.56 33.56a5.53 5.53 0 0 1 0 7.8L2.56 75.36A1.5 1.5 0 0 1 1.5 75.8z" fill="#000"/>
+            </svg>
+        Ya tienes una cuenta? <br> <span class="underline"> Inicia sesión!</span>
         </a>
     </div>
 </dialog>
