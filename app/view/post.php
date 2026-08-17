@@ -1,20 +1,18 @@
 <?php
 
-$user = $partesRuta[1] ?? null;
+$postId = $partesRuta[1] ?? null;
 
 use app\model\Model;
 
-$titulo = ucfirst($user) ?? "Uma Musume";
+$titulo = null;
 include_once __DIR__."/header.php";
 
 if (!empty($partesRuta[1])) {
     $model = new Model($pdo);
-    $userData = $model->getUser($user);
-    $postsData = $model->getPosts($user);
+    $postData = $model->getPost($postId);
 
-    if ($userData["status"] === "ok" && $postsData["status"] === "ok") {
-        $user = $userData["data"];
-        $posts = $postsData["data"];
+    if ($postData["status"] === "ok") {
+        $post = $postData["data"];
     }
 
     else {
@@ -28,50 +26,28 @@ else {
     exit();
 }
 ?>
-<?php // Usuario entra a su propio perfil ?>
-<?php if (($userData["status"] ?? null) === "ok" && ($user["id"] ?? null) === ($_SESSION["user_id"] ?? null)): ?>    
     <main class="muro">
         <section class="hero">
             <div class="card card__profile">
-                <h2 class="capitalize profile__title-name">Hola, <?= e($user["username"]) ?>! <br> Bienvenid@.</h2>
-                <form class="form login-form">
-                    <p>Espero sea de tu agrado mi sitio </p> 
-                    <p>Tu uma favorita es <strong><?= e($user["fav_uma"]) ?></strong>? <br> Pronto podras utilizarla de foto de perfil! </p> 
-                    <p>Me uni a Umastagram el dia <strong><?= e($user["signup_date"]) ?></strong></p>
-                    <p>Nuevas funciones en camino...</p>
-                </form>
-            </div>
-        </section>
-    </main>
-<?php else: ?>
-    <main class="muro">
-        <section class="hero">
-            <div class="card card__profile">
-                <h2 class="profile__title-name">Bienvenid@ a mi perfil, soy <?= e($user["username"]) ?>.</h2>
-                <div>
-                    <p>Mi uma favorita es <strong><?= e($user["fav_uma"]) ?></strong></p> 
-                    <p>Me uni a Umastagram el dia <strong><?= e($user["signup_date"]) ?></strong></p>
-                </div>
-                <div class="post-wrapper" id="post-wrapper">
-                    <?php if ($postsData["status"] === "ok" && !empty($posts)): ?>
-                        <?php foreach ($posts as $data) : ?>
+            <div class="post-wrapper" id="post-wrapper">
+                    <?php if ($postData["status"] === "ok" && !empty($post)): ?>
                         <div class="post">
                             <div class="post__title">
-                                <a href="perfil/<?= e($data["username"]) ?>"> 
-                                    <img class="post__title-img" src="src/media/img/pfp/<?= isset($data["fav_uma"]) && fileExists(umaGuion($data["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($data["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
+                                <a href="perfil/<?= e($post["username"]) ?>"> 
+                                    <img class="post__title-img" src="src/media/img/pfp/<?= isset($post["fav_uma"]) && fileExists(umaGuion($post["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($post["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
                                 </a>
                                 <h2 class="post__title-name capitalize"> 
-                                    <?= e($data["username"]) ?> 
-                                    <p class="post__title-date"><?= e($data["date"])?></p>
+                                    <?= e($post["username"]) ?> 
+                                    <p class="post__title-date"><?= e($post["date"])?></p>
                                 </h2>
                             </div>
                             <div class="post__content">
-                                <p class="post__content-title"><?= e($data["title"])?></p>
-                                <p class="post__content-description">> <?= e($data["content"])?></p>
-                                <img class="post__content-img" src="src/media/img/post/<?= fileExists($data["post_img"] ?? null) ? e($data["post_img"]) : "post_3" ?>.webp" alt="">
+                                <p class="post__content-title"><?= e($post["title"])?></p>
+                                <p class="post__content-description">> <?= e($post["content"])?></p>
+                                <img class="post__content-img" src="src/media/img/post/<?= fileExists($post["post_img"] ?? null) ? e($post["post_img"]) : "post_3" ?>.webp" alt="">
                             </div>
                             <div class="post__interaction">
-                                <button name="button-like" data-post-id="<?= e($data["id"]) ?>" class="post__button-like">
+                                <button name="button-like" data-post-id="<?= e($post["id"]) ?>" class="post__button-like">
                                     <svg class="post__interaction-like" viewBox="0 0 1024 1024" class="icon"  version="1.1" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M254.593 740.233c-17.109 99.238-25.094 149.359 3.422 177.943 55.689 55.892 196.388-6.993 219.007-17.109 138.933-62.132 326.846-230.038 277.181-383.263-27.969-86.359-128.895-160.332-229.148-154.469-78.706 4.563-131.519 56.839-157.571 82.596-74.953 74.121-90.021 161.586-112.891 294.303z" fill="#EF863F" />
                                         <path d="M261.436 928.465c2.761 9.969 50.633 4.711 67.619 2.841 206.563-22.676 350.925-165.248 393.53-242.403 0.901-1.631 2.282-4.095 3.924-7.312 12.068-23.258 45.113-89.189 27.787-163.81-7.597-32.715-12.080-52.038-23.954-54.752-41.189-9.422-63.010 205.73-223.57 337.523-111.067 91.207-249.999 110.861-245.334 127.914z" fill="#CF7436" />
@@ -86,11 +62,10 @@ else {
                                         <path d="M579.27 648.717l34.756 33.25z" fill="#EF863F" />
                                         <path d="M614.027 704.78c-0.023 0-0.053 0-0.082 0-6.090 0-11.62-2.394-15.701-6.293l-34.736-33.242c-4.47-4.176-7.257-10.105-7.257-16.687 0-12.599 10.214-22.813 22.813-22.813 6.226 0 11.87 2.495 15.986 6.538l34.718 33.202c4.342 4.161 7.041 10.006 7.041 16.483 0 12.599-10.214 22.813-22.813 22.813-0.001 0-0.002 0-0.004 0z" fill="#000000" />
                                     </svg>   
-                                    <p name="likes" data-post-id="<?= e($data["id"]) ?>"><?= e($data["likes"])?></p>
+                                    <p name="likes" data-post-id="<?= e($post["id"]) ?>"><?= e($post["likes"])?></p>
                                 </button>
                             </div>
                         </div>
-                        <?php endforeach ?>
                     <?php else: ?>
                     <h2>No hay publicaciones :(</h2>
                     <?php endif ?>
@@ -98,9 +73,8 @@ else {
             </div>
         </section>
     </main>
-<?php endif ?>
 
-<?php include_once __DIR__."/footer.php" ?>
+    <?php include_once __DIR__."/footer.php" ?>
     <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video" autoplay loop muted playsinline title="mambo"></video>
     <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video mambo-wrapper__video--left" autoplay loop muted playsinline title="mambo"></video>
 </body>

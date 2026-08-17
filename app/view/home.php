@@ -91,7 +91,7 @@ include_once __DIR__."/header.php";
                                     <img class="post__title-img" src="src/media/img/pfp/<?= isset($data["fav_uma"]) && fileExists(umaGuion($data["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($data["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
                                 </a>
                                 <h2 class="post__title-name capitalize"> 
-                                    <?= e($data["username"]) ?> 
+                                    <a href="perfil/<?= e($data["username"]) ?>"> <?= e($data["username"]) ?> </a>
                                     <p class="post__title-date"><?= e($data["date"])?></p>
                                 </h2>
                             </div>

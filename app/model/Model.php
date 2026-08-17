@@ -194,4 +194,26 @@ class Model {
             return $this->response("error", $e);
         }
     }
+
+    public function getPost($postId) {
+        try {
+            $stmt = $this->pdo->prepare("SELECT p.*,
+            u.username,
+            u.fav_uma
+            FROM posts p
+            INNER JOIN users u ON p.user_id = u.id
+            WHERE p.id = :postId");
+            $stmt->execute([
+                "postId" => $postId
+            ]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if(!$data) {
+                return $this->response("error", "No existe ese post");
+            }
+            return $this->response("ok", "", $data);
+        } catch (PDOException $e) {
+            return $this->response("error", $e);
+        }
+    }
 }

@@ -1,5 +1,6 @@
 document.addEventListener("click", async (e) => {
     const button = e.target.closest("[name='button-like']")
+    //const post = e.target.closest(".post")
 
     if (button) {
             const postId = button.dataset.postId
@@ -31,7 +32,8 @@ document.addEventListener("click", async (e) => {
             catch (error) {
                 console.error(error)
             }
-        }
+            return
+    }
 })
 
 document.querySelector('[name="post_img"')?.addEventListener("change", (e) => {

@@ -18,7 +18,9 @@
     <meta name="twitter:image" content="https://umamusume.infinityfreeapp.com/src/media/img/card.jpg">
     <meta name="author" content="Yerm4">
     <title><?= !empty($titulo) ? $titulo : "Uma Musume";?></title>
+
     <base href="/Uma-establo/">
+    
     <link rel="stylesheet" href="src/css/styles.css?v=1">
     <link rel="icon" href="src/media/img/mini/favicon.ico" type="image/x-icon">
     <link rel="prefetch" href="src/media/img/modal_bg_2.webp">
