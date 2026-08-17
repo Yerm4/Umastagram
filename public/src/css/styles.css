@@ -455,14 +455,6 @@ footer p {
     max-width: clamp(350px, 15.625rem + 25vw, 550px);
 }
 
-.card.card__profile {
-    box-shadow: 3px 2px 5px 0 var(--theme-text);
-}
-
-.card.card__profile:hover {
-    box-shadow: 3px 2px 10px 0 oklch(from var(--theme-text) l c h / 0.6);
-}
-
 .form {
     display: grid;
     place-items: center;

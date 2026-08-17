@@ -116,14 +116,13 @@ class Model {
 
     public function consultarPublicaciones() {
         try {
-            $sql = "SELECT p.*,
-                u.username,
-                u.fav_uma
-                FROM posts p
-                INNER JOIN users u ON p.user_id = u.id
-                ORDER BY date DESC
-                LIMIT 10";
-            $stmt = $this->pdo->prepare($sql);
+            $stmt = $this->pdo->prepare("SELECT p.*,
+            u.username,
+            u.fav_uma
+            FROM posts p
+            INNER JOIN users u ON p.user_id = u.id
+            ORDER BY date DESC
+            LIMIT 10");
             $stmt->execute();
             return $this->response("ok", "", $stmt->fetchAll(PDO::FETCH_ASSOC)  );
         } catch (PDOException $e) {
@@ -174,6 +173,25 @@ class Model {
             return $this->response("ok", "Perfil enviado", $data);
         } catch (PDOException $e) {
             $this->response("error", $e);
+        }
+    }
+
+    public function getPosts($username) {
+        try {
+            $stmt = $this->pdo->prepare("SELECT p.*,
+            u.username,
+            u.fav_uma
+            FROM posts p
+            INNER JOIN users u ON p.user_id = u.id
+            WHERE u.username = :username
+            ORDER BY p.date DESC
+            LIMIT 10");
+            $stmt->execute([
+                "username" => $username
+            ]);
+            return $this->response("ok", "", $stmt->fetchAll(PDO::FETCH_ASSOC)  );
+        } catch (PDOException $e) {
+            return $this->response("error", $e);
         }
     }
 }
