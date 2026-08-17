@@ -264,8 +264,8 @@ function agregarUma() { // Agregar umas a lista de umas disponibles
 
         container.setAttribute("class", "available-section__grid-container");
         nombre.setAttribute("href", "#");
-        nombre.setAttribute("onclick", "scrollSection1(event)");  
-        nombre.setAttribute("data-uma", llave);      
+        nombre.setAttribute("data-uma", llave);
+        nombre.setAttribute("name", "buscarUma")
         nombre.textContent = `${datos.nombre}`;
 
         container.appendChild(nombre);
@@ -279,8 +279,16 @@ function agregarUma() { // Agregar umas a lista de umas disponibles
         }   
     });
 }
+document.documentElement.addEventListener("click", (e) => {
+    const buscarUma = e.target.closest('[name="buscarUma"]')
 
-function scrollSection1(event) {
+    if (buscarUma) {
+        e.preventDefault()
+        scrollSection1()
+    }
+})
+function scrollSection1() {
+
     window.scrollTo({
         top: 0
     });
