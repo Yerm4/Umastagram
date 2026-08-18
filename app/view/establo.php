@@ -71,7 +71,7 @@ include_once __DIR__."/header.php";
         <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video" autoplay loop muted playsinline title="mambo"></video>
         <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video mambo-wrapper__video--left" autoplay loop muted playsinline title="mambo"></video>
         <script src="src/script/datos.js" defer></script>
-        <script src="src/script/index.js" defer></script>
+        <script src="src/script/modal.js" defer></script>
         <script src="src/script/establo.js" defer></script>
     </div>
 </body>

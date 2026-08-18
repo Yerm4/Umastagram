@@ -1,7 +1,3 @@
-const queryMobile = window.matchMedia("(pointer: fine)").matches;
-
-
-
 // Login
 
 const modales = document.querySelectorAll("dialog[name=modal]")

@@ -1,3 +1,5 @@
+const queryMobile = window.matchMedia("(pointer: fine)").matches;
+
 document.addEventListener("DOMContentLoaded", (e) => {
     let body = document.body;
 

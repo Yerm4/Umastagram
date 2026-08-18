@@ -22,8 +22,8 @@ $rutasApi = [
     "POST" => [
         "api/auth/login"    => "login",
         "api/users" => "signup",
-        "api/posts"    => "publicar",
-        "api/posts/likes"    => "actualizarLikes",
+        "api/posts"    => "createPost",
+        "api/posts/likes"    => "createLike",
     ],
     "GET" => [
         "api/posts"    => "obtenerPosts",
@@ -118,4 +118,18 @@ function code($num) {
         return "";
     }
     return http_response_code($num);
+}
+
+function cleanString($value): ?string {
+    if (!is_string($value) && !is_int($value) && !is_float($value)) {
+        return null; 
+    }
+
+    $trimmed = trim((string)$value);
+    return $trimmed !== '' ? $trimmed : null;
+}
+
+
+function cleanValue(?array $data, string $key): ?string {
+    return cleanString($data[$key] ?? null);
 }

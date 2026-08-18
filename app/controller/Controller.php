@@ -27,8 +27,8 @@ class Controller {
 
         $data = json_decode(file_get_contents("php://input"), true);
 
-        $username = isset($data["username"]) ? trim($data["username"]) : "";
-        $password = isset($data["password"]) ? trim($data["password"]) : "";
+        $username = cleanValue($data, "username");
+        $password = cleanValue($data, "password");
         
         if (empty($username) || empty($password)) {
             code(400);
@@ -73,9 +73,9 @@ class Controller {
 
         $data = json_decode(file_get_contents("php://input"), true);
 
-        $username = isset($data["username"]) ? trim($data["username"]) : "";
-        $password = isset($data["password"]) ? trim($data["password"]) : "";
-        $favUma = isset($data["fav_uma"]) ? trim($data["fav_uma"]) : "";
+        $username = cleanValue($data, "username");
+        $password = cleanValue($data, "password");
+        $favUma = cleanValue($data, "fav_uma");
         $allowedUmas = ["Mayano Top Gun", "Narita Brian", "Marvelous Sunday"];
 
         if (empty($username) || empty($password) || empty($favUma)) {
@@ -114,16 +114,16 @@ class Controller {
         }
     }
 
-    public function publicar() {
+    public function createPost() {
 
         $data = json_decode(file_get_contents("php://input"), true);
 
-        $title = isset($data["post_title"]) ? $data["post_title"] : "";
-        $content = isset($data["post_content"]) ? $data["post_content"] : "";
-        $postImg = isset($data["post_img"]) ? $data["post_img"] : "";
+        $title = cleanValue($data, "post_title");
+        $content = cleanValue($data, "post_content");
+        $postImg = cleanValue($data, "post_img");
         $userId = $_SESSION["user_id"] ?? null;
 
-        if (empty($content) || empty($title) || empty($postImg)) {
+        if ($content === null || $title === null || $postImg === null) {
             code(400);
             $this->jsonResponse("error", "Parece que el contenido de la publicacion está vacio");
         }
@@ -134,7 +134,7 @@ class Controller {
         }
     
         $model = new Model($this->pdo);
-        $estado = $model->publicar($userId, $title, $content, $postImg);
+        $estado = $model->createPost($userId, $title, $content, $postImg);
 
         if ($estado["status"] === "ok") {
             $this->jsonResponse("ok", "Publicacion hecha", $estado["data"]);
@@ -144,18 +144,17 @@ class Controller {
             code(429);
             $this->jsonResponse("error", "Ya hiciste una publicacion en los ultimos 5 minutos");
         }
-        
     }
 
-    public function consultarPublicaciones () {
+    public function getPostss () {
         $model = new Model($this->pdo);
-        $this->jsonResponse("ok", "", $model->consultarPublicaciones());
+        $this->jsonResponse("ok", "", $model->getPostss());
     }
 
-    public function actualizarLikes () {
+    public function createLike () {
 
         $data = json_decode(file_get_contents("php://input"), true);
-        $postId = $data["data"] ?? null;
+        $postId = cleanValue($data, "data");
         $userId = $_SESSION["user_id"] ?? null; 
         
         if (empty($userId)) {
@@ -169,7 +168,7 @@ class Controller {
         }
 
         $model = new Model($this->pdo);
-        $data = $model->actualizarLikes($userId, $postId);
+        $data = $model->createLike($userId, $postId);
 
         if ($data["status"] === "ok") {
             $this->jsonResponse("ok", "Like dado", $data["data"]);
@@ -179,7 +178,11 @@ class Controller {
         }
     }
 
-    public function getUser($username) {
+    public function getUser() {
+
+        $data = json_decode(file_get_contents("php://input"), true);
+        $username = cleanValue($data, "username");
+
         $model = new Model($this->pdo);
         $data = $model->getUser($username);
         
@@ -190,6 +193,10 @@ class Controller {
         else {
             $this->jsonResponse("error", "nose", $data);
         }
+    }
+
+    public function createComment($userId, $postId, $content, $img = null) {
+        $data = json_decode(file_get_contents("php://input"), true);
 
     }
 }

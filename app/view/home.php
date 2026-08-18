@@ -2,7 +2,7 @@
 
 use app\model\Model;
 $model = new Model($pdo);
-$resultado = $model->consultarPublicaciones();
+$resultado = $model->getPostss();
 $titulo = "Muro";
 
 include_once __DIR__."/header.php";
@@ -156,7 +156,7 @@ include_once __DIR__."/header.php";
         </main>
         <?php include __DIR__."/footer.php" ?>
         <script src="src/script/fetch.js"></script>
-        <script src="src/script/index.js"></script>  
+        <script src="src/script/modal.js"></script>  
 </body>
 
 </html>

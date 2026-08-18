@@ -77,18 +77,18 @@ class Model {
         }
     }
 
-    public function publicar($user_id, $title, $content, $postImg) {
+    public function createPost($userId, $title, $content, $postImg) {
         try {
-            $stmtCheck = $this->pdo->prepare("SELECT COUNT(*) FROM posts WHERE user_id = :user_id AND date >= NOW() - INTERVAL 5 MINUTE");
+            $stmtCheck = $this->pdo->prepare("SELECT COUNT(*) FROM posts WHERE user_id = :userId AND date >= NOW() - INTERVAL 5 MINUTE");
             $stmtCheck->execute([
-                "user_id" => $user_id
+                "userId" => $userId
             ]);
             $date = $stmtCheck->fetchColumn();
 
             if (!$date > 0) {
-                $stmt = $this->pdo->prepare("INSERT INTO posts (user_id, title, content, post_img) VALUES (:user_id, :title, :content, :post_img)");
+                $stmt = $this->pdo->prepare("INSERT INTO posts (user_id, title, content, post_img) VALUES (:userId, :title, :content, :post_img)");
                 $stmt->execute([
-                "user_id" => $user_id,
+                "userId" => $userId,
                 "title" => $title,
                 "content" => $content,
                 "post_img" => $postImg
@@ -114,7 +114,7 @@ class Model {
         }
     }
 
-    public function consultarPublicaciones() {
+    public function getPostss() {
         try {
             $stmt = $this->pdo->prepare("SELECT p.*,
             u.username,
@@ -124,13 +124,13 @@ class Model {
             ORDER BY date DESC
             LIMIT 10");
             $stmt->execute();
-            return $this->response("ok", "", $stmt->fetchAll(PDO::FETCH_ASSOC)  );
+            return $this->response("ok", "", $stmt->fetchAll(PDO::FETCH_ASSOC));
         } catch (PDOException $e) {
             return $this->response("error", $e);
         }
     }
 
-    public function actualizarLikes ($userId, $postId) {
+    public function createLike ($userId, $postId) {
         try {
             $this->pdo->beginTransaction();
 
@@ -212,6 +212,21 @@ class Model {
                 return $this->response("error", "No existe ese post");
             }
             return $this->response("ok", "", $data);
+        } catch (PDOException $e) {
+            return $this->response("error", $e);
+        }
+    }
+
+    public function createComment($postId, $userId, $content, $img = null) {
+        try {
+            $stmt = $this->pdo->prepare("INSERT INTO comments
+            (post_id, user_id, content) VALUES (:postId, :userId, :content)");
+            $stmt->execute([
+                "postId" => $postId,
+                "userId" => $userId,
+                "content" => $content
+            ]);
+            return $this->response("ok", "Comentario enviado");
         } catch (PDOException $e) {
             return $this->response("error", $e);
         }
