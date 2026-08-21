@@ -114,7 +114,7 @@ class Model {
         }
     }
 
-    public function getPostss() {
+    public function getAllPosts() {
         try {
             $stmt = $this->pdo->prepare("SELECT p.*,
             u.username,
@@ -226,7 +226,43 @@ class Model {
                 "userId" => $userId,
                 "content" => $content
             ]);
-            return $this->response("ok", "Comentario enviado");
+            $lastId = $this->pdo->lastInsertId();
+
+            if (!$lastId) {
+                return $this->response("error", "Error al enviar el comentario");    
+            }
+            
+            $stmt = $this->pdo->prepare("SELECT c.*, u.username, u.fav_uma
+                FROM comments c
+                INNER JOIN users u ON c.user_id = u.id
+                WHERE c.id = :id");
+                $stmt->execute(["id" => $lastId]);
+                $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $this->response("ok", "Comentario enviado", $resultado);
+        } catch (PDOException $e) {
+            return $this->response("error", $e);
+        }
+    }
+
+    public function getComment($postId) {
+        try {
+            $stmt = $this->pdo->prepare("SELECT c.*,
+            u.username,
+            u.fav_uma
+            FROM comments c
+            INNER JOIN users u ON c.user_id = u.id
+            WHERE post_id = :postId
+            ORDER BY c.date DESC");
+            $stmt->execute([
+                "postId" => $postId]
+            );
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (!$data) {
+                return $this->response("error", "No hay comentarios");
+            }
+            return $this->response("ok", "", $data);
         } catch (PDOException $e) {
             return $this->response("error", $e);
         }

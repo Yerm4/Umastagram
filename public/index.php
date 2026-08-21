@@ -24,6 +24,7 @@ $rutasApi = [
         "api/users" => "signup",
         "api/posts"    => "createPost",
         "api/posts/likes"    => "createLike",
+        "api/comment" => "createComment"
     ],
     "GET" => [
         "api/posts"    => "obtenerPosts",
@@ -132,4 +133,22 @@ function cleanString($value): ?string {
 
 function cleanValue(?array $data, string $key): ?string {
     return cleanString($data[$key] ?? null);
+}
+
+function getRelativeTime($pastTimeString) {
+
+    $timezoneUTC = new DateTimeZone('UTC');
+    $pastTime = new DateTimeImmutable($pastTimeString, $timezoneUTC);
+    
+    $currentTime = new DateTimeImmutable('now', $timezoneUTC);
+    
+    $diff = $currentTime->diff($pastTime);
+    
+    if ($diff->y > 0) return $diff->y . 'y ago';
+    if ($diff->m > 0) return $diff->m . 'mo ago';
+    if ($diff->d > 0) return $diff->d . 'd ago';
+    if ($diff->h > 0) return $diff->h . 'h ago';
+    if ($diff->i > 0) return $diff->i . 'm ago';
+    
+    return 'just now';
 }

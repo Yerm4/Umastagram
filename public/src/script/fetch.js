@@ -1,9 +1,10 @@
-document.addEventListener("click", async (e) => {
-    const button = e.target.closest("[name='button-like']")
-    //const post = e.target.closest(".post")
 
-    if (button) {
-            const postId = button.dataset.postId
+
+document.addEventListener("click", async (e) => {
+    const buttonLike = e.target.closest("[name='button-like']")
+    const buttonComment = e.target.closest("[name='button-comment'")
+    if (buttonLike) {
+            const postId = buttonLike.dataset.postId
             const like = document.querySelector(`[name="likes"][data-post-id="${postId}"]`)
             try {
                 const response = await fetch("api/posts/likes", {
@@ -32,7 +33,12 @@ document.addEventListener("click", async (e) => {
             catch (error) {
                 console.error(error)
             }
-            return
+            return;
+    }
+
+    if (buttonComment) {
+        const postId = buttonComment.dataset.postId
+        window.location.href = `post/${postId}`
     }
 })
 
@@ -157,13 +163,57 @@ if (postForm && postMessage) {
             
                 postForm.reset();
             }
-        }
-        
-        catch(error) {
+        }   catch(error) {
             console.error(error)
         }
     })
 }
+
+const commentForm = document.getElementById("commentForm")
+
+if (commentForm) {
+    commentForm.addEventListener("submit", async (e) => {
+        e.preventDefault()
+
+        const postId = commentForm.dataset.postId
+
+        const formData = new FormData(commentForm)
+        formData.append("postId", postId ?? "");
+        const datos = Object.fromEntries(formData.entries())
+
+        try {
+            const response = await fetch("api/comment", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(datos)
+            })
+
+            const data = await response.json().catch(() => null)
+            
+            if (!response.ok) {
+                const error = data.message || response.status+": "+response.statusText
+                throw new Error(error)
+            }
+
+            if (!data) {
+                throw new Error("No es JSON")
+            }
+
+            if (data.status === "ok") {
+                console.log(data.status+data.message)
+                const commWrapper = document.querySelector(".comments-wrapper")
+                const newComm = crearComentario(data.data)
+                commWrapper.append(newComm)
+                commentForm.reset()
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    })
+}
+
 
 function msg(msg, data) {
     msg.classList.remove("op-1")
@@ -181,7 +231,7 @@ function crearPost(data) {
 
     postDiv.innerHTML = `
         <div class="post__title">
-            <img class="post__title-img" width="30px" height="30px" src="src/media/img/pfp/${favUmaFormatted}_Pfp.webp" alt="">
+            <img class="post__title-img" src="src/media/img/pfp/${favUmaFormatted}_Pfp.webp" alt="">
             <h2 class="post__title-name capitalize"> 
                 ${data.username} 
                 <p class="post__title-date">${data.date}</p>
@@ -210,6 +260,35 @@ function crearPost(data) {
         </svg>   
                 <p name="likes" data-post-id="${data.id}">0</p>
             </button>
+        </div>
+    `;
+
+    return postDiv;
+}
+
+function crearComentario(data) {
+    const postDiv = document.createElement("div");
+    postDiv.classList.add("comment");
+
+    const favUmaFormatted = (data.fav_uma || "").replace(/ /g, "_");
+
+    postDiv.innerHTML = `
+        <div class="comment__pfp">
+            <a href="perfil/${data.username}"> 
+                <img class="comment__pfp-img" src="src/media/img/pfp/${favUmaFormatted}_Pfp.webp" alt="">
+            </a>
+        </div>
+        <div class="comment__content">
+            <a href="perfil/${data.username}">
+                <h2 class="comment__content-name capitalize"> 
+                ${data.username}
+                <span class="comment__content-date">Just Now</span>
+                </h2>
+            </a>
+            <p class="comment__content-description">> ${data.content}</p>
+        </div>
+        <div class="comment__interaction">
+            
         </div>
     `;
 

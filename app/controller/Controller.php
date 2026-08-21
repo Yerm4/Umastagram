@@ -146,9 +146,9 @@ class Controller {
         }
     }
 
-    public function getPostss () {
+    public function getAllPosts () {
         $model = new Model($this->pdo);
-        $this->jsonResponse("ok", "", $model->getPostss());
+        $this->jsonResponse("ok", "", $model->getAllPosts());
     }
 
     public function createLike () {
@@ -195,8 +195,33 @@ class Controller {
         }
     }
 
-    public function createComment($userId, $postId, $content, $img = null) {
+    public function createComment() {
         $data = json_decode(file_get_contents("php://input"), true);
+        
+        $postId = cleanValue($data, "postId");
+        $userId = $_SESSION["user_id"] ?? null;
+        $content = cleanValue($data, "content");
+        
+        if (empty($postId)) {
+            code(404);
+            $this->jsonResponse("error", "No existe la publicacion que intentas comentar");
+        }
 
+        if (empty($userId)) {
+            code(401);
+            $this->jsonResponse("error", "No tas logueado");
+        }
+
+        if (empty($content)) {
+            code(400);
+            $this->jsonResponse("error", "Tu comentario está vacio");
+        }
+
+        $model = new Model($this->pdo); 
+        $respuesta = $model->createComment($postId, $userId, $content);
+        
+        if ($respuesta["status"] === "ok") {
+            $this->jsonResponse("ok", "Todo bien", $respuesta["data"]);
+        }
     }
 }

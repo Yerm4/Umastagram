@@ -13,8 +13,10 @@ if (!empty($partesRuta[1])) {
 
     if ($postData["status"] === "ok") {
         $post = $postData["data"];
+        
+        $commentData = $model->getComment($postId);
+        $comments = ($commentData["status"] === "ok") ? $commentData["data"] : [];
     }
-
     else {
         include_once __DIR__."/404.php";
         exit();
@@ -25,6 +27,7 @@ else {
     include_once __DIR__."/404.php";
     exit();
 }
+
 ?>
     <main class="muro">
         <section class="hero">
@@ -37,7 +40,7 @@ else {
                                     <img class="post__title-img" src="src/media/img/pfp/<?= isset($post["fav_uma"]) && fileExists(umaGuion($post["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($post["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
                                 </a>
                                 <h2 class="post__title-name capitalize"> 
-                                    <?= e($post["username"]) ?> 
+                                    <a href="perfil/<?= e($post["username"]) ?>"><?= e($post["username"]) ?> </a>
                                     <p class="post__title-date"><?= e($post["date"])?></p>
                                 </h2>
                             </div>
@@ -65,6 +68,35 @@ else {
                                     <p name="likes" data-post-id="<?= e($post["id"]) ?>"><?= e($post["likes"])?></p>
                                 </button>
                             </div>
+                            <div class="comments-wrapper">
+                            <?php foreach ($comments as $c): ?>
+                                    <div class="comment">
+                                        <div class="comment__pfp">
+                                            <a href="perfil/<?= e($post["username"]) ?>"> 
+                                                <img class="comment__pfp-img" src="src/media/img/pfp/<?= isset($post["fav_uma"]) && fileExists(umaGuion($post["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($post["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="comment__content">
+                                            <a href="perfil/<?= e($post["username"]) ?>"> 
+                                                <h3 class="comment__content-name capitalize"> 
+                                                    <?= e($post["username"]) ?> 
+                                                    <span class="comment__content-date"><?= e(getRelativeTime($c["date"]))?></span>
+                                                </h3>
+                                            </a>
+                                            <p class="comment__content-description">> <?= e($c["content"])?></p>
+                                        </div>
+                                        <div class="comment__interaction">
+                                            
+                                        </div>
+                                    </div>
+                                <?php endforeach ?>
+                            </div>
+                            <form id="commentForm" class="form form-comment" data-post-id="<?= e($post["id"]) ?>" >
+                                <div class="form-comment__wrapper">
+                                    <input class="form-comment__input" placeholder="Escribe tu comentario..." type="text" name="content">
+                                    <button class="form-comment__submit" type="submit">Enviar</button>
+                                </div>
+                            </form>
                         </div>
                     <?php else: ?>
                     <h2>No hay publicaciones :(</h2>
@@ -77,5 +109,6 @@ else {
     <?php include_once __DIR__."/footer.php" ?>
     <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video" autoplay loop muted playsinline title="mambo"></video>
     <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video mambo-wrapper__video--left" autoplay loop muted playsinline title="mambo"></video>
+    <script src="src/script/fetch.js"></script>
 </body>
 </html>
