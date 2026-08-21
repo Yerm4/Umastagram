@@ -44,6 +44,7 @@ else {
                     <?php if ($postsData["status"] === "ok" && !empty($posts)): ?>
                         <?php foreach ($posts as $post) : ?>
                             <?php include __DIR__."/mPost.php" ?>
+                            </div>
                         <?php endforeach ?>
                     <?php else: ?>
                     <h2>No hay publicaciones :(</h2>
@@ -78,6 +79,5 @@ else {
 <?php include_once __DIR__."/footer.php" ?>
     <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video" autoplay loop muted playsinline title="mambo"></video>
     <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video mambo-wrapper__video--left" autoplay loop muted playsinline title="mambo"></video>
-    <script src="src/script/fetch.js"></script>
 </body>
 </html>

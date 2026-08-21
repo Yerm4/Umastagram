@@ -1021,7 +1021,11 @@ dialog::backdrop {
     }
 
     .sidebar-nav__item:hover {
-        background-color: #bbb;
+        background-color: #999;
+    }
+
+    .sidebar-nav__item:focus-visible {
+        background-color: #666;
     }
 
     .sidebar-nav .sidebar-nav__item-logo {
@@ -1294,3 +1298,15 @@ dialog::backdrop {
     }
 }
 
+.field-group {
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.custom-input {
+  padding: 10px;
+  font-size: 16px;
+  width: 300px;
+  border: 1px solid #ccc;
+  outline: none;
+}

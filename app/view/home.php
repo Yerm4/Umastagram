@@ -45,8 +45,8 @@ include_once __DIR__."/header.php";
                                 </h2>
                             </div>
                             <div class="post__content">
-                                <input type="text" class="post__content-title form-post__content-title" name="post_title" placeholder="Escribe un titulo..." required>
-                                <textarea class="post__content-description form-post__content-description" name="post_content" placeholder="> Escribe una descripcion... Asi se verá tu publicación!" rows="3" required></textarea>
+                                <input id="input-titulo" type="text" class="post__content-title form-post__content-title" name="post_title" placeholder="Escribe un titulo..." required>
+                                <textarea id="input-contenido" class="post__content-description form-post__content-description" name="post_content" placeholder="> Escribe una descripcion... Asi se verá tu publicación!" rows="3" required></textarea>
                                 <select name="post_img" class="select form__select">
                                     <option value="post_1" selected>Mayano</option>
                                     <option value="post_2">Vivlox</option>
@@ -58,7 +58,7 @@ include_once __DIR__."/header.php";
                                 <button type="submit" class="post__button-like form-post__button-submit"> Publicar</button>
                                 <p class="form__warning" id="postMessage">olis</p>
                             </div>
-                       </form>
+                    </form>
                     <?php endif ?>
 
                     <p>Publicaciones</p>
@@ -67,6 +67,7 @@ include_once __DIR__."/header.php";
                     <?php if ($resultado["status"] === "ok"): ?>
                         <?php foreach ($resultado["data"] as $post) : ?>
                             <?php include __DIR__."/mPost.php" ?>
+                            </div>
                         <?php endforeach ?>
                         <?php else: ?>
                         <h2>No hay publicaciones :(</h2>
@@ -102,8 +103,6 @@ include_once __DIR__."/header.php";
             </section>
         </main>
         <?php include __DIR__."/footer.php" ?>
-        <script src="src/script/fetch.js"></script>
-        <script src="src/script/modal.js"></script>  
+        
 </body>
-
 </html>

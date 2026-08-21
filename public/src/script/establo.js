@@ -227,10 +227,8 @@ if (switchButton) {
 const sonido = new Audio("src/media/audio/mambo.mp3");
 sonido.volume = 0.2;
 
-const mambo = document.querySelectorAll(".mambo-wrapper__video");
-
-mambo.forEach(elementoMambo => {
-    elementoMambo.addEventListener("click", function(event) {
+mambos.forEach(mambo => {
+    mambo.addEventListener("click", function(event) {
         buscarUma("mambo");
         sonido.currentTime = 0;
         sonido.play();

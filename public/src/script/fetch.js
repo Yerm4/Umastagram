@@ -76,7 +76,7 @@ if (loginForm && loginMessage) {
             if (data.status === "ok") {
                 msg(loginMessage, data.message)
                 setTimeout(() => {
-                    window.location.href = data.redirect;
+                    window.location.reload();
                 }, 2000);
             } 
         }
@@ -118,7 +118,7 @@ if (signUpForm && signUpMessage) {
             if (data.status === "ok") {
                 msg(signUpMessage, data.message)
                 setTimeout(() => {
-                    window.location.href = data.redirect;
+                    window.location.reload();
                 }, 2000);
             }
         }   catch (error) {

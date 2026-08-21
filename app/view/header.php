@@ -21,10 +21,14 @@
 
     <base href="/Uma-establo/">
     
-    <link rel="stylesheet" href="src/css/styles.css?v=1">
+    <link rel="stylesheet" href="src/css/styles.css?v=2">
     <link rel="icon" href="src/media/img/mini/favicon.ico" type="image/x-icon">
     <link rel="prefetch" href="src/media/img/modal_bg_2.webp">
     <script src="src/script/diseño.js" defer></script>
+    <script src="src/script/modal.js" defer></script>
+
+    <script src="src/script/fetch.js" defer></script>
+
     <script>
         const preferredThemeSaved = localStorage.getItem("theme");
         const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;

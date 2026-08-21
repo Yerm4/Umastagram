@@ -22,51 +22,45 @@ class Model {
 
     public function login($username) {
         try {
-            $sqlCheck = "SELECT COUNT(*) FROM users WHERE username = :username";
-            $stmtCheck = $this->pdo->prepare($sqlCheck);
-            $stmtCheck->execute([
+            $sql = "SELECT id, username, password, fav_uma FROM users WHERE username = :username LIMIT 1";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
                 "username" => $username
             ]);
-            $exists = $stmtCheck->fetchColumn();
-            if ($exists > 0) {
-                $sql = "SELECT * FROM users WHERE username = :username";
-                $stmt = $this->pdo->prepare($sql);
-                $stmt->execute([
-                "username" => $username
-                ]);
-
-                return $this->response("ok", "", $stmt->fetch(PDO::FETCH_ASSOC));
-                
-            }
-
-            else {
+        
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+            if ($user) {
+                return $this->response("ok", "", $user);
+            } else {
                 return $this->response("error", "No existe un usuario con ese nombre");
             }
+        
         } catch (PDOException $e) {
             return $this->response("error", "Error en la consulta");
         }
     }
 
-    public function signUp ($username, $password, $favUma) {
-        
+    public function signup ($username, $password, $favUma) {
         try {
-            $sqlCheck = "SELECT COUNT(*) FROM users WHERE username = :username";
-            $stmtCheck = $this->pdo->prepare($sqlCheck);
+            $stmtCheck = $this->pdo->prepare("SELECT EXISTS
+            (SELECT 1 FROM users 
+            WHERE username = :username)");
             $stmtCheck->execute([
                 "username" => $username
             ]);
-            $exists = (int)$stmtCheck->fetchColumn();
+            $exists = (bool)$stmtCheck->fetchColumn();
 
-            if ($exists === 0) {
-                $sql = "INSERT INTO users (username, password, fav_uma) VALUES (:username, :password, :favUma)";
-                $stmt = $this->pdo->prepare($sql);
+            if (!$exists) {
+                $stmt = $this->pdo->prepare("INSERT INTO users (username, password, fav_uma) 
+                VALUES (:username, :password, :favUma)");
                 $stmt->execute([
                 "username" => $username,
                 "password" => $password,
                 "favUma" => $favUma
                 ]);
 
-                return $this->response("ok", "", $this->pdo->lastInsertId());
+                return $this->response("ok", "", ["id" => $this->pdo->lastInsertId()]);
             }
 
             else {
@@ -74,6 +68,100 @@ class Model {
             }
         } catch (PDOException $e) {
             return $this->response("error", "Error en la consulta");
+        }
+    }
+
+    public function getAllPosts() {
+        try {
+            $stmt = $this->pdo->prepare("SELECT p.id, p.title, p.content, p.likes, p.date, p.post_img, u.username, u.fav_uma,
+            (SELECT COUNT(*) FROM comments c WHERE c.post_id = p.id) AS total_comments
+            FROM posts p
+            INNER JOIN users u ON p.user_id = u.id
+            ORDER BY date DESC
+            LIMIT 10");
+            $stmt->execute();
+            return $this->response("ok", "", $stmt->fetchAll(PDO::FETCH_ASSOC));
+        } catch (PDOException $e) {
+            return $this->response("error", $e);
+        }
+    }
+
+    public function getUser($username) {
+        try {
+            $stmt = $this->pdo->prepare("SELECT id, username, fav_uma, signup_date FROM users WHERE username = :username");
+            $stmt->execute([
+                "username" => $username
+            ]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if (!$data) {
+                return $this->response("error", "No se encontro ese usuario");
+            }
+
+            return $this->response("ok", "Perfil enviado", $data);
+        } catch (PDOException $e) {
+            $this->response("error", $e);
+        }
+    }
+
+    public function getPosts($username) {
+        try {
+            $stmt = $this->pdo->prepare("SELECT p.id, p.title, p.content, p.likes, p.date, p.post_img, u.username, u.fav_uma,
+            (SELECT COUNT(*) FROM comments c WHERE c.post_id = p.id) AS total_comments
+            FROM posts p
+            INNER JOIN users u ON p.user_id = u.id
+            WHERE u.username = :username
+            ORDER BY p.date DESC
+            LIMIT 10");
+            $stmt->execute([
+                "username" => $username
+            ]);
+            return $this->response("ok", "", $stmt->fetchAll(PDO::FETCH_ASSOC));
+        } catch (PDOException $e) {
+            return $this->response("error", "Error en la consulta");
+        }
+    }
+
+    public function getPost($postId) {
+        try {
+            $stmt = $this->pdo->prepare("SELECT p.id, p.title, p.content, p.likes, p.date, p.post_img, u.username, u.fav_uma,
+            (SELECT COUNT(*) FROM comments c WHERE c.post_id = p.id) AS total_comments
+            FROM posts p
+            INNER JOIN users u ON p.user_id = u.id
+            WHERE p.id = :postId");
+            
+            $stmt->execute([
+                "postId" => $postId
+            ]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if(!$data) {
+                return $this->response("error", "No existe ese post");
+            }
+            return $this->response("ok", "", $data);
+        } catch (PDOException $e) {
+            return $this->response("error", $e->getMessage()); // Es mejor pasar $e->getMessage() para no romper el json
+        }
+    }
+
+    public function getComment($postId) {
+        try {
+            $stmt = $this->pdo->prepare("SELECT c.id, c.id, c.post_id, c.user_id, c.content, c.img, c.date, u.username, u.fav_uma
+            FROM comments c
+            INNER JOIN users u ON c.user_id = u.id
+            WHERE post_id = :postId
+            ORDER BY c.date DESC");
+            $stmt->execute([
+                "postId" => $postId]
+            );
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (!$data) {
+                return $this->response("error", "No hay comentarios");
+            }
+            return $this->response("ok", "", $data);
+        } catch (PDOException $e) {
+            return $this->response("error", $e);
         }
     }
 
@@ -114,22 +202,6 @@ class Model {
         }
     }
 
-    public function getAllPosts() {
-        try {
-            $stmt = $this->pdo->prepare("SELECT p.*,
-            u.username,
-            u.fav_uma
-            FROM posts p
-            INNER JOIN users u ON p.user_id = u.id
-            ORDER BY date DESC
-            LIMIT 10");
-            $stmt->execute();
-            return $this->response("ok", "", $stmt->fetchAll(PDO::FETCH_ASSOC));
-        } catch (PDOException $e) {
-            return $this->response("error", $e);
-        }
-    }
-
     public function createLike ($userId, $postId) {
         try {
             $this->pdo->beginTransaction();
@@ -139,6 +211,7 @@ class Model {
                 "user_id" => $userId,
                 "post_id" => $postId
             ]);
+
             $stmt2 = $this->pdo->prepare("UPDATE posts SET likes = likes + 1 WHERE id = :post_id");
             $stmt2->execute([
                 "post_id" => $postId
@@ -148,72 +221,13 @@ class Model {
             $stmt3->execute([
                 "post_id" => $postId
             ]);
-            $likes = $stmt3->fetch();
+            $likes = $stmt3->fetchColumn();
 
             $this->pdo->commit();
-            return $this->response("ok", "Like enviado correctamente", $likes["likes"]);
+            return $this->response("ok", "Like enviado correctamente", $likes);
         } catch (PDOException $e) {
             $this->pdo->rollBack();
-            return $this->response("error", $e);
-        }
-    }
-
-    public function getUser($username) {
-        try {
-            $stmt = $this->pdo->prepare("SELECT id, username, fav_uma, signup_date FROM users WHERE username = :username");
-            $stmt->execute([
-                "username" => $username
-            ]);
-            $data = $stmt->fetch(PDO::FETCH_ASSOC);
-            
-            if (!$data) {
-                return $this->response("error", "No se encontro ese usuario");
-            }
-
-            return $this->response("ok", "Perfil enviado", $data);
-        } catch (PDOException $e) {
-            $this->response("error", $e);
-        }
-    }
-
-    public function getPosts($username) {
-        try {
-            $stmt = $this->pdo->prepare("SELECT p.*,
-            u.username,
-            u.fav_uma
-            FROM posts p
-            INNER JOIN users u ON p.user_id = u.id
-            WHERE u.username = :username
-            ORDER BY p.date DESC
-            LIMIT 10");
-            $stmt->execute([
-                "username" => $username
-            ]);
-            return $this->response("ok", "", $stmt->fetchAll(PDO::FETCH_ASSOC)  );
-        } catch (PDOException $e) {
-            return $this->response("error", $e);
-        }
-    }
-
-    public function getPost($postId) {
-        try {
-            $stmt = $this->pdo->prepare("SELECT p.*,
-            u.username,
-            u.fav_uma
-            FROM posts p
-            INNER JOIN users u ON p.user_id = u.id
-            WHERE p.id = :postId");
-            $stmt->execute([
-                "postId" => $postId
-            ]);
-            $data = $stmt->fetch(PDO::FETCH_ASSOC);
-            
-            if(!$data) {
-                return $this->response("error", "No existe ese post");
-            }
-            return $this->response("ok", "", $data);
-        } catch (PDOException $e) {
-            return $this->response("error", $e);
+            return $this->response("error", "Error en la consulta");
         }
     }
 
@@ -245,26 +259,13 @@ class Model {
         }
     }
 
-    public function getComment($postId) {
-        try {
-            $stmt = $this->pdo->prepare("SELECT c.*,
-            u.username,
-            u.fav_uma
-            FROM comments c
-            INNER JOIN users u ON c.user_id = u.id
-            WHERE post_id = :postId
-            ORDER BY c.date DESC");
-            $stmt->execute([
-                "postId" => $postId]
-            );
-            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function postExists($postId) {
+        $stmt = $this->pdo->prepare("SELECT EXISTS (SELECT 1 FROM posts WHERE id = :postId)");
+        $stmt->execute(["postId" => $postId]);
+        $exists = (bool)$stmt->fetchColumn();
 
-            if (!$data) {
-                return $this->response("error", "No hay comentarios");
-            }
-            return $this->response("ok", "", $data);
-        } catch (PDOException $e) {
-            return $this->response("error", $e);
-        }
+        if (!$exists) return $this->response("error", "No existe esa publicacion");
+
+        return $this->response("ok", "Sí existe esa publicacion");
     }
 }

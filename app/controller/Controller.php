@@ -47,13 +47,13 @@ class Controller {
 
         $usuarioModel = new Model($this->pdo);
         $resultado = $usuarioModel->login($username);
-
+        $data = $resultado["data"];
         if ($resultado["status"] === "ok") {
-            if (password_verify($password, $resultado["data"]["password"])) {
+            if (password_verify($password, $data["password"])) {
                 session_regenerate_id(true);
-                $_SESSION["user_id"] = $resultado["data"]["id"];
-                $_SESSION["username"] = $resultado["data"]["username"];
-                $_SESSION["fav_uma"] = $resultado["data"]["fav_uma"];
+                $_SESSION["user_id"] = $data["id"];
+                $_SESSION["username"] = $data["username"];
+                $_SESSION["fav_uma"] = $data["fav_uma"];
                 $this->jsonResponse("ok", "Inicio de sesión exitoso, redirigiendo..", null, "home");
             }
             
@@ -100,17 +100,39 @@ class Controller {
 
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
         $usuarioModel = new Model($this->pdo);
-        $resultado = $usuarioModel->signUp($username, $passwordHash, $favUma);
+        $resultado = $usuarioModel->signup($username, $passwordHash, $favUma);
 
         if ($resultado["status"] === "ok") {
             session_regenerate_id(true);
-            $_SESSION["user_id"] = $resultado["data"];
+            $_SESSION["user_id"] = $resultado["data"]["id"];
             $_SESSION["username"] = $username;
             $_SESSION["fav_uma"] = $favUma;
             $this->jsonResponse("ok", "Registro exitoso, redirigiendo..", null, "home");
         } else {
             code(400);
             $this->jsonResponse("error", $resultado["message"]);        
+        }
+    }
+
+    public function getAllPosts () {
+        $model = new Model($this->pdo);
+        $this->jsonResponse("ok", "", $model->getAllPosts());
+    }
+
+    public function getUser() {
+
+        $data = json_decode(file_get_contents("php://input"), true);
+        $username = cleanValue($data, "username");
+
+        $model = new Model($this->pdo);
+        $data = $model->getUser($username);
+        
+        if ($data["status"] === "ok") {
+            $this->jsonResponse("ok", "Perfil enviado", $data);
+        }
+
+        else {
+            $this->jsonResponse("error", "nose", $data);
         }
     }
 
@@ -146,28 +168,33 @@ class Controller {
         }
     }
 
-    public function getAllPosts () {
-        $model = new Model($this->pdo);
-        $this->jsonResponse("ok", "", $model->getAllPosts());
-    }
-
     public function createLike () {
 
         $data = json_decode(file_get_contents("php://input"), true);
-        $postId = cleanValue($data, "data");
         $userId = $_SESSION["user_id"] ?? null; 
-        
+
         if (empty($userId)) {
             code(401);
             $this->jsonResponse("error", "No estas logueado");
         }
 
-        if (empty($postId)) {
-            code(401);
-            $this->jsonResponse("error", "Parece que intestate darle like a un post no existente?");
+        $postIdReceived = cleanValue($data, "data");
+        $postId = filter_var($postIdReceived, FILTER_VALIDATE_INT, [
+            "options" => [
+                "min_range" => 1
+            ]
+        ]);
+
+        if ($postId === false) {
+            code(404);
+            $this->jsonResponse("error", "La ID no es valida");
         }
 
         $model = new Model($this->pdo);
+        $postExists = $model->postExists($postId);
+
+        if ($postExists["status"] === "error") $this->jsonResponse("error", "No existe esa publicacion");
+
         $data = $model->createLike($userId, $postId);
 
         if ($data["status"] === "ok") {
@@ -175,23 +202,6 @@ class Controller {
         } else {
             code(409);
             $this->jsonResponse("error", "Ya le diste like a está publicacion");
-        }
-    }
-
-    public function getUser() {
-
-        $data = json_decode(file_get_contents("php://input"), true);
-        $username = cleanValue($data, "username");
-
-        $model = new Model($this->pdo);
-        $data = $model->getUser($username);
-        
-        if ($data["status"] === "ok") {
-            $this->jsonResponse("ok", "Perfil enviado", $data);
-        }
-
-        else {
-            $this->jsonResponse("error", "nose", $data);
         }
     }
 

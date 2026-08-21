@@ -72,7 +72,7 @@ const establo = {
         estilos: "Late",
         suelo: "Dirt",
         distancia: "Sprint",
-        rival: "N/A",
+        rival: "Helicopteros",
         compañera: "King Halo",
         imagen: ["Haru_Urara.webp", "Haru_Urara_Alt(1).webp", "Haru_Urara_Alt(2).webp"],
         color: "#FDA5D544"
