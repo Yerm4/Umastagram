@@ -106,7 +106,7 @@ function umaGuion($texto) {
     return str_replace(" ", "_", $texto);
 }
 
-function fileExists(?string $file, string $ruta = "/src/media/img/post/") : bool {
+function webpExists(?string $file, string $ruta = "/src/media/img/post/") : bool {
     if (empty($file)) {
         return false;
     }
@@ -151,4 +151,16 @@ function getRelativeTime($pastTimeString) {
     if ($diff->i > 0) return $diff->i . 'm ago';
     
     return 'just now';
+}
+
+function getUmaImage(string $umaName, int $index = 0): string {
+    static $establo = null;
+
+    if ($establo === null) {
+        $rutaArchivo = __DIR__ . "/../app/config/datos.php";
+        $establo = file_exists($rutaArchivo) ? require $rutaArchivo : [];
+    }
+
+    
+    return $establo[$umaName]["imagen"][$index] ?? $establo[$umaName]["imagen"][0] ?? "Mayano_Top_Gun_Alt(3).webp";
 }

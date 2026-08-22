@@ -95,7 +95,6 @@ async function buscarUma(menu = null) {
             const imagen = document.createElement("img");
             imagen.src = img.src;
             imagen.classList.add("draw-card__uma-img");
-            imagen.id = "draw-card__uma-img";
             imagen.alt = "Imagen de un caballo";
 
             infoContainer.append(
@@ -137,7 +136,6 @@ async function buscarUma(menu = null) {
             imagen.src = img.src;
             imagen.classList.add("draw-card__uma-img");
             imagen.classList.add("draw-card__horse-img");
-            imagen.id = "draw-card__uma-img";
             imagen.alt = "Imagen de un caballo";
 
             infoContainer.append(
@@ -165,7 +163,7 @@ async function buscarUma(menu = null) {
         IRLButton.style.opacity = "1";
         
         setTimeout(() => {
-            const imgUma = document.getElementById("draw-card__uma-img");
+            const imgUma = document.querySelector(".draw-card__uma-img");
             if (imgUma) imgUma.classList.add("draw-card__uma-img--visible");
         }, 100);
         

@@ -70,13 +70,9 @@ a:-webkit-any-link:focus-visible {
 /* -----------
 --- UTILITIES ---
 ------------*/
-.capitalize {
-    text-transform: capitalize !important;
-}
-
-.op-1 {
-    opacity: 1 !important;
-}
+.no-filter { filter: none !important}
+.capitalize { text-transform: capitalize !important;}
+.op-1 { opacity: 1 !important;}
 .underline { text-decoration: underline !important;   text-underline-offset: 3px !important; }
 .anim-appear { animation: aparicion 1s ease forwards !important;}
 
@@ -527,7 +523,7 @@ html.modo-oscuro {
 
 .form-post__content-title:focus, 
 .form-post__content-description:focus {
-    outline: 1px red solid
+    outline: 1px #fff solid
 }
 
 .form-post__content-title::placeholder,
@@ -576,8 +572,7 @@ dialog {
 }   
 
 dialog::backdrop {
-    background-color: #0005;
-    backdrop-filter: blur(5px);
+    background-color: #0009;
 }
 
 .modal__close-icon {
@@ -612,6 +607,11 @@ dialog::backdrop {
 .profile__title-name {
     font-size: 2.5rem;
     text-align: center;
+}
+
+.profile-card--column {
+    flex-direction: column;
+    margin-top: 100px
 }
 
 /* -----------
@@ -697,7 +697,7 @@ dialog::backdrop {
     width: 35px;
     height: 35px;
     padding: 1px;
-    border: 1px solid #fff;
+    outline: 1px solid #fff;
     border-radius: 30px;
     flex: 0 1 auto;
 }
@@ -812,7 +812,7 @@ dialog::backdrop {
     width: 35px;
     height: 35px;
     padding: 1px;
-    border: 1px solid #fff;
+    outline: 1px solid #fff;
     border-radius: 30px;
     flex: 0 1 auto;
 }
@@ -1296,17 +1296,4 @@ dialog::backdrop {
         padding: 15px;
         max-width: 95vw;
     }
-}
-
-.field-group {
-  margin-bottom: 20px;
-  font-family: Arial, sans-serif;
-}
-
-.custom-input {
-  padding: 10px;
-  font-size: 16px;
-  width: 300px;
-  border: 1px solid #ccc;
-  outline: none;
 }

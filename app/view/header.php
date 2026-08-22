@@ -45,7 +45,7 @@
                 <div class="sidebar-nav">
                         <div class="sidebar-nav__logo">
                         <div class="div-pfp">
-                            <img class="pfp" src="src/media/img/pfp/<?= isset($_SESSION["fav_uma"]) && fileExists(umaGuion($_SESSION["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($_SESSION["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="Foto de perfil">
+                            <img class="pfp" src="src/media/img/pfp/<?= isset($_SESSION["fav_uma"]) && webpExists(umaGuion($_SESSION["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($_SESSION["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="Foto de perfil">
                         </div>
                         <h1 class="sidebar-nav__text--hidden capitalize sidebar-nav__text--title"><?= isset($_SESSION["username"]) ? e($_SESSION["username"]) : "Umamusume" ?> </h1>
                     </div>

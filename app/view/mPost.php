@@ -1,7 +1,7 @@
 <div class="post">
     <div class="post__title">
         <a href="perfil/<?= e($post["username"]) ?>"> 
-            <img class="post__title-img" src="src/media/img/pfp/<?= isset($post["fav_uma"]) && fileExists(umaGuion($post["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($post["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
+            <img class="post__title-img" src="src/media/img/pfp/<?= isset($post["fav_uma"]) && webpExists(umaGuion($post["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($post["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
         </a>
         <h2 class="post__title-name capitalize"> 
             <a href="perfil/<?= e($post["username"]) ?>"> <?= e($post["username"]) ?> </a>
@@ -11,7 +11,7 @@
     <div class="post__content">
         <p class="post__content-title"><?= e($post["title"])?></p>
         <p class="post__content-description">> <?= e($post["content"])?></p>
-        <img class="post__content-img" src="src/media/img/post/<?= fileExists($post["post_img"] ?? null) ? e($post["post_img"]) : "post_3" ?>.webp" alt="">
+        <img class="post__content-img" src="src/media/img/post/<?= webpExists($post["post_img"] ?? null) ? e($post["post_img"]) : "post_3" ?>.webp" alt="">
     </div>
     <div class="post__interaction">
         <button name="button-like" data-post-id="<?= e($post["id"]) ?>" class="post__button-like">

@@ -27,19 +27,29 @@ else {
     include_once __DIR__."/404.php";
     exit();
 }
+
 ?>
 <?php // Usuario entra a su propio perfil ?>
 <?php if (($userData["status"] ?? null) === "ok" && ($user["id"] ?? null) === ($_SESSION["user_id"] ?? null)): ?>    
     <main class="muro">
         <section class="hero">
             <div class="card card__profile">
-                <h2 class="capitalize profile__title-name">Hola, <?= e($user["username"]) ?>! <br> Bienvenid@.</h2>
-                <form class="form login-form">
-                    <p>Espero sea de tu agrado mi sitio </p> 
-                    <p>Tu uma favorita es <strong><?= e($user["fav_uma"]) ?></strong>? <br> Pronto podras utilizarla de foto de perfil! </p> 
-                    <p>Me uni a Umastagram el dia <strong><?= e($user["signup_date"]) ?></strong></p>
-                    <p>Nuevas funciones en camino...</p>
-                </form>
+                <div id="draw-card" class="draw-card profile-card--column op-1">
+                    <div class="uma-info" id="uma-info">
+                        <h2>
+                            <img class="post__title-img" src="src/media/img/pfp/<?= webpExists(umaGuion($user["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($user["fav_uma"])) : "invitado" ?>_Pfp.webp" alt=""> 
+                            Hola, <strong class="capitalize"><?= e($user["username"]) ?></strong>     
+                        </h2>
+                        <br>
+                        <p>Espero te guste mi pagina :D </p> 
+                        <p>Tu uma favorita es <strong><?= e($user["fav_uma"]) ?>!</strong></p> 
+                        <p>Sabias que te uniste a Umastagram el dia <strong><?= e($user["signup_date"]) ?>?</strong></p>
+                    </div>
+                    <div class="draw-card__img-container">
+                        <img src="src/media/img/<?= e(getUmaImage($user["fav_uma"], 0)) ?>" class="draw-card__uma-img op-1 no-filter" alt="Imagen de un caballo">
+                        <img src="src/media/img/<?= e(getUmaImage($user["fav_uma"], 1)) ?>" class="draw-card__uma-img op-1 no-filter" alt="Imagen de un caballo">
+                    </div>
+                </div>
                 <div class="post-wrapper" id="post-wrapper">
                     <?php if ($postsData["status"] === "ok" && !empty($posts)): ?>
                         <?php foreach ($posts as $post) : ?>
@@ -57,11 +67,23 @@ else {
     <main class="muro">
         <section class="hero">
             <div class="card card__profile">
-                <h2 class="profile__title-name">Bienvenid@ a mi perfil, soy <?= e($user["username"]) ?>.</h2>
-                <div>
-                    <p>Mi uma favorita es <strong><?= e($user["fav_uma"]) ?></strong></p> 
-                    <p>Me uni a Umastagram el dia <strong><?= e($user["signup_date"]) ?></strong></p>
+                
+                <div id="draw-card" class="draw-card profile-card--column op-1">
+                    <div class="uma-info" id="uma-info">
+                        <h2>
+                            <img class="post__title-img" src="src/media/img/pfp/<?= webpExists(umaGuion($user["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($user["fav_uma"])) : "invitado" ?>_Pfp.webp" alt=""> 
+                            Bienvenid@! Soy <strong class="capitalize"><?= e($user["username"]) ?></strong>     
+                        </h2>
+                        <br>
+                        <p>Mi uma favorita es <strong><?= e($user["fav_uma"]) ?></strong></p> 
+                        <p>Me uni a Umastagram el dia <strong><?= e($user["signup_date"]) ?></strong></p>
+                    </div>
+                    <div class="draw-card__img-container">
+                    <img src="src/media/img/<?= e(getUmaImage($user["fav_uma"], 0)) ?? "xd" ?>" class="draw-card__uma-img op-1 no-filter" alt="Imagen de un caballo">
+                        <img src="src/media/img/<?= e(getUmaImage($user["fav_uma"], 1)) ?? "xd" ?>" class="draw-card__uma-img op-1 no-filter" alt="Imagen de un caballo">
+                    </div>
                 </div>
+
                 <div class="post-wrapper" id="post-wrapper">
                     <?php if ($postsData["status"] === "ok" && !empty($posts)): ?>
                         <?php foreach ($posts as $post) : ?>

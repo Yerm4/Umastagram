@@ -299,7 +299,7 @@ const establo = {
         color: "#00002244"
     }
 };
-
+//Marvelous_Sunday.webpMarvelous_Sunday_Alt(1).webpMarvelous_Sunday_Alt(2).webpMarvelous_Sunday_Alt(3).webp
 const establoReal = {
     "tachyon": {
         nombre: "Agnes Tachyon",

@@ -39,7 +39,7 @@ include_once __DIR__."/header.php";
                     <?php if (isset($_SESSION["user_id"])): ?> 
                         <form id="postForm" class="post form-post">
                             <div class="post__title">
-                                <img class="post__title-img" src="src/media/img/pfp/<?= isset($_SESSION["fav_uma"]) && fileExists(umaGuion($_SESSION["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($_SESSION["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
+                                <img class="post__title-img" src="src/media/img/pfp/<?= isset($_SESSION["fav_uma"]) && webpExists(umaGuion($_SESSION["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($_SESSION["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
                                 <h2 class="post__title-name capitalize"> <?= e($_SESSION["username"]) ?> 
                                     <p class="post__title-date">Ahora mismo</p>
                                 </h2>

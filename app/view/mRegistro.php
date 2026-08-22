@@ -22,6 +22,7 @@
                     <option value="Mayano Top Gun">Mayano Top Gun</option>
                     <option value="Narita Brian">Narita Brian</option>
                     <option value="Marvelous Sunday">Marvelous Sunday</option>
+                    <option value="Haru Urara">Haru Urara</option>
                 </select>
                 </label>
                 <button type="submit">Registrar</button>

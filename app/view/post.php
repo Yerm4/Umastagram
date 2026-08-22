@@ -40,7 +40,7 @@ else {
                                     <div class="comment">
                                         <div class="comment__pfp">
                                             <a href="perfil/<?= e($c["username"]) ?>"> 
-                                                <img class="comment__pfp-img" src="src/media/img/pfp/<?= isset($post["fav_uma"]) && fileExists(umaGuion($post["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($post["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
+                                                <img class="comment__pfp-img" src="src/media/img/pfp/<?= isset($post["fav_uma"]) && webpExists(umaGuion($post["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($post["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
                                             </a>
                                         </div>
                                         <div class="comment__content">

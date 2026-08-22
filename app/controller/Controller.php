@@ -76,7 +76,7 @@ class Controller {
         $username = cleanValue($data, "username");
         $password = cleanValue($data, "password");
         $favUma = cleanValue($data, "fav_uma");
-        $allowedUmas = ["Mayano Top Gun", "Narita Brian", "Marvelous Sunday"];
+        $allowedUmas = ["Mayano Top Gun", "Narita Brian", "Marvelous Sunday", "Tokai Teio", "Haru Urara"];
 
         if (empty($username) || empty($password) || empty($favUma)) {
             code(400);
