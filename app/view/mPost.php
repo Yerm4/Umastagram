@@ -1,4 +1,4 @@
-<div class="post">
+
     <div class="post__title">
         <a href="perfil/<?= e($post["username"]) ?>"> 
             <img class="post__title-img" src="src/media/img/pfp/<?= isset($post["fav_uma"]) && webpExists(umaGuion($post["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($post["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">

@@ -53,7 +53,8 @@ else {
                 <div class="post-wrapper" id="post-wrapper">
                     <?php if ($postsData["status"] === "ok" && !empty($posts)): ?>
                         <?php foreach ($posts as $post) : ?>
-                            <?php include __DIR__."/mPost.php" ?>
+                            <div class="post">
+                                <?php include __DIR__."/mPost.php" ?>
                             </div>
                         <?php endforeach ?>
                     <?php else: ?>
@@ -66,8 +67,7 @@ else {
 <?php else: ?>
     <main class="muro">
         <section class="hero">
-            <div class="card card__profile">
-                
+            <div class="card card-profile">
                 <div id="draw-card" class="draw-card profile-card--column op-1">
                     <div class="uma-info" id="uma-info">
                         <h2>
@@ -79,7 +79,7 @@ else {
                         <p>Me uni a Umastagram el dia <strong><?= e($user["signup_date"]) ?></strong></p>
                     </div>
                     <div class="draw-card__img-container">
-                    <img src="src/media/img/<?= e(getUmaImage($user["fav_uma"], 0)) ?? "xd" ?>" class="draw-card__uma-img op-1 no-filter" alt="Imagen de un caballo">
+                        <img src="src/media/img/<?= e(getUmaImage($user["fav_uma"], 0)) ?? "xd" ?>" class="draw-card__uma-img op-1 no-filter" alt="Imagen de un caballo">
                         <img src="src/media/img/<?= e(getUmaImage($user["fav_uma"], 1)) ?? "xd" ?>" class="draw-card__uma-img op-1 no-filter" alt="Imagen de un caballo">
                     </div>
                 </div>
@@ -87,7 +87,9 @@ else {
                 <div class="post-wrapper" id="post-wrapper">
                     <?php if ($postsData["status"] === "ok" && !empty($posts)): ?>
                         <?php foreach ($posts as $post) : ?>
-                            <?php include __DIR__."/mPost.php" ?>
+                            <div class="post">
+                                <?php include __DIR__."/mPost.php" ?>
+                            </div>
                         <?php endforeach ?>
                     <?php else: ?>
                     <h2>No hay publicaciones :(</h2>

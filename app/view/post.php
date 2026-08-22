@@ -32,31 +32,32 @@ else {
     <main class="muro">
         <section class="hero">
             <div class="card card__profile">
-            <div class="post-wrapper" id="post-wrapper">
+                <div class="post-wrapper" id="post-wrapper">
                     <?php if ($postData["status"] === "ok" && !empty($post)): ?>
+                        <div class="post">
                         <?php include __DIR__."/mPost.php" ?>
                             <div class="comments-wrapper">
                             <?php foreach ($comments as $c): ?>
-                                    <div class="comment">
-                                        <div class="comment__pfp">
-                                            <a href="perfil/<?= e($c["username"]) ?>"> 
-                                                <img class="comment__pfp-img" src="src/media/img/pfp/<?= isset($post["fav_uma"]) && webpExists(umaGuion($post["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($post["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="comment__content">
-                                            <a href="perfil/<?= e($c["username"]) ?>"> 
-                                                <h3 class="comment__content-name capitalize"> 
-                                                    <?= e($c["username"]) ?> 
-                                                    <span class="comment__content-date"><?= e(getRelativeTime($c["date"]))?></span>
-                                                </h3>
-                                            </a>
-                                            <p class="comment__content-description">> <?= e($c["content"])?></p>
-                                        </div>
-                                        <div class="comment__interaction">
-                                            
-                                        </div>
+                                <div class="comment">
+                                    <div class="comment__pfp">
+                                        <a href="perfil/<?= e($c["username"]) ?>"> 
+                                            <img class="comment__pfp-img" src="src/media/img/pfp/<?= webpExists(umaGuion($c["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($c["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
+                                        </a>
                                     </div>
-                                <?php endforeach ?>
+                                    <div class="comment__content">
+                                        <a href="perfil/<?= e($c["username"]) ?>"> 
+                                            <h3 class="comment__content-name capitalize"> 
+                                                <?= e($c["username"]) ?> 
+                                                <span class="comment__content-date"><?= e(getRelativeTime($c["date"]))?></span>
+                                            </h3>
+                                        </a>
+                                        <p class="comment__content-description">> <?= e($c["content"])?></p>
+                                    </div>
+                                    <div class="comment__interaction">
+                                        
+                                    </div>
+                                </div>
+                            <?php endforeach ?>
                             </div>
                             <form id="commentForm" class="form form-comment" data-post-id="<?= e($post["id"]) ?>" >
                                 <div class="form-comment__wrapper">
@@ -65,7 +66,6 @@ else {
                                 </div>
                             </form>
                         </div>
-                    </div>
                     <?php else: ?>
                     <h2>No hay publicaciones :(</h2>
                     <?php endif ?>

@@ -11,7 +11,7 @@ include_once __DIR__."/header.php";
     <main class="muro">
             <section class="hero home">
                 
-                <div class="card">    
+                <div class="card card-home">    
                     <h2 class="umastagram"> 
                         <span class="umastagram--light-pink">Uma</span<span class="umastagram--orange-pink">stagram 
                             <svg width="40px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -58,15 +58,14 @@ include_once __DIR__."/header.php";
                                 <button type="submit" class="post__button-like form-post__button-submit"> Publicar</button>
                                 <p class="form__warning" id="postMessage">olis</p>
                             </div>
-                    </form>
+                        </form>
                     <?php endif ?>
-
-                    <p>Publicaciones</p>
 
                     <div class="post-wrapper" id="post-wrapper">
                     <?php if ($resultado["status"] === "ok"): ?>
                         <?php foreach ($resultado["data"] as $post) : ?>
-                            <?php include __DIR__."/mPost.php" ?>
+                            <div class="post">    
+                                <?php include __DIR__."/mPost.php" ?>
                             </div>
                         <?php endforeach ?>
                         <?php else: ?>

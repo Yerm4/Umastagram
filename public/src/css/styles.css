@@ -442,8 +442,17 @@ footer p {
 ------------*/
 .card {
     max-width: 550px;
+    min-width: 450px;
     padding: 10px;
     border-radius: 20px;
+}
+.card.card-profile,
+.card.card-home {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .card.card__signup,
@@ -660,7 +669,8 @@ dialog::backdrop {
     flex-direction: column;
     align-items: center;
     gap: 15px;
-    padding: 35px 0 15px 0
+    padding: 35px 0 15px 0;
+    width: 100%;
 }
 
 .post {
@@ -1233,6 +1243,10 @@ dialog::backdrop {
         font-size: 2rem;
     }
 
+    .card {
+        min-width: 100vw;
+    }
+
     .aside {
         display: none;
     }
@@ -1252,6 +1266,9 @@ dialog::backdrop {
         font-size: 9px;
         padding: 15px;
         max-width: 90vw;
+    }
+
+    .card {
     }
     
     .draw-card .draw-card__uma-img {
