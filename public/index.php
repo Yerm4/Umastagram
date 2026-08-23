@@ -1,6 +1,7 @@
 <?php 
 
 session_start();
+define('APP_VERSION', '1.1');
 
 header("Cache-Control: no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);

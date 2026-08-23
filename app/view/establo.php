@@ -70,8 +70,8 @@ include_once __DIR__."/header.php";
         <?php include __DIR__."/footer.php" ?>
         <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video" autoplay loop muted playsinline title="mambo"></video>
         <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video mambo-wrapper__video--left" autoplay loop muted playsinline title="mambo"></video>
-        <script src="src/script/datos.js" defer></script>
-        <script src="src/script/establo.js" defer></script>
+        <script src="src/script/datos.js?v=<?= APP_VERSION?>" defer></script>
+        <script src="src/script/establo.js?v=<?= APP_VERSION?>" defer></script>
     </div>
 </body>
 </html>
