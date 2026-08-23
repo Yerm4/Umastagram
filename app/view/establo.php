@@ -1,5 +1,4 @@
 <?php
-$titulo = "Establo";
 include_once __DIR__."/header.php";
 ?>
         <main id="main" class="home" data-login="<?php echo isset($_SESSION["user_id"]) ? "true" : "false" ?>">

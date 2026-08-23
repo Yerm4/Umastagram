@@ -798,6 +798,25 @@ dialog::backdrop {
     background: #fff;
 }
 
+.post__button-like .svg-body,
+.post__button-like .svg-shadow,
+.post__button-like .svg-leaves {
+    fill: transparent;
+    transition: fill 0.2s ease;
+}
+
+.post__button-like.liked .svg-body {
+    fill: #EF863F;
+}
+
+.post__button-like.liked .svg-shadow {
+    fill: #CF7436;
+}
+
+.post__button-like.liked .svg-leaves {
+    fill: #6BE166;
+}
+
 .comments-wrapper {
     display: flex;
     flex-direction: column;
@@ -869,7 +888,7 @@ dialog::backdrop {
 
 .form .form-comment__input {
     flex: 1 1 auto;
-    background-color: transparent;
+    background-color: #fff3;
     outline: 1px solid #fff
 }
 
@@ -1313,35 +1332,4 @@ dialog::backdrop {
         padding: 15px;
         max-width: 95vw;
     }
-}
-
-.post__interaction-svg--liked-orange {
-
-}
-
-.post__interaction-svg--green {
-
-}
-
-.post__interaction-svg--not-liked {
-
-}
-
-.post__button-like .svg-body,
-.post__button-like .svg-shadow,
-.post__button-like .svg-leaves {
-    fill: transparent;
-    transition: fill 0.2s ease;
-}
-
-.post__button-like.liked .svg-body {
-    fill: #EF863F;
-}
-
-.post__button-like.liked .svg-shadow {
-    fill: #CF7436;
-}
-
-.post__button-like.liked .svg-leaves {
-    fill: #6BE166;
 }

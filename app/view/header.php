@@ -24,7 +24,9 @@
     <link rel="stylesheet" href="src/css/styles.css?v=<?= APP_VERSION?>">
     <link rel="icon" href="src/media/img/mini/favicon.ico" type="image/x-icon">
     <link rel="prefetch" href="src/media/img/modal_bg_2.webp">
+    
     <script src="src/script/diseño.js?v=<?= APP_VERSION?>" defer></script>
+
     <script src="src/script/modal.js?v=<?= APP_VERSION?>" defer></script>
 
     <script src="src/script/fetch.js?v=<?= APP_VERSION?>" defer></script>

@@ -1,8 +1,9 @@
-<?php 
+<?php
 if (empty($_SESSION["user_id"])) {
 
     include __DIR__."/mRegistro.php";
-    include __DIR__."/mLogin.php"; }
+    include __DIR__."/mLogin.php"; 
+}
 ?>
 
 <footer>

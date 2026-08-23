@@ -1,3 +1,6 @@
+<?php
+declare(strict_types=1);
+?>
 <dialog name="modal" id="registroModal">
     <div class="modal__wrapper">
         <svg class="modal__close-icon" id="closeModalRegistro" data-modal="registroModal" fill="#000000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.775 460.775" xml:space="preserve">

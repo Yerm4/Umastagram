@@ -1,8 +1,11 @@
+<?php
+$titulo = "404";
+include_once __DIR__."/header.php";
+?>
 <main class="muro">
     <section class="hero">
         <div class="card card__profile">
             <p style="font-size: 2.5rem">La pagina que intentaste buscar no existe <br> 404 </p>
-            
         </div>
     </section>
 </main>

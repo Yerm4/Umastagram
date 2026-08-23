@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace app\model;
 
 use PDO;
@@ -18,6 +19,26 @@ class Model {
             "data" => $data,
             "redirect" => $redirect
             ];
+    }
+
+    private function postExists(?int $postId) : bool {
+        $stmt = $this->pdo->prepare("SELECT EXISTS (SELECT 1 FROM posts WHERE id = :postId)");
+        $stmt->execute(["postId" => $postId]);
+        $exists = (bool)$stmt->fetchColumn();
+
+        if (!$exists) return $this->response("error", "No existe esa publicacion");
+
+        return true;
+    }
+
+    private function userExists($userId) {
+        $stmt = $this->pdo->prepare("SELECT EXISTS (SELECT 1 FROM users WHERE id = :userId AND deleted_at IS NULL)");
+        $stmt->execute(["userId" => $userId]);
+        $exists = (bool)$stmt->fetchColumn();
+
+        if (!$exists) return $this->response("error", "No existe ese usuario");
+
+        return $this->response("ok", "Sí existe ese usuario");
     }
 
     public function login($username) {
@@ -190,6 +211,9 @@ class Model {
 
     public function toggleLike ($userId, $postId) {
         try {
+            $exists = $this->postExists($postId);
+            
+            if (!$exists) return $this->response("error", "No existe esa publicacion");
             $this->pdo->beginTransaction();
 
             $stmt = $this->pdo->prepare("SELECT EXISTS 
@@ -249,17 +273,63 @@ class Model {
 
             return $this->response("ok", "Comentario enviado", $resultado);
         } catch (PDOException $e) {
-            return $this->response("error", $e);
+            return $this->response("error", $e->getMessage());
         }
     }
 
-    public function postExists($postId) {
-        $stmt = $this->pdo->prepare("SELECT EXISTS (SELECT 1 FROM posts WHERE id = :postId)");
-        $stmt->execute(["postId" => $postId]);
-        $exists = (bool)$stmt->fetchColumn();
+    public function sendFriendRequest($userIdSends, $userIdReceives) {
+        try {
 
-        if (!$exists) return $this->response("error", "No existe esa publicacion");
+            $exists = $this->userExists($userIdReceives);
+            if (!$exists) return $this->response("error", "El usuario no existe");    
 
-        return $this->response("ok", "Sí existe esa publicacion");
+            $stmt = $this->pdo->prepare("SELECT EXISTS
+            (SELECT 1 FROM friends 
+            WHERE (user_id_sends = :idSends 
+            AND user_id_receives = :idReceives)
+            OR (user_id_sends = :idReceives 
+            AND user_id_receives = :idSends))");
+            $stmt->execute(["idSends" => $userIdSends, "idReceives" => $userIdReceives]);
+
+            $exists = (bool)$stmt->fetchColumn();
+
+            if ($exists) {
+                return $this->response("error", "Ya existe una solicitud de amitas pendiente");    
+            } else {
+                $stmt = $this->pdo->prepare("INSERT INTO friends
+                (user_id_sends, user_id_receives, status_id) VALUES (:idSends, :idReceives, 1)");
+                $stmt->execute(["idSends" => $userIdSends, "idReceives" => $userIdReceives]);
+                return $this->response("ok", "Solicitud de amistad enviada");
+            }
+
+        } catch(PDOException $e) {
+            return $this->response("error", $e->getMessage());
+        }
+    }
+
+    public function answerFriendRequest($userIdSends, $userIdReceives) {
+        try {
+            $stmt = $this->pdo->prepare("SELECT EXISTS
+            (SELECT 1 FROM friends 
+            WHERE (user_id_sends = :idSends 
+            AND user_id_receives = :idReceives)
+            OR (user_id_sends = :idReceives 
+            AND user_id_receives = :idSends))");
+            $stmt->execute(["idSends" => $userIdSends, "idReceives" => $userIdReceives]);
+
+            $exists = (bool)$stmt->fetchColumn();
+
+            if ($exists) {
+                return $this->response("error", "Ya existe una solicitud de amitas pendiente");    
+            } else {
+                $stmt = $this->pdo->prepare("INSERT INTO friends
+                (user_id_sends, user_id_receives, status_id) VALUES (:idSends, :idReceives, 1)");
+                $stmt->execute(["idSends" => $userIdSends, "idReceives" => $userIdReceives]);
+                return $this->response("ok", "Solicitud de amistad enviada");
+            }
+
+        } catch(PDOException $e) {
+            return $this->response("error", $e->getMessage());
+        }
     }
 }

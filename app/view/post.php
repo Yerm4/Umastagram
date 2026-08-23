@@ -1,34 +1,5 @@
 <?php
-
-$postId = $partesRuta[1] ?? null;
-$userId = $_SESSION["user_id"] ?? null;
-
-use app\model\Model;
-
-$titulo = null;
 include_once __DIR__."/header.php";
-
-if (!empty($partesRuta[1])) {
-    $model = new Model($pdo);
-    $postData = $model->getPost($postId, $userId);
-
-    if ($postData["status"] === "ok") {
-        $post = $postData["data"];
-        
-        $commentData = $model->getComment($postId);
-        $comments = ($commentData["status"] === "ok") ? $commentData["data"] : [];
-    }
-    else {
-        include_once __DIR__."/404.php";
-        exit();
-    }
-}
-
-else {
-    include_once __DIR__."/404.php";
-    exit();
-}
-
 ?>
     <main class="muro">
         <section class="hero">

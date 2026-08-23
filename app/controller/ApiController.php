@@ -1,10 +1,10 @@
 <?php
-
+declare(strict_types=1);
 namespace app\controller;
 
 use app\model\Model;
 
-class Controller {
+class ApiController {
     
     private $pdo;
 
@@ -145,6 +145,11 @@ class Controller {
         $postImg = cleanValue($data, "post_img");
         $userId = $_SESSION["user_id"] ?? null;
 
+        if (empty($userId)) {
+            code(401);
+            $this->jsonResponse("error", "No tas logueado");
+        }
+
         if ($content === null || $title === null || $postImg === null) {
             code(400);
             $this->jsonResponse("error", "Parece que el contenido de la publicacion está vacio");
@@ -191,9 +196,6 @@ class Controller {
         }
 
         $model = new Model($this->pdo);
-        $postExists = $model->postExists($postId);
-
-        if ($postExists["status"] === "error") $this->jsonResponse("error", "No existe esa publicacion");
 
         $data = $model->toggleLike($userId, $postId);
 
@@ -212,14 +214,14 @@ class Controller {
         $userId = $_SESSION["user_id"] ?? null;
         $content = cleanValue($data, "content");
         
-        if (empty($postId)) {
-            code(404);
-            $this->jsonResponse("error", "No existe la publicacion que intentas comentar");
-        }
-
         if (empty($userId)) {
             code(401);
             $this->jsonResponse("error", "No tas logueado");
+        }
+
+        if (empty($postId)) {
+            code(404);
+            $this->jsonResponse("error", "No existe la publicacion que intentas comentar");
         }
 
         if (empty($content)) {
@@ -233,5 +235,50 @@ class Controller {
         if ($respuesta["status"] === "ok") {
             $this->jsonResponse("ok", "Todo bien", $respuesta["data"]);
         }
+    }
+
+    public function sendFriendRequest() {
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        $userIdSends = $_SESSION["user_id"] ?? null;
+        $userIdReceives = $data["data"];
+
+        if (empty($userIdSends)) {
+            code(401);
+            $this->jsonResponse("error", "No tas logueado");
+        }
+
+        if (empty($userIdReceives) || $userIdSends === $userIdReceives) {
+            code(404);
+            $this->jsonResponse("error", "ID de usuario invalido");
+        }
+
+        $model = new Model($this->pdo);
+        $res = $model->sendFriendRequest($userIdSends, $userIdReceives);
+
+        if ($res["status"] === "ok") {
+            $this->jsonResponse("ok", "Solicitud de amistad enviada");
+        } else {
+            $this->jsonResponse("error", "Solicitud de amistad no enviada");
+        }
+    }
+
+    public function answerFriendRequest() {
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        $userIdSends = $_SESSION["user_id"] ?? null;
+        $userIdReceives = $data["data"];
+
+        if (empty($userIdSends)) {
+            code(401);
+            $this->jsonResponse("error", "No tas logueado");
+        }
+
+        if (empty($userIdReceives) || $userIdSends === $userIdReceives) {
+            code(404);
+            $this->jsonResponse("error", "ID de usuario invalido");
+        }
+
+        $model = new Model($this->pdo);
     }
 }

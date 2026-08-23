@@ -1,5 +1,5 @@
 <?php 
-
+declare(strict_types=1);
 session_start();
 define('APP_VERSION', '1.1');
 
@@ -7,14 +7,19 @@ header("Cache-Control: no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-use app\config\Conexion;
-use app\controller\Controller;
-use app\model\Model;
-
 require_once __DIR__."/../vendor/autoload.php";
+
 $env = Dotenv\Dotenv::createImmutable(__DIR__."/../");
 $env->load();
+
+use app\config\Conexion;
+use app\controller\ApiController;
+use app\controller\ViewController;
+
 $pdo = Conexion::conectar();
+
+$apiController = new ApiController($pdo);
+$viewController = new ViewController($pdo);
 
 $method = !empty($_SERVER["REQUEST_METHOD"]) ? $_SERVER["REQUEST_METHOD"] : "";
 $ruta = isset($_GET["ruta"]) ? trim ($_GET["ruta"], "/") : "home";
@@ -46,10 +51,9 @@ if (isset($rutasApi[$method][$ruta])) {
     header("Content-Type: application/json; charset=UTF-8");
     
     $metodoController = $rutasApi[$method][$ruta];
-    $controller = new Controller($pdo);
 
-    if (method_exists($controller, $metodoController)) {
-        $controller->$metodoController();
+    if (method_exists($apiController, $metodoController)) {
+        $apiController->$metodoController();
         exit();
     } else {
         http_response_code(500);
@@ -77,10 +81,18 @@ if ($paginaActual === "logout") {
     header("Location: home");
     exit();
 }
+$rutasWeb = [
+    "home"   => "showHome",
+    "perfil" => "showProfile",
+    "post"   => "showPost",
+    "establo" => "showEstablo"
+];
 
 $paginaMostrar = __DIR__."/../app/view/$paginaActual.php";
-if (file_exists($paginaMostrar)) {
-    include $paginaMostrar;
-}   else {
-    include __DIR__."/../app/view/home.php";
+
+if (file_exists($paginaMostrar) && isset($rutasWeb[$paginaActual])) {
+    $metodoController = $rutasWeb[$paginaActual];
+    $viewController->$metodoController($partesRuta);
+} else {
+    include __DIR__."/../app/view/404.php";
 }

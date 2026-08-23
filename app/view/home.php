@@ -1,20 +1,12 @@
 <?php
-
-use app\model\Model;
-$model = new Model($pdo);
-$userId = $_SESSION["user_id"] ?? null;
-$resultado = $model->getAllPosts($userId);
-$titulo = "Muro";
-
 include_once __DIR__."/header.php";
-
 ?>
     <main class="muro">
             <section class="hero home">
                 
                 <div class="card card-home">    
                     <h2 class="umastagram"> 
-                        <span class="umastagram--light-pink">Uma</span<span class="umastagram--orange-pink">stagram 
+                        <span class="umastagram--light-pink">Uma</span><span class="umastagram--orange-pink">stagram 
                             <svg width="40px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M254.593 740.233c-17.109 99.238-25.094 149.359 3.422 177.943 55.689 55.892 196.388-6.993 219.007-17.109 138.933-62.132 326.846-230.038 277.181-383.263-27.969-86.359-128.895-160.332-229.148-154.469-78.706 4.563-131.519 56.839-157.571 82.596-74.953 74.121-90.021 161.586-112.891 294.303z" fill="#EF863F" />
                                 <path d="M261.436 928.465c2.761 9.969 50.633 4.711 67.619 2.841 206.563-22.676 350.925-165.248 393.53-242.403 0.901-1.631 2.282-4.095 3.924-7.312 12.068-23.258 45.113-89.189 27.787-163.81-7.597-32.715-12.080-52.038-23.954-54.752-41.189-9.422-63.010 205.73-223.57 337.523-111.067 91.207-249.999 110.861-245.334 127.914z" fill="#CF7436" />

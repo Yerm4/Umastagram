@@ -1,34 +1,5 @@
 <?php
-
-$user = $partesRuta[1] ?? null;
-$userId = $_SESSION["user_id"] ?? null;
-
-use app\model\Model;
-
-$titulo = ucfirst($user) ?? "Uma Musume";
 include_once __DIR__."/header.php";
-
-if (!empty($partesRuta[1])) {
-    $model = new Model($pdo);
-    $userData = $model->getUser($user);
-    $postsData = $model->getPosts($user, $userId);
-
-    if ($userData["status"] === "ok" && $postsData["status"] === "ok") {
-        $user = $userData["data"];
-        $posts = $postsData["data"];
-    }
-
-    else {
-        include_once __DIR__."/404.php";
-        exit();
-    }
-}
-
-else {
-    include_once __DIR__."/404.php";
-    exit();
-}
-
 ?>
 <?php // Usuario entra a su propio perfil ?>
 <?php if (($userData["status"] ?? null) === "ok" && ($user["id"] ?? null) === ($_SESSION["user_id"] ?? null)): ?>    
@@ -80,8 +51,8 @@ else {
                         <p>Me uni a Umastagram el dia <strong><?= e($user["signup_date"]) ?></strong></p>
                     </div>
                     <div class="draw-card__img-container">
-                        <img src="src/media/img/<?= e(getUmaImage($user["fav_uma"], 0)) ?? "xd" ?>" class="draw-card__uma-img op-1 no-filter" alt="Imagen de un caballo">
-                        <img src="src/media/img/<?= e(getUmaImage($user["fav_uma"], 1)) ?? "xd" ?>" class="draw-card__uma-img op-1 no-filter" alt="Imagen de un caballo">
+                        <img src="src/media/img/<?= e(getUmaImage($user["fav_uma"], 0)) ?>" class="draw-card__uma-img op-1 no-filter" alt="Imagen de un caballo">
+                        <img src="src/media/img/<?= e(getUmaImage($user["fav_uma"], 1)) ?>" class="draw-card__uma-img op-1 no-filter" alt="Imagen de un caballo">
                     </div>
                 </div>
 
