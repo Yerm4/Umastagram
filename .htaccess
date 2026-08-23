@@ -1,13 +1,10 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # 1. Evitar bucles: Si la petición ya entró a public/, detenemos las reglas de este archivo
     RewriteRule ^public/ - [L]
 
-    # 2. Bloquear acceso a carpetas sensibles de forma relativa (devuelve error 403 Forbidden)
     RewriteRule ^(app|db|vendor) - [F,L]
 
-    # 3. Redirigir todo el tráfico restante hacia el interior de la carpeta public/
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
 

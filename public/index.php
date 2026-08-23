@@ -23,7 +23,7 @@ $rutasApi = [
         "api/auth/login"    => "login",
         "api/users" => "signup",
         "api/posts"    => "createPost",
-        "api/posts/likes"    => "createLike",
+        "api/posts/likes"    => "toggleLike",
         "api/comment" => "createComment"
     ],
     "GET" => [
@@ -82,85 +82,4 @@ if (file_exists($paginaMostrar)) {
     include $paginaMostrar;
 }   else {
     include __DIR__."/../app/view/home.php";
-}
-
-// Helper functions
-
-function e($texto) {
-    if ($texto === null) {
-        return "";
-    }
-    return htmlspecialchars($texto, ENT_QUOTES, "UTF-8");
-}
-
-function reload() {
-    $url = $_SERVER["REQUEST_URI"];
-    header("Location: ".$url);
-    die();
-}
-
-function umaGuion($texto) {
-    if ($texto === null) {
-        return "";
-    }
-    return str_replace(" ", "_", $texto);
-}
-
-function webpExists(?string $file, string $ruta = "/src/media/img/post/") : bool {
-    if (empty($file)) {
-        return false;
-    }
-    
-    return file_exists(__DIR__.$ruta.$file.".webp");
-}
-
-function code($num) {
-    if ($num === null) {
-        return "";
-    }
-    return http_response_code($num);
-}
-
-function cleanString($value): ?string {
-    if (!is_string($value) && !is_int($value) && !is_float($value)) {
-        return null; 
-    }
-
-    $trimmed = trim((string)$value);
-    return $trimmed !== '' ? $trimmed : null;
-}
-
-
-function cleanValue(?array $data, string $key): ?string {
-    return cleanString($data[$key] ?? null);
-}
-
-function getRelativeTime($pastTimeString) {
-
-    $timezoneUTC = new DateTimeZone('UTC');
-    $pastTime = new DateTimeImmutable($pastTimeString, $timezoneUTC);
-    
-    $currentTime = new DateTimeImmutable('now', $timezoneUTC);
-    
-    $diff = $currentTime->diff($pastTime);
-    
-    if ($diff->y > 0) return $diff->y . 'y ago';
-    if ($diff->m > 0) return $diff->m . 'mo ago';
-    if ($diff->d > 0) return $diff->d . 'd ago';
-    if ($diff->h > 0) return $diff->h . 'h ago';
-    if ($diff->i > 0) return $diff->i . 'm ago';
-    
-    return 'just now';
-}
-
-function getUmaImage(string $umaName, int $index = 0): string {
-    static $establo = null;
-
-    if ($establo === null) {
-        $rutaArchivo = __DIR__ . "/../app/config/datos.php";
-        $establo = file_exists($rutaArchivo) ? require $rutaArchivo : [];
-    }
-
-    
-    return $establo[$umaName]["imagen"][$index] ?? $establo[$umaName]["imagen"][0] ?? "Mayano_Top_Gun_Alt(3).webp";
 }

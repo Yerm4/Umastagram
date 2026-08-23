@@ -2,7 +2,8 @@
 
 use app\model\Model;
 $model = new Model($pdo);
-$resultado = $model->getAllPosts();
+$userId = $_SESSION["user_id"] ?? null;
+$resultado = $model->getAllPosts($userId);
 $titulo = "Muro";
 
 include_once __DIR__."/header.php";

@@ -168,7 +168,7 @@ class Controller {
         }
     }
 
-    public function createLike () {
+    public function toggleLike () {
 
         $data = json_decode(file_get_contents("php://input"), true);
         $userId = $_SESSION["user_id"] ?? null; 
@@ -195,13 +195,13 @@ class Controller {
 
         if ($postExists["status"] === "error") $this->jsonResponse("error", "No existe esa publicacion");
 
-        $data = $model->createLike($userId, $postId);
+        $data = $model->toggleLike($userId, $postId);
 
         if ($data["status"] === "ok") {
             $this->jsonResponse("ok", "Like dado", $data["data"]);
         } else {
             code(409);
-            $this->jsonResponse("error", "Ya le diste like a está publicacion");
+            $this->jsonResponse("error", $data["message"]);
         }
     }
 

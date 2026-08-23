@@ -21,7 +21,7 @@
 
     <base href="/Uma-establo/">
     
-    <link rel="stylesheet" href="src/css/styles.css?v=4">
+    <link rel="stylesheet" href="src/css/styles.css?v=5">
     <link rel="icon" href="src/media/img/mini/favicon.ico" type="image/x-icon">
     <link rel="prefetch" href="src/media/img/modal_bg_2.webp">
     <script src="src/script/diseño.js" defer></script>

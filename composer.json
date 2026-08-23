@@ -2,7 +2,10 @@
     "autoload": {
         "psr-4": {
             "app\\": "app/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "require": {
         "robmorgan/phinx": "^0.13.4",

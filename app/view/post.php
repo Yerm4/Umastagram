@@ -1,6 +1,7 @@
 <?php
 
 $postId = $partesRuta[1] ?? null;
+$userId = $_SESSION["user_id"] ?? null;
 
 use app\model\Model;
 
@@ -9,7 +10,7 @@ include_once __DIR__."/header.php";
 
 if (!empty($partesRuta[1])) {
     $model = new Model($pdo);
-    $postData = $model->getPost($postId);
+    $postData = $model->getPost($postId, $userId);
 
     if ($postData["status"] === "ok") {
         $post = $postData["data"];
