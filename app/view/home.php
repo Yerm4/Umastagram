@@ -1,7 +1,4 @@
-<?php
-include_once __DIR__."/header.php";
-?>
-    <main class="muro">
+<main class="muro">
             <section class="hero home">
                 
                 <div class="card card-home">    
@@ -58,7 +55,7 @@ include_once __DIR__."/header.php";
                     <?php if ($resultado["status"] === "ok"): ?>
                         <?php foreach ($resultado["data"] as $post) : ?>
                             <div class="post">    
-                                <?php include __DIR__."/mPost.php" ?>
+                                <?php include __DIR__."/layout/postComponent.php" ?>
                             </div>
                         <?php endforeach ?>
                         <?php else: ?>
@@ -94,7 +91,7 @@ include_once __DIR__."/header.php";
                 </div>
             </section>
         </main>
-        <?php include __DIR__."/footer.php" ?>
+        <?php include __DIR__."/layout/footer.php" ?>
         
 </body>
 </html>

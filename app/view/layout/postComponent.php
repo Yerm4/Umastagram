@@ -3,8 +3,8 @@
         <a href="perfil/<?= e($post["username"]) ?>"> 
             <img class="post__title-img" src="src/media/img/pfp/<?= isset($post["fav_uma"]) && webpExists(umaGuion($post["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($post["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
         </a>
-        <h2 class="post__title-name capitalize"> 
-            <a href="perfil/<?= e($post["username"]) ?>"> <?= e($post["username"]) ?> </a>
+        <h2 class="post__title-name"> 
+            <a class="capitalize" href="perfil/<?= e($post["username"]) ?>"> <?= e($post["username"]) ?> </a>
             <p class="post__title-date"><?= e(getRelativeTime($post["date"]))?></p>
         </h2>
     </div>

@@ -1,13 +1,10 @@
-<?php
-include_once __DIR__."/header.php";
-?>
     <main class="muro">
         <section class="hero">
             <div class="card card__profile">
                 <div class="post-wrapper" id="post-wrapper">
                     <?php if ($postData["status"] === "ok" && !empty($post)): ?>
                         <div class="post">
-                        <?php include __DIR__."/mPost.php" ?>
+                        <?php include __DIR__."/layout/postComponent.php" ?>
                             <div class="comments-wrapper">
                             <?php foreach ($comments as $c): ?>
                                 <div class="comment">
@@ -46,7 +43,7 @@ include_once __DIR__."/header.php";
         </section>
     </main>
 
-    <?php include_once __DIR__."/footer.php" ?>
+    <?php include_once __DIR__."/layout/footer.php" ?>
     <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video" autoplay loop muted playsinline title="mambo"></video>
 </body>
 </html>

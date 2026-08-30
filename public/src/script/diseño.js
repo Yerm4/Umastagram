@@ -53,11 +53,11 @@ mambos.forEach(mambo => {
 const phrases = [
     {
     id: "input-titulo",
-    textos: ["Escribe un título...", "Tus besos frios como la lluvia", "Mayano mi mujer", "Titulo alfa buena maravilla onda dinamita escuadrón lobo"]
+    textos: ["Escribe un título...", "Tus besos frios como la lluvia", "Mayano mi mujer", "Esta cancion va dedicada"]
     },
     {
     id: "input-contenido",
-    textos: ["Escribe el contenido...", "Había una vez...", "Soy lesbiana", "Lorem ipsum dolor..."]
+    textos: ["Escribe el contenido...", "Vuelve chamita chama", "Soy lesbiana", "Lorem ipsum dolor..."]
     }
 ]
 

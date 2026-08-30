@@ -8,8 +8,8 @@ use PDOException;
 class Model {
     private $pdo;
 
-    public function __construct($connection) {
-        $this->pdo = $connection;
+    public function __construct($database) {
+        $this->pdo = $database;
     }
 
     private function response($status, $message = "", $data = null, $redirect = null) {
@@ -100,7 +100,7 @@ class Model {
 
             return $this->response("ok", "Perfil enviado", $data);
         } catch (PDOException $e) {
-            $this->response("error", $e);
+            $this->response("error", $e->getMessage());
         }
     }
 

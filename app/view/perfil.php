@@ -1,6 +1,3 @@
-<?php
-include_once __DIR__."/header.php";
-?>
 <?php // Usuario entra a su propio perfil ?>
 <?php if (($userData["status"] ?? null) === "ok" && ($user["id"] ?? null) === ($_SESSION["user_id"] ?? null)): ?>    
     <main class="muro">
@@ -26,7 +23,7 @@ include_once __DIR__."/header.php";
                     <?php if ($postsData["status"] === "ok" && !empty($posts)): ?>
                         <?php foreach ($posts as $post) : ?>
                             <div class="post">
-                                <?php include __DIR__."/mPost.php" ?>
+                                <?php include __DIR__."/layout/postComponent.php" ?>
                             </div>
                         <?php endforeach ?>
                     <?php else: ?>
@@ -60,7 +57,7 @@ include_once __DIR__."/header.php";
                     <?php if ($postsData["status"] === "ok" && !empty($posts)): ?>
                         <?php foreach ($posts as $post) : ?>
                             <div class="post">
-                                <?php include __DIR__."/mPost.php" ?>
+                                <?php include __DIR__."/layout/postComponent.php" ?>
                             </div>
                         <?php endforeach ?>
                     <?php else: ?>
@@ -72,7 +69,7 @@ include_once __DIR__."/header.php";
     </main>
 <?php endif ?>
 
-<?php include_once __DIR__."/footer.php" ?>
+<?php include_once __DIR__."/layout/footer.php" ?>
     <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video" autoplay loop muted playsinline title="mambo"></video>
     <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video mambo-wrapper__video--left" autoplay loop muted playsinline title="mambo"></video>
 </body>

@@ -1,7 +1,4 @@
-<?php
-include_once __DIR__."/header.php";
-?>
-        <main id="main" class="home" data-login="<?php echo isset($_SESSION["user_id"]) ? "true" : "false" ?>">
+<main id="main" class="home" data-login="<?php echo isset($_SESSION["user_id"]) ? "true" : "false" ?>">
             <section class="hero establo" id="hero">
                     <div class="hero__container">
                         <div id="draw-card" class="draw-card anim-appear">
@@ -66,7 +63,7 @@ include_once __DIR__."/header.php";
             </section>
         </main>
 
-        <?php include __DIR__."/footer.php" ?>
+        <?php include __DIR__."/layout/footer.php" ?>
         <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video" autoplay loop muted playsinline title="mambo"></video>
         <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video mambo-wrapper__video--left" autoplay loop muted playsinline title="mambo"></video>
         <script src="src/script/datos.js?v=<?= APP_VERSION?>" defer></script>

@@ -8,8 +8,8 @@ class ApiController {
     
     private $pdo;
 
-    public function __construct($connection) {
-        $this->pdo = $connection;
+    public function __construct($database) {
+        $this->pdo = $database;
     }
 
     private function jsonResponse($status, $message = "", $data = null, $redirect = null) {
@@ -116,13 +116,12 @@ class ApiController {
 
     public function getAllPosts () {
         $model = new Model($this->pdo);
-        $this->jsonResponse("ok", "", $model->getAllPosts());
+        $this->jsonResponse("ok", "Publicaciones enviadas", $model->getAllPosts());
     }
 
-    public function getUser() {
+    public function getUser($username) {
 
-        $data = json_decode(file_get_contents("php://input"), true);
-        $username = cleanValue($data, "username");
+        $username = cleanString($username);
 
         $model = new Model($this->pdo);
         $data = $model->getUser($username);
@@ -132,7 +131,8 @@ class ApiController {
         }
 
         else {
-            $this->jsonResponse("error", "nose", $data);
+            code(404);
+            $this->jsonResponse("error", "El usuario no fue encontrado", $data);
         }
     }
 
@@ -234,6 +234,9 @@ class ApiController {
         
         if ($respuesta["status"] === "ok") {
             $this->jsonResponse("ok", "Todo bien", $respuesta["data"]);
+        } else {
+            code(500);
+            $this->jsonResponse("error", "No se pudo crear el comentario");
         }
     }
 
@@ -280,5 +283,7 @@ class ApiController {
         }
 
         $model = new Model($this->pdo);
+
+        
     }
 }

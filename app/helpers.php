@@ -49,22 +49,31 @@ function cleanValue(?array $data, string $key): ?string {
     return cleanString($data[$key] ?? null);
 }
 
-function getRelativeTime($pastTimeString) {
-    $timezonePost = new DateTimeZone('Etc/GMT+7');
-    $pastTime = new DateTimeImmutable($pastTimeString, $timezonePost);
-    
-    $currentTime = new DateTimeImmutable('now', $timezonePost);
-    
-    $diff = $currentTime->diff($pastTime);
-    
-    if ($diff->y > 0) return "Hace ".$diff->y." años";
-    if ($diff->m > 0) return "Hace ".$diff->m." meses";
-    if ($diff->d > 0) return "Hace ".$diff->d." dias";
-    if ($diff->h > 0) return "Hace ".$diff->h." horas";
-    if ($diff->i > 0) return "Hace ".$diff->i." minutos";
-    
-    return 'Justo ahora';
+function getRelativeTime($pastTimeString) { 
+    $timezonePost = new DateTimeZone('Etc/GMT+7'); 
+    $pastTime = new DateTimeImmutable($pastTimeString, $timezonePost); 
+    $currentTime = new DateTimeImmutable('now', $timezonePost); 
+    $diff = $currentTime->diff($pastTime); 
+
+    if ($diff->y > 0) {
+        return "Hace " . $diff->y . ($diff->y == 1 ? " año" : " años");
+    }
+    if ($diff->m > 0) {
+        return "Hace " . $diff->m . ($diff->m == 1 ? " mes" : " meses");
+    }
+    if ($diff->d > 0) {
+        return "Hace " . $diff->d . ($diff->d == 1 ? " día" : " días");
+    }
+    if ($diff->h > 0) {
+        return "Hace " . $diff->h . ($diff->h == 1 ? " hora" : " horas");
+    }
+    if ($diff->i > 0) {
+        return "Hace " . $diff->i . ($diff->i == 1 ? " minuto" : " minutos");
+    } 
+
+    return 'Justo ahora'; 
 }
+
 
 
 function getUmaImage(string $umaName, int $index = 0): string {

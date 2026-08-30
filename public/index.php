@@ -1,7 +1,11 @@
 <?php 
 declare(strict_types=1);
-session_start();
-define('APP_VERSION', '1.1');
+session_start([
+    'cookie_lifetime' => 0,
+    'cookie_secure'   => false,
+    'cookie_httponly' => true
+]);
+define('APP_VERSION', '1.3');
 
 header("Cache-Control: no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
@@ -27,33 +31,55 @@ $ruta = isset($_GET["ruta"]) ? trim ($_GET["ruta"], "/") : "home";
 $rutasApi = [
     "POST" => [
         "api/auth/login"    => "login",
-        "api/users" => "signup",
-        "api/posts"    => "createPost",
-        "api/posts/likes"    => "toggleLike",
-        "api/comment" => "createComment"
+        "api/users"         => "signup",
+        "api/posts"         => "createPost",
+        "api/posts/likes"   => "toggleLike",
+        "api/comment"       => "createComment"
     ],
     "GET" => [
-        "api/posts"    => "obtenerPosts",
+        "api/posts"         => "getAllPosts",
+        "api/users/{username}"    => "getUser"
     ],
     "PUT" => [
-
+        
     ],
     "PATCH" => [
-
+        
     ],
     "DELETE" => [
         
-        ]
-    
+    ]
 ];
 
-if (isset($rutasApi[$method][$ruta])) {
+$rutaEncontrada = false;
+$metodoController = null;
+$parametrosUrl = [];
+
+
+if (isset($rutasApi[$method])) {
+    foreach ($rutasApi[$method] as $rutaDefinida => $metodo) {
+        
+        // Convertimos marcadores como {id} o {username} en grupos de captura Regex ([^/]+)
+        $patronRegex = preg_replace('/\{[a-zA-Z0-9_]+\}/', '([^/]+)', $rutaDefinida);
+        // Escapamos las barras para que sea un Regex válido: ^api/users/([^/]+)$
+        $patronRegex = '#^' . $patronRegex . '$#';
+
+        
+        if (preg_match($patronRegex, $ruta, $coincidencias)) {
+            $rutaEncontrada = true;
+            $metodoController = $metodo;
+            array_shift($coincidencias);
+            $parametrosUrl = $coincidencias; 
+            break;
+        }
+    }
+}
+
+if ($rutaEncontrada) {
     header("Content-Type: application/json; charset=UTF-8");
-    
-    $metodoController = $rutasApi[$method][$ruta];
 
     if (method_exists($apiController, $metodoController)) {
-        $apiController->$metodoController();
+        $apiController->$metodoController(...$parametrosUrl);
         exit();
     } else {
         http_response_code(500);
@@ -62,15 +88,17 @@ if (isset($rutasApi[$method][$ruta])) {
     }
 }
 
+
 if (str_starts_with($ruta, "api/")) { 
-    header("Content-Type: application/json; 
-    charset=UTF-8"); http_response_code(400); 
+    header("Content-Type: application/json; charset=UTF-8"); 
+    http_response_code(404); 
     echo json_encode([ 
         "status" => "error", 
         "message" => "La ruta: ".$ruta." no existe" 
         ]); 
     exit(); 
 }
+
 
 $partesRuta = explode("/", $ruta);
 $paginaActual = $partesRuta[0];
