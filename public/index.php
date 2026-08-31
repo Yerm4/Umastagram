@@ -113,7 +113,7 @@ $rutasWeb = [
     "home"   => "showHome",
     "perfil" => "showProfile",
     "post"   => "showPost",
-    "establo" => "showEstablo"
+    "stable" => "showStable"
 ];
 
 $paginaMostrar = __DIR__."/../app/view/$paginaActual.php";

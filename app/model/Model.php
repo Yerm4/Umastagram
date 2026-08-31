@@ -22,13 +22,10 @@ class Model {
     }
 
     private function postExists(?int $postId) : bool {
+        if ($postId === null) return false;
         $stmt = $this->pdo->prepare("SELECT EXISTS (SELECT 1 FROM posts WHERE id = :postId)");
         $stmt->execute(["postId" => $postId]);
-        $exists = (bool)$stmt->fetchColumn();
-
-        if (!$exists) return $this->response("error", "No existe esa publicacion");
-
-        return true;
+        return (bool)$stmt->fetchColumn();
     }
 
     private function userExists($userId) {
@@ -160,7 +157,7 @@ class Model {
 
     public function getComment($postId) {
         try {
-            $stmt = $this->pdo->prepare("SELECT c.id, c.id, c.post_id, c.user_id, c.content, c.img, c.date, u.username, u.fav_uma
+            $stmt = $this->pdo->prepare("SELECT c.id, c.post_id, c.user_id, c.content, c.img, c.date, u.username, u.fav_uma
             FROM comments c
             INNER JOIN users u ON c.user_id = u.id
             WHERE post_id = :postId
@@ -181,9 +178,9 @@ class Model {
         try {
             $stmtCheck = $this->pdo->prepare("SELECT COUNT(*) FROM posts WHERE user_id = :userId AND date >= NOW() - INTERVAL 5 MINUTE");
             $stmtCheck->execute(["userId" => $userId]);
-            $date = $stmtCheck->fetchColumn();
+            $date = (bool)$stmtCheck->fetchColumn();
 
-            if (!$date > 0) {
+            if (!$date) {
                 $stmt = $this->pdo->prepare("INSERT INTO posts (user_id, title, content, post_img) VALUES (:userId, :title, :content, :post_img)");
                 $stmt->execute([
                 "userId" => $userId,

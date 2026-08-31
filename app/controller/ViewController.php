@@ -60,7 +60,7 @@ class ViewController {
                 $post = $postData["data"];
                 $commentData = $model->getComment($postId);
                 $comments = ($commentData["status"] === "ok") ? $commentData["data"] : [];
-                $titulo = ucfirst($post["username"])." post";
+                $titulo = "Publicación de ".ucfirst($post["username"]);
                 include_once __DIR__."/../view/layout/header.php";
                 include_once __DIR__."/../view/post.php";
             }
@@ -72,13 +72,12 @@ class ViewController {
         else {
             $this->show404();
         }
-
     }
 
-    public function showEstablo($partesRuta = null) {
+    public function showStable($partesRuta = null) {
         $titulo = "Establo";
         include_once __DIR__."/../view/layout/header.php";
-        include_once __DIR__."/../view/establo.php";
+        include_once __DIR__."/../view/stable.php";
     }
 
     private function show404() {
