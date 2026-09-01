@@ -12,7 +12,7 @@ class ViewController {
         $this->pdo = $database;
     }
 
-    public function showHome($partesRuta = null) {
+    public function showHome($pathExploited = null) {
         $model = new Model($this->pdo);
         $userId = $_SESSION["user_id"] ?? null;
         $resultado = $model->getAllPosts($userId);
@@ -21,11 +21,11 @@ class ViewController {
         include_once __DIR__."/../view/home.php";
     }
 
-    public function showProfile($partesRuta = null) {
-        $user = $partesRuta[1] ?? "Uma Musume";
+    public function showProfile($pathExploited = null) {
+        $user = $pathExploited[1] ?? "Uma Musume";
         $userId = $_SESSION["user_id"] ?? null;
 
-        if (!empty($partesRuta[1])) {
+        if (!empty($pathExploited[1])) {
             $model = new Model($this->pdo);
             $userData = $model->getUser($user);
             $postsData = $model->getPosts($user, $userId);
@@ -35,7 +35,7 @@ class ViewController {
                 $user = $userData["data"];
                 $posts = $postsData["data"];
                 include_once __DIR__."/../view/layout/header.php";
-                include_once __DIR__."/../view/perfil.php";
+                include_once __DIR__."/../view/profile.php";
             }
 
             else {
@@ -48,11 +48,11 @@ class ViewController {
         }
     }
 
-    public function showPost($partesRuta = null) {
-        $postId = $partesRuta[1] ?? null;
+    public function showPost($pathExploited = null) {
+        $postId = $pathExploited[1] ?? null;
         $userId = $_SESSION["user_id"] ?? null;
 
-        if (!empty($partesRuta[1])) {
+        if (!empty($pathExploited[1])) {
             $model = new Model($this->pdo);
             $postData = $model->getPost($postId, $userId);
 
@@ -74,7 +74,7 @@ class ViewController {
         }
     }
 
-    public function showStable($partesRuta = null) {
+    public function showStable($pathExploited = null) {
         $titulo = "Establo";
         include_once __DIR__."/../view/layout/header.php";
         include_once __DIR__."/../view/stable.php";

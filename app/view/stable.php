@@ -43,11 +43,9 @@
                     </div>
                 
                     <div class="search-box">
-                        <form onsubmit="buscarUmaForm(event)">
+                        <form id="searchUmaForm">
                             <input type="text" list="sugerencias-umas" id="nombreUma" placeholder="Nombre de la Uma..." class="search-box__input" autocomplete="off">
-                            <button onclick="buscarUma()" class="search-box__button">Buscar</button>
-                            <datalist id="sugerencias-umas">
-                            </datalist>
+                            <button type="submit" class="search-box__button">Buscar</button>
                         </form>
                     </div>
 
@@ -66,8 +64,8 @@
         <?php include __DIR__."/layout/footer.php" ?>
         <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video" autoplay loop muted playsinline title="mambo"></video>
         <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video mambo-wrapper__video--left" autoplay loop muted playsinline title="mambo"></video>
-        <script src="src/script/datos.js?v=<?= APP_VERSION?>" defer></script>
-        <script src="src/script/establo.js?v=<?= APP_VERSION?>" defer></script>
+        <script src="src/script/umaData.js?v=<?= APP_VERSION?>" defer></script>
+        <script src="src/script/stable.js?v=<?= APP_VERSION?>" defer></script>
     </div>
 </body>
 </html>

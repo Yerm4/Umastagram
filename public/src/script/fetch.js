@@ -292,12 +292,12 @@ function crearComentario(data) {
 
     postDiv.innerHTML = `
         <div class="comment__pfp">
-            <a href="perfil/${data.username}"> 
+            <a href="profile/${data.username}"> 
                 <img class="comment__pfp-img" src="src/media/img/pfp/${favUmaFormatted}_Pfp.webp" alt="">
             </a>
         </div>
         <div class="comment__content">
-            <a href="perfil/${data.username}">
+            <a href="profile/${data.username}">
                 <h2 class="comment__content-name capitalize"> 
                 ${data.username}
                 <span class="comment__content-date">Just Now</span>

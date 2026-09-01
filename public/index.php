@@ -16,19 +16,19 @@ require_once __DIR__."/../vendor/autoload.php";
 $env = Dotenv\Dotenv::createImmutable(__DIR__."/../");
 $env->load();
 
-use app\config\Conexion;
+use app\config\Database;
 use app\controller\ApiController;
 use app\controller\ViewController;
 
-$pdo = Conexion::conectar();
+$pdo = Database::conectar();
 
 $apiController = new ApiController($pdo);
 $viewController = new ViewController($pdo);
 
 $method = !empty($_SERVER["REQUEST_METHOD"]) ? $_SERVER["REQUEST_METHOD"] : "";
-$ruta = isset($_GET["ruta"]) ? trim ($_GET["ruta"], "/") : "home";
+$path = isset($_GET["path"]) ? trim ($_GET["path"], "/") : "home";
 
-$rutasApi = [
+$apiPath = [
     "POST" => [
         "api/auth/login"    => "login",
         "api/users"         => "signup",
@@ -51,13 +51,13 @@ $rutasApi = [
     ]
 ];
 
-$rutaEncontrada = false;
-$metodoController = null;
-$parametrosUrl = [];
+$apiExists = false;
+$controllerFunc = null;
+$apIUrlData = [];
 
 
-if (isset($rutasApi[$method])) {
-    foreach ($rutasApi[$method] as $rutaDefinida => $metodo) {
+if (isset($apiPath[$method])) {
+    foreach ($apiPath[$method] as $rutaDefinida => $metodo) {
         
         // Convertimos marcadores como {id} o {username} en grupos de captura Regex ([^/]+)
         $patronRegex = preg_replace('/\{[a-zA-Z0-9_]+\}/', '([^/]+)', $rutaDefinida);
@@ -65,21 +65,21 @@ if (isset($rutasApi[$method])) {
         $patronRegex = '#^' . $patronRegex . '$#';
 
         
-        if (preg_match($patronRegex, $ruta, $coincidencias)) {
-            $rutaEncontrada = true;
-            $metodoController = $metodo;
+        if (preg_match($patronRegex, $path, $coincidencias)) {
+            $apiExists = true;
+            $controllerFunc = $metodo;
             array_shift($coincidencias);
-            $parametrosUrl = $coincidencias; 
+            $apIUrlData = $coincidencias; 
             break;
         }
     }
 }
 
-if ($rutaEncontrada) {
+if ($apiExists) {
     header("Content-Type: application/json; charset=UTF-8");
 
-    if (method_exists($apiController, $metodoController)) {
-        $apiController->$metodoController(...$parametrosUrl);
+    if (method_exists($apiController, $controllerFunc)) {
+        $apiController->$controllerFunc(...$apIUrlData);
         exit();
     } else {
         http_response_code(500);
@@ -89,21 +89,21 @@ if ($rutaEncontrada) {
 }
 
 
-if (str_starts_with($ruta, "api/")) { 
+if (str_starts_with($path, "api/")) { 
     header("Content-Type: application/json; charset=UTF-8"); 
     http_response_code(404); 
     echo json_encode([ 
         "status" => "error", 
-        "message" => "La ruta: ".$ruta." no existe" 
+        "message" => "La ruta: ".$path." no existe" 
         ]); 
     exit(); 
 }
 
 
-$partesRuta = explode("/", $ruta);
-$paginaActual = $partesRuta[0];
+$pathExploited = explode("/", $path);
+$currentPage = $pathExploited[0];
 
-if ($paginaActual === "logout") {
+if ($currentPage === "logout") {
     session_unset();
     session_destroy();
     header("Location: home");
@@ -111,16 +111,16 @@ if ($paginaActual === "logout") {
 }
 $rutasWeb = [
     "home"   => "showHome",
-    "perfil" => "showProfile",
+    "profile" => "showProfile",
     "post"   => "showPost",
     "stable" => "showStable"
 ];
 
-$paginaMostrar = __DIR__."/../app/view/$paginaActual.php";
+$currentPagePath = __DIR__."/../app/view/$currentPage.php";
 
-if (file_exists($paginaMostrar) && isset($rutasWeb[$paginaActual])) {
-    $metodoController = $rutasWeb[$paginaActual];
-    $viewController->$metodoController($partesRuta);
+if (file_exists($currentPagePath) && isset($rutasWeb[$currentPage])) {
+    $controllerFunc = $rutasWeb[$currentPage];
+    $viewController->$controllerFunc($pathExploited);
 } else {
     include __DIR__."/../app/view/404.php";
 }

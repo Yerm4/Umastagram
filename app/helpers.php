@@ -1,36 +1,30 @@
 <?php 
 declare(strict_types=1);
-function e($texto) {
-    if ($texto === null) {
+
+function e(?string $string) : string {
+    if ($string === null) {
         return "";
     }
-    return htmlspecialchars($texto, ENT_QUOTES, "UTF-8");
+    return htmlspecialchars($string, ENT_QUOTES, "UTF-8");
 }
 
-function reload() {
-    $url = $_SERVER["REQUEST_URI"];
-    header("Location: ".$url);
-    die();
-}
-
-function umaGuion($texto) {
-    if ($texto === null) {
+function toUnderscore(?string $string) : string {
+    if ($string === null) {
         return "";
     }
-    return str_replace(" ", "_", $texto);
+    return str_replace(" ", "_", $string);
 }
 
-function webpExists(string $file, string $ruta = "/src/media/img/post/") : bool {
+function webpExists(?string $file, string $path = "/src/media/img/post/") : bool {
     if (empty($file)) {
         return false;
     }
-
-    return file_exists(__DIR__."/../public".$ruta.$file.".webp");
+    return file_exists(__DIR__."/../public".$path.$file.".webp");
 }
 
-function code($num) {
+function code(?int $num = null) {
     if ($num === null) {
-        return "";
+        return http_response_code();
     }
     return http_response_code($num);
 }
@@ -39,17 +33,15 @@ function cleanString($value): ?string {
     if (!is_string($value) && !is_int($value) && !is_float($value)) {
         return null; 
     }
-
     $trimmed = trim((string)$value);
     return $trimmed !== '' ? $trimmed : null;
 }
-
 
 function cleanValue(?array $data, string $key): ?string {
     return cleanString($data[$key] ?? null);
 }
 
-function getRelativeTime($pastTimeString) { 
+function getRelativeTime(string $pastTimeString) : string { 
     $timezonePost = new DateTimeZone('Etc/GMT+7'); 
     $pastTime = new DateTimeImmutable($pastTimeString, $timezonePost); 
     $currentTime = new DateTimeImmutable('now', $timezonePost); 
@@ -74,16 +66,13 @@ function getRelativeTime($pastTimeString) {
     return 'Justo ahora'; 
 }
 
-
-
 function getUmaImage(string $umaName, int $index = 0): string {
     static $establo = null;
 
     if ($establo === null) {
-        $rutaArchivo = __DIR__ . "/data/datos.php";
-        $establo = file_exists($rutaArchivo) ? require $rutaArchivo : [];
+        $file = __DIR__ . "/data/datos.php";
+        $establo = file_exists($file) ? require $file : [];
     }
 
     return $establo[$umaName]["imagen"][$index] ?? $establo[$umaName]["imagen"][0] ?? "Mayano_Top_Gun_Alt(3).webp";
 }
-

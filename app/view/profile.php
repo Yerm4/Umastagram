@@ -6,7 +6,7 @@
                 <div id="draw-card" class="draw-card profile-card--column op-1">
                     <div class="uma-info" id="uma-info">
                         <h2>
-                            <img class="post__title-img" src="src/media/img/pfp/<?= webpExists(umaGuion($user["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($user["fav_uma"])) : "invitado" ?>_Pfp.webp" alt=""> 
+                            <img class="post__title-img" src="src/media/img/pfp/<?= webpExists(toUnderscore($user["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(toUnderscore($user["fav_uma"])) : "invitado" ?>_Pfp.webp" alt=""> 
                             Hola, <strong class="capitalize"><?= e($user["username"]) ?></strong>     
                         </h2>
                         <br>
@@ -40,7 +40,7 @@
                 <div id="draw-card" class="draw-card profile-card--column op-1">
                     <div class="uma-info" id="uma-info">
                         <h2>
-                            <img class="post__title-img" src="src/media/img/pfp/<?= webpExists(umaGuion($user["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($user["fav_uma"])) : "invitado" ?>_Pfp.webp" alt=""> 
+                            <img class="post__title-img" src="src/media/img/pfp/<?= webpExists(toUnderscore($user["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(toUnderscore($user["fav_uma"])) : "invitado" ?>_Pfp.webp" alt=""> 
                             Bienvenid@! Soy <strong class="capitalize"><?= e($user["username"]) ?></strong>     
                         </h2>
                         <br>

@@ -2,10 +2,10 @@
 declare(strict_types=1);
 namespace app\config;
 
-use \PDO;
-use \PDOException;
+use PDO;
+use PDOException;
 
-class Conexion {
+class Database {
     
     public static function conectar () {
 

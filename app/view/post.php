@@ -9,12 +9,12 @@
                             <?php foreach ($comments as $c): ?>
                                 <div class="comment">
                                     <div class="comment__pfp">
-                                        <a href="perfil/<?= e($c["username"]) ?>"> 
-                                            <img class="comment__pfp-img" src="src/media/img/pfp/<?= webpExists(umaGuion($c["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(umaGuion($c["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
+                                        <a href="profile/<?= e($c["username"]) ?>"> 
+                                            <img class="comment__pfp-img" src="src/media/img/pfp/<?= webpExists(toUnderscore($c["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(toUnderscore($c["fav_uma"])) : "invitado" ?>_Pfp.webp" alt="">
                                         </a>
                                     </div>
                                     <div class="comment__content">
-                                        <a href="perfil/<?= e($c["username"]) ?>"> 
+                                        <a href="profile/<?= e($c["username"]) ?>"> 
                                             <h3 class="comment__content-name capitalize"> 
                                                 <?= e($c["username"]) ?> 
                                                 <span class="comment__content-date"><?= e(getRelativeTime($c["date"]))?></span>

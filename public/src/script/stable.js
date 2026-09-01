@@ -2,9 +2,9 @@
 let IRL = false;
 let nombreGuardado = "";
 
-buscarUma("mayano");
+searchUma("mayano");
 
-async function buscarUma(menu = null) {
+async function searchUma(menu = null) {
     const ruta_img = "src/media/img/";
     const IRLButton = document.getElementById("switch-button");
     if (!IRLButton) {
@@ -216,7 +216,7 @@ if (switchButton) {
             switchButton.style.pointerEvents = "auto";
         }, 500);
         IRL = !IRL;
-        buscarUma(nombreGuardado);
+        searchUma(nombreGuardado);
         sonido.play();
     });
 }
@@ -227,17 +227,19 @@ sonido.volume = 0.2;
 
 mambos.forEach(mambo => {
     mambo.addEventListener("click", function(event) {
-        buscarUma("mambo");
+        searchUma("mambo");
         sonido.currentTime = 0;
         sonido.play();
     });    
 });
 
 // Búsqueda "Enter"
-function buscarUmaForm(event) {
-    event.preventDefault();
-    buscarUma();
-}
+const searchUmaForm = document.getElementById("searchUmaForm")
+
+searchUmaForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+    searchUma()
+})
 
 agregarUma();
 
@@ -261,7 +263,7 @@ function agregarUma() { // Agregar umas a lista de umas disponibles
         container.setAttribute("class", "available-section__grid-container");
         nombre.setAttribute("href", "#");
         nombre.setAttribute("data-uma", llave);
-        nombre.setAttribute("name", "buscarUma")
+        nombre.setAttribute("name", "searchUma")
         nombre.textContent = `${datos.nombre}`;
 
         container.appendChild(nombre);
@@ -271,14 +273,14 @@ function agregarUma() { // Agregar umas a lista de umas disponibles
     umasDisponibles.addEventListener("click", function(event) {
         const opcionSeleccionada = event.target.getAttribute("data-uma");
         if (opcionSeleccionada) {
-            buscarUma(opcionSeleccionada);
+            searchUma(opcionSeleccionada);
         }   
     });
 }
 document.documentElement.addEventListener("click", (e) => {
-    const buscarUma = e.target.closest('[name="buscarUma"]')
+    const searchUma = e.target.closest('[name="searchUma"]')
 
-    if (buscarUma) {
+    if (searchUma) {
         e.preventDefault()
         scrollSection1()
     }
