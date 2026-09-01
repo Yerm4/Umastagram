@@ -46,7 +46,7 @@
                             </div>
                             <div class="post__interaction">
                                 <button type="submit" class="post__button-like form-post__button-submit"> Publicar</button>
-                                <p class="form__warning" id="postMessage">olis</p>
+                                <p class="form__warning" id="postMessage"></p>
                             </div>
                         </form>
                     <?php endif ?>

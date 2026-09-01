@@ -28,14 +28,11 @@ class Model {
         return (bool)$stmt->fetchColumn();
     }
 
-    private function userExists($userId) {
+    private function userExists($userId) : bool {
+        if ($userId === null) return false;
         $stmt = $this->pdo->prepare("SELECT EXISTS (SELECT 1 FROM users WHERE id = :userId AND deleted_at IS NULL)");
         $stmt->execute(["userId" => $userId]);
-        $exists = (bool)$stmt->fetchColumn();
-
-        if (!$exists) return $this->response("error", "No existe ese usuario");
-
-        return $this->response("ok", "Sí existe ese usuario");
+        return (bool)$stmt->fetchColumn();
     }
 
     public function login($username) {
@@ -97,7 +94,7 @@ class Model {
 
             return $this->response("ok", "Perfil enviado", $data);
         } catch (PDOException $e) {
-            $this->response("error", $e->getMessage());
+            return $this->response("error", $e->getMessage());
         }
     }
 
