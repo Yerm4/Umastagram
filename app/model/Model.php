@@ -8,15 +8,6 @@ use app\model\BaseModel;
 
 class Model extends BaseModel {
 
-    private function response($status, $message = "", $data = null, $redirect = null) {
-            return    [
-            "status" => $status,
-            "message" => $message,
-            "data" => $data,
-            "redirect" => $redirect
-            ];
-    }
-
     private function postExists(?int $postId) : bool {
         if ($postId === null) return false;
         $stmt = $this->pdo->prepare("SELECT EXISTS (SELECT 1 FROM posts WHERE id = :postId)");
@@ -38,43 +29,32 @@ class Model extends BaseModel {
             $stmt->execute(["username" => $username]);
         
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-            if ($user) {
-                return $this->response("ok", "", $user);
-            } else {
-                return $this->response("error", "No existe un usuario con ese nombre");
-            }
-        
+            return $user ? $user : false;
         } catch (PDOException $e) {
-            return $this->response("error", "Error en la consulta");
+            return false;
         }
     }
 
-    public function signup ($username, $password, $favUma) {
+    public function signup($username, $password, $favUma) {
         try {
-            $stmtCheck = $this->pdo->prepare("SELECT EXISTS
-            (SELECT 1 FROM users 
-            WHERE username = :username)");
+            $stmtCheck = $this->pdo->prepare("SELECT EXISTS (SELECT 1 FROM users WHERE username = :username)");
             $stmtCheck->execute(["username" => $username]);
             $exists = (bool)$stmtCheck->fetchColumn();
 
             if (!$exists) {
-                $stmt = $this->pdo->prepare("INSERT INTO users (username, password, fav_uma) 
-                VALUES (:username, :password, :favUma)");
+                $stmt = $this->pdo->prepare("INSERT INTO users (username, password, fav_uma) VALUES (:username, :password, :favUma)");
                 $stmt->execute([
-                "username" => $username,
-                "password" => $password,
-                "favUma" => $favUma
+                    "username" => $username,
+                    "password" => $password,
+                    "favUma" => $favUma
                 ]);
 
-                return $this->response("ok", "", ["id" => $this->pdo->lastInsertId()]);
+                return ["id" => (int)$this->pdo->lastInsertId()];
             }
 
-            else {
-                return $this->response("error", "Ya existe un usuario registrado con ese nombre");
-            }
+            return false;
         } catch (PDOException $e) {
-            return $this->response("error", "Error en la consulta");
+            return false;
         }
     }
 
@@ -84,13 +64,9 @@ class Model extends BaseModel {
             $stmt->execute(["username" => $username]);
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
             
-            if (!$data) {
-                return $this->response("error", "No se encontro ese usuario");
-            }
-
-            return $this->response("ok", "Perfil enviado", $data);
+            return $data ? $data : false;
         } catch (PDOException $e) {
-            return $this->response("error", $e->getMessage());
+            return false;
         }
     }
 
@@ -104,9 +80,9 @@ class Model extends BaseModel {
             ORDER BY p.date DESC
             LIMIT 10");
             $stmt->execute(["userId" => $userId]);
-            return $this->response("ok", "", $stmt->fetchAll(PDO::FETCH_ASSOC));
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return $this->response("error", $e);
+            return [];
         }
     }
 
@@ -121,9 +97,9 @@ class Model extends BaseModel {
             ORDER BY p.date DESC
             LIMIT 10");
             $stmt->execute(["username" => $username, "userId" => $userId]);
-            return $this->response("ok", "", $stmt->fetchAll(PDO::FETCH_ASSOC));
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return $this->response("error", "Error en la consulta");
+            return [];
         }
     }
 
@@ -139,12 +115,9 @@ class Model extends BaseModel {
             $stmt->execute(["postId" => $postId, "userId" => $userId]);
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
             
-            if(!$data) {
-                return $this->response("error", "No existe ese post");
-            }
-            return $this->response("ok", "", $data);
+            return $data ? $data : false;
         } catch (PDOException $e) {
-            return $this->response("error", $e->getMessage());
+            return false;
         }
     }
 
@@ -158,12 +131,9 @@ class Model extends BaseModel {
             $stmt->execute(["postId" => $postId]);
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            if (!$data) {
-                return $this->response("error", "No hay comentarios");
-            }
-            return $this->response("ok", "", $data);
+            return $data ? $data : [];
         } catch (PDOException $e) {
-            return $this->response("error", $e);
+            return [];
         }
     }
 
@@ -171,15 +141,15 @@ class Model extends BaseModel {
         try {
             $stmtCheck = $this->pdo->prepare("SELECT COUNT(*) FROM posts WHERE user_id = :userId AND date >= NOW() - INTERVAL 5 MINUTE");
             $stmtCheck->execute(["userId" => $userId]);
-            $date = (bool)$stmtCheck->fetchColumn();
+            $hasPostedRecently = (bool)$stmtCheck->fetchColumn();
 
-            if (!$date) {
+            if (!$hasPostedRecently) {
                 $stmt = $this->pdo->prepare("INSERT INTO posts (user_id, title, content, post_img) VALUES (:userId, :title, :content, :post_img)");
                 $stmt->execute([
-                "userId" => $userId,
-                "title" => $title,
-                "content" => $content,
-                "post_img" => $postImg
+                    "userId" => $userId,
+                    "title" => $title,
+                    "content" => $content,
+                    "post_img" => $postImg
                 ]);
                 $newPostId = $this->pdo->lastInsertId();
 
@@ -189,21 +159,20 @@ class Model extends BaseModel {
                     INNER JOIN users u ON p.user_id = u.id
                     WHERE p.id = :id");
                     $stmt->execute(["id" => $newPostId]);
-                    return $this->response("ok", "", $stmt->fetch(PDO::FETCH_ASSOC));
+                    return $stmt->fetch(PDO::FETCH_ASSOC);
                 }
-            } else {
-                return $this->response("error", "Publicaste hace menos de 5 minutos");
             }
+            return false;
         } catch (PDOException $e) {
-            return $this->response("error", "");
+            return false;
         }
     }
 
-    public function toggleLike ($userId, $postId) {
+    public function toggleLike($userId, $postId) {
         try {
             $exists = $this->postExists($postId);
-            
-            if (!$exists) return $this->response("error", "No existe esa publicacion");
+            if (!$exists) return false;
+
             $this->pdo->beginTransaction();
 
             $stmt = $this->pdo->prepare("SELECT EXISTS 
@@ -230,13 +199,15 @@ class Model extends BaseModel {
             }
             $stmt = $this->pdo->prepare("SELECT likes FROM posts WHERE id = :postId");
             $stmt->execute(["postId" => $postId]);
-            $likes = $stmt->fetchColumn();
+            $likes = (int)$stmt->fetchColumn();
 
             $this->pdo->commit();
-            return $this->response("ok", "Like enviado correctamente", ["likes" => $likes, "like" => $like]);
+            return ["likes" => $likes, "like" => $like];
         } catch (PDOException $e) {
-            $this->pdo->rollBack();
-            return $this->response("error", $e->getMessage()." ".$e->getCode());
+            if ($this->pdo->inTransaction()) {
+                $this->pdo->rollBack();
+            }
+            return false;
         }
     }
 
@@ -245,33 +216,33 @@ class Model extends BaseModel {
             $stmt = $this->pdo->prepare("INSERT INTO comments
             (post_id, user_id, content) VALUES (:postId, :userId, :content)");
             $stmt->execute([
-            "postId" => $postId,
-            "userId" => $userId, 
-            "content" => $content]);
+                "postId" => $postId,
+                "userId" => $userId, 
+                "content" => $content
+            ]);
             $lastId = $this->pdo->lastInsertId();
 
             if (!$lastId) {
-                return $this->response("error", "Error al enviar el comentario");    
+                return false;    
             }
             
             $stmt = $this->pdo->prepare("SELECT c.*, u.username, u.fav_uma
                 FROM comments c
                 INNER JOIN users u ON c.user_id = u.id
                 WHERE c.id = :id");
-                $stmt->execute(["id" => $lastId]);
-                $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt->execute(["id" => $lastId]);
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            return $this->response("ok", "Comentario enviado", $resultado);
+            return $resultado ? $resultado : false;
         } catch (PDOException $e) {
-            return $this->response("error", $e->getMessage());
+            return false;
         }
     }
 
     public function sendFriendRequest($userIdSends, $userIdReceives) {
         try {
-
             $exists = $this->userExists($userIdReceives);
-            if (!$exists) return $this->response("error", "El usuario no existe");    
+            if (!$exists) return false;    
 
             $stmt = $this->pdo->prepare("SELECT EXISTS
             (SELECT 1 FROM friends 
@@ -281,19 +252,18 @@ class Model extends BaseModel {
             AND user_id_receives = :idSends))");
             $stmt->execute(["idSends" => $userIdSends, "idReceives" => $userIdReceives]);
 
-            $exists = (bool)$stmt->fetchColumn();
+            $alreadyExists = (bool)$stmt->fetchColumn();
 
-            if ($exists) {
-                return $this->response("error", "Ya existe una solicitud de amitas pendiente");    
+            if ($alreadyExists) {
+                return false;    
             } else {
                 $stmt = $this->pdo->prepare("INSERT INTO friends
                 (user_id_sends, user_id_receives, status_id) VALUES (:idSends, :idReceives, 1)");
                 $stmt->execute(["idSends" => $userIdSends, "idReceives" => $userIdReceives]);
-                return $this->response("ok", "Solicitud de amistad enviada");
+                return true;
             }
-
         } catch(PDOException $e) {
-            return $this->response("error", $e->getMessage());
+            return false;
         }
     }
 
@@ -309,17 +279,15 @@ class Model extends BaseModel {
 
             $exists = (bool)$stmt->fetchColumn();
 
-            if ($exists) {
-                return $this->response("error", "Ya existe una solicitud de amitas pendiente");    
+            if (!$exists) {
+                return false;    
             } else {
-                $stmt = $this->pdo->prepare("INSERT INTO friends
-                (user_id_sends, user_id_receives, status_id) VALUES (:idSends, :idReceives, 1)");
+                $stmt = $this->pdo->prepare("UPDATE friends SET status_id = 2 WHERE user_id_sends = :idReceives AND user_id_receives = :idSends");
                 $stmt->execute(["idSends" => $userIdSends, "idReceives" => $userIdReceives]);
-                return $this->response("ok", "Solicitud de amistad enviada");
+                return true;
             }
-
         } catch(PDOException $e) {
-            return $this->response("error", $e->getMessage());
+            return false;
         }
     }
 }
