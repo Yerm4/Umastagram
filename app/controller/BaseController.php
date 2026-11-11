@@ -3,9 +3,11 @@ namespace app\controller;
 
 class BaseController {
 
-    protected function jsonResponse($status, $message = "", $data = null, $redirect = null) {
+    protected function jsonResponse($code, $status, $message = "", $data = null, $redirect = null) {
+        http_response_code($code);
         header("Content-Type: application/json");
         echo json_encode([
+            "code" => $code,
             "status" => $status,
             "message" => $message,
             "data" => $data,

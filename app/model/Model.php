@@ -8,8 +8,7 @@ use app\model\BaseModel;
 
 class Model extends BaseModel {
 
-    private function postExists(?int $postId) : bool {
-        if ($postId === null) return false;
+    private function postExists(int $postId) : bool {
         $stmt = $this->pdo->prepare("SELECT EXISTS (SELECT 1 FROM posts WHERE id = :postId)");
         $stmt->execute(["postId" => $postId]);
         return (bool)$stmt->fetchColumn();
