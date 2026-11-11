@@ -63,6 +63,11 @@
                     <?php else: ?>
                     <h2>No hay publicaciones :(</h2>
                     <?php endif ?>
+                    <div>
+                    <form action="" id="xd">
+                    <button>xd</button>
+                    </form>
+                    </div>
                 </div>
             </div>
         </section>
@@ -70,6 +75,26 @@
 <?php endif ?>
 
 <?php include_once __DIR__."/layout/footer.php" ?>
+<script>
+const prueba = document.getElementById("xd")
+
+if (prueba) {
+    prueba.addEventListener("submit", async (e) =>{
+        e.preventDefault()
+        const response = await fetch("api/friend", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({data: "4"})
+        })
+
+        const res = response.json()
+
+        console.log(res.message)
+    })
+}
+</script>
     <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video" autoplay loop muted playsinline title="mambo"></video>
     <video src="src/media/img/mambo-spinning.webm" class="mambo-wrapper__video mambo-wrapper__video--left" autoplay loop muted playsinline title="mambo"></video>
 </body>

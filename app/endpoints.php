@@ -6,7 +6,8 @@ $apiEndpoints = [
         "api/users"         => "AuthController@signup",
         "api/posts"         => "AuthController@createPost",
         "api/posts/likes"   => "AuthController@toggleLike",
-        "api/comment"       => "AuthController@createComment"
+        "api/comment"       => "AuthController@createComment",
+        "api/friend"        => "AuthController@sendFriendRequest"
     ],
     "GET" => [
         "api/posts"         => "AuthController@getAllPosts",

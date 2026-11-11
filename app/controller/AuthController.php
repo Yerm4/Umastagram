@@ -230,7 +230,7 @@ class AuthController extends BaseController {
         $data = $this->getData();
 
         $userIdSends = $_SESSION["user_id"] ?? null;
-        $userIdReceives = $data["data"] ?? null;
+        $userIdReceives = cleanValue($data, "data") ?? null;
 
         if (empty($userIdSends)) {
             code(401);

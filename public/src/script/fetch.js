@@ -1,6 +1,17 @@
+async function apiFetch(url, options = {}) {
+    const response = await fetch(url, options);
+    const result = await response.json().catch(() => null);
+
+    if (!response.ok || !result || result.status !== "ok") {
+        const errorMsg = result?.message || `${response.status}: ${response.statusText}`;
+        throw new Error(errorMsg);
+    }
+    return result;
+}
+
 document.addEventListener("click", async (e) => {
     const likeAction = e.target.closest("[name='button-like']")
-    const buttonComment = e.target.closest("[name='button-comment'")
+    const buttonComment = e.target.closest("[name='button-comment']")
     
     if (likeAction) {
         const postId = likeAction.dataset.postId
@@ -8,7 +19,7 @@ document.addEventListener("click", async (e) => {
         const buttonLike = document.querySelector(`[name=button-like][data-post-id="${postId}"]`)
         
         try {
-            const response = await fetch("api/posts/likes", {
+            const result = await apiFetch("api/posts/likes", {
                 method: "POST",
                 headers: { 
                     "Content-Type": "application/json" 
@@ -18,29 +29,19 @@ document.addEventListener("click", async (e) => {
                 })
             })
             
-            const result = await response.json().catch(() => null)
+            const data = result.data
             
-            if (!result) {
-                throw new Error("La respuesta no es JSON")
-            }
-            if (!response.ok) {
-                const error = result?.message || response.status + ": " + response.statusText
-                throw new Error(error)
-            }
-            if (result.status === "ok") {
-                const data = result.data
-                
-                console.log("like dado, esta publicacion tiene: " + data.likes + " like(s)")
-                like.innerHTML = data.likes
-                
-                if (data.like) console.log("diste like") 
-                else console.log("dislike")
+            console.log(`like dado, esta publicacion tiene: ${data.likes} like(s)`)
+            
+            like.innerHTML = data.likes
+            
+            if (data.like) console.log("diste like") 
+            else console.log("dislike")
 
-                if (buttonLike.classList.contains("liked")) {
-                    buttonLike.classList.remove("liked")
-                } else {
-                    buttonLike.classList.add("liked")
-                }
+            if (buttonLike.classList.contains("liked")) {
+                buttonLike.classList.remove("liked")
+            } else {
+                buttonLike.classList.add("liked")
             }
         } catch (error) {
             console.error(error)
@@ -68,7 +69,7 @@ if (loginForm && loginMessage) {
         const datos = Object.fromEntries(formData.entries())
     
         try {
-            const response = await fetch("api/auth/login", {
+            const result = await apiFetch("api/auth/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -76,24 +77,12 @@ if (loginForm && loginMessage) {
                 body: JSON.stringify(datos)
             })
             
-            const result = await response.json().catch(() => null)
-            
-            if (!response.ok) {
-                const error = result?.message || response.status + ": " + response.statusText
-                msg(loginMessage, error)
-                throw new Error(error)
-            }
-            
-            if (!result) throw new Error("La respuesta no fue JSON")
-            
-            if (result.status === "ok") {
-                const data = result.data
-                msg(loginMessage, result.message)
-                setTimeout(() => {
-                    window.location.reload()
-                }, 2000)
-            } 
+            msg(loginMessage, result.message)
+            setTimeout(() => {
+                window.location.reload()
+            }, 2000)
         } catch(error) {
+            msg(loginMessage, error.message)
             console.error(error)
         }
     })
@@ -110,7 +99,7 @@ if (signUpForm && signUpMessage) {
         const datos = Object.fromEntries(formData.entries())
 
         try {
-            const response = await fetch("api/users", {
+            const result = await apiFetch("api/users", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -118,24 +107,12 @@ if (signUpForm && signUpMessage) {
                 body: JSON.stringify(datos)
             })
             
-            const result = await response.json().catch(() => null)
-
-            if (!response.ok) {
-                const error = result?.message || response.status + ": " + response.statusText
-                msg(signUpMessage, error)
-                throw new Error(error)
-            }
-
-            if (!result) throw new Error("La respuesta no es JSON")
-
-            if (result.status === "ok") {
-                const data = result.data
-                msg(signUpMessage, result.message)
-                setTimeout(() => {
-                    window.location.reload()
-                }, 2000)
-            }
+            msg(signUpMessage, result.message)
+            setTimeout(() => {
+                window.location.reload()
+            }, 2000)
         } catch (error) {
+            msg(signUpMessage, error.message)
             console.error(error)
         }
     })
@@ -151,33 +128,22 @@ if (postForm && postMessage) {
         const datos = Object.fromEntries(formData.entries())
 
         try {
-            const response = await fetch("api/posts", {
+            const result = await apiFetch("api/posts", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(datos)
             })
-            
-            const result = await response.json().catch(() => null)
-            
-            if (!response.ok) {
-                const error = result?.message || `${response.status}: ${response.statusText}`
-                msg(postMessage, error)
-                throw new Error(error)
-            }
-
-            if (!result) throw new Error("La respuesta no fue JSON")
         
-            if (result.status === "ok") {
-                const data = result.data
-                const postsWrap = document.querySelector(".post-wrapper")
-                const newPost = crearPost(data)
-            
-                postsWrap.prepend(newPost) 
-                postForm.reset()
-            }
+            const data = result.data
+            const postsWrap = document.querySelector(".post-wrapper")
+            const newPost = crearPost(data)
+        
+            postsWrap.prepend(newPost) 
+            postForm.reset()
         } catch(error) {
+            msg(postMessage, error.message)
             console.error(error)
         }
     })
@@ -195,7 +161,7 @@ if (commentForm) {
         const datos = Object.fromEntries(formData.entries())
 
         try {
-            const response = await fetch("api/comment", {
+            const result = await apiFetch("api/comment", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -203,36 +169,23 @@ if (commentForm) {
                 body: JSON.stringify(datos)
             })
 
-            const result = await response.json().catch(() => null)
-            
-            if (!response.ok) {
-                const error = result?.message || response.status + ": " + response.statusText
-                throw new Error(error)
-            }
-
-            if (!result) {
-                throw new Error("No es JSON")
-            }
-
-            if (result.status === "ok") {
-                const data = result.data
-                console.log(result.status + result.message)
-                const commWrapper = document.querySelector(".comments-wrapper")
-                const newComm = crearComentario(data)
-                commWrapper.append(newComm)
-                commentForm.reset()
-            }
+            const data = result.data
+            console.log(result.status + result.message)
+            const commWrapper = document.querySelector(".comments-wrapper")
+            const newComm = crearComentario(data)
+            commWrapper.append(newComm)
+            commentForm.reset()
         } catch (error) {
             console.log(error)
         }
     })
 }
 
-function msg(msg, data) {
-    msg.classList.remove("op-1")
+function msg(msgElement, data) {
+    msgElement.classList.remove("op-1")
     setTimeout(() => {
-        msg.textContent = data
-        msg.classList.add("op-1")
+        msgElement.textContent = data
+        msgElement.classList.add("op-1")
     }, 500)
 }
 
@@ -312,20 +265,3 @@ function crearComentario(data) {
 
     return postDiv
 }
-
-/*document.addEventListener("DOMContentLoaded", async (e) => {
-
-    const response = await fetch("https://api.umapyoi.net/api/v1/character/info", {
-        method: "GET"
-    })
-
-    const data = await response.json()
-
-    if (!response.ok) {
-        console.error(response.status)
-    }
-
-    if (data) {
-        console.log(data)
-    }
-})*/
