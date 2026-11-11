@@ -4,13 +4,9 @@ namespace app\model;
 
 use PDO;
 use PDOException;
+use app\model\BaseModel;
 
-class Model {
-    private $pdo;
-
-    public function __construct($database) {
-        $this->pdo = $database;
-    }
+class Model extends BaseModel {
 
     private function response($status, $message = "", $data = null, $redirect = null) {
             return    [

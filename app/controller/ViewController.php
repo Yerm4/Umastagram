@@ -5,15 +5,9 @@ namespace app\controller;
 use app\model\Model;
 
 class ViewController {
-    
-    private $pdo;
-
-    public function __construct($database) {
-        $this->pdo = $database;
-    }
 
     public function showHome($pathExploited = null) {
-        $model = new Model($this->pdo);
+        $model = new Model();
         $userId = $_SESSION["user_id"] ?? null;
         $resultado = $model->getAllPosts($userId);
         $titulo = "Muro";
@@ -26,7 +20,7 @@ class ViewController {
         $userId = $_SESSION["user_id"] ?? null;
 
         if (!empty($pathExploited[1])) {
-            $model = new Model($this->pdo);
+            $model = new Model();
             $userData = $model->getUser($user);
             $postsData = $model->getPosts($user, $userId);
             $titulo = ucfirst($user);
@@ -53,7 +47,7 @@ class ViewController {
         $userId = $_SESSION["user_id"] ?? null;
 
         if (!empty($pathExploited[1])) {
-            $model = new Model($this->pdo);
+            $model = new Model();
             $postData = $model->getPost($postId, $userId);
 
             if ($postData["status"] === "ok") {
