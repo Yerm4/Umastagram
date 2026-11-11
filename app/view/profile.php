@@ -1,5 +1,5 @@
 <?php // Usuario entra a su propio perfil ?>
-<?php if (($userData["status"] ?? null) === "ok" && ($user["id"] ?? null) === ($_SESSION["user_id"] ?? null)): ?>    
+<?php if (($user ?? null) && ($user ?? null) === ($_SESSION["user_id"] ?? null)): ?>
     <main class="muro">
         <section class="hero">
             <div class="card card__profile">
@@ -41,7 +41,7 @@
                     <div class="uma-info" id="uma-info">
                         <h2>
                             <img class="post__title-img" src="src/media/img/pfp/<?= webpExists(toUnderscore($user["fav_uma"])."_Pfp", "/src/media/img/pfp/") ? e(toUnderscore($user["fav_uma"])) : "invitado" ?>_Pfp.webp" alt=""> 
-                            Bienvenid@! Soy <strong class="capitalize"><?= e($user["username"]) ?></strong>     
+                            Holis! Soy <strong class="capitalize"><?= e($user["username"]) ?></strong>     
                         </h2>
                         <br>
                         <p>Mi uma favorita es <strong><?= e($user["fav_uma"]) ?></strong></p> 
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="post-wrapper" id="post-wrapper">
-                    <?php if ($postsData["status"] === "ok" && !empty($posts)): ?>
+                    <?php if (($posts ?? null) && !empty($posts)): ?>
                         <?php foreach ($posts as $post) : ?>
                             <div class="post">
                                 <?php include __DIR__."/layout/postComponent.php" ?>

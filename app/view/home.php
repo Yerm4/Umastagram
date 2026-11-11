@@ -52,8 +52,8 @@
                     <?php endif ?>
 
                     <div class="post-wrapper" id="post-wrapper">
-                    <?php if ($resultado["status"] === "ok"): ?>
-                        <?php foreach ($resultado["data"] as $post) : ?>
+                    <?php if ($resp): ?>
+                        <?php foreach ($resp as $post) : ?>
                             <div class="post">    
                                 <?php include __DIR__."/layout/postComponent.php" ?>
                             </div>

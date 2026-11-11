@@ -2,7 +2,7 @@
         <section class="hero">
             <div class="card card__profile">
                 <div class="post-wrapper" id="post-wrapper">
-                    <?php if ($postData["status"] === "ok" && !empty($post)): ?>
+                    <?php if (($post ?? null) && !empty($post)): ?>
                         <div class="post">
                         <?php include __DIR__."/layout/postComponent.php" ?>
                             <div class="comments-wrapper">

@@ -9,25 +9,25 @@ class ViewController {
     public function showHome($pathExploited = null) {
         $model = new Model();
         $userId = $_SESSION["user_id"] ?? null;
-        $resultado = $model->getAllPosts($userId);
+        $resp = $model->getAllPosts($userId);
         $titulo = "Muro";
         include_once __DIR__."/../view/layout/header.php";
         include_once __DIR__."/../view/home.php";
     }
 
     public function showProfile($pathExploited = null) {
-        $user = $pathExploited[1] ?? "Uma Musume";
+        $user = $pathExploited[1];
         $userId = $_SESSION["user_id"] ?? null;
 
-        if (!empty($pathExploited[1])) {
+        if (!empty($user)) {
             $model = new Model();
             $userData = $model->getUser($user);
             $postsData = $model->getPosts($user, $userId);
             $titulo = ucfirst($user);
             
-            if ($userData["status"] === "ok" && $postsData["status"] === "ok") {
-                $user = $userData["data"];
-                $posts = $postsData["data"];
+            if ($userData && $postsData) {
+                $user = $userData;
+                $posts = $postsData;
                 include_once __DIR__."/../view/layout/header.php";
                 include_once __DIR__."/../view/profile.php";
             }
@@ -43,17 +43,17 @@ class ViewController {
     }
 
     public function showPost($pathExploited = null) {
-        $postId = $pathExploited[1] ?? null;
+        $postId = $pathExploited[1];
         $userId = $_SESSION["user_id"] ?? null;
 
-        if (!empty($pathExploited[1])) {
+        if ($postId) {
             $model = new Model();
-            $postData = $model->getPost($postId, $userId);
+            $resp = $model->getPost($postId, $userId);
 
-            if ($postData["status"] === "ok") {
-                $post = $postData["data"];
+            if ($resp) {
+                $post = $resp;
                 $commentData = $model->getComment($postId);
-                $comments = ($commentData["status"] === "ok") ? $commentData["data"] : [];
+                $comments = $commentData ? $commentData : [];
                 $titulo = "Publicación de ".ucfirst($post["username"]);
                 include_once __DIR__."/../view/layout/header.php";
                 include_once __DIR__."/../view/post.php";
