@@ -245,9 +245,9 @@ class AuthController extends BaseController {
         }
 
         $model = new Model();
-        $res = $model->sendFriendRequest($userIdSends, $userIdReceives);
+        $resp = $model->sendFriendRequest($userIdSends, $userIdReceives);
 
-        if ($res) {
+        if ($resp) {
             $this->jsonResponse("ok", "Solicitud de amistad enviada");
         } else {
             code(400);
@@ -258,25 +258,28 @@ class AuthController extends BaseController {
     public function answerFriendRequest() {
         $data = $this->getData();
 
-        $userIdSends = $_SESSION["user_id"] ?? null;
-        $userIdReceives = $data["data"] ?? null;
+        $currentUserId = $_SESSION["user_id"] ?? null;
+        $senderUserId = $data["data"] ?? null;
+        $action = cleanValue($data, "action"); #REVISAR
 
-        if (empty($userIdSends)) {
+        if (empty($currentUserId)) {
             code(401);
             $this->jsonResponse("error", "No tas logueado");
             return;
         }
 
-        if (empty($userIdReceives) || $userIdSends === $userIdReceives) {
+        if (empty($senderUserId) || $currentUserId === $senderUserId) {
             code(404);
             $this->jsonResponse("error", "ID de usuario invalido");
             return;
         }
 
         $model = new Model();
-        $res = $model->answerFriendRequest($userIdSends, $userIdReceives);
+        $accept = ($action === 'accept');
+        $resp = $model->answerFriendRequest($currentUserId, $senderUserId);
 
-        if ($res) {
+        if ($resp) {
+            $message = $accept ? "Solicitud de amistad aceptada" : "Solicitud de amistad rechazada";
             $this->jsonResponse("ok", "Solicitud de amistad respondida");
         } else {
             code(400);

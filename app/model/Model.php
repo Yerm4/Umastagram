@@ -246,46 +246,42 @@ class Model extends BaseModel {
 
             $stmt = $this->pdo->prepare("SELECT EXISTS
             (SELECT 1 FROM friends 
-            WHERE (user_id_sends = :idSends 
-            AND user_id_receives = :idReceives)
-            OR (user_id_sends = :idReceives 
-            AND user_id_receives = :idSends))");
+            WHERE (user_id_sends = :idSends AND user_id_receives = :idReceives)
+            OR (user_id_sends = :idReceives AND user_id_receives = :idSends))");
             $stmt->execute(["idSends" => $userIdSends, "idReceives" => $userIdReceives]);
 
-            $alreadyExists = (bool)$stmt->fetchColumn();
-
-            if ($alreadyExists) {
-                return false;    
-            } else {
-                $stmt = $this->pdo->prepare("INSERT INTO friends
-                (user_id_sends, user_id_receives, status_id) VALUES (:idSends, :idReceives, 1)");
-                $stmt->execute(["idSends" => $userIdSends, "idReceives" => $userIdReceives]);
-                return true;
-            }
+            if ((bool)$stmt->fetchColumn()) {
+                return false;
+            }    
+            $stmt = $this->pdo->prepare("INSERT INTO friends
+            (user_id_sends, user_id_receives, status_id) VALUES (:idSends, :idReceives, 1)");
+            $stmt->execute(["idSends" => $userIdSends, "idReceives" => $userIdReceives]);
+            return true;
         } catch(PDOException $e) {
             return false;
         }
     }
 
-    public function answerFriendRequest($userIdSends, $userIdReceives) {
+    public function answerFriendRequest($currentUserId, $senderUserId, $accept = true) {
         try {
-            $stmt = $this->pdo->prepare("SELECT EXISTS
-            (SELECT 1 FROM friends 
-            WHERE (user_id_sends = :idSends 
-            AND user_id_receives = :idReceives)
-            OR (user_id_sends = :idReceives 
-            AND user_id_receives = :idSends))");
-            $stmt->execute(["idSends" => $userIdSends, "idReceives" => $userIdReceives]);
+            $stmt = $this->pdo->prepare("SELECT id FROM friends
+            WHERE user_id_sends = :senderId
+            AND user_id_receives = :currentId
+            AND status_id = 1");
+            $stmt->execute(["senderId" => $senderUserId, "currentId" => $currentUserId]);
+            $request = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $exists = (bool)$stmt->fetchColumn();
-
-            if (!$exists) {
-                return false;    
+            if (!$request) return false;
+            $id = $request["id"];
+            if ($accept) {
+                $stmt = $this->pdo->prepare("UPDATE friends SET status_id = 2 WHERE id = :id");
+                $stmt->execute(["id" => $id]);
             } else {
-                $stmt = $this->pdo->prepare("UPDATE friends SET status_id = 2 WHERE user_id_sends = :idReceives AND user_id_receives = :idSends");
-                $stmt->execute(["idSends" => $userIdSends, "idReceives" => $userIdReceives]);
-                return true;
+                $stmt = $this->pdo->prepare("DELETE FROM friends WHERE id = :id");
+                $stmt->execute(["id" => $id]);
             }
+
+            return true;
         } catch(PDOException $e) {
             return false;
         }
